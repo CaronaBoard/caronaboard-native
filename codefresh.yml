@@ -3,7 +3,7 @@ steps:
   BuildingDockerImage:
     title: Building Docker Image
     type: build
-    image_name: CaronaBoard/caronaboard-native
+    image_name: caronaboard/caronaboard-native
     working_directory: ${{main_clone}}
     dockerfile: Dockerfile
     when:
