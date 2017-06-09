@@ -1,11 +1,8 @@
 /* @flow */
 
 import React, { Component } from 'react'
-import {
-  View,
-  Text,
-  StyleSheet
-} from 'react-native'
+import PropTypes from 'prop-types'
+import { View, Text, StyleSheet } from 'react-native'
 
 export default class Ride extends Component {
   render () {
@@ -33,6 +30,19 @@ export default class Ride extends Component {
       </View>
     )
   }
+}
+
+Ride.propTypes = {
+  ride: PropTypes.shape({
+    area: PropTypes.string.isRequired,
+    days: PropTypes.string.isRequired,
+    destination: PropTypes.string.isRequired,
+    formUrl: PropTypes.string.isRequired,
+    hours: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    origin: PropTypes.string.isRequired,
+    flexible: PropTypes.bool.isRequired
+  }).isRequired
 }
 
 const styles = StyleSheet.create({
