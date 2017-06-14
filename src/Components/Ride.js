@@ -13,25 +13,17 @@ export default class Ride extends Component {
         destination,
         days,
         hours,
-        name,
-        flexible,
-        formUrl
+        name
      } = this.props.ride
 
     return (
       <View style={Styles.container}>
-        <View style={Styles.upperBox}>
-          <Text>{area}</Text>
-          <Text>{origin}</Text>
-          <Text>{destination}</Text>
-        </View>
-        <View style={Styles.lowerBox}>
-          <Text>{days}</Text>
-          <Text>{hours}</Text>
-          <Text>{name}</Text>
-        </View>
-        <Text>{flexible}</Text>
-        <Text>{formUrl}</Text>
+        <Text style={Styles.title}>{area}</Text>
+        <Text style={Styles.subTitle}>{origin}</Text>
+        <Text style={Styles.subTitle}>{destination}</Text>
+        <Text style={Styles.text}>{days}</Text>
+        <Text style={Styles.text}>{hours}</Text>
+        <Text style={Styles.text}>{name}</Text>
       </View>
     )
   }

@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import { ListView } from 'react-native'
+import { ListView, StyleSheet } from 'react-native'
 import Ride from '../Components/Ride'
 
 var ride = {
@@ -19,16 +19,24 @@ export default class RideList extends Component {
     super()
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
-      dataSource: ds.cloneWithRows([{...ride, id: 1}, {...ride, id: 2}, {...ride, id: 3}])
+      dataSource: ds.cloneWithRows([{...ride, id: 1}, {...ride, id: 2}, {...ride, id: 3}, {...ride, id: 4}, {...ride, id: 5}, {...ride, id: 6}])
     }
   }
 
   render () {
     return (
       <ListView
+        style={styles.container}
         dataSource={this.state.dataSource}
         renderRow={(ride) => <Ride ride={ride} />}
       />
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 20
+  }
+})
