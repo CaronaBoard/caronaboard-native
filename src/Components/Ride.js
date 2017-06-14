@@ -2,31 +2,36 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text } from 'react-native'
+import Styles from './Styles/RideStyles'
 
 export default class Ride extends Component {
   render () {
     const {
         area,
-        days,
+        origin,
         destination,
-        flexible,
-        formUrl,
+        days,
         hours,
         name,
-        origin
+        flexible,
+        formUrl
      } = this.props.ride
 
     return (
-      <View style={styles.container}>
-        <Text>{area}</Text>
-        <Text>{days}</Text>
-        <Text>{destination}</Text>
+      <View style={Styles.container}>
+        <View style={Styles.upperBox}>
+          <Text>{area}</Text>
+          <Text>{origin}</Text>
+          <Text>{destination}</Text>
+        </View>
+        <View style={Styles.lowerBox}>
+          <Text>{days}</Text>
+          <Text>{hours}</Text>
+          <Text>{name}</Text>
+        </View>
         <Text>{flexible}</Text>
         <Text>{formUrl}</Text>
-        <Text>{hours}</Text>
-        <Text>{name}</Text>
-        <Text>{origin}</Text>
       </View>
     )
   }
@@ -44,12 +49,3 @@ Ride.propTypes = {
     flexible: PropTypes.bool.isRequired
   }).isRequired
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  }
-})
