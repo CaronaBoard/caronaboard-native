@@ -15,5 +15,13 @@ export default StyleSheet.create({
   },
   text: {
     ...Fonts.style.input
+  },
+  line: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  icon: {
+    fontSize: Metrics.icons.tiny,
+    marginRight: Metrics.smallMargin
   }
 })
