@@ -13,9 +13,10 @@
     "prepush": "jest --bail --forceExit --silent"
   },
   "dependencies": {
-    "react": "16.0.0-alpha.6",
     "prop-types": "^15.5.10",
-    "react-native": "0.44.3"
+    "react": "16.0.0-alpha.6",
+    "react-native": "0.44.3",
+    "react-native-vector-icons": "^4.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
