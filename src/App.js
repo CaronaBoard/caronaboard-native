@@ -10,8 +10,13 @@ import {
   StyleSheet,
   View
 } from 'react-native'
+import Kitten from './Themes/Kitten'
 
 export default class caronaboardnative extends Component {
+  componentWillMount () {
+    Kitten.setup()
+  }
+
   render () {
     return (
       <View style={styles.container}>
