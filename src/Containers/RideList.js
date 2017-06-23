@@ -7,7 +7,7 @@ var ride = {
   'area': 'Aeroporto',
   'days': 'Seg a Sex',
   'destination': 'Rodoviaria',
-  'flexible': false,
+  'flexible': true,
   'formUrl': 'https://goo.gl/forms/',
   'hours': '19h',
   'name': 'Hugh Jackman',

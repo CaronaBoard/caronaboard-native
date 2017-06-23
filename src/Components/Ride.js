@@ -2,18 +2,23 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import Styles from './Styles/RideStyles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import { RkCard } from 'react-native-ui-kitten'
 
 export default class Ride extends Component {
-  renderLine (subTitle, icon, textStyle = 'text') {
+  renderLine (subTitle, icon) {
     return (
       <View style={Styles.line} >
         <Icon name={icon} style={Styles.icon} />
-        <Text style={Styles[textStyle]}>{subTitle}</Text>
+        <Text rkCardText>{subTitle}</Text>
       </View>
     )
+  }
+
+  renderFlexible (flexible) {
+    return flexible ? this.renderLine('Rota flexível', 'call-split') : <View />
   }
 
   render () {
@@ -21,20 +26,31 @@ export default class Ride extends Component {
         area,
         origin,
         destination,
+        flexible,
         days,
         hours,
-        name
+        name,
+        formUrl
      } = this.props.ride
 
     return (
-      <View style={Styles.container}>
-        <Text style={Styles.title}>{area}</Text>
-        { this.renderLine(origin, 'radio-button-unchecked', 'subTitle') }
-        { this.renderLine(destination, 'radio-button-unchecked', 'subTitle') }
-        { this.renderLine(days, 'today') }
-        { this.renderLine(hours, 'schedule') }
-        { this.renderLine(name, 'directions-car') }
-      </View>
+      <TouchableOpacity onPress={() => console.log('touched ' + formUrl)}>
+        <View>
+          <RkCard>
+            <View rkCardContent>
+              <Text rkCardTitle>{area}</Text>
+              { this.renderLine(origin, 'radio-button-unchecked') }
+              { this.renderLine(destination, 'radio-button-unchecked') }
+              { this.renderFlexible(flexible) }
+            </View>
+            <View rkCardContent>
+              { this.renderLine(days, 'today') }
+              { this.renderLine(hours, 'schedule') }
+              { this.renderLine(name, 'directions-car') }
+            </View>
+          </RkCard>
+        </View>
+      </TouchableOpacity>
     )
   }
 }
