@@ -36,7 +36,6 @@ export default class caronaboardnative extends Component {
 
   render () {
     const { rides } = this.state
-    console.log('State rides: ', rides || mockedRides)
 
     return (
       <View style={styles.container}>
