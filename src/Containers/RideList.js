@@ -1,12 +1,12 @@
 
 import React, { Component } from 'react'
-import { View, ListView, StyleSheet } from 'react-native'
+import { ListView, StyleSheet } from 'react-native'
 import Ride from '../Components/Ride'
 
 export default class RideList extends Component {
   constructor (props) {
     super(props)
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id})
     this.state = {
       dataSource: ds.cloneWithRows(props.rides)
     }
@@ -18,7 +18,6 @@ export default class RideList extends Component {
         style={styles.container}
         dataSource={this.state.dataSource}
         renderRow={(ride) => <Ride ride={ride} />}
-        renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
       />
     )
   }
@@ -28,10 +27,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 20
-  },
-  separator: {
-    flex: 1,
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: '#F7F7F7'
   }
 })

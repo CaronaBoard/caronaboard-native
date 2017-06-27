@@ -11,7 +11,7 @@ import {
   View
 } from 'react-native'
 import Kitten from './Themes/Kitten'
-import firebase from 'firebase'
+import { getAllRides } from './Services/Firebase'
 
 var ride = {
   'area': 'Aeroporto',
@@ -24,46 +24,23 @@ var ride = {
   'origin': 'Tecnopuc'
 }
 
-var rides = [{...ride, id: 1}, {...ride, id: 2}, {...ride, id: 3}, {...ride, id: 4}, {...ride, id: 5}, {...ride, id: 6}]
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyDfwHLwWKTqduazsf4kjbstJEA2E1sCeoI',
-  authDomain: 'caronaboard-61f75.firebaseapp.com',
-  databaseURL: 'https://caronaboard-61f75.firebaseio.com',
-  projectId: 'caronaboard-61f75',
-  storageBucket: 'caronaboard-61f75.appspot.com',
-  messagingSenderId: '617045704123'
-}
-
-const firebaseApp = firebase.initializeApp(firebaseConfig)
+var mockedRides = [{...ride, id: 1}, {...ride, id: 2}, {...ride, id: 3}, {...ride, id: 4}, {...ride, id: 5}, {...ride, id: 6}]
 
 export default class caronaboardnative extends Component {
   constructor () {
     super()
-    this.itemsRef = this.getRef().child('rides')
-  }
-
-  getRef () {
-    return firebaseApp.database().ref()
-  }
-
-  componentWillMount () {
     Kitten.setup()
-  }
-
-  componentDidMount () {
-    console.log('getting rides')
-    this.itemsRef.on('value', (snap) => {
-      console.log('rides')
-      console.log(snap)
-      console.log(snap)
-    })
+    this.state = { rides: undefined }
+    getAllRides().then((data) => this.setState({rides: data}))
   }
 
   render () {
+    const { rides } = this.state
+    console.log('State rides: ', rides || mockedRides)
+
     return (
       <View style={styles.container}>
-        <RideList rides={rides} />
+        <RideList key={rides} rides={rides || mockedRides} />
       </View>
     )
   }
