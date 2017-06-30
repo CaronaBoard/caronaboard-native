@@ -18,11 +18,24 @@ const databaseMock = {
   }
 }
 
+const signInMock = () => {
+  return new Promise(resolve => {
+    process.nextTick(
+      () => resolve({uid: '101'})
+    )
+  })
+}
+
 export default {
   initializeApp: jest.fn(),
   database: () => {
     return {
       ref: () => databaseMock
+    }
+  },
+  auth: () => {
+    return {
+      signInWithEmailAndPassword: signInMock
     }
   }
 }
