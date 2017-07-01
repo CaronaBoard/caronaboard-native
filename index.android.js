@@ -1,4 +1,2 @@
-import { AppRegistry } from 'react-native'
+/* eslint-disable no-unused-vars */
 import App from './src/App'
-
-AppRegistry.registerComponent('caronaboardnative', () => App)
