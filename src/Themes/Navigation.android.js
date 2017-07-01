@@ -37,13 +37,18 @@ export const appStyle = {
 export const tabs = [
   {
     label: 'SignIn',
-    screen: 'example.Types',
+    screen: 'carona.signIn',
     icon: require('../Assets/Images/swap.png'),
     title: 'Sign In Screen'
   }, {
-    label: 'SignIn',
-    screen: 'example.Types',
+    label: 'RideList',
+    screen: 'carona.rideList',
     icon: require('../Assets/Images/swap.png'),
-    title: 'Sign In Screen'
+    title: 'Ride List'
+  }, {
+    label: 'Test Screen',
+    screen: 'carona.testScreen',
+    icon: require('../Assets/Images/swap.png'),
+    title: 'Ride List'
   }
 ]
