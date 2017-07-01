@@ -6,23 +6,10 @@ const setup = () => {
   RkConfig.setColor('darkGray', RkConfig.colors.grey700)
   RkConfig.setColor('primary', RkConfig.colors.blue500)
 
-  RkConfig.setColor('blurText', 'rgba(255,255,255,0.7)')
-  RkConfig.setColor('blurTextStrong', 'rgba(255,255,255,0.9)')
-  RkConfig.setColor('blurBg', 'rgba(0,0,0,0.1)')
-  RkConfig.setColor('blurBgWhite', 'rgba(255,255,255,0.1)')
-  RkConfig.setColor('blurBg', 'rgba(11,18,38,0.3)')
-  RkConfig.setColor('blurBgLight', 'rgba(11,18,38,0.1)')
-  RkConfig.setColor('blurBgStrong', 'rgba(11,18,38,0.5)')
-  RkConfig.setColor('blurPrimary', '#00e5bf')
-  RkConfig.setColor('blurDark', '#15213b')
-  RkConfig.setColor('blurExtraDark', '#0b162a')
   RkConfig.setColor('materialGray', '#ECECEC')
   RkConfig.setColor('materialWarning', '#FFC65E')
   RkConfig.setColor('materialBg', '#009688')
 
-  RkConfig.setType('text', 'blurText', {
-    color: RkConfig.colors.blurTextStrong
-  })
   RkConfig.setType('text', 'primary', {
     color: RkConfig.colors.primary
   })
@@ -39,10 +26,6 @@ const setup = () => {
     backgroundColor: 'transparent'
   })
 
-  RkConfig.setType('separator', 'blur', {
-    backgroundColor: RkConfig.colors.blurBgStrong,
-    height: 0.5
-  })
   RkConfig.setType('button', 'iconButton', {
     container: {
       paddingHorizontal: 5,
@@ -129,62 +112,6 @@ const setup = () => {
     }
   })
 
-  RkConfig.setType('card', 'blur', {
-    container: {
-      borderRadius: 0,
-      marginHorizontal: 0,
-      backgroundColor: RkConfig.colors.blurBg,
-      shadowOpacity: 0,
-      shadowRadius: 0,
-      shadowOffset: {
-        height: 0,
-        width: 0
-      }
-    },
-    content: {
-      backgroundColor: RkConfig.colors.blurBg
-    },
-    title: {
-      marginBottom: 3,
-      color: RkConfig.colors.blurTextStrong
-    },
-    subTitle: {
-      color: RkConfig.colors.blurText
-    },
-    header: {
-      borderTopLeftRadius: 0,
-      borderTopRightRadius: 0,
-      backgroundColor: RkConfig.colors.blurBg
-    },
-    footer: {
-      borderBottomLeftRadius: 0,
-      borderBottomRightRadius: 0,
-      backgroundColor: RkConfig.colors.blurBg
-    },
-    icon: {
-      color: 'white'
-    },
-    sideColor: {
-      width: 5,
-      marginRight: 10,
-      alignSelf: 'stretch',
-      borderRadius: 2
-    },
-    friendItem: {
-      paddingLeft: 0
-    },
-    online: {
-      backgroundColor: RkConfig.colors.blurPrimary,
-      shadowColor: RkConfig.colors.blurPrimary,
-      shadowOpacity: 0.5,
-      shadowRadius: 5,
-      shadowOffset: {
-        height: 0,
-        width: 0
-      }
-    }
-  })
-
   RkConfig.setType('card', 'materialCard', {
     content: {
       paddingHorizontal: 10,
@@ -225,18 +152,6 @@ const setup = () => {
     },
     inner: {
       color: RkConfig.colors.white
-    }
-  })
-
-  RkConfig.setTheme('blur', {
-    text: {
-      defaultType: 'montserrat transparentBg blurText'
-    },
-    card: {
-      defaultType: 'classic blur'
-    },
-    separator: {
-      defaultType: 'blur'
     }
   })
 
