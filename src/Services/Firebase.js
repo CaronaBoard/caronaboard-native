@@ -25,3 +25,9 @@ export const getAllRides = () => {
     )
   })
 }
+
+export const signIn = (email, password) => {
+  return new Promise(resolve => {
+    Firebase.auth().signInWithEmailAndPassword(email, password).then(resolve)
+  })
+}
