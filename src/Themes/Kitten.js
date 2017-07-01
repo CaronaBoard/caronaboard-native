@@ -1,3 +1,4 @@
+import {Platform} from 'react-native'
 import {RkConfig} from 'react-native-ui-kitten'
 
 const setup = () => {
@@ -185,7 +186,7 @@ const setup = () => {
     alignItems: 'stretch'
   })
 
-  RkConfig.theme = RkConfig.themes.classic
+  RkConfig.theme = Platform.OS === 'ios' ? RkConfig.themes.classic : RkConfig.themes.material
 }
 
 export default { setup }
