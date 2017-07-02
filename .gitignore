@@ -56,3 +56,5 @@ fastlane/screenshots
 #VS Code
 jsconfig.json
 .vscode/
+
+coverage/
