@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 import { ListView, StyleSheet } from 'react-native'
-import Ride from '../Components/Ride'
+import Ride from '../../Shared/Components/Ride'
 
 const ride = {
   'area': 'Aeroporto',

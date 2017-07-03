@@ -1,12 +1,12 @@
 import { Navigation } from 'react-native-navigation'
 
-import RegisterScreens from './Screens'
-import Kitten from './Themes/Kitten'
-import { tabsStyle, appStyle, animationType, tabs } from './Themes/Navigation'
-import { configureStore } from './Configuration/CreateStore'
+import Kitten from './Configuration/Kitten'
+import Screens from './Configuration/Screens'
+import { createStore } from './Configuration/Redux'
+import { tabsStyle, appStyle, animationType, tabs } from './Configuration/Navigation'
 
 Kitten.setup()
-RegisterScreens(configureStore())
+Screens.registerScreens(createStore())
 
 Navigation.startTabBasedApp({
   tabs,

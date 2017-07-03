@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 
-import { testAction } from '../Redux/Actions/TestActions'
+import { testAction } from '../../../Redux/Actions/TestActions'
 import { RkButton, RkText } from 'react-native-ui-kitten'
-import Styles from './Styles/SignInScreenStyles'
+import Styles from '../../Authentication/Containers/Styles/SignInScreenStyles'
 
 export class TestScreen extends Component {
   render () {

@@ -58,3 +58,4 @@ jsconfig.json
 .vscode/
 
 coverage/
+.tmp/
