@@ -3,14 +3,16 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start-packager": "node node_modules/react-native/local-cli/cli.js start",
+    "run-ios": "react-native run-ios",
+    "run-android": "react-native run-ios",
     "test": "jest",
     "test-watch": "jest --watch",
     "test-ci": "jest --forceExit --coverage",
     "generate-coverage": "jest --coverage --silent --noStackTrace || true",
     "update-coverage": "npm run generate-coverage && codeclimate-test-reporter < ./coverage/lcov.info",
     "lint-check": "standard --verbose | snazzy",
-    "lint-fixcode": "standard --fix --verbose | snazzy",
+    "lint-fix": "standard --fix --verbose | snazzy",
     "precommit": "npm run lint-check",
     "prepush": "jest --bail --forceExit --silent"
   },
