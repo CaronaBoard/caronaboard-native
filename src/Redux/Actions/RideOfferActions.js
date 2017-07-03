@@ -8,6 +8,7 @@ export function fetchAllRides () {
       type: FETCH_ALL_RIDES,
       payload: rides
     }
+    console.log('rides', rides)
     dispatch(action)
   }
 }

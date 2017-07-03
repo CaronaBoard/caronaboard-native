@@ -8,12 +8,13 @@ const props = {
     'area': 'Aeroporto',
     'days': 'Seg a Sex',
     'destination': 'Rodoviaria',
-    'flexible': true,
-    'formUrl': 'https://goo.gl/forms/',
     'hours': '19h',
-    'name': 'Hugh Jackman',
     'origin': 'Tecnopuc',
-    'id': 1
+    'profile': {
+      'contact': {
+        'kind': 'Whatsapp', 'value': '5198269999'
+      },
+      'name': 'Eduardo' }
   }],
   fetchRides: jest.fn()
 }

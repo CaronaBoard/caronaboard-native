@@ -14,6 +14,7 @@ ShallowWrapper {
             "items": 1,
           }
     }
+    enableEmptySections={true}
     renderRow={[Function]}
     renderScrollComponent={[Function]}
     style={
@@ -30,6 +31,7 @@ ShallowWrapper {
                   "items": 1,
                 }
       }
+      enableEmptySections={true}
       renderRow={[Function]}
       renderScrollComponent={[Function]}
       style={
@@ -54,12 +56,15 @@ ShallowWrapper {
                           "area": "Aeroporto",
                           "days": "Seg a Sex",
                           "destination": "Rodoviaria",
-                          "flexible": true,
-                          "formUrl": "https://goo.gl/forms/",
                           "hours": "19h",
-                          "id": 1,
-                          "name": "Hugh Jackman",
                           "origin": "Tecnopuc",
+                          "profile": Object {
+                            "contact": Object {
+                              "kind": "Whatsapp",
+                              "value": "5198269999",
+                            },
+                            "name": "Eduardo",
+                          },
                         },
                       ]
         }
@@ -77,12 +82,15 @@ ShallowWrapper {
               "area": "Aeroporto",
               "days": "Seg a Sex",
               "destination": "Rodoviaria",
-              "flexible": true,
-              "formUrl": "https://goo.gl/forms/",
               "hours": "19h",
-              "id": 1,
-              "name": "Hugh Jackman",
               "origin": "Tecnopuc",
+              "profile": Object {
+                "contact": Object {
+                  "kind": "Whatsapp",
+                  "value": "5198269999",
+                },
+                "name": "Eduardo",
+              },
             },
           ],
         },
@@ -116,6 +124,7 @@ ShallowWrapper {
                               "items": 1,
                             }
           }
+          enableEmptySections={true}
           renderRow={[Function]}
           renderScrollComponent={[Function]}
           style={
@@ -132,6 +141,7 @@ ShallowWrapper {
                               "items": 1,
                             }
           }
+          enableEmptySections={true}
           renderRow={[Function]}
           renderScrollComponent={[Function]}
           style={
@@ -160,12 +170,15 @@ ShallowWrapper {
               "area": "Aeroporto",
               "days": "Seg a Sex",
               "destination": "Rodoviaria",
-              "flexible": true,
-              "formUrl": "https://goo.gl/forms/",
               "hours": "19h",
-              "id": 1,
-              "name": "Hugh Jackman",
               "origin": "Tecnopuc",
+              "profile": Object {
+                "contact": Object {
+                  "kind": "Whatsapp",
+                  "value": "5198269999",
+                },
+                "name": "Eduardo",
+              },
             },
           ]
     }

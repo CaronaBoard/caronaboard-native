@@ -34,6 +34,7 @@ export class RideList extends Component {
         style={styles.container}
         dataSource={this.state.dataSource}
         renderRow={(ride) => <Ride ride={ride} />}
+        enableEmptySections
       />
     )
   }

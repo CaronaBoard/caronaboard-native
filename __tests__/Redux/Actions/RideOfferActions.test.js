@@ -1,6 +1,11 @@
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+
 import { FETCH_ALL_RIDES } from '../../../src/Redux/Types'
 import { fetchAllRides } from '../../../src/Redux/Actions'
-import { getAllRides } from '../../../src/Services/Firebase'
+
+const middlewares = [thunk]
+const mockStore = configureMockStore(middlewares)
 
 const mockedRides = {
   'area': 'Aeroporto',
@@ -17,28 +22,20 @@ const mockedRides = {
 jest.mock('../../../src/Services/Firebase', () => {
   return {
     getAllRides: jest.fn(() => mockedRides)
-    // getAllRides: jest.fn({
-    //   return new Promise(resolve => {
-    //     process.nextTick(
-    //       () => resolve(mockedRides)
-    //     )
-    //   })
-    // })
   }
 })
 
 describe('RideOffer Actions', () => {
   it('Should fetch all ride offers', () => {
-    const thunk = fetchAllRides()
-    const dispatchMock = jest.fn()
-    const expectedAction = {
+    const expectedAction = [{
       type: FETCH_ALL_RIDES,
       payload: mockedRides
-    }
+    }]
 
-    thunk(dispatchMock)
+    const store = mockStore({ rideOffer: {rides: []} })
 
-    expect(getAllRides).toHaveBeenCalled()
-    expect(dispatchMock).toHaveBeenCalledWith(expectedAction)
+    return store.dispatch(fetchAllRides()).then(() => {
+      expect(store.getActions()).toEqual(expectedAction)
+    })
   })
 })
