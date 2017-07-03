@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Fonts, Metrics } from '../../Themes'
+import { Fonts, Metrics } from '../../../Shared/Themes/index'
 import { RkConfig } from 'react-native-ui-kitten'
 
 export default StyleSheet.create({

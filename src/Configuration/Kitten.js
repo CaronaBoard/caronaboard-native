@@ -1,6 +1,8 @@
 import {Platform} from 'react-native'
 import {RkConfig} from 'react-native-ui-kitten'
 
+// TODO: Replace Hardcoded values by our themes constants
+
 const setup = () => {
   RkConfig.setColor('lightGray', RkConfig.colors.grey300)
   RkConfig.setColor('gray', RkConfig.colors.grey500)
