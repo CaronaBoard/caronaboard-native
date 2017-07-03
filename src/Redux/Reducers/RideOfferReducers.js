@@ -1,17 +1,7 @@
 import { FETCH_ALL_RIDES } from '../Types'
 
 export const INITIAL_STATE = {
-  rides: [{
-    'area': 'Aeroporto',
-    'days': 'Seg a Sex',
-    'destination': 'Rodoviaria',
-    'flexible': true,
-    'formUrl': 'https://goo.gl/forms/',
-    'hours': '19h',
-    'name': 'Hugh Jackman',
-    'origin': 'Tecnopuc',
-    'id': 1
-  }]
+  rides: []
 }
 
 export default (state = INITIAL_STATE, action) => {
