@@ -1,54 +1,26 @@
-const tabBarBackgroundColor = '#003a66'
-const navBarButtonColor = '#ffffff'
-const tabBarButtonColor = '#ffffff'
-const navBarTextColor = '#ffffff'
-const tabBarSelectedButtonColor = '#ff505c'
-const navigationBarColor = '#003a66'
-const navBarBackgroundColor = '#003a66'
-const statusBarColor = '#002b4c'
-const tabFontFamily = 'BioRhyme-Bold'
+import { Navigation } from 'react-native-navigation'
+import { Colors } from '../Modules/Shared/Themes'
 
-export const animationType = 'fade'
-
-export const tabsStyle = {
-  tabBarBackgroundColor,
-  navBarButtonColor,
-  tabBarButtonColor,
-  navBarTextColor,
-  tabBarSelectedButtonColor,
-  navigationBarColor,
-  navBarBackgroundColor,
-  statusBarColor,
-  tabFontFamily
+const navigatorStyle = {
+  statusBarColor: Colors.black,
+  statusBarTextColorScheme: Colors.white,
+  navigationBarColor: Colors.black,
+  navBarBackgroundColor: Colors.black,
+  navBarTextColor: Colors.white,
+  navBarButtonColor: Colors.white,
+  tabBarButtonColor: Colors.red,
+  tabBarSelectedButtonColor: Colors.red,
+  tabBarBackgroundColor: Colors.white
 }
 
-export const appStyle = {
-  tabBarBackgroundColor,
-  navBarButtonColor,
-  tabBarButtonColor,
-  navBarTextColor,
-  tabBarSelectedButtonColor,
-  navigationBarColor,
-  navBarBackgroundColor,
-  statusBarColor,
-  tabFontFamily
-}
-
-export const tabs = [
-  {
-    label: 'SignIn',
+export const singleScreenAppParams = {
+  screen: {
     screen: 'carona.signIn',
-    icon: require('../Assets/Images/swap.png'),
-    title: 'Sign In Screen'
-  }, {
-    label: 'RideList',
-    screen: 'carona.rideList',
-    icon: require('../Assets/Images/swap.png'),
-    title: 'Ride List'
-  }, {
-    label: 'Test Screen',
-    screen: 'carona.testScreen',
-    icon: require('../Assets/Images/swap.png'),
-    title: 'Ride List'
+    title: 'Sign In',
+    navigatorStyle
   }
-]
+}
+
+export default {
+  startApp: () => Navigation.startSingleScreenApp(singleScreenAppParams)
+}

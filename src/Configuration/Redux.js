@@ -3,4 +3,6 @@ import RootReducer from '../Redux/Reducers'
 
 const initialState = {}
 
-export const createStore = () => create(RootReducer, initialState)
+export default {
+  createStore: () => create(RootReducer, initialState)
+}
