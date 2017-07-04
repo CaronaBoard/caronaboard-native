@@ -25,6 +25,11 @@ const tabs = [
     icon: require('../Assets/Images/swap.png'),
     title: 'Ride List'
   }, {
+    label: 'RideOffer',
+    screen: 'carona.rideOffer',
+    icon: require('../Assets/Images/swap.png'),
+    title: 'Ride Offer'
+  }, {
     label: 'Test Screen',
     screen: 'carona.testScreen',
     icon: require('../Assets/Images/swap.png'),

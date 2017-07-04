@@ -65,5 +65,3 @@ Ride.propTypes = {
     })
   }).isRequired
 }
-
-export default Ride
