@@ -7,7 +7,7 @@ import Styles from './Styles/RideStyles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkCard } from 'react-native-ui-kitten'
 
-export default class Ride extends Component {
+export class Ride extends Component {
   renderLine (subTitle, icon) {
     return (
       <View style={Styles.line} >
@@ -65,3 +65,5 @@ Ride.propTypes = {
     })
   }).isRequired
 }
+
+export default Ride

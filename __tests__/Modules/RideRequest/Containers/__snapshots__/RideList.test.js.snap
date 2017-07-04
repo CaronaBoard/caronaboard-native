@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RideList /> Should have a snapshot 1`] = `
+<ListViewMock
+  dataSource={
+    ListViewDataSource {
+      "items": 1,
+    }
+  }
+  enableEmptySections={true}
+  renderRow={[Function]}
+  renderScrollComponent={[Function]}
+  style={
+    Object {
+      "flex": 1,
+      "paddingTop": 20,
+    }
+  }
+/>
+`;

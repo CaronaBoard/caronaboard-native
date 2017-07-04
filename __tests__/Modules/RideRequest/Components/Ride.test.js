@@ -1,10 +1,10 @@
 import 'react-native'
 import React from 'react'
 import { shallow } from 'enzyme'
-import { RideList } from '../../../src/Modules/RideRequest/Containers/RideList'
+import { Ride } from '../../../../src/Modules/RideRequest/Components/Ride'
 
 const props = {
-  rides: [{
+  ride: {
     'area': 'Aeroporto',
     'days': 'Seg a Sex',
     'destination': 'Rodoviaria',
@@ -15,12 +15,11 @@ const props = {
         'kind': 'Whatsapp', 'value': '5198269999'
       },
       'name': 'Eduardo' }
-  }],
-  fetchRides: jest.fn()
+  }
 }
 
-describe('<RideList />', () => {
-  const wrapper = shallow(<RideList {...props} />)
+describe('<Ride />', () => {
+  const wrapper = shallow(<Ride {...props} />)
 
   it('Should have a snapshot', () => {
     expect(wrapper).toMatchSnapshot()
