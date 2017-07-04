@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
+import { RkTextInput, RkText } from 'react-native-ui-kitten'
 
-import { RkButton, RkTextInput, RkText } from 'react-native-ui-kitten'
+import { Button } from '../../Shared/Components'
 import Styles from './Styles/SignInScreenStyles'
 
 export default class SignInScreen extends Component {
@@ -29,13 +30,7 @@ export default class SignInScreen extends Component {
               style={Styles.input}
               secureTextEntry />
           </View>
-          <View>
-            <RkButton innerStyle={[Styles.buttonFontSize]}
-              rkType='circle outline medium'
-              onPress={() => console.log('Apertou Fazer Signin')}>
-              SIGN IN
-            </RkButton>
-          </View>
+          <Button text='SIGN IN' onPress={() => console.log('Apertou Fazer Signin')} />
         </View>
       </View>
     )

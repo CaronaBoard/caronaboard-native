@@ -1,28 +1,31 @@
 
 import React, { Component } from 'react'
 import { ListView, StyleSheet } from 'react-native'
-import Ride from '../../Shared/Components/Ride'
+import { fetchAllRides } from '../../../Redux/Actions'
+import { connect } from 'react-redux'
 
-const ride = {
-  'area': 'Aeroporto',
-  'days': 'Seg a Sex',
-  'destination': 'Rodoviaria',
-  'flexible': true,
-  'formUrl': 'https://goo.gl/forms/',
-  'hours': '19h',
-  'name': 'Hugh Jackman',
-  'origin': 'Tecnopuc'
-}
+import Ride from '../Components/Ride'
 
-const mockedRides = [{...ride, id: 1}, {...ride, id: 2}, {...ride, id: 3}, {...ride, id: 4}, {...ride, id: 5}, {...ride, id: 6}]
-
-export default class RideList extends Component {
+export class RideList extends Component {
   constructor (props) {
     super(props)
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id})
     this.state = {
-      dataSource: ds.cloneWithRows(mockedRides)
+      dataSource: ds.cloneWithRows(this.props.rides)
     }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.rides.length !== this.props.rides.length) {
+      const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id})
+      this.setState({
+        dataSource: ds.cloneWithRows(nextProps.rides)
+      })
+    }
+  }
+
+  componentDidMount () {
+    this.props.fetchRides()
   }
 
   render () {
@@ -31,6 +34,7 @@ export default class RideList extends Component {
         style={styles.container}
         dataSource={this.state.dataSource}
         renderRow={(ride) => <Ride ride={ride} />}
+        enableEmptySections
       />
     )
   }
@@ -42,3 +46,17 @@ const styles = StyleSheet.create({
     paddingTop: 20
   }
 })
+
+const mapStateToProps = (state) => {
+  return {
+    rides: state.rideOffer.rides
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchRides: () => dispatch(fetchAllRides())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RideList)
