@@ -1,11 +1,8 @@
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
-
 import { FETCH_ALL_RIDES } from '../../../src/Redux/Types'
 import { fetchAllRides } from '../../../src/Redux/Actions'
 
-const middlewares = [thunk]
-const mockStore = configureMockStore(middlewares)
+import * as FirebaseService from '../../../src/Services/Firebase'
+jest.mock('../../../src/Services/Firebase')
 
 const mockedRides = {
   'area': 'Aeroporto',
@@ -19,23 +16,20 @@ const mockedRides = {
   'id': 1
 }
 
-jest.mock('../../../src/Services/Firebase', () => {
-  return {
-    getAllRides: jest.fn(() => mockedRides)
-  }
-})
-
 describe('RideOffer Actions', () => {
-  it('Should fetch all ride offers', () => {
-    const expectedAction = [{
+  const dispatchMock = jest.fn()
+
+  it('Should create a thunk for fetching all rides', async () => {
+    FirebaseService.getAllRides = jest.fn(() => mockedRides)
+
+    const expectedAction = {
       type: FETCH_ALL_RIDES,
       payload: mockedRides
-    }]
+    }
 
-    const store = mockStore({ rideOffer: {rides: []} })
+    const thunk = fetchAllRides()
+    await thunk(dispatchMock)
 
-    return store.dispatch(fetchAllRides()).then(() => {
-      expect(store.getActions()).toEqual(expectedAction)
-    })
+    expect(dispatchMock).toHaveBeenCalledWith(expectedAction)
   })
 })
