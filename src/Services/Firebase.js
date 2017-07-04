@@ -31,7 +31,17 @@ let database = (() => {
 })()
 
 const toArrayOfRides = (firebaseResponse) => {
-  return _.flatMap(firebaseResponse.val(), Object.values)
+  return _.flatMap(firebaseResponse.val(), (value, driverId) => {
+    const ridesIds = Object.keys(value)
+    const rides = Object.values(value)
+
+    rides.forEach((ride, index) => {
+      ride.driverId = driverId
+      ride.rideId = ridesIds[index]
+    })
+
+    return rides
+  })
 }
 
 export const getAllRides = () => {
@@ -70,6 +80,58 @@ export const saveRideOffer = (ride: rideOfferType) => {
     database
       .ref(`rides/${group}/${userId}`)
       .push({ ride, profile })
+      .then(resolve)
+      .catch(reject)
+  })
+}
+
+const removeRideRequestByRideOfferId = (rideId) => {
+  return new Promise((resolve, reject) => {
+    database
+      .ref(`rideRequests/${rideId}`)
+      .remove()
+      .then(resolve)
+      .catch(reject)
+  })
+}
+
+export const removeRideOffer = (rideId) => {
+  return new Promise((resolve, reject) => {
+    database
+      .ref(`rides/${group}/${rideId}`)
+      .remove()
+      .then(() => {
+        removeRideRequestByRideOfferId(rideId)
+          .then(resolve)
+          .catch(reject)
+      })
+      .catch(reject)
+  })
+}
+
+export const saveRideRequest = (rideId) => {
+  const profile = {
+    name: 'TEST',
+    contact: {
+      kind: 'Whatsapp',
+      value: '5566778899'
+    }
+  } // firebase.database().ref(`profiles/${userId}`).once("value")
+
+  return new Promise((resolve, reject) => {
+    database
+      .ref(`rideRequests/${rideId}`)
+      .push({ profile })
+      .then(resolve)
+      .catch(reject)
+  })
+}
+
+export const removeRideRequest = (rideId, rideRequestId) => {
+  return new Promise((resolve, reject) => {
+    database
+      .ref(`rideRequests/${rideId}/${rideRequestId}`)
+      .remove()
       .then(resolve)
       .catch(reject)
   })
