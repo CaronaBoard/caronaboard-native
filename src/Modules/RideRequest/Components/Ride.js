@@ -7,7 +7,7 @@ import Styles from './Styles/RideStyles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkCard } from 'react-native-ui-kitten'
 
-export default class Ride extends Component {
+export class Ride extends Component {
   renderLine (subTitle, icon) {
     return (
       <View style={Styles.line} >
@@ -17,36 +17,28 @@ export default class Ride extends Component {
     )
   }
 
-  renderFlexible (flexible) {
-    return flexible ? this.renderLine('Rota flexível', 'call-split') : <View />
-  }
-
   render () {
     const {
-        area,
         origin,
         destination,
-        flexible,
         days,
         hours,
-        name,
-        formUrl
+        profile
      } = this.props.ride
 
     return (
-      <TouchableOpacity onPress={() => console.log('touched ' + formUrl)}>
+      <TouchableOpacity onPress={() => console.log('touched')}>
         <View>
           <RkCard>
             <View rkCardContent>
-              <Text rkCardTitle>{area}</Text>
+              <Text rkCardTitle>{destination}</Text>
               { this.renderLine(origin, 'radio-button-unchecked') }
               { this.renderLine(destination, 'radio-button-unchecked') }
-              { this.renderFlexible(flexible) }
             </View>
             <View rkCardContent>
               { this.renderLine(days, 'today') }
               { this.renderLine(hours, 'schedule') }
-              { this.renderLine(name, 'directions-car') }
+              { this.renderLine(profile.name, 'directions-car') }
             </View>
           </RkCard>
         </View>
@@ -57,13 +49,19 @@ export default class Ride extends Component {
 
 Ride.propTypes = {
   ride: PropTypes.shape({
-    area: PropTypes.string.isRequired,
     days: PropTypes.string.isRequired,
     destination: PropTypes.string.isRequired,
-    formUrl: PropTypes.string.isRequired,
     hours: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
     origin: PropTypes.string.isRequired,
-    flexible: PropTypes.bool.isRequired
+    profile: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      contact: PropTypes.shape({
+        kind: PropTypes.string.isRequired,
+        value: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.number
+        ]).isRequired
+      })
+    })
   }).isRequired
 }

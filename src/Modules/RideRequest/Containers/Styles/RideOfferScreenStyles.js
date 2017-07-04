@@ -14,7 +14,7 @@ export default StyleSheet.create({
   flexible: {
     flex: 1
   },
-  credentialsContainer: {
-    minHeight: 185
+  inputTextsContainer: {
+    minHeight: 185 * 2
   }
 })
