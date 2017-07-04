@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-<<<<<<< HEAD
 import { RkText } from 'react-native-ui-kitten'
-
 import { Button, TextInput } from '../../Shared/Components'
-=======
 import { signIn } from '../../../Services/Firebase'
-import { RkButton, RkTextInput, RkText } from 'react-native-ui-kitten'
->>>>>>> add sign in method in component
 import Styles from './Styles/SignInScreenStyles'
 
 export default class SignInScreen extends Component {
