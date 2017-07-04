@@ -5,7 +5,6 @@ export const INITIAL_STATE = {
 }
 
 export default (state = INITIAL_STATE, action) => {
-  console.log('Action', action)
   switch (action.type) {
     case FETCH_ALL_RIDES:
       return { rides: action.payload }
