@@ -15,13 +15,19 @@ let database = (() => {
 })()
 
 const toArrayOfRides = (firebaseResponse) => {
+  console.log(_.flatMap(firebaseResponse, Object.values))
   return _.flatMap(firebaseResponse, Object.values)
 }
 
 export const getAllRides = () => {
-  return new Promise(resolve => {
-    database.child('rides').once('value').then(
-      (snapshot) => resolve(toArrayOfRides(snapshot.val()))
+  return new Promise((resolve, reject) => {
+    database.child('rides/twpoa').once('value')
+      .then(
+        (snapshot) => resolve(toArrayOfRides(snapshot.val()))
+      ).catch((error) => {
+        console.log('Error occured during getting all rides from firebase.', error)
+        reject(error)
+      }
     )
   })
 }
