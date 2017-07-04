@@ -14,8 +14,8 @@ export default class SignInScreen extends Component {
             SIGN IN
           </RkText>
           <View style={Styles.credentialsContainer}>
-            <TextInput label='EMAIL ADDRESS' />
-            <TextInput label='PASSWORD' />
+            <TextInput label='EMAIL ADDRESS' onChangeText={(text) => console.log(text)} />
+            <TextInput label='PASSWORD' onChangeText={(text) => console.log(text)} />
           </View>
           <Button text='SIGN IN' onPress={() => console.log('Apertou Fazer Signin')} />
         </View>

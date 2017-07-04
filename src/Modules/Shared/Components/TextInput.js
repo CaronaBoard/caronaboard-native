@@ -8,13 +8,16 @@ export const TextInput = (props) => {
   return (
     <RkTextInput
       rkType='underline topLabel'
-      label={props.label}
       labelStyle={Styles.inputLabel}
       containerStyle={Styles.inputContainer}
-      style={Styles.input} />
+      style={Styles.input}
+      label={props.label}
+      onChangeText={props.onChangeText}
+    />
   )
 }
 
 TextInput.propTypes = {
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
+  onChangeText: PropTypes.func.isRequired
 }

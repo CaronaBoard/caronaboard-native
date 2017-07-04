@@ -1,13 +1,22 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { connect } from 'react-redux'
 import { RkText } from 'react-native-ui-kitten'
-import PropTypes from 'prop-types'
 
 import { Button, TextInput } from '../../Shared/Components'
+import { saveRideOffer } from '../../../Services/Firebase'
 import styles from './Styles/RideOfferScreenStyles'
 
 export class RideOfferScreen extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      rideOrigin: '',
+      rideDestination: '',
+      rideDays: '',
+      rideHour: ''
+    }
+  }
+
   render () {
     return (
       <View style={styles.flexible}>
@@ -16,34 +25,16 @@ export class RideOfferScreen extends Component {
             Ride Offer
           </RkText>
           <View style={styles.inputTextsContainer}>
-            <TextInput label='ORIGIN' />
-            <TextInput label='DESTINATION' />
-            <TextInput label='DAYS' />
-            <TextInput label='HOUR' />
+            <TextInput label='ORIGIN' onChangeText={(rideOrigin) => this.setState({rideOrigin})} />
+            <TextInput label='DESTINATION' onChangeText={(rideDestination) => this.setState({rideDestination})} />
+            <TextInput label='DAYS' onChangeText={(rideDays) => this.setState({rideDays})} />
+            <TextInput label='HOUR' onChangeText={(rideHour) => this.setState({rideHour})} />
           </View>
-          <Button text='Offer Ride' onPress={() => console.log('Apertou Oferecer Ride')} />
+          <Button text='Offer Ride' onPress={() => saveRideOffer(this.state)} />
         </View>
       </View>
     )
   }
 }
 
-RideOfferScreen.propTypes = {
-  foo: PropTypes.any
-}
-
-RideOfferScreen.defaultProps = {
-  foo: ''
-}
-
-const mapStateToProps = (state) => {
-  return {
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(RideOfferScreen)
+export default RideOfferScreen
