@@ -52,7 +52,16 @@ Ride.propTypes = {
     days: PropTypes.string.isRequired,
     destination: PropTypes.string.isRequired,
     hours: PropTypes.string.isRequired,
-    // profile: PropTypes.string.isRequired,
-    origin: PropTypes.string.isRequired
+    origin: PropTypes.string.isRequired,
+    profile: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      contact: PropTypes.shape({
+        kind: PropTypes.string.isRequired,
+        value: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.number
+        ]).isRequired
+      })
+    })
   }).isRequired
 }

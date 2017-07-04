@@ -3,7 +3,8 @@ import { View } from 'react-native'
 import { connect } from 'react-redux'
 
 import { testAction } from '../../../Redux/Actions/TestActions'
-import { RkButton, RkText } from 'react-native-ui-kitten'
+import { RkText } from 'react-native-ui-kitten'
+import { Button } from '../../Shared/Components'
 import Styles from '../../Authentication/Containers/Styles/SignInScreenStyles'
 
 export class TestScreen extends Component {
@@ -17,13 +18,7 @@ export class TestScreen extends Component {
               {testCounter}
             </RkText>
           </View>
-          <View>
-            <RkButton innerStyle={[Styles.buttonFontSize]}
-              rkType='circle outline medium'
-              onPress={() => increaseCounter()}>
-              UPDATE STATE
-            </RkButton>
-          </View>
+          <Button text={'UPDATE STATE'} onPress={() => increaseCounter()} />
         </View>
       </View>
     )

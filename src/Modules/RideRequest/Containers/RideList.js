@@ -4,7 +4,7 @@ import { ListView, StyleSheet } from 'react-native'
 import { fetchAllRides } from '../../../Redux/Actions'
 import { connect } from 'react-redux'
 
-import Ride from '../../Shared/Components/Ride'
+import Ride from '../Components/Ride'
 
 export class RideList extends Component {
   constructor (props) {

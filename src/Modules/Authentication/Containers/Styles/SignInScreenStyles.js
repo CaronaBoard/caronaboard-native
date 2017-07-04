@@ -28,8 +28,5 @@ export default StyleSheet.create({
   },
   credentialsContainer: {
     minHeight: 185
-  },
-  buttonFontSize: {
-    fontSize: Fonts.size.h5
   }
 })
