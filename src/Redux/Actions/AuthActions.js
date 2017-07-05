@@ -3,12 +3,15 @@ import { signIn } from '../../Services/Firebase'
 
 export function signInFirebase (email, password) {
   return async (dispatch) => {
-    const firebaseUser = await signIn(email, password)
-    const action = {
-      type: SIGN_IN_FIREBASE,
-      payload: firebaseUser
-    }
-
-    dispatch(action)
+    await signIn(email, password).then(userData => {
+      const action = {
+        type: SIGN_IN_FIREBASE,
+        payload: userData
+      }
+      dispatch(action)
+    })
+      .catch(err => {
+        console.log('Error loging in: ', err)
+      })
   }
 }

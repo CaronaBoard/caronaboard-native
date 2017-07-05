@@ -1,11 +1,12 @@
+import Styles from './Styles/SignInScreenStyles'
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import { RkText } from 'react-native-ui-kitten'
 import { Button, TextInput } from '../../Shared/Components'
-import { signIn } from '../../../Services/Firebase'
-import Styles from './Styles/SignInScreenStyles'
+import { signInFirebase } from '../../../Redux/Actions'
+import { connect } from 'react-redux'
 
-export default class SignInScreen extends Component {
+export class SignInScreen extends Component {
   constructor (props) {
     super()
     this.state = {
@@ -16,13 +17,11 @@ export default class SignInScreen extends Component {
   }
 
   onButtonSubmit = () => {
-    console.log(`email: ${this.state.email} \npassword: ${this.state.password}`)
-    signIn(this.state.email, this.state.password).then(this.onLoginSuccess)
+    this.props.signIn(this.state.email, this.state.password).then(this.onLoginSuccess)
   }
 
   onLoginSuccess = (userData) => {
-    console.log('Login successful')
-    console.log(`user uid: ${userData.uid} \nemail: ${userData.email}`)
+    // TODO navigate to ridelist?
   }
 
   render () {
@@ -36,9 +35,22 @@ export default class SignInScreen extends Component {
             <TextInput label='EMAIL ADDRESS' onChangeText={(email) => { this.setState({email}) }} />
             <TextInput label='PASSWORD' onChangeText={(password) => { this.setState({password}) }} />
           </View>
-          <Button text='SIGN IN' onPress={() => console.log('Apertou Fazer Signin')} />
+          <Button text='SIGN IN' onPress={this.onButtonSubmit} />
         </View>
       </View>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    userData: state.auth.userData
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signIn: (e, p) => dispatch(signInFirebase(e, p))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen)
