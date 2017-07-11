@@ -1,4 +1,4 @@
-import {Platform} from 'react-native'
+// import {Platform} from 'react-native'
 import {RkConfig} from 'react-native-ui-kitten'
 
 // TODO: Replace Hardcoded values by our themes constants
@@ -188,7 +188,7 @@ const setup = () => {
     alignItems: 'stretch'
   })
 
-  RkConfig.theme = Platform.OS === 'ios' ? RkConfig.themes.classic : RkConfig.themes.material
+  RkConfig.theme = RkConfig.themes.classic
 }
 
 export default { setup }
