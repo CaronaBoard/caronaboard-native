@@ -6,25 +6,39 @@ import { Button, TextInput } from '../../Shared/Components'
 import { signInFirebase } from '../../../Redux/Actions'
 import { connect } from 'react-redux'
 
+export const INITIAL_STATE = {
+  email: '',
+  password: '',
+  loading: false
+}
+
 export class SignInScreen extends Component {
   constructor (props) {
     super()
-    this.state = {
-      email: '',
-      password: '',
-      loading: false
+    this.state = INITIAL_STATE
+  }
+
+  onButtonSubmit = async () => {
+    this.setState({loading: true})
+    try {
+      const userData = await this.props.signIn(this.state.email, this.state.password)
+      this.onLoginSuccess(userData)
+    } catch (error) {
+      this.setState({loading: false})
+      console.error(error)
     }
   }
 
-  onButtonSubmit = () => {
-    this.props.signIn(this.state.email, this.state.password).then(this.onLoginSuccess)
-  }
-
   onLoginSuccess = (userData) => {
-    // TODO navigate to ridelist?
+    this.setState({loading: false})
+    // TODO: navigate to ridelist?
   }
 
   render () {
+    if (this.props.userData !== {}) {
+      // TODO: User already logged in
+    }
+
     return (
       <View style={Styles.flexible}>
         <View style={Styles.container}>
@@ -32,8 +46,14 @@ export class SignInScreen extends Component {
             SIGN IN
           </RkText>
           <View style={Styles.credentialsContainer}>
-            <TextInput label='EMAIL ADDRESS' onChangeText={(email) => { this.setState({email}) }} />
-            <TextInput label='PASSWORD' onChangeText={(password) => { this.setState({password}) }} />
+            <TextInput
+              onChangeText={(email) => { this.setState({email}) }}
+              label='EMAIL ADDRESS'
+              key='email-input' />
+            <TextInput
+              onChangeText={(password) => { this.setState({password}) }}
+              label='PASSWORD'
+              key='password-input' />
           </View>
           <Button text='SIGN IN' onPress={this.onButtonSubmit} />
         </View>
@@ -50,7 +70,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signIn: (e, p) => dispatch(signInFirebase(e, p))
+    signIn: (email, password) => dispatch(signInFirebase(email, password))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen)
