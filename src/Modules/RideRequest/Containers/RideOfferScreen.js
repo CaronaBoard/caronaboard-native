@@ -10,10 +10,10 @@ export class RideOfferScreen extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      rideOrigin: '',
-      rideDestination: '',
-      rideDays: '',
-      rideHour: ''
+      origin: '',
+      destination: '',
+      days: '',
+      hours: ''
     }
   }
 
@@ -25,10 +25,10 @@ export class RideOfferScreen extends Component {
             Ride Offer
           </RkText>
           <View style={styles.inputTextsContainer}>
-            <TextInput label='ORIGIN' onChangeText={(rideOrigin) => this.setState({rideOrigin})} />
-            <TextInput label='DESTINATION' onChangeText={(rideDestination) => this.setState({rideDestination})} />
-            <TextInput label='DAYS' onChangeText={(rideDays) => this.setState({rideDays})} />
-            <TextInput label='HOUR' onChangeText={(rideHour) => this.setState({rideHour})} />
+            <TextInput label='ORIGIN' onChangeText={(origin) => this.setState({origin})} />
+            <TextInput label='DESTINATION' onChangeText={(destination) => this.setState({destination})} />
+            <TextInput label='DAYS' onChangeText={(days) => this.setState({days})} />
+            <TextInput label='HOUR' onChangeText={(hours) => this.setState({hours})} />
           </View>
           <Button text='Offer Ride' onPress={() => saveRideOffer(this.state)} />
         </View>

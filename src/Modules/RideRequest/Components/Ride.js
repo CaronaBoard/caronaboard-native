@@ -1,5 +1,3 @@
-/* @flow */
-
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, TouchableOpacity } from 'react-native'
@@ -17,6 +15,14 @@ export class Ride extends Component {
     )
   }
 
+  pushTestScreen (ride) {
+    this.props.navigator.push({
+      screen: 'carona.rideRequest',
+      title: 'Requesting a Ride',
+      passProps: { ride }
+    })
+  }
+
   render () {
     const {
         origin,
@@ -27,7 +33,7 @@ export class Ride extends Component {
      } = this.props.ride
 
     return (
-      <TouchableOpacity onPress={() => console.log('touched')}>
+      <TouchableOpacity onPress={() => this.pushTestScreen(this.props.ride)}>
         <View>
           <RkCard>
             <View rkCardContent>
@@ -47,12 +53,14 @@ export class Ride extends Component {
   }
 }
 
-Ride.propTypes = {
+export const ridePropTypes = {
   ride: PropTypes.shape({
     days: PropTypes.string.isRequired,
     destination: PropTypes.string.isRequired,
     hours: PropTypes.string.isRequired,
     origin: PropTypes.string.isRequired,
+    driverId: PropTypes.string.isRequired,
+    rideId: PropTypes.string.isRequired,
     profile: PropTypes.shape({
       name: PropTypes.string.isRequired,
       contact: PropTypes.shape({
@@ -65,3 +73,5 @@ Ride.propTypes = {
     })
   }).isRequired
 }
+
+Ride.propTypes = ridePropTypes

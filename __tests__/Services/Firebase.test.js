@@ -1,11 +1,27 @@
 import { getAllRides, signIn, saveRideOffer } from '../../src/Services/Firebase'
 
-describe.skip('Firebase Service', () => {
-  it('Should provide all rides as an array of rides', async () => {
+describe('Firebase Service', () => {
+  it.only('Should provide all rides as an array of rides', async () => {
     const rides = await getAllRides()
 
+    const expectedRide = {
+      driverId: 'AIYmwTmrdTfUuGeuoNF0SYgXJ1j1',
+      rideId: '-KndyvnnlSN05mJxL57Q',
+      origin: 'PUC',
+      destination: 'Bomfim',
+      days: 'Seg-Sex',
+      hours: '19h',
+      profile: {
+        name: 'Eduardo Moroni',
+        contact: {
+          kind: 'Whatsapp',
+          value: '+5559999999'
+        }
+      }
+    }
+
     expect(rides).toHaveLength(3)
-    expect(rides[0].destination).toBe('Bomfim')
+    expect(rides[0]).toEqual(expectedRide)
     expect(rides[1].destination).toBe('Centro')
     expect(rides[2].destination).toBe('Viamao')
   })
