@@ -17,6 +17,14 @@ export class Ride extends Component {
     )
   }
 
+  pushTestScreen (ride) {
+    this.props.navigator.push({
+      screen: 'carona.testScreen',
+      title: 'Requesting a Ride',
+      passProps: ride
+    })
+  }
+
   render () {
     const {
         origin,
@@ -25,9 +33,9 @@ export class Ride extends Component {
         hours,
         profile
      } = this.props.ride
-
+    console.log(this.props.ride)
     return (
-      <TouchableOpacity onPress={() => console.log('touched')}>
+      <TouchableOpacity onPress={() => this.pushTestScreen(this.props.ride)}>
         <View>
           <RkCard>
             <View rkCardContent>

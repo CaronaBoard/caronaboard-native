@@ -33,7 +33,7 @@ export class RideList extends Component {
       <ListView
         style={styles.container}
         dataSource={this.state.dataSource}
-        renderRow={(ride) => <Ride ride={ride} />}
+        renderRow={(ride) => <Ride ride={ride} navigator={this.props.navigator} />}
         enableEmptySections
       />
     )
