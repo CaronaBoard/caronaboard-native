@@ -5,7 +5,7 @@
   "scripts": {
     "start-packager": "node node_modules/react-native/local-cli/cli.js start",
     "run-ios": "react-native run-ios",
-    "run-android": "react-native run-ios",
+    "run-android": "react-native run-android",
     "test": "jest",
     "test-watch": "jest --watch",
     "test-ci": "jest --forceExit --coverage",

@@ -60,8 +60,12 @@ export const getAllRides = () => {
 export const signIn = (email, password) => {
   return new Promise((resolve, reject) => {
     Firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(resolve)
-      .catch(reject)
+      .then(firebaseUser => {
+        resolve(firebaseUser)
+      })
+      .catch(err => {
+        reject(err)
+      })
   })
 }
 
