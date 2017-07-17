@@ -14,7 +14,7 @@ export const INITIAL_STATE = {
 
 export class SignInScreen extends Component {
   constructor (props) {
-    super()
+    super(props)
     this.state = INITIAL_STATE
   }
 
@@ -73,4 +73,5 @@ const mapDispatchToProps = (dispatch) => {
     signIn: (email, password) => dispatch(signInFirebase(email, password))
   }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen)

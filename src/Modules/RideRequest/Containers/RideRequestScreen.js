@@ -9,7 +9,6 @@ import styles from './Styles/RideRequestScreenStyles'
 export class RideOfferScreen extends Component {
   render () {
     const { ride } = this.props
-    console.log('PROPS BABY', this.props)
     return (
       <View style={styles.flexible}>
         <View style={styles.container}>

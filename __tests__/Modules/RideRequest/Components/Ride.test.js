@@ -5,6 +5,8 @@ import { Ride } from '../../../../src/Modules/RideRequest/Components/Ride'
 
 const props = {
   ride: {
+    'driverId': 'driverId',
+    'rideId': 'rideId',
     'area': 'Aeroporto',
     'days': 'Seg a Sex',
     'destination': 'Rodoviaria',

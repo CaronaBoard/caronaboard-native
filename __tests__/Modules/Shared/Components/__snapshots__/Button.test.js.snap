@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button /> Should have a snapshot 1`] = `
+<RkButton
+  innerStyle={
+    Array [
+      Object {
+        "fontSize": 20,
+      },
+    ]
+  }
+  onPress={[Function]}
+  rkType="circle outline medium"
+>
+  texto
+</RkButton>
+`;
