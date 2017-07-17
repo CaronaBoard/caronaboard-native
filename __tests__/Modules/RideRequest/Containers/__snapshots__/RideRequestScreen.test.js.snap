@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RideOfferScreen /> Snapshot have a snapshot 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "space-around",
+        "paddingHorizontal": 50,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "minHeight": 370,
+        }
+      }
+    >
+      <Ride
+        ride={
+          Object {
+            "area": "Aeroporto",
+            "days": "Seg a Sex",
+            "destination": "Rodoviaria",
+            "driverId": "driverId",
+            "hours": "19h",
+            "origin": "Tecnopuc",
+            "profile": Object {
+              "contact": Object {
+                "kind": "Whatsapp",
+                "value": "5198269999",
+              },
+              "name": "Eduardo",
+            },
+            "rideId": "rideId",
+          }
+        }
+      />
+    </View>
+    <Button
+      onPress={[Function]}
+      text="Ask for a Ride"
+    />
+  </View>
+</View>
+`;

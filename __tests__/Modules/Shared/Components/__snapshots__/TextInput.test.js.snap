@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TextInput /> Should have a snapshot 1`] = `
+<RkTextInput
+  containerStyle={
+    Object {
+      "borderBottomColor": undefined,
+    }
+  }
+  label="texto"
+  labelStyle={
+    Object {
+      "paddingBottom": 20,
+    }
+  }
+  onChangeText={[Function]}
+  rkType="underline topLabel"
+  style={
+    Object {
+      "color": undefined,
+      "fontSize": 20,
+    }
+  }
+/>
+`;

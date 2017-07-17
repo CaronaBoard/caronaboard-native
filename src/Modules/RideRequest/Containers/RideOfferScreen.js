@@ -6,15 +6,17 @@ import { Button, TextInput } from '../../Shared/Components'
 import { saveRideOffer } from '../../../Services/Firebase'
 import styles from './Styles/RideOfferScreenStyles'
 
+export const INITIAL_STATE = {
+  origin: '',
+  destination: '',
+  days: '',
+  hours: ''
+}
+
 export class RideOfferScreen extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      origin: '',
-      destination: '',
-      days: '',
-      hours: ''
-    }
+    this.state = INITIAL_STATE
   }
 
   render () {

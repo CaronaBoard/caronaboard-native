@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RideOfferScreen /> Snapshot have a snapshot 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "space-around",
+        "paddingHorizontal": 50,
+      }
+    }
+  >
+    <RkText
+      style={
+        Object {
+          "fontSize": 38,
+          "textAlign": "center",
+        }
+      }
+    >
+      Ride Offer
+    </RkText>
+    <View
+      style={
+        Object {
+          "minHeight": 370,
+        }
+      }
+    >
+      <TextInput
+        label="ORIGIN"
+        onChangeText={[Function]}
+      />
+      <TextInput
+        label="DESTINATION"
+        onChangeText={[Function]}
+      />
+      <TextInput
+        label="DAYS"
+        onChangeText={[Function]}
+      />
+      <TextInput
+        label="HOUR"
+        onChangeText={[Function]}
+      />
+    </View>
+    <Button
+      onPress={[Function]}
+      text="Offer Ride"
+    />
+  </View>
+</View>
+`;
