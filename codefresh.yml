@@ -6,21 +6,20 @@ steps:
     image_name: caronaboard/caronaboard-native
     working_directory: ${{main_clone}}
     dockerfile: Dockerfile
-    when:
-      branch:
-        ignore:
-          - gh-pages
   RunningUnitTests:
     title: Running Tests
     image: '${{BuildingDockerImage}}'
     working_directory: IMAGE_WORK_DIR
-    when:
-      branch:
-        ignore:
-          - gh-pages
     environment:
       - NODE_ENV=development
     commands:
       - npm run lint-check
       - npm run test-ci
-      - npm run update-coverage
+  UpdateCodeCoverage:
+      title: Updating code coverage
+      image: '${{BuildingDockerImage}}'
+      working_directory: IMAGE_WORK_DIR
+      environment:
+        - NODE_ENV=development
+      commands:
+        - npm run update-coverage || true
