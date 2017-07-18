@@ -1,7 +1,7 @@
-import Kitten from './Configuration/Kitten'
-import Screens from './Configuration/Screens'
-import Navigation from './Configuration/Navigation'
-import Redux from './Configuration/Redux'
+import Kitten from './configuration/Kitten'
+import Screens from './configuration/Screens'
+import Navigation from './configuration/Navigation'
+import Redux from './configuration/Redux'
 
 Kitten.setup()
 Screens.registerScreens(Redux.createStore())
