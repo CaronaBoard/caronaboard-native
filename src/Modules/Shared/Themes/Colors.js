@@ -1,4 +1,6 @@
-const colors = {
+import {RkConfig} from 'react-native-ui-kitten'
+
+export const Colors = {
   background: 'white',
   clear: 'rgba(0,0,0,0)',
   facebook: '#3b5998',
@@ -19,10 +21,13 @@ const colors = {
   ember: 'rgba(164, 0, 48, 0.5)',
   fire: '#e73536',
   drawer: 'rgba(30, 30, 29, 0.95)',
+  darkGray: RkConfig.colors.grey700,
+  primary: RkConfig.colors.blue500,
+  materialBg: '#009688',
+  materialWarning: '#FFC65E',
+  materialGray: '#ECECEC',
   black: '#000000',
   blue: '#003a66',
   darkblue: '#002b4c',
   red: 'red'
 }
-
-export default colors

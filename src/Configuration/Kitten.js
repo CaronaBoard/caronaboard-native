@@ -1,23 +1,12 @@
-// import {Platform} from 'react-native'
 import {RkConfig} from 'react-native-ui-kitten'
-
-// TODO: Replace Hardcoded values by our themes constants
+import {Colors} from '../Modules/Shared/Themes'
 
 const setup = () => {
-  RkConfig.setColor('lightGray', RkConfig.colors.grey300)
-  RkConfig.setColor('gray', RkConfig.colors.grey500)
-  RkConfig.setColor('darkGray', RkConfig.colors.grey700)
-  RkConfig.setColor('primary', RkConfig.colors.blue500)
-
-  RkConfig.setColor('materialGray', '#ECECEC')
-  RkConfig.setColor('materialWarning', '#FFC65E')
-  RkConfig.setColor('materialBg', '#009688')
-
   RkConfig.setType('text', 'primary', {
-    color: RkConfig.colors.primary
+    color: Colors.primary
   })
   RkConfig.setType('text', 'cyan', {
-    color: RkConfig.colors.materialBg
+    color: Colors.materialBg
   })
   RkConfig.setType('text', 'montserrat', {
     fontFamily: 'Montserrat-Regular'
@@ -39,13 +28,22 @@ const setup = () => {
     }
   })
 
+  RkConfig.setTheme('classic', {
+    text: {
+      defaultType: 'transparentBg primary'
+    },
+    card: {
+      defaultType: 'classic'
+    }
+  })
+
   RkConfig.setType('input', 'classic', {
     input: {
       fontSize: 20,
-      color: RkConfig.colors.primary
+      color: Colors.primary
     },
     container: {
-      borderBottomColor: RkConfig.colors.darkGray,
+      borderBottomColor: Colors.darkGray,
       marginTop: 40
     },
     label: {
@@ -60,19 +58,19 @@ const setup = () => {
       marginTop: 0,
       marginBottom: 15,
       borderWidth: 0,
-      backgroundColor: RkConfig.colors.white
+      backgroundColor: Colors.white
     },
     content: {
       padding: 0,
-      backgroundColor: RkConfig.colors.white
+      backgroundColor: Colors.white
     },
     title: {
       fontSize: 16,
-      color: RkConfig.colors.primary
+      color: Colors.primary
     },
     subTitle: {
       fontSize: 12,
-      color: RkConfig.colors.gray
+      color: Colors.gray
     },
     avatarSmall: {
       width: 48,
@@ -82,14 +80,14 @@ const setup = () => {
     header: {
       borderTopLeftRadius: 15,
       borderTopRightRadius: 15,
-      backgroundColor: RkConfig.colors.white,
+      backgroundColor: Colors.white,
       paddingVertical: 10,
       paddingHorizontal: 15
     },
     footer: {
       borderBottomLeftRadius: 15,
       borderBottomRightRadius: 15,
-      backgroundColor: RkConfig.colors.white,
+      backgroundColor: Colors.white,
       paddingVertical: 10,
       paddingHorizontal: 15
     },
@@ -107,11 +105,11 @@ const setup = () => {
       borderRadius: 4,
       marginLeft: 10,
       alignSelf: 'center',
-      backgroundColor: RkConfig.colors.primary
+      backgroundColor: Colors.primary
     },
     icon: {
       fontSize: 27,
-      color: RkConfig.colors.primary
+      color: Colors.primary
     }
   })
 
@@ -125,13 +123,13 @@ const setup = () => {
       borderWidth: 0
     },
     title: {
-      color: RkConfig.colors.materialBg
+      color: Colors.materialBg
     },
     subTitle: {
-      color: RkConfig.colors.materialBg
+      color: Colors.materialBg
     },
     icon: {
-      color: RkConfig.colors.materialBg
+      color: Colors.materialBg
     },
     header: {
       borderTopLeftRadius: 5,
@@ -139,31 +137,22 @@ const setup = () => {
       borderWidth: 0
     },
     footer: {
-      borderTopColor: RkConfig.colors.materialGray,
+      borderTopColor: Colors.materialGray,
       borderTopWidth: 0.5,
       borderBottomLeftRadius: 5,
       borderBottomRightRadius: 5
     },
     online: {
-      backgroundColor: RkConfig.colors.materialBg
+      backgroundColor: Colors.materialBg
     }
   })
 
   RkConfig.setType('button', 'materialButton', {
     container: {
-      backgroundColor: RkConfig.colors.materialBg
+      backgroundColor: Colors.materialBg
     },
     inner: {
-      color: RkConfig.colors.white
-    }
-  })
-
-  RkConfig.setTheme('classic', {
-    text: {
-      defaultType: 'transparentBg primary'
-    },
-    card: {
-      defaultType: 'classic'
+      color: Colors.white
     }
   })
 

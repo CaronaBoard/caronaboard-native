@@ -53,7 +53,7 @@ const style = {
   }
 }
 
-export default {
+export const Fonts = {
   type,
   size,
   style
