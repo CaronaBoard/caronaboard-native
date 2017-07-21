@@ -1,8 +1,8 @@
 import { FETCH_ALL_RIDES } from '../../../src/redux/types'
 import { fetchAllRides } from '../../../src/redux/actions'
 
-import * as FirebaseService from '../../../src/services/Firebase'
-jest.mock('../../../src/services/Firebase')
+import * as FirebaseService from '../../../src/services/firebase'
+jest.mock('../../../src/services/firebase')
 
 const mockedRides = {
   'area': 'Aeroporto',

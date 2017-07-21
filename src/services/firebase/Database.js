@@ -45,27 +45,12 @@ const toArrayOfRides = (firebaseResponse) => {
 }
 
 export const getAllRides = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     database
       .ref('rides')
       .child(group)
       .once('value')
-      .then(
-        (snapshot) => resolve(toArrayOfRides(snapshot))
-      )
-      .catch(reject)
-  })
-}
-
-export const signIn = (email, password) => {
-  return new Promise((resolve, reject) => {
-    Firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(firebaseUser => {
-        resolve(firebaseUser)
-      })
-      .catch(err => {
-        reject(err)
-      })
+      .then(snapshot => resolve(toArrayOfRides(snapshot)))
   })
 }
 
@@ -80,36 +65,32 @@ export const saveRideOffer = (ride: rideOfferType) => {
     }
   } // firebase.database().ref(`profiles/${userId}`).once("value")
 
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     database
       .ref(`rides/${group}/${userId}`)
       .push({ ride, profile })
       .then(resolve)
-      .catch(reject)
   })
 }
 
 const removeRideRequestByRideOfferId = (rideId) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     database
       .ref(`rideRequests/${rideId}`)
       .remove()
       .then(resolve)
-      .catch(reject)
   })
 }
 
 export const removeRideOffer = (rideId) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     database
       .ref(`rides/${group}/${rideId}`)
       .remove()
       .then(() => {
         removeRideRequestByRideOfferId(rideId)
           .then(resolve)
-          .catch(reject)
       })
-      .catch(reject)
   })
 }
 
@@ -122,21 +103,19 @@ export const saveRideRequest = (rideId) => {
     }
   } // firebase.database().ref(`profiles/${userId}`).once("value")
 
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     database
       .ref(`rideRequests/${rideId}`)
       .push({ profile })
       .then(resolve)
-      .catch(reject)
   })
 }
 
 export const removeRideRequest = (rideId, rideRequestId) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     database
       .ref(`rideRequests/${rideId}/${rideRequestId}`)
       .remove()
       .then(resolve)
-      .catch(reject)
   })
 }

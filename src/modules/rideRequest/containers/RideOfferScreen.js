@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import { RkText } from 'react-native-ui-kitten'
 
 import { Button, TextInput } from '../../shared/components'
-import { saveRideOffer } from '../../../services/Firebase'
+import { saveRideOffer } from '../../../services/firebase'
 import styles from './styles/RideOfferScreenStyles'
 
 export const INITIAL_STATE = {

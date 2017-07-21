@@ -1,5 +1,5 @@
 import { SIGN_IN_FIREBASE } from '../types'
-import { signIn } from '../../services/Firebase'
+import { signIn } from '../../services/firebase'
 
 export function signInFirebase (email, password) {
   return async (dispatch) => {
