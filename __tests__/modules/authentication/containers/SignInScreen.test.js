@@ -2,9 +2,11 @@ import 'react-native'
 import React from 'react'
 import { shallow } from 'enzyme'
 import { SignInScreen, INITIAL_STATE } from '../../../../src/modules/authentication/containers/SignInScreen'
-import { Button } from '../../../../src/modules/shared/components'
 
 const props = {
+  navigator: {
+    push: jest.fn()
+  },
   userData: {},
   signIn: jest.fn()
 }
@@ -35,11 +37,19 @@ describe('<SignInScreen />', () => {
   })
 
   it('Should call signIn passing username and password', () => {
-    const submitButton = wrapper.find(Button)
+    const signinButton = wrapper.findWhere(node => node.key() === 'signin-button')
 
     wrapper.setState({email, password})
-    submitButton.simulate('press')
+    signinButton.simulate('press')
 
     expect(props.signIn).toHaveBeenCalledWith(email, password)
+  })
+
+  it('Should navigate to sign up screen on button is pressed', () => {
+    const signupButton = wrapper.findWhere(node => node.key() === 'signup-button')
+
+    signupButton.simulate('press')
+
+    expect(props.navigator.push).toHaveBeenCalledWith({screen: 'carona.signUp'})
   })
 })

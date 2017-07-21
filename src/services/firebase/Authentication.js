@@ -15,6 +15,12 @@ export const signIn = (email, password) => {
   })
 }
 
+export const signUp = (email, password) => {
+  return Firebase.auth()
+          .createUserWithEmailAndPassword(email, password)
+          .then(user => sendVerificationEmail(user))
+}
+
 export const checkEmailRegistration = (email) => {
   return new Promise(resolve => {
     Firebase.auth().fetchProvidersForEmail(email)

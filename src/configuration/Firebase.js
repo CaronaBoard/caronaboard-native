@@ -9,7 +9,15 @@ const config = {
 }
 
 const initialize = () => {
-  Firebase.initializeApp(config)
+  try {
+    Firebase.initializeApp(config)
+  } catch (error) {
+    if (error.code === 'app/duplicate-app') {
+      console.info('Hot reload tried to initiate firebase again. Ignoring duplicated initialization')
+    } else {
+      throw error
+    }
+  }
 }
 
 export default { initialize }
