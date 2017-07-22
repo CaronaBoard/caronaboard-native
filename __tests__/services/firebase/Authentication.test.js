@@ -1,4 +1,9 @@
-import { checkEmailRegistration, signIn, sendVerificationEmail } from '../../../src/services/firebase/Authentication'
+import {
+  signUp,
+  checkEmailRegistration,
+  signIn,
+  sendVerificationEmail
+} from '../../../src/services/firebase/Authentication'
 
 let mockFirebaseResponse = {
   sendEmailVerification: jest.fn(() => Promise.resolve()),
@@ -12,14 +17,24 @@ let mockFetchProviders = jest.fn()
 jest.mock('firebase', () => ({
   auth: () => ({
     signInWithEmailAndPassword: () => Promise.resolve(mockFirebaseResponse),
+    createUserWithEmailAndPassword: jest.fn(() => Promise.resolve(mockFirebaseResponse)),
     fetchProvidersForEmail: mockFetchProviders
   })
 }))
 
 describe('Firebase authentication service', () => {
+  it('Should register new user and send a verification mail', async () => {
+    const email = 'new@user.com'
+    const password = 'pass123'
+    await signUp(email, password)
+    // expect(createUserWithEmailAndPassword).toHaveBeenCalledWith(email, password)
+    expect(mockFirebaseResponse.sendEmailVerification).toHaveBeenCalledWith()
+  })
+
   it('Should sign in user with a verified email', async () => {
     mockFirebaseResponse.emailVerified = true
     const user = await signIn('verified@user.com', 'secret')
+    // expect(signInWithEmailAndPassword).toHaveBeenCalledWith(email, password)
     expect(user.uid).toBe(mockFirebaseResponse.uid)
   })
 

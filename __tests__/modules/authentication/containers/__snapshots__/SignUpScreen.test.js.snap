@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignUpScreen /> Should have a snapshot 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "space-around",
+        "paddingHorizontal": 50,
+      }
+    }
+  >
+    <RkText
+      style={
+        Object {
+          "fontSize": 38,
+          "textAlign": "center",
+        }
+      }
+    >
+      REGISTER NEW ACCOUNT
+    </RkText>
+    <View
+      style={
+        Object {
+          "minHeight": 185,
+        }
+      }
+    >
+      <TextInput
+        label="EMAIL ADDRESS"
+        onChangeText={[Function]}
+      />
+      <TextInput
+        label="PASSWORD"
+        onChangeText={[Function]}
+      />
+    </View>
+    <Button
+      onPress={[Function]}
+      text="SIGN UP"
+    />
+  </View>
+  <Toast
+    fadeInDuration={500}
+    fadeOutDuration={500}
+    opacity={1}
+    position="top"
+    positionValue={120}
+    textStyle={
+      Object {
+        "color": "white",
+      }
+    }
+  />
+</View>
+`;

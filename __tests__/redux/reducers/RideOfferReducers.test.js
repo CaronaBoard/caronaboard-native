@@ -1,5 +1,6 @@
 import RideOfferReducers, { INITIAL_STATE } from '../../../src/redux/reducers/RideOfferReducers'
 import { fetchAllRides } from '../../../src/redux/actions'
+import { extractActionFromThunk } from '../../__mocks__/ReduxThunkMock'
 
 import * as FirebaseService from '../../../src/services/firebase'
 jest.mock('../../../src/services/firebase')
@@ -20,21 +21,14 @@ const mockedRides = {
   }
 }
 
-const firstMockCall = 0
-const firstArgument = 0
-
 describe('RideOfferReducers', () => {
-  const dispatchMock = jest.fn()
-
   it('Should handle FETCH_ALL_RIDES action type', async () => {
     FirebaseService.getAllRides = jest.fn(() => mockedRides)
 
-    const thunk = fetchAllRides()
-    await thunk(dispatchMock)
-
-    const action = dispatchMock.mock.calls[firstMockCall][firstArgument]
+    const action = await extractActionFromThunk(fetchAllRides)
     const state = RideOfferReducers(INITIAL_STATE, action)
+    const expectedState = { rides: action.payload }
 
-    expect(state.rides).toEqual(action.payload)
+    expect(state).toEqual(expectedState)
   })
 })

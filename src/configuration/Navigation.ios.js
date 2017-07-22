@@ -15,6 +15,10 @@ const theme = {
 
 const tabs = [
   {
+    label: 'SignUp',
+    screen: 'carona.signUp',
+    icon: require('../assets/images/swap.png')
+  }, {
     label: 'SignIn',
     screen: 'carona.signIn',
     icon: require('../assets/images/swap.png'),
