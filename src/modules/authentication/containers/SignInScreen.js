@@ -18,7 +18,7 @@ export class SignInScreen extends Component {
     this.state = INITIAL_STATE
   }
 
-  onButtonSubmit = async () => {
+  onPressSignInButton = async () => {
     this.setState({loading: true})
     try {
       this.props.signIn(this.state.email, this.state.password)
@@ -26,6 +26,10 @@ export class SignInScreen extends Component {
       this.setState({loading: false})
       console.error(error)
     }
+  }
+
+  navigateToSignUpScreen = () => {
+    this.props.navigator.push({screen: 'carona.signUp'})
   }
 
   onLoginSuccess = (userData) => {
@@ -54,7 +58,14 @@ export class SignInScreen extends Component {
               label='PASSWORD'
               key='password-input' />
           </View>
-          <Button text='SIGN IN' onPress={this.onButtonSubmit} />
+          <Button
+            text='SIGN IN'
+            onPress={this.onPressSignInButton}
+            key='signin-button' />
+          <Button
+            text='SIGN UP'
+            onPress={this.navigateToSignUpScreen}
+            key='signup-button' />
         </View>
       </View>
     )

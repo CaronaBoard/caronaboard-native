@@ -47,6 +47,10 @@ exports[`<SignInScreen /> Should have a snapshot 1`] = `
       onPress={[Function]}
       text="SIGN IN"
     />
+    <Button
+      onPress={[Function]}
+      text="SIGN UP"
+    />
   </View>
 </View>
 `;

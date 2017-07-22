@@ -9,6 +9,7 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "test-ci": "jest --forceExit",
+    "update-snapshot": "jest -u -t snapshot",
     "generate-coverage": "jest --coverage --silent --noStackTrace",
     "update-coverage": "npm run generate-coverage && codeclimate-test-reporter < ./coverage/lcov.info",
     "lint-check": "standard --verbose | snazzy",
