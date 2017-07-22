@@ -9,25 +9,17 @@ const config = {
   messagingSenderId: '617045704123'
 }
 
-const group = 'twpoa'
+const rideGroup = 'twpoa'
 
 type rideOfferType = {
   origin: string,
   destination: string,
   days: string,
-  hour: string,
-  profile: {
-    name: string,
-    contact: {
-      kind: string,
-      value: string
-    }
-  }
+  hour: string
 }
 
-let database = (() => {
+(() => {
   Firebase.initializeApp(config)
-  return Firebase.database()
 })()
 
 const toArrayOfRides = (firebaseResponse) => {
@@ -46,15 +38,15 @@ const toArrayOfRides = (firebaseResponse) => {
 
 export const getAllRides = () => {
   return new Promise(resolve => {
-    database
+    Firebase.database()
       .ref('rides')
-      .child(group)
+      .child(rideGroup)
       .once('value')
       .then(snapshot => resolve(toArrayOfRides(snapshot)))
   })
 }
 
-export const saveRideOffer = (ride: rideOfferType) => {
+export const saveRideOffer = (rideOffer: rideOfferType) => {
   const userId = 's29iF96rLqRIj1O9WZ2p2BjR59J3' // firebase.auth().currentUser.uid
 
   const profile = {
@@ -65,33 +57,12 @@ export const saveRideOffer = (ride: rideOfferType) => {
     }
   } // firebase.database().ref(`profiles/${userId}`).once("value")
 
-  return new Promise(resolve => {
-    database
-      .ref(`rides/${group}/${userId}`)
-      .push({ ride, profile })
+  return new Promise(resolve =>
+    Firebase.database()
+      .ref(`rides/${rideGroup}/${userId}`)
+      .push({rideOffer, profile})
       .then(resolve)
-  })
-}
-
-const removeRideRequestByRideOfferId = (rideId) => {
-  return new Promise(resolve => {
-    database
-      .ref(`rideRequests/${rideId}`)
-      .remove()
-      .then(resolve)
-  })
-}
-
-export const removeRideOffer = (rideId) => {
-  return new Promise(resolve => {
-    database
-      .ref(`rides/${group}/${rideId}`)
-      .remove()
-      .then(() => {
-        removeRideRequestByRideOfferId(rideId)
-          .then(resolve)
-      })
-  })
+  )
 }
 
 export const saveRideRequest = (rideId) => {
@@ -104,18 +75,9 @@ export const saveRideRequest = (rideId) => {
   } // firebase.database().ref(`profiles/${userId}`).once("value")
 
   return new Promise(resolve => {
-    database
+    Firebase.database()
       .ref(`rideRequests/${rideId}`)
-      .push({ profile })
-      .then(resolve)
-  })
-}
-
-export const removeRideRequest = (rideId, rideRequestId) => {
-  return new Promise(resolve => {
-    database
-      .ref(`rideRequests/${rideId}/${rideRequestId}`)
-      .remove()
+      .push({profile})
       .then(resolve)
   })
 }
