@@ -1,8 +1,8 @@
 import RidesResponse from './Fixtures/FirebaseRidesResponse.json'
 
-jest.genMockFromModule('firebase')
+// jest.genMockFromModule('firebase')
 
-const databaseModuleMock = {
+export const databaseModuleMock = {
   ref: () => {
     return {
       child: () => {
@@ -14,7 +14,7 @@ const databaseModuleMock = {
   }
 }
 
-const authModuleMock = {
+export const authModuleMock = {
   signInWithEmailAndPassword: () => Promise.resolve({ uid: '101' })
 }
 

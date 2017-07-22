@@ -5,9 +5,9 @@ export const signIn = (email, password) => {
     Firebase.auth().signInWithEmailAndPassword(email, password)
       .then(user => {
         const { uid, emailVerified, email, phoneNumber } = user
-
         if (!emailVerified) {
-          reject(sendEmailVerification(user))
+          sendVerificationEmail(user)
+          reject(new Error('Email não verificado'))
         } else {
           resolve({ uid, emailVerified, email, phoneNumber })
         }
@@ -28,10 +28,8 @@ export const checkEmailRegistration = (email) => {
   })
 }
 
-export function sendEmailVerification (user) {
-  const error = new Error('Este email não foi verificado, favor verificar sua caixa de mensagem')
+export function sendVerificationEmail (user) {
   user.sendEmailVerification()
     .then(() => console.log('Email de verificação enviado'))
     .catch(() => console.error('Error ao enviar email de verificação'))
-  return error
 }

@@ -1,4 +1,18 @@
 import { getAllRides, saveRideOffer } from '../../../src/services/firebase'
+import RidesResponse from '../../__mocks__/Fixtures/FirebaseRidesResponse.json'
+
+const mockDatabase = {
+  child: () => ({
+    once: () => Promise.resolve({ val: () => RidesResponse })
+  })
+}
+
+jest.mock('firebase', () => ({
+  initializeApp: jest.fn(),
+  database: () => ({
+    ref: () => mockDatabase
+  })
+}))
 
 describe('Firebase database service', () => {
   it.only('Should provide all rides as an array of rides', async () => {
