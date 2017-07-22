@@ -5,15 +5,19 @@ import * as FirebaseService from '../../../src/services/firebase'
 jest.mock('../../../src/services/firebase')
 
 const mockedRides = {
-  'area': 'Aeroporto',
-  'days': 'Seg a Sex',
-  'destination': 'Rodoviaria',
-  'flexible': true,
-  'formUrl': 'https://goo.gl/forms/',
-  'hours': '19h',
-  'name': 'Hugh Jackman',
-  'origin': 'Tecnopuc',
-  'id': 1
+  driverId: 'AIYmwTmrdTfUuGeuoNF0SYgXJ1j1',
+  rideId: '-KndyvnnlSN05mJxL57Q',
+  origin: 'PUC',
+  destination: 'Bomfim',
+  days: 'Seg-Sex',
+  hours: '19h',
+  profile: {
+    name: 'Eduardo Moroni',
+    contact: {
+      kind: 'Whatsapp',
+      value: '+5559999999'
+    }
+  }
 }
 
 describe('RideOffer actions', () => {

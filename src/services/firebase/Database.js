@@ -1,13 +1,5 @@
 import Firebase from 'firebase'
-import _ from 'lodash'
-
-const config = {
-  apiKey: 'AIzaSyDfwHLwWKTqduazsf4kjbstJEA2E1sCeoI',
-  authDomain: 'caronaboard-61f75.firebaseapp.com',
-  databaseURL: 'https://caronaboard-61f75.firebaseio.com',
-  storageBucket: 'caronaboard-61f75.appspot.com',
-  messagingSenderId: '617045704123'
-}
+import { toArrayOfRides } from './Conversion'
 
 const rideGroup = 'twpoa'
 
@@ -18,31 +10,13 @@ type rideOfferType = {
   hour: string
 }
 
-(() => {
-  Firebase.initializeApp(config)
-})()
-
-const toArrayOfRides = (firebaseResponse) => {
-  return _.flatMap(firebaseResponse.val(), (value, driverId) => {
-    const ridesIds = Object.keys(value)
-    const rides = Object.values(value)
-
-    rides.forEach((ride, index) => {
-      ride.driverId = driverId
-      ride.rideId = ridesIds[index]
-    })
-
-    return rides
-  })
-}
-
 export const getAllRides = () => {
   return new Promise(resolve => {
     Firebase.database()
       .ref('rides')
       .child(rideGroup)
       .once('value')
-      .then(snapshot => resolve(toArrayOfRides(snapshot)))
+      .then(snapshot => resolve(toArrayOfRides(snapshot.val())))
   })
 }
 
