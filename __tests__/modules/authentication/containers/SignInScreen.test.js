@@ -42,8 +42,4 @@ describe('<SignInScreen />', () => {
 
     expect(props.signIn).toHaveBeenCalledWith(email, password)
   })
-
-  it.skip('Should redirect if user is already loggedIn', () => {
-    // TODO:
-  })
 })

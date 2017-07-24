@@ -3,8 +3,8 @@ import { shallow } from 'enzyme'
 import { RideOfferScreen, INITIAL_STATE } from '../../../../src/modules/rideRequest/containers/RideOfferScreen'
 import { Button } from '../../../../src/modules/shared/components'
 
-import * as Firebase from '../../../../src/services/Firebase'
-jest.mock('../../../../src/services/Firebase')
+import * as Firebase from '../../../../src/services/firebase'
+jest.mock('../../../../src/services/firebase')
 
 describe('<RideOfferScreen />', () => {
   const wrapper = shallow(<RideOfferScreen />)

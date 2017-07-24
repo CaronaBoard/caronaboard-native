@@ -1,11 +1,11 @@
 {
   "name": "caronaboardnative",
-  "version": "0.0.1",
-  "private": true,
   "scripts": {
     "start-packager": "node node_modules/react-native/local-cli/cli.js start",
-    "run-ios": "react-native run-ios",
-    "run-android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "android": "react-native run-android",
+    "log-ios": "react-native log-ios",
+    "log-android": "react-native log-android",
     "test": "jest",
     "test-watch": "jest --watch",
     "test-ci": "jest --forceExit",
@@ -48,18 +48,11 @@
   },
   "jest": {
     "preset": "react-native",
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/jest-serializer-enzyme"
-    ],
-    "testMatch": [
-      "**/__tests__/**/*test.js?(x)"
-    ]
+    "snapshotSerializers": ["<rootDir>/node_modules/jest-serializer-enzyme"],
+    "testMatch": ["**/__tests__/**/*test.js?(x)"]
   },
   "standard": {
-    "plugins": [],
-    "env": [
-      "jest"
-    ],
+    "env": ["jest"],
     "parser": "babel-eslint"
   }
 }

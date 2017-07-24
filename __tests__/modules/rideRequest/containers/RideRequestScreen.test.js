@@ -3,8 +3,8 @@ import { shallow } from 'enzyme'
 import { RideOfferScreen } from '../../../../src/modules/rideRequest/containers/RideRequestScreen'
 import { Button } from '../../../../src/modules/shared/components'
 
-import * as Firebase from '../../../../src/services/Firebase'
-jest.mock('../../../../src/services/Firebase')
+import * as Firebase from '../../../../src/services/firebase'
+jest.mock('../../../../src/services/firebase')
 
 const props = {
   ride: {

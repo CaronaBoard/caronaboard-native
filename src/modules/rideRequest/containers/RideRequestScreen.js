@@ -3,7 +3,7 @@ import { View } from 'react-native'
 
 import { Button } from '../../shared/components'
 import { Ride, ridePropTypes } from '../components/Ride'
-import { saveRideRequest } from '../../../services/Firebase'
+import { saveRideRequest } from '../../../services/firebase'
 import styles from './styles/RideRequestScreenStyles'
 
 export class RideOfferScreen extends Component {

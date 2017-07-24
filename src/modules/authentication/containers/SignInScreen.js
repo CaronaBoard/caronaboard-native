@@ -21,8 +21,7 @@ export class SignInScreen extends Component {
   onButtonSubmit = async () => {
     this.setState({loading: true})
     try {
-      const userData = await this.props.signIn(this.state.email, this.state.password)
-      this.onLoginSuccess(userData)
+      this.props.signIn(this.state.email, this.state.password)
     } catch (error) {
       this.setState({loading: false})
       console.error(error)
