@@ -20,6 +20,11 @@ const tabs = [
     icon: require('../assets/images/swap.png'),
     title: 'Sign In Screen'
   }, {
+    label: 'Profile',
+    screen: 'carona.profile',
+    icon: require('../assets/images/swap.png'),
+    title: 'Profile'
+  }, {
     label: 'RideList',
     screen: 'carona.rideList',
     icon: require('../assets/images/swap.png'),
