@@ -18,7 +18,9 @@ const tabs = [
     label: 'SignIn',
     screen: 'carona.signIn',
     icon: require('../assets/images/swap.png'),
-    title: 'Sign In Screen'
+    navigatorStyle: {
+      navBarHidden: true
+    }
   }, {
     label: 'Profile',
     screen: 'carona.profile',

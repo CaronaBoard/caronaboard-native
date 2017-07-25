@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SignInScreen /> Should have a snapshot 1`] = `
+exports[`<SignUpScreen /> Should have a snapshot 1`] = `
 <View
   style={
     Object {
@@ -25,7 +25,7 @@ exports[`<SignInScreen /> Should have a snapshot 1`] = `
         }
       }
     >
-      SIGN IN
+      REGISTER NEW ACCOUNT
     </RkText>
     <View
       style={
@@ -45,12 +45,20 @@ exports[`<SignInScreen /> Should have a snapshot 1`] = `
     </View>
     <Button
       onPress={[Function]}
-      text="SIGN IN"
-    />
-    <Button
-      onPress={[Function]}
       text="SIGN UP"
     />
   </View>
+  <Toast
+    fadeInDuration={500}
+    fadeOutDuration={500}
+    opacity={1}
+    position="top"
+    positionValue={120}
+    textStyle={
+      Object {
+        "color": "white",
+      }
+    }
+  />
 </View>
 `;

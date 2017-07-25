@@ -4941,6 +4941,10 @@ react-dom@^15.6.1:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
+react-native-easy-toast@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-native-easy-toast/-/react-native-easy-toast-1.0.6.tgz#e9e2a0c865fcfdb407dbc2341bc3571a7f5da3b5"
+
 react-native-navigation@^1.1.128:
   version "1.1.128"
   resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.128.tgz#4f2260d8ae68e4b95b0f6141dbfd5600990ec169"
