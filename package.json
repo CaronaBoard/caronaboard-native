@@ -24,6 +24,7 @@
     "prop-types": "^15.5.10",
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.3",
+    "react-native-config": "^0.5.0",
     "react-native-easy-toast": "^1.0.6",
     "react-native-linear-gradient": "^2.1.0",
     "react-native-navigation": "^1.1.128",
