@@ -33,3 +33,25 @@ export function sendVerificationEmail (user) {
     .then(() => console.log('Email de verificação enviado'))
     .catch(() => console.error('Error ao enviar email de verificação'))
 }
+
+export const saveProfile = (profile) => {
+  var currentUser = Firebase.auth().currentUser
+  var pathsToUpdate = {}
+  pathsToUpdate[`profiles/${currentUser.uid}`] = profile
+
+  return new Promise((resolve, reject) => {
+    Firebase
+      .database()
+      .ref(`rides/${currentUser.uid}`)
+      .once('value')
+      .then(rides => {
+        Object.keys(rides.val() || {}).forEach(function (key) {
+          pathsToUpdate[`rides/${currentUser.uid}/${key}/profile`] = profile
+        })
+        return Firebase.database()
+          .ref()
+          .update(pathsToUpdate)
+          .then(() => resolve(profile))
+      })
+  })
+}

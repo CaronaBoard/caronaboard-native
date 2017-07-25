@@ -1,4 +1,5 @@
-import { checkEmailRegistration, signIn, sendVerificationEmail } from '../../../src/services/firebase/Authentication'
+import { checkEmailRegistration, signIn, sendVerificationEmail, saveProfile } from '../../../src/services/firebase/Authentication'
+import RidesResponse from '../../__mocks__/Fixtures/FirebaseRidesResponse.json'
 
 let mockFirebaseResponse = {
   sendEmailVerification: jest.fn(() => Promise.resolve()),
@@ -9,11 +10,22 @@ let mockFirebaseResponse = {
 }
 let mockFetchProviders = jest.fn()
 
+const mockRef = {
+  once: () => Promise.resolve({ val: () => RidesResponse }),
+  update: () => Promise.resolve({})
+}
+
+const mockDatabase = {
+  ref: jest.fn(() => mockRef)
+}
+
 jest.mock('firebase', () => ({
   auth: () => ({
     signInWithEmailAndPassword: () => Promise.resolve(mockFirebaseResponse),
-    fetchProvidersForEmail: mockFetchProviders
-  })
+    fetchProvidersForEmail: mockFetchProviders,
+    currentUser: { uid: '12345' }
+  }),
+  database: jest.fn(() => mockDatabase)
 }))
 
 describe('Firebase authentication service', () => {
@@ -43,5 +55,11 @@ describe('Firebase authentication service', () => {
     mockFetchProviders = jest.fn(() => Promise.resolve([]))
     const notRegisteredUserResponse = await checkEmailRegistration('not_registered@email.com')
     expect(notRegisteredUserResponse).toBe(false)
+  })
+
+  it('Should update the user profile info', async () => {
+    const profile = {name: 'John Smith'}
+    const updatedProfile = await saveProfile(profile)
+    expect(updatedProfile.name).toBe(profile.name)
   })
 })
