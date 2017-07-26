@@ -25,7 +25,7 @@
     "react-native": "0.44.3",
     "react-native-easy-toast": "^1.0.6",
     "react-native-navigation": "^1.1.128",
-    "react-native-ui-kitten": "^0.0.1",
+    "react-native-ui-kitten": "^2.0.1",
     "react-native-vector-icons": "^4.2.0",
     "react-redux": "^5.0.5",
     "redux": "^3.7.1",
@@ -56,5 +56,8 @@
   "standard": {
     "env": ["jest"],
     "parser": "babel-eslint"
+  },
+  "rnpm": {
+    "assets": ["./src/assets/fonts"]
   }
 }
