@@ -1,4 +1,4 @@
-import Kitten from './configuration/Kitten'
+import Kitten from './configuration/kitten'
 import Screens from './configuration/Screens'
 import Navigation from './configuration/Navigation'
 import Firebase from './configuration/Firebase'
