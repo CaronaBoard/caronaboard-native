@@ -28,9 +28,5 @@ export const styles = RkStyleSheet.create(theme => ({
   },
   loginButton: {
     marginVertical: 20
-  },
-  textRow: {
-    flexDirection: 'row',
-    justifyContent: 'center'
   }
 }))

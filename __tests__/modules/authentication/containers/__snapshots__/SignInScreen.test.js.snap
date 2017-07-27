@@ -1,56 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SignInScreen /> Should have a snapshot 1`] = `
-<View
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
-  <View
-    style={
-      Object {
-        "flex": 1,
-        "justifyContent": "space-around",
-        "paddingHorizontal": 50,
-      }
-    }
-  >
-    <RkText
-      style={
-        Object {
-          "fontSize": 38,
-          "textAlign": "center",
-        }
-      }
-    >
-      SIGN IN
-    </RkText>
-    <View
-      style={
-        Object {
-          "minHeight": 185,
-        }
-      }
-    >
-      <TextInput
-        label="EMAIL ADDRESS"
-        onChangeText={[Function]}
-      />
-      <TextInput
-        label="PASSWORD"
-        onChangeText={[Function]}
-      />
-    </View>
-    <Button
-      onPress={[Function]}
-      text="SIGN IN"
-    />
-    <Button
-      onPress={[Function]}
-      text="SIGN UP"
-    />
-  </View>
-</View>
+<LoginV2
+  footer={[Function]}
+  onButtonPress={[Function]}
+/>
 `;
