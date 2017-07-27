@@ -41,7 +41,7 @@ export class LoginForm extends React.Component {
         onResponderRelease={e => Keyboard.dismiss()}>
 
         <View style={styles.header}>
-          <Image style={styles.image} source={require('../../../assets/images/caronaBoardAzul.png')} />
+          <Image style={styles.image} source={require('../../../assets/images/caronaboard-logo-azul.png')} />
           <RkText rkType='logo h0'>Caronaboard</RkText>
           <RkText rkType='light h1'>Awesome Slogan</RkText>
         </View>

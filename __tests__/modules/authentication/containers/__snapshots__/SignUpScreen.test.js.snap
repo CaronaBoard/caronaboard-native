@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignUpScreen /> Should have a snapshot 1`] = `
+<LoginForm
+  buttonText="SIGN UP"
+  footer={[Function]}
+  onButtonPress={[Function]}
+  toast={
+    Object {
+      "message": "",
+      "showAlert": false,
+    }
+  }
+/>
+`;

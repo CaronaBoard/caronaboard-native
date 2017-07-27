@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignInScreen /> Should have a snapshot 1`] = `
+<LoginForm
+  buttonText="SIGN IN"
+  footer={
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <RkText
+        rkType="primary3"
+      >
+        Don’t have an account?
+      </RkText>
+      <RkButton
+        onPress={[Function]}
+        rkType="clear"
+      >
+        <RkText
+          rkType="header6"
+        >
+           Sign up now 
+        </RkText>
+      </RkButton>
+    </View>
+  }
+  onButtonPress={[Function]}
+  toast={
+    Object {
+      "message": "",
+      "showAlert": false,
+    }
+  }
+/>
+`;
