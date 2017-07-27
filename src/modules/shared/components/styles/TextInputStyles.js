@@ -7,9 +7,5 @@ export default StyleSheet.create({
   },
   inputContainer: {
     borderBottomColor: Colors.darkGray
-  },
-  input: {
-    fontSize: Fonts.size.h5,
-    color: Colors.primary
   }
 })

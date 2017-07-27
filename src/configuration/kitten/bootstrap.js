@@ -47,12 +47,12 @@ export let bootstrap = () => {
     fontSize: 44
   })
 
-  // // all font sizes
-  // for (let key in RkTheme.current.fonts.sizes) {
-  //   RkTheme.setType('RkText', key, {
-  //     fontSize: theme => theme.fonts.sizes[key]
-  //   })
-  // }
+  // all font sizes
+  for (let key in RkTheme.current.fonts.sizes) {
+    RkTheme.setType('RkText', key, {
+      fontSize: theme => theme.fonts.sizes[key]
+    })
+  }
 
   // all text colors
   for (let key in RkTheme.current.colors.text) {
