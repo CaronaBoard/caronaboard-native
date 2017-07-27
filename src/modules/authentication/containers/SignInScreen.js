@@ -1,12 +1,21 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { RkButton, RkText } from 'react-native-ui-kitten'
 import Styles from './styles/SignInScreenStyles'
 import { signInFirebase } from '../../../redux/actions'
-import LoginScreen from '../components/LoginScreen'
+import { LoginForm } from '../components/LoginForm'
 
 export class SignInScreen extends Component {
+  static propTypes = {
+    signIn: PropTypes.func.isRequired,
+    alert: PropTypes.shape({
+      showAlert: PropTypes.bool.isRequired,
+      message: PropTypes.string
+    }).isRequired
+  }
+
   renderFooter = () => {
     return (
       <View style={Styles.textRow}>
@@ -20,9 +29,11 @@ export class SignInScreen extends Component {
 
   render () {
     return (
-      <LoginScreen
+      <LoginForm
+        buttonText='SIGN IN'
         onButtonPress={this.props.signIn}
-        footer={this.renderFooter}
+        toast={this.props.alert}
+        footer={this.renderFooter()}
       />
     )
   }
@@ -30,7 +41,7 @@ export class SignInScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userData: state.auth.userData
+    alert: state.auth.alert
   }
 }
 

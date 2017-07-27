@@ -1,8 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<SignInScreen /> Should have a snapshot 1`] = `
-<LoginV2
-  footer={[Function]}
-  onButtonPress={[Function]}
-/>
-`;

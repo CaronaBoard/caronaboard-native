@@ -27,13 +27,15 @@ export class GradientButton extends RkComponent {
     let colors = this.extractNonStyleValue(gradient, 'colors')
     let {style, ...otherProps} = this.props
 
-    colors = this.props.colors ? this.props.colors : colors
+    colors = this.props.colors ? this.props.colors : ['#2364FF']
 
     return (
-      <RkButton rkType='stretch'
+      <RkButton
+        rkType='stretch'
         style={[button, style]}
         {...otherProps}>
-        <LinearGradient colors={colors}
+        <LinearGradient
+          colors={colors}
           start={{x: 0.0, y: 0.5}}
           end={{x: 1, y: 0.5}}
           style={[gradient]}>

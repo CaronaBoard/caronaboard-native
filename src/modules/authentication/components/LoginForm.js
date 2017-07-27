@@ -5,30 +5,28 @@ import { RkText, RkTextInput, RkAvoidKeyboard } from 'react-native-ui-kitten'
 import { GradientButton } from '../../shared/components/index'
 import { styles } from '../containers/styles/LoginScreenStyles'
 
-export const INITIAL_STATE = {
-  email: '',
-  password: '',
-  loading: false
-}
+export class LoginForm extends React.Component {
+  static defaultProps = {
+    footer: () => <View />,
+    toast: {
+      showAlert: false,
+      message: ''
+    }
+  }
 
-export default class LoginV2 extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = INITIAL_STATE
+  state = {
+    email: '',
+    password: '',
+    loading: false
   }
 
   onButtonPress = () => {
     const { email, password } = this.state
-    const { onButtonPress } = this.props
-    try {
-      onButtonPress(email, password)
-    } catch (error) {
-      console.log(error)
-    }
+    this.props.onButtonPress(email, password)
   }
 
   componentWillReceiveProps (nextProps) {
-    const { showAlert, message } = nextProps.alert
+    const { showAlert, message } = nextProps.toast
 
     if (showAlert) {
       this.refs.toast.show(message, DURATION.LENGTH_LONG)
@@ -43,7 +41,7 @@ export default class LoginV2 extends React.Component {
         onResponderRelease={e => Keyboard.dismiss()}>
 
         <View style={styles.header}>
-          <Image style={styles.image} source={require('../../../assets/images/logo.png')} />
+          <Image style={styles.image} source={require('../../../assets/images/caronaBoardAzul.png')} />
           <RkText rkType='logo h0'>Caronaboard</RkText>
           <RkText rkType='light h1'>Awesome Slogan</RkText>
         </View>
@@ -53,14 +51,14 @@ export default class LoginV2 extends React.Component {
 
         <View style={styles.centralized}>
           <GradientButton
-            style={styles.loginButton}
             rkType='large'
-            text='LOGIN'
+            style={styles.loginButton}
+            text={this.props.buttonText}
             onPress={this.onButtonPress}
           />
         </View>
 
-        {this.props.footer()}
+        {this.props.footer}
         <Toast position='top' ref='toast' />
       </RkAvoidKeyboard>
     )
