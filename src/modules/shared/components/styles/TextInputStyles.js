@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Metrics, Fonts, Colors } from '../../themes'
+import { Metrics, Colors } from '../../themes'
 
 export default StyleSheet.create({
   inputLabel: {
