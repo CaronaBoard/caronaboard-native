@@ -46,8 +46,20 @@ export class LoginForm extends React.Component {
           <RkText rkType='light h1'>Awesome Slogan</RkText>
         </View>
 
-        <RkTextInput onChangeText={(email) => { this.setState({email}) }} rkType='rounded' placeholder='Username' autoCapitalize='none' />
-        <RkTextInput onChangeText={(password) => { this.setState({password}) }} rkType='rounded' placeholder='Password' secureTextEntry />
+        <RkTextInput
+          onChangeText={(email) => { this.setState({email}) }}
+          key='email-input'
+          rkType='rounded'
+          placeholder='Username'
+          autoCapitalize='none'
+        />
+        <RkTextInput
+          onChangeText={(password) => { this.setState({password}) }}
+          key='password-input'
+          rkType='rounded'
+          placeholder='Password'
+          secureTextEntry
+        />
 
         <View style={styles.centralized}>
           <GradientButton

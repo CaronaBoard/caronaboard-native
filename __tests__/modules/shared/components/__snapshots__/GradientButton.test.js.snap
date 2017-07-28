@@ -2,6 +2,7 @@
 
 exports[`<GradientButton /> Snapshot have a snapshot 1`] = `
 <RkButton
+  onButtonPress={[Function]}
   rkType="stretch"
   style={
     Array [
@@ -9,6 +10,7 @@ exports[`<GradientButton /> Snapshot have a snapshot 1`] = `
       Object {},
     ]
   }
+  text="Button Text"
 >
   <LinearGradient
     colors={
@@ -33,6 +35,10 @@ exports[`<GradientButton /> Snapshot have a snapshot 1`] = `
         undefined,
       ]
     }
-  />
+  >
+    <RkText>
+      Button Text
+    </RkText>
+  </LinearGradient>
 </RkButton>
 `;

@@ -25,11 +25,12 @@ export class GradientButton extends RkComponent {
   render () {
     let {button, gradient, text: textStyle} = this.defineStyles()
     this.extractNonStyleValue(gradient, 'colors')
-    let {style, ...otherProps} = this.props
+    let {style, onButtonPress, ...otherProps} = this.props
 
     return (
       <RkButton
         rkType='stretch'
+        onButtonPress={onButtonPress}
         style={[button, style]}
         {...otherProps}>
         <LinearGradient
