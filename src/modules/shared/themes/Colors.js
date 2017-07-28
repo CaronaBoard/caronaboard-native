@@ -27,5 +27,6 @@ export const Colors = {
   black: '#000000',
   blue: '#003a66',
   darkblue: '#002b4c',
-  red: 'red'
+  red: 'red',
+  caronaBlue: '#2364FF'
 }

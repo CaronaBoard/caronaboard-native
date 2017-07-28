@@ -1,6 +1,6 @@
 import React from 'react'
-import LinearGradient from 'react-native-linear-gradient'
 import { RkButton, RkText, RkComponent } from 'react-native-ui-kitten'
+import { LinearGradient } from './'
 
 export class GradientButton extends RkComponent {
   componentName = 'GradientButton';
@@ -24,10 +24,8 @@ export class GradientButton extends RkComponent {
 
   render () {
     let {button, gradient, text: textStyle} = this.defineStyles()
-    let colors = this.extractNonStyleValue(gradient, 'colors')
+    this.extractNonStyleValue(gradient, 'colors')
     let {style, ...otherProps} = this.props
-
-    colors = this.props.colors ? this.props.colors : ['#2364FF']
 
     return (
       <RkButton
@@ -35,9 +33,6 @@ export class GradientButton extends RkComponent {
         style={[button, style]}
         {...otherProps}>
         <LinearGradient
-          colors={colors}
-          start={{x: 0.0, y: 0.5}}
-          end={{x: 1, y: 0.5}}
           style={[gradient]}>
           {this.renderContent(textStyle)}
         </LinearGradient>
