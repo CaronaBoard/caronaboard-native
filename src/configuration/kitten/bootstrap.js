@@ -7,13 +7,20 @@ import { KittenTheme } from './whiteTheme'
 import {SocialBarTypes, SwitchTypes, GradientButtonTypes, AvatarTypes} from './types'
 import {scale, scaleVertical} from './scale'
 
-export let bootstrap = () => {
+export function bootstrap () {
   RkTheme.setTheme(KittenTheme, null)
 
-  /*
-   RkText types
-   */
+  bootsTrapRkText()
+  bootstrapRkButton()
+  bootstrapRkModalImg()
+  bootstrapRkTextInput()
+  bootstrapRkCard()
 
+  registerComponents()
+  StatusBar.setBarStyle('dark-content', true)
+}
+
+function bootsTrapRkText () {
   RkTheme.setType('RkText', 'basic', {
     fontFamily: theme => theme.fonts.family.bold,
     backgroundColor: 'transparent'
@@ -49,28 +56,33 @@ export let bootstrap = () => {
 
   // all font sizes
   for (let key in RkTheme.current.fonts.sizes) {
-    RkTheme.setType('RkText', key, {
-      fontSize: theme => theme.fonts.sizes[key]
-    })
+    if (RkTheme.current.fonts.sizes.hasOwnProperty(key)) {
+      RkTheme.setType('RkText', key, {
+        fontSize: theme => theme.fonts.sizes[key]
+      })
+    }
   }
 
   // all text colors
   for (let key in RkTheme.current.colors.text) {
-    RkTheme.setType('RkText', `${key}Color`, {
-      color: theme => theme.colors.text[key]
-    })
+    if (RkTheme.current.colors.text.hasOwnProperty(key)) {
+      RkTheme.setType('RkText', `${key}Color`, {
+        color: theme => theme.colors.text[key]
+      })
+    }
   }
 
   // all text line heights
   for (let key in RkTheme.current.fonts.lineHeights) {
-    RkTheme.setType('RkText', `${key}Line`, {
-      text: {
-        lineHeight: theme => theme.fonts.lineHeights[key]
-      }
-    })
+    if (RkTheme.current.fonts.lineHeights.hasOwnProperty(key)) {
+      RkTheme.setType('RkText', `${key}Line`, {
+        text: {
+          lineHeight: theme => theme.fonts.lineHeights[key]
+        }
+      })
+    }
   }
 
-  // theme text styles
   RkTheme.setType('RkText', 'header1', {
     fontSize: theme => theme.fonts.sizes.h1,
     fontFamily: theme => theme.fonts.family.bold
@@ -149,10 +161,9 @@ export let bootstrap = () => {
   RkTheme.setType('RkText', 'chat', {
     color: theme => theme.colors.chat.text
   })
-  /*
-   RkButton types
-   */
+}
 
+function bootstrapRkButton () {
   RkTheme.setType('RkButton', 'basic', {
     container: {
       alignSelf: 'auto'
@@ -206,10 +217,9 @@ export let bootstrap = () => {
     borderWidth: 1,
     backgroundColor: theme => theme.colors.control.background
   })
-  /*
-   RkModalImg types
-   */
+}
 
+function bootstrapRkModalImg () {
   RkTheme.setType('RkModalImg', 'basic', {
     img: {
       margin: 1.5
@@ -226,11 +236,9 @@ export let bootstrap = () => {
       paddingBottom: 6
     }
   })
+}
 
-  /*
-   RkTextInput
-   */
-
+function bootstrapRkTextInput () {
   RkTheme.setType('RkTextInput', 'basic', {
     input: {
       fontFamily: theme => theme.fonts.family.bold
@@ -320,11 +328,9 @@ export let bootstrap = () => {
       right: 0
     }
   })
+}
 
-  /*
-   RkCard types
-   */
-
+function bootstrapRkCard () {
   RkTheme.setType('RkCard', 'basic', {
     container: {
       borderRadius: 3,
@@ -469,15 +475,11 @@ export let bootstrap = () => {
       alignItems: 'flex-end'
     }
   })
+}
 
-  /*
-   Register components
-   */
-
+function registerComponents () {
   RkTheme.registerComponent('Avatar', AvatarTypes)
   RkTheme.registerComponent('GradientButton', GradientButtonTypes)
   RkTheme.registerComponent('RkSwitch', SwitchTypes)
   RkTheme.registerComponent('SocialBar', SocialBarTypes)
-
-  StatusBar.setBarStyle('dark-content', true)
 }
