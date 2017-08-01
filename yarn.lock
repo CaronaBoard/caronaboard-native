@@ -2739,6 +2739,10 @@ hoist-non-react-statics@^1.0.3:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
 
+hoist-non-react-statics@^2.0.0:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.2.1.tgz#a7e41c760121d0abfc7a2339b331d29a26389e52"
+
 home-or-tmp@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/home-or-tmp/-/home-or-tmp-2.0.0.tgz#e36c3f2d2cae7d746a857e38d18d5f32a7882db8"
@@ -4945,19 +4949,28 @@ react-native-easy-toast@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/react-native-easy-toast/-/react-native-easy-toast-1.0.6.tgz#e9e2a0c865fcfdb407dbc2341bc3571a7f5da3b5"
 
+react-native-linear-gradient@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.1.0.tgz#2cbf4a061fef5c74d1256da425caf9fe893c94e2"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-navigation@^1.1.128:
   version "1.1.128"
   resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-1.1.128.tgz#4f2260d8ae68e4b95b0f6141dbfd5600990ec169"
   dependencies:
     lodash "4.x.x"
 
-react-native-ui-kitten@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/react-native-ui-kitten/-/react-native-ui-kitten-0.0.1.tgz#4a8a94a09ce63a976ac9e0274dd7e64eaf3ae249"
+react-native-ui-kitten@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-ui-kitten/-/react-native-ui-kitten-2.0.1.tgz#bbd4483a11e35f13502f0bd86d78ef1621fd0d7d"
   dependencies:
     gh-pages "^0.12.0"
+    hoist-non-react-statics "^2.0.0"
     markdown-it "^8.2.0"
+    prop-types "^15.5.10"
     wintersmith "^2.3.3"
+    wolfy87-eventemitter "^5.1.0"
 
 react-native-vector-icons@^4.2.0:
   version "4.2.0"
@@ -6345,6 +6358,10 @@ with@~5.1.1:
   dependencies:
     acorn "^3.1.0"
     acorn-globals "^3.0.0"
+
+wolfy87-eventemitter@^5.1.0:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/wolfy87-eventemitter/-/wolfy87-eventemitter-5.2.2.tgz#9cb8e58f6d53814602b91128dd81cad090197a4d"
 
 wordwrap@0.0.2:
   version "0.0.2"

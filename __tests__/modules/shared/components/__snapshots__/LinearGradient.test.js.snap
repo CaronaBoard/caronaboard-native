@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LinearGradient /> Android Snapshot have a snapshot 1`] = `
+<View
+  style={Object {}}
+>
+  <View />
+</View>
+`;
+
+exports[`<LinearGradient /> iOS Snapshot have a snapshot 1`] = `
+<iOSLinearGradient
+  colors="blue"
+  end={
+    Object {
+      "x": 0,
+      "y": 0.5,
+    }
+  }
+  start={
+    Object {
+      "x": 0,
+      "y": 0.5,
+    }
+  }
+  style={Object {}}
+>
+  <View />
+</iOSLinearGradient>
+`;

@@ -10,7 +10,6 @@ export const TextInput = (props) => {
       rkType='underline topLabel'
       labelStyle={Styles.inputLabel}
       containerStyle={Styles.inputContainer}
-      style={Styles.input}
       label={props.label}
       onChangeText={props.onChangeText}
     />

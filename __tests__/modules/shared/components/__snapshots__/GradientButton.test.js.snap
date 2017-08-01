@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GradientButton /> Snapshot have a snapshot 1`] = `
+<RkButton
+  onButtonPress={[Function]}
+  rkType="stretch"
+  style={
+    Array [
+      undefined,
+      Object {},
+    ]
+  }
+  text="Button Text"
+>
+  <LinearGradient
+    colors={
+      Array [
+        "#2364FF",
+      ]
+    }
+    end={
+      Object {
+        "x": 1,
+        "y": 0.5,
+      }
+    }
+    start={
+      Object {
+        "x": 0,
+        "y": 0.5,
+      }
+    }
+    style={
+      Array [
+        undefined,
+      ]
+    }
+  >
+    <RkText>
+      Button Text
+    </RkText>
+  </LinearGradient>
+</RkButton>
+`;

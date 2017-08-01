@@ -1,56 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SignInScreen /> Should have a snapshot 1`] = `
-<View
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
-  <View
-    style={
-      Object {
-        "flex": 1,
-        "justifyContent": "space-around",
-        "paddingHorizontal": 50,
-      }
-    }
-  >
-    <RkText
-      style={
-        Object {
-          "fontSize": 38,
-          "textAlign": "center",
-        }
-      }
-    >
-      SIGN IN
-    </RkText>
+<LoginForm
+  buttonText="SIGN IN"
+  footer={
     <View
       style={
         Object {
-          "minHeight": 185,
+          "flexDirection": "row",
+          "justifyContent": "center",
         }
       }
     >
-      <TextInput
-        label="EMAIL ADDRESS"
-        onChangeText={[Function]}
-      />
-      <TextInput
-        label="PASSWORD"
-        onChangeText={[Function]}
-      />
+      <RkText
+        rkType="primary3"
+      >
+        Don’t have an account?
+      </RkText>
+      <RkButton
+        onPress={[Function]}
+        rkType="clear"
+      >
+        <RkText
+          rkType="header6"
+        >
+           Sign up now 
+        </RkText>
+      </RkButton>
     </View>
-    <Button
-      onPress={[Function]}
-      text="SIGN IN"
-    />
-    <Button
-      onPress={[Function]}
-      text="SIGN UP"
-    />
-  </View>
-</View>
+  }
+  onButtonPress={[Function]}
+  toast={
+    Object {
+      "message": "",
+      "showAlert": false,
+    }
+  }
+/>
 `;

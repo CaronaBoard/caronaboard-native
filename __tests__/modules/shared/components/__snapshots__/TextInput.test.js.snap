@@ -4,7 +4,7 @@ exports[`<TextInput /> Should have a snapshot 1`] = `
 <RkTextInput
   containerStyle={
     Object {
-      "borderBottomColor": "#616161",
+      "borderBottomColor": "grey",
     }
   }
   label="texto"
@@ -15,11 +15,5 @@ exports[`<TextInput /> Should have a snapshot 1`] = `
   }
   onChangeText={[Function]}
   rkType="underline topLabel"
-  style={
-    Object {
-      "color": "#2196f3",
-      "fontSize": 20,
-    }
-  }
 />
 `;

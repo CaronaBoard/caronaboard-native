@@ -1,80 +1,47 @@
-import Styles from './styles/SignInScreenStyles'
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { View } from 'react-native'
-import { RkText } from 'react-native-ui-kitten'
-import { Button, TextInput } from '../../shared/components'
-import { signInFirebase } from '../../../redux/actions'
 import { connect } from 'react-redux'
-
-export const INITIAL_STATE = {
-  email: '',
-  password: '',
-  loading: false
-}
+import { RkButton, RkText } from 'react-native-ui-kitten'
+import Styles from './styles/SignInScreenStyles'
+import { signInFirebase } from '../../../redux/actions'
+import { LoginForm } from '../components/LoginForm'
 
 export class SignInScreen extends Component {
-  constructor (props) {
-    super(props)
-    this.state = INITIAL_STATE
+  static propTypes = {
+    signIn: PropTypes.func.isRequired,
+    alert: PropTypes.shape({
+      showAlert: PropTypes.bool.isRequired,
+      message: PropTypes.string
+    }).isRequired
   }
 
-  onPressSignInButton = async () => {
-    this.setState({loading: true})
-    try {
-      this.props.signIn(this.state.email, this.state.password)
-    } catch (error) {
-      this.setState({loading: false})
-      console.error(error)
-    }
-  }
-
-  navigateToSignUpScreen = () => {
-    this.props.navigator.push({screen: 'carona.signUp'})
-  }
-
-  onLoginSuccess = (userData) => {
-    this.setState({loading: false})
-    // TODO: navigate to ridelist?
+  renderFooter = () => {
+    return (
+      <View style={Styles.textRow}>
+        <RkText rkType='primary3'>Don’t have an account?</RkText>
+        <RkButton rkType='clear' onPress={() => this.props.navigator.push({screen: 'carona.signUp'})}>
+          <RkText rkType='header6'> Sign up now </RkText>
+        </RkButton>
+      </View>
+    )
   }
 
   render () {
-    if (this.props.userData !== {}) {
-      // TODO: User already logged in
-    }
-
     return (
-      <View style={Styles.flexible}>
-        <View style={Styles.container}>
-          <RkText style={Styles.title}>
-            SIGN IN
-          </RkText>
-          <View style={Styles.credentialsContainer}>
-            <TextInput
-              onChangeText={(email) => { this.setState({email}) }}
-              label='EMAIL ADDRESS'
-              key='email-input' />
-            <TextInput
-              onChangeText={(password) => { this.setState({password}) }}
-              label='PASSWORD'
-              key='password-input' />
-          </View>
-          <Button
-            text='SIGN IN'
-            onPress={this.onPressSignInButton}
-            key='signin-button' />
-          <Button
-            text='SIGN UP'
-            onPress={this.navigateToSignUpScreen}
-            key='signup-button' />
-        </View>
-      </View>
+      <LoginForm
+        buttonText='SIGN IN'
+        onButtonPress={this.props.signIn}
+        toast={this.props.alert}
+        footer={this.renderFooter()}
+      />
     )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    userData: state.auth.userData
+    alert: state.auth.alert
   }
 }
 
