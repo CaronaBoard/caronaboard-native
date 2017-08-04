@@ -1,26 +1,22 @@
-#sudo gem install bundler
-#bundle install
-#bundle exec fastlane
-
 fastlane_require 'httparty'
-
 fastlane_version "2.50.1"
-
 default_platform :android
 
 before_all do
-  ENV["GITHUB_TOKEN"] = "be79c7c6b1820ae3471282f1bce6c23075123304"
-  ENV["APPETIZE_TOKEN"] = "tok_b97uq9mxzjwh5070p05d3nttjw"
-  ENV["GIT_COMMIT"] = "93c879967243accaed9aaa35c970dda2cba9553a"
+  # ENV["GITHUB_TOKEN"] = ""
+  # ENV["APPETIZE_TOKEN"] = ""
+  ENV["REPO_OWNER"] = "caronaboard"
+  ENV["REPO_NAME"] = "caronaboard-native"
+  ENV["GIT_COMMIT"] = last_git_commit[:commit_hash]
 
-  if !ENV["ghprbSourceBranch"]
-    ENV["ghprbSourceBranch"] = "appetize-danger"
+  if !ENV["GIT_BRANCH"]
+    ENV["GIT_BRANCH"] = git_branch
   end
 end
 
 private_lane :githubStatusUpdate do |options|
   response = HTTParty.post(
-    "https://github.com/api/v3/repos/caronaboard/caronaboard-native/statuses/#{ENV["GIT_COMMIT"]}?access_token=#{ENV["GITHUB_TOKEN"]}",
+    "https://github.com/api/v3/repos/#{ENV["REPO_OWNER"]}/#{ENV["REPO_NAME"]}/statuses/#{ENV["GIT_COMMIT"]}?access_token=#{ENV["GITHUB_TOKEN"]}",
     :body => {
       :context => options[:context],
       :state => options[:state],
@@ -39,7 +35,7 @@ private_lane :getAppetizePublicKey do |options|
 
   # Find branch name in notes
   json["data"].each do |value|
-    if value["note"] == ENV["ghprbSourceBranch"] && value["platform"] == options[:platform]
+    if value["note"] == ENV["GIT_BRANCH"] && value["platform"] == options[:platform]
       publicKey = value["publicKey"]
     end
   end
@@ -47,6 +43,7 @@ private_lane :getAppetizePublicKey do |options|
   publicKey
 end
 
+# TODO: Seria melhor pegar o APK que foi buildado no buddybuild!
 private_lane :getLastAPKPath do
   apk_search_path = File.join('../android/', 'app', 'build', 'outputs', 'apk', '*.apk')
   new_apks = Dir[apk_search_path].reject { |path| path =~ /^.*-unaligned.apk$/i}
@@ -79,7 +76,7 @@ platform :android do
         path: getLastAPKPath,
         api_token: "#{ENV["APPETIZE_TOKEN"]}",
         platform: "android",
-        note: "#{ENV["ghprbSourceBranch"]}",
+        note: "#{ENV["GIT_BRANCH"]}",
         public_key: getAppetizePublicKey({platform: "android"})
       )
 

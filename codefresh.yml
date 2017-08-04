@@ -23,3 +23,15 @@ steps:
         - NODE_ENV=development
       commands:
         - npm run update-coverage || true
+  DeployToAppetize:
+      title: Deploying apps to Appetize
+      image: '${{BuildingDockerImage}}'
+      working_directory: IMAGE_WORK_DIR
+      environment:
+        - GIT_BRANCH=${{CF_BRANCH}}
+        - REPO_OWNER=${{CF_REPO_OWNER}}
+        - REPO_NAME=${{CF_REPO_NAME}}
+        - GIT_COMMIT=${{CF_REVISION}}
+      commands:
+        - bundle install
+        - bundle exec fastlane android deployAppetize
