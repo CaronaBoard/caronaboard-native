@@ -1,102 +1,69 @@
 fastlane_require 'httparty'
 fastlane_version "2.50.1"
-default_platform :android
 
 before_all do
-  # ENV["GITHUB_TOKEN"] = ""
-  # ENV["APPETIZE_TOKEN"] = ""
-  ENV["REPO_OWNER"] = "caronaboard"
-  ENV["REPO_NAME"] = "caronaboard-native"
-  ENV["GIT_COMMIT"] = last_git_commit[:commit_hash]
+
 
   if !ENV["GIT_BRANCH"]
     ENV["GIT_BRANCH"] = git_branch
   end
 end
 
-private_lane :githubStatusUpdate do |options|
+lane :listBuddyBuilds do
+    response = HTTParty.get(
+    "https://api.buddybuild.com/v1/apps/#{ENV["BUDDYBUILD_APP_ID"]}/builds?branch=#{ENV["GIT_BRANCH"]}&limit=1",
+    :headers => { 'Authorization' => "Bearer #{ENV["BUDDYBUILD_TOKEN"]}" }
+  )
+  # Checar se o commit hash é o mesmo e retornar o build id
+
+  json = JSON.parse(response.body)
+  p json
+end
+
+#THIS SHOULD RETURN URL FOR A VALID APK
+lane :getArtifactURL do |build_id|
+  build_id = "59848048030ea7000186b305"
+  url = "https://api.buddybuild.com/v1/builds/#{build_id}"
+    response = HTTParty.get(
+    url,
+    :headers => { 'Authorization' => "Bearer #{ENV["BUDDYBUILD_TOKEN"]}" }
+  )
+  # "cancelled", "failed"
+  json = JSON.parse(response.body)
+end
+
+private_lane :callAppetizeAPI do |options|
+  options[:url] = "https://downloads.buddybuild.com/api/download/download-apk?buildID=59848048030ea7000186b305&application_variant=release&download_token=3a703fe5-e406-4475-b5a0-7eb6266cca55"
+  options[:platform] = "android"
+
+  url = "https://#{ENV["APPETIZE_TOKEN"]}@api.appetize.io/v1/apps/#{ENV["APPETIZE_PUBLIC_KEY"]}"
+
   response = HTTParty.post(
-    "https://github.com/api/v3/repos/#{ENV["REPO_OWNER"]}/#{ENV["REPO_NAME"]}/statuses/#{ENV["GIT_COMMIT"]}?access_token=#{ENV["GITHUB_TOKEN"]}",
+    url,
     :body => {
-      :context => options[:context],
-      :state => options[:state],
-      :description => options[:description],
-      :target_url => options[:url]
+      :url => options[:url],
+      :platform => options[:platform]
     }.to_json,
     :headers => { 'Content-Type' => 'application/json' }
   )
-end
 
-private_lane :getAppetizePublicKey do |options|
-  publicKey = ""
-
-  response = HTTParty.get("https://#{ENV["APPETIZE_TOKEN"]}@api.appetize.io/v1/apps")
   json = JSON.parse(response.body)
-
-  # Find branch name in notes
-  json["data"].each do |value|
-    if value["note"] == ENV["GIT_BRANCH"] && value["platform"] == options[:platform]
-      publicKey = value["publicKey"]
-    end
-  end
-
-  publicKey
-end
-
-# TODO: Seria melhor pegar o APK que foi buildado no buddybuild!
-private_lane :getLastAPKPath do
-  apk_search_path = File.join('../android/', 'app', 'build', 'outputs', 'apk', '*.apk')
-  new_apks = Dir[apk_search_path].reject { |path| path =~ /^.*-unaligned.apk$/i}
-  new_apks = new_apks.map { |path| File.expand_path(path)}
-  last_apk_path = new_apks.sort_by(&File.method(:mtime)).last
-
-  last_apk_path
 end
 
 platform :android do
 
   desc "Deployment Android lane"
-
     lane :deployAppetize do
-
-      githubStatusUpdate(
-        context: 'Appetize Android',
-        state: 'pending',
-        url: "https://appetize.io/dashboard",
-        description: 'Android build in progress'
-      )
-
-      gradle(
-        task: "assemble",
-        build_type: "Release",
-        project_dir: "android/"
-      )
-
-      Actions::AppetizeAction.run(
-        path: getLastAPKPath,
-        api_token: "#{ENV["APPETIZE_TOKEN"]}",
-        platform: "android",
-        note: "#{ENV["GIT_BRANCH"]}",
-        public_key: getAppetizePublicKey({platform: "android"})
-      )
-
-      githubStatusUpdate(
-        context: 'Appetize Android',
-        state: 'success',
-        url: "#{lane_context[SharedValues::APPETIZE_APP_URL]}",
-        description: 'Android build succeed'
+      callAppetizeAPI(
+        url: getArtifactURL(),
+        platform: "android"
       )
     end
 
     error do |lane, exception|
       case lane
         when /deployAppetize/
-          githubStatusUpdate(
-            context: 'Appetize Android',
-            state: 'failure',
-            url: "https://appetize.io/dashboard",
-            description: 'Android build failed'
-          )
+          p "DEU RUIM"
       end
     end
 end

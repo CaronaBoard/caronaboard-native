@@ -29,6 +29,19 @@ xcode-select --install
 </table>
 
 # Available Actions
+### listBuddyBuilds
+```
+fastlane listBuddyBuilds
+```
+
+### getArtifactURL
+```
+fastlane getArtifactURL
+```
+
+
+----
+
 ## Android
 ### android deployAppetize
 ```
