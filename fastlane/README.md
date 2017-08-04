@@ -30,21 +30,11 @@ xcode-select --install
 
 # Available Actions
 ## Android
-### android test
+### android deployAppetize
 ```
-fastlane android test
+fastlane android deployAppetize
 ```
-Runs all the tests
-### android beta
-```
-fastlane android beta
-```
-Submit a new Beta Build to Crashlytics Beta
-### android deploy
-```
-fastlane android deploy
-```
-Deploy a new version to the Google Play
+Deployment Android lane
 
 ----
 
