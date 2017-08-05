@@ -2,22 +2,27 @@ fastlane_require 'httparty'
 fastlane_version "2.50.1"
 
 before_all do
-
+  ENV["GIT_COMMIT"] = last_git_commit[:commit_hash]
 
   if !ENV["GIT_BRANCH"]
     ENV["GIT_BRANCH"] = git_branch
   end
 end
 
-lane :listBuddyBuilds do
-    response = HTTParty.get(
+lane :getBuildId do
+  response = HTTParty.get(
     "https://api.buddybuild.com/v1/apps/#{ENV["BUDDYBUILD_APP_ID"]}/builds?branch=#{ENV["GIT_BRANCH"]}&limit=1",
     :headers => { 'Authorization' => "Bearer #{ENV["BUDDYBUILD_TOKEN"]}" }
   )
-  # Checar se o commit hash é o mesmo e retornar o build id
 
-  json = JSON.parse(response.body)
-  p json
+  json = JSON.parse(response.body).first
+  commit_sha = json["commit_info"]["commit_sha"]
+
+  if commit_sha != ENV["GIT_COMMIT"]
+    throw :invalid_commit, "INVALID COMMIT HASH"
+  end
+
+  commit_sha
 end
 
 #THIS SHOULD RETURN URL FOR A VALID APK
@@ -30,6 +35,7 @@ lane :getArtifactURL do |build_id|
   )
   # "cancelled", "failed"
   json = JSON.parse(response.body)
+  return "https://downloads.buddybuild.com/api/download/download-apk?buildID=59848048030ea7000186b305&application_variant=release&download_token=3a703fe5-e406-4475-b5a0-7eb6266cca55"
 end
 
 private_lane :callAppetizeAPI do |options|
@@ -46,8 +52,7 @@ private_lane :callAppetizeAPI do |options|
     }.to_json,
     :headers => { 'Content-Type' => 'application/json' }
   )
-
-  json = JSON.parse(response.body)
+  #CATCH EXCEPTION
 end
 
 platform :android do
@@ -63,7 +68,8 @@ platform :android do
     error do |lane, exception|
       case lane
         when /deployAppetize/
-          p "DEU RUIM"
+          p "Error during deployAppetize"
       end
+        p exception
     end
 end

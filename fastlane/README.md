@@ -29,9 +29,9 @@ xcode-select --install
 </table>
 
 # Available Actions
-### listBuddyBuilds
+### getBuildId
 ```
-fastlane listBuddyBuilds
+fastlane getBuildId
 ```
 
 ### getArtifactURL
