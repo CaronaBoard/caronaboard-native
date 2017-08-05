@@ -1,6 +1,7 @@
 language: javascript
 os: osx
 osx_image: xcode8.3
+rvm: 2.2
 branches:
   only:
     - master
@@ -21,9 +22,9 @@ script:
 after_script:
 # - npm run update-coverage || true
 - npm run danger
-- bundle exec danger pr --dangerfile=./Dangerfile.js --verbose
 after_success:
 # - bundle exec fastlane android deployAppetize
+# - npm run danger
 env:
   global:
   - NODE_ENV=development
