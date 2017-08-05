@@ -10,15 +10,15 @@ cache:
 before_install:
 - nvm install && nvm use
 install:
-- npm install
+- yarn install
 - bundle install
 script:
-# - npm run lint-check
-# - npm run test-ci
+# - yarn run lint-check
+# - yarn run test-ci
 after_script:
-- npm run update-coverage || true
+- yarn run update-coverage || true
 - bundle exec danger pr --dangerfile=./Dangerfile.js --verbose
-- npm run danger
+- yarn danger --verbose
 after_success:
 # - bundle exec fastlane android deployAppetize
 env:
