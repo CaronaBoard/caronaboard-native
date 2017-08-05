@@ -32,32 +32,29 @@ private_lane :getBuildId do
 end
 
 private_lane :getArtifactURL do |options|
-  build_id = options[:build_id]
-  url = "https://api.buddybuild.com/v1/builds/#{build_id}"
-
-  p "Waiting for build ##{build_id} status report"
-  
-  response = HTTParty.get(url, :headers => BUDDY_BUILD_HEADER)
-  json = JSON.parse(response.body) 
-
-  until json["finished"] do
-    p "Build is #{json["build_status"]} waiting untill it finishes"
-    sleep(60)
-  end
-
-  unless json["build_status"] == "success" then
-    throw :buddybuild_failure, "BuddyBuild ##{build_id} has failed: #{json}"
-  end
-
+  url = "https://api.buddybuild.com/v1/builds/#{options[:build_id]}"
+  jsonResponse = nil
   artifactUrl = nil
 
-  json["links"]["download"].each do |value|
+  loop do 
+    responseBody = HTTParty.get(url, :headers => BUDDY_BUILD_HEADER).body
+    jsonResponse = JSON.parse(responseBody) 
+
+    p "Build status #{jsonResponse["build_status"]}"
+    jsonResponse["finished"] ? break : sleep(60)
+  end
+
+  unless jsonResponse["build_status"] == "success" then
+    throw :buddybuild_failure, "BuddyBuild ##{options[:build_id]} has failed: #{jsonResponse}"
+  end
+
+  jsonResponse["links"]["download"].each do |value|
     if value["name"] == "release" then
       artifactUrl = value["url"]
     end
   end
 
-  throw :buddybuild_release_url, "Couldn't find realease URL: #{json}" unless artifactUrl != nil
+  throw :buddybuild_release_url, "Couldn't find realease URL: #{jsonResponse}" unless artifactUrl != nil
   artifactUrl
 
 end
