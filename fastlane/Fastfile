@@ -1,3 +1,4 @@
+setup_travis
 fastlane_require 'httparty'
 fastlane_version '2.50.1'
 
@@ -37,9 +38,12 @@ private_lane :getArtifactURL do |options|
   p "Waiting for build ##{build_id} status report"
   
   response = HTTParty.get(url, :headers => BUDDY_BUILD_HEADER)
-  json = JSON.parse(response.body)
+  json = JSON.parse(response.body) 
 
-  sleep(1.minutes) until json["finished"]
+  until json["finished"] do
+    p "Build is #{json["build_status"]} waiting untill it finishes"
+    sleep(60)
+  end
 
   unless json["build_status"] == "success" then
     throw :buddybuild_failure, "BuddyBuild ##{build_id} has failed: #{json}"
@@ -73,10 +77,38 @@ private_lane :callAppetizeAPI do |options|
   JSON.parse(response.body)["publicURL"]
 end
 
+private_lane :githubStatusUpdate do |options|
+  url = "https://api.github.com/repos/caronaboard/caronaboard-native/statuses/#{ENV["GIT_COMMIT"]}"
+  body = {
+    "context" => options[:context],
+    "state" => options[:state],
+    "description" => options[:description],
+    "target_url" => options[:url]
+  }
+
+  p "Updating commit statuses"  
+  p body
+
+  response = HTTParty.post(
+    url,
+    :body => body.to_json,
+    :query => { "access_token" => ENV["GITHUB_TOKEN"]},
+    :headers => { 'Content-Type' => 'application/json', 'user-agent': 'ci-fastlane' }
+  )
+
+  p response unless response.code == 201
+end
+
 platform :android do
 
   desc "Deployment Android lane"
     lane :deployAppetize do
+      githubStatusUpdate(
+        context: 'Appetize Android',
+        state: 'pending',
+        url: "https://appetize.io/dashboard",
+        description: 'Android build in progress'
+      )
 
       apkUrl = getArtifactURL(
         build_id: getBuildId()
@@ -88,12 +120,25 @@ platform :android do
       )
       
       p "Appetize app has been updated! check it out on #{appUrl}"
+
+      githubStatusUpdate(
+        context: 'Appetize Android',
+        state: 'success',
+        url: appUrl,
+        description: 'Android build succeed'
+      )
     end
 
     error do |lane, exception|
       case lane
         when /deployAppetize/
           p "Error during deployAppetize"
+          githubStatusUpdate(
+            context: 'Appetize Android',
+            state: 'failure',
+            url: "https://appetize.io/dashboard",
+            description: 'Android build failed'
+          )
       end
     end
 end

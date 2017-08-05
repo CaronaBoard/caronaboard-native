@@ -52,6 +52,7 @@ buck-out/
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
+fastlane/test_output
 
 #VS Code
 jsconfig.json
@@ -59,18 +60,4 @@ jsconfig.json
 
 coverage/
 .tmp/
-
-
-
-secrets/
-# fastlane specific
-fastlane/report.xml
-
-# deliver temporary files
-fastlane/Preview.html
-
-# snapshot generated screenshots
-fastlane/screenshots
-
-# scan temporary files
-fastlane/test_output
+.env
