@@ -29,19 +29,6 @@ xcode-select --install
 </table>
 
 # Available Actions
-### getBuildId
-```
-fastlane getBuildId
-```
-
-### getArtifactURL
-```
-fastlane getArtifactURL
-```
-
-
-----
-
 ## Android
 ### android deployAppetize
 ```

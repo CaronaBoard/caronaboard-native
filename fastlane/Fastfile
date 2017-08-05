@@ -1,47 +1,64 @@
 fastlane_require 'httparty'
-fastlane_version "2.50.1"
+fastlane_version '2.50.1'
 
 before_all do
-  ENV["GIT_COMMIT"] = last_git_commit[:commit_hash]
-
-  if !ENV["GIT_BRANCH"]
-    ENV["GIT_BRANCH"] = git_branch
-  end
+  ENV["GIT_COMMIT"] = last_git_commit[:commit_hash] unless ENV["GIT_COMMIT"]
+  ENV["GIT_BRANCH"] = git_branch unless ENV["GIT_BRANCH"]
+  BUDDY_BUILD_HEADER = { 'Authorization' => "Bearer #{ENV["BUDDYBUILD_TOKEN"]}" }
 end
 
-lane :getBuildId do
-  response = HTTParty.get(
-    "https://api.buddybuild.com/v1/apps/#{ENV["BUDDYBUILD_APP_ID"]}/builds?branch=#{ENV["GIT_BRANCH"]}&limit=1",
-    :headers => { 'Authorization' => "Bearer #{ENV["BUDDYBUILD_TOKEN"]}" }
-  )
+private_lane :getBuildId do
+  url = "https://api.buddybuild.com/v1/apps/#{ENV["BUDDYBUILD_APP_ID"]}/builds"
+  query = {
+    "branch" => "#{ENV["GIT_BRANCH"]}",
+    "limit" => 1
+  }
 
+  response = HTTParty.get(url, :query => query, :headers => BUDDY_BUILD_HEADER)
   json = JSON.parse(response.body).first
   commit_sha = json["commit_info"]["commit_sha"]
 
-  if commit_sha != ENV["GIT_COMMIT"]
-    throw :invalid_commit, "INVALID COMMIT HASH"
+  p "Actual commit hash is #{ENV["GIT_COMMIT"]}"
+  p "Buddybuild last commit build is #{commit_sha}"
+
+  if commit_sha != ENV["GIT_COMMIT"] then
+    throw :invalid_commit, "INVALID COMMIT HASH EXPECTED #{ENV["GIT_COMMIT"]} got #{commit_sha} instead: #{json}"
   end
 
-  commit_sha
+  p "Latest BuddyBuild Id # is #{json["_id"]}"
+  json["_id"]
+
 end
 
-#THIS SHOULD RETURN URL FOR A VALID APK
-lane :getArtifactURL do |build_id|
-  build_id = "59848048030ea7000186b305"
+private_lane :getArtifactURL do |options|
+  build_id = options[:build_id]
   url = "https://api.buddybuild.com/v1/builds/#{build_id}"
-    response = HTTParty.get(
-    url,
-    :headers => { 'Authorization' => "Bearer #{ENV["BUDDYBUILD_TOKEN"]}" }
-  )
-  # "cancelled", "failed"
+
+  p "Waiting for build ##{build_id} status report"
+  
+  response = HTTParty.get(url, :headers => BUDDY_BUILD_HEADER)
   json = JSON.parse(response.body)
-  return "https://downloads.buddybuild.com/api/download/download-apk?buildID=59848048030ea7000186b305&application_variant=release&download_token=3a703fe5-e406-4475-b5a0-7eb6266cca55"
+
+  sleep(1.minutes) until json["finished"]
+
+  unless json["build_status"] == "success" then
+    throw :buddybuild_failure, "BuddyBuild ##{build_id} has failed: #{json}"
+  end
+
+  artifactUrl = nil
+
+  json["links"]["download"].each do |value|
+    if value["name"] == "release" then
+      artifactUrl = value["url"]
+    end
+  end
+
+  throw :buddybuild_release_url, "Couldn't find realease URL: #{json}" unless artifactUrl != nil
+  artifactUrl
+
 end
 
 private_lane :callAppetizeAPI do |options|
-  options[:url] = "https://downloads.buddybuild.com/api/download/download-apk?buildID=59848048030ea7000186b305&application_variant=release&download_token=3a703fe5-e406-4475-b5a0-7eb6266cca55"
-  options[:platform] = "android"
-
   url = "https://#{ENV["APPETIZE_TOKEN"]}@api.appetize.io/v1/apps/#{ENV["APPETIZE_PUBLIC_KEY"]}"
 
   response = HTTParty.post(
@@ -52,17 +69,25 @@ private_lane :callAppetizeAPI do |options|
     }.to_json,
     :headers => { 'Content-Type' => 'application/json' }
   )
-  #CATCH EXCEPTION
+  
+  JSON.parse(response.body)["publicURL"]
 end
 
 platform :android do
 
   desc "Deployment Android lane"
     lane :deployAppetize do
-      callAppetizeAPI(
-        url: getArtifactURL(),
+
+      apkUrl = getArtifactURL(
+        build_id: getBuildId()
+      )
+      
+      appUrl = callAppetizeAPI(
+        url: apkUrl,
         platform: "android"
       )
+      
+      p "Appetize app has been updated! check it out on #{appUrl}"
     end
 
     error do |lane, exception|
@@ -70,6 +95,5 @@ platform :android do
         when /deployAppetize/
           p "Error during deployAppetize"
       end
-        p exception
     end
 end
