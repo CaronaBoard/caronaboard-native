@@ -1,19 +1,19 @@
 language: javascript
 os: osx
 osx_image: xcode8.3
-cache:
-  bundler: true
-  yarn: true
-  directories:
-  - node_modules
-  - vendor/bundle
+# cache:
+#   bundler: true
+#   yarn: true
+#   directories:
+#   - node_modules
+#   - vendor/bundle
 before_install:
 - nvm install && nvm use
 install:
 - npm install
 - bundle install
 script:
-# - npm run lint-check
+# - npm run lint-check #TODO: Make danger report lint failures
 # - npm run test-ci
 after_script:
 - npm run update-coverage || true

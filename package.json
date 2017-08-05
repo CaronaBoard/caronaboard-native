@@ -16,7 +16,7 @@
     "lint-fix": "standard --fix --verbose | snazzy",
     "precommit": "npm run lint-check",
     "prepush": "jest --bail --forceExit --silent",
-    "danger": "danger --verbose"
+    "danger": "danger"
   },
   "dependencies": {
     "firebase": "^4.1.3",
