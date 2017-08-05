@@ -1,0 +1,141 @@
+setup_travis
+fastlane_require 'httparty'
+fastlane_version '2.50.1'
+
+before_all do
+  ENV["GIT_COMMIT"] = last_git_commit[:commit_hash] unless ENV["GIT_COMMIT"]
+  ENV["GIT_BRANCH"] = git_branch unless ENV["GIT_BRANCH"]
+  BUDDY_BUILD_HEADER = { 'Authorization' => "Bearer #{ENV["BUDDYBUILD_TOKEN"]}" }
+end
+
+private_lane :getBuildId do
+  url = "https://api.buddybuild.com/v1/apps/#{ENV["BUDDYBUILD_APP_ID"]}/builds"
+  query = {
+    "branch" => "#{ENV["GIT_BRANCH"]}",
+    "limit" => 1
+  }
+
+  response = HTTParty.get(url, :query => query, :headers => BUDDY_BUILD_HEADER)
+  json = JSON.parse(response.body).first
+  commit_sha = json["commit_info"]["commit_sha"]
+
+  p "Actual commit hash is #{ENV["GIT_COMMIT"]}"
+  p "Buddybuild last commit build is #{commit_sha}"
+
+  if commit_sha != ENV["GIT_COMMIT"] then
+    throw :invalid_commit, "INVALID COMMIT HASH EXPECTED #{ENV["GIT_COMMIT"]} got #{commit_sha} instead: #{json}"
+  end
+
+  p "Latest BuddyBuild Id # is #{json["_id"]}"
+  json["_id"]
+
+end
+
+private_lane :getArtifactURL do |options|
+  url = "https://api.buddybuild.com/v1/builds/#{options[:build_id]}"
+  jsonResponse = nil
+  artifactUrl = nil
+
+  loop do 
+    responseBody = HTTParty.get(url, :headers => BUDDY_BUILD_HEADER).body
+    jsonResponse = JSON.parse(responseBody) 
+
+    p "Build status #{jsonResponse["build_status"]}"
+    jsonResponse["finished"] ? break : sleep(60)
+  end
+
+  unless jsonResponse["build_status"] == "success" then
+    throw :buddybuild_failure, "BuddyBuild ##{options[:build_id]} has failed: #{jsonResponse}"
+  end
+
+  jsonResponse["links"]["download"].each do |value|
+    if value["name"] == "release" then
+      artifactUrl = value["url"]
+    end
+  end
+
+  throw :buddybuild_release_url, "Couldn't find realease URL: #{jsonResponse}" unless artifactUrl != nil
+  artifactUrl
+
+end
+
+private_lane :callAppetizeAPI do |options|
+  url = "https://#{ENV["APPETIZE_TOKEN"]}@api.appetize.io/v1/apps/#{ENV["APPETIZE_PUBLIC_KEY"]}"
+
+  response = HTTParty.post(
+    url,
+    :body => {
+      :url => options[:url],
+      :platform => options[:platform]
+    }.to_json,
+    :headers => { 'Content-Type' => 'application/json' }
+  )
+  
+  JSON.parse(response.body)["publicURL"]
+end
+
+private_lane :githubStatusUpdate do |options|
+  url = "https://api.github.com/repos/caronaboard/caronaboard-native/statuses/#{ENV["GIT_COMMIT"]}"
+  body = {
+    "context" => options[:context],
+    "state" => options[:state],
+    "description" => options[:description],
+    "target_url" => options[:url]
+  }
+
+  p "Updating commit statuses"  
+  p body
+
+  response = HTTParty.post(
+    url,
+    :body => body.to_json,
+    :query => { "access_token" => ENV["GITHUB_TOKEN"]},
+    :headers => { 'Content-Type' => 'application/json', 'user-agent': 'ci-fastlane' }
+  )
+
+  p response unless response.code == 201
+end
+
+platform :android do
+
+  desc "Deployment Android lane"
+    lane :deployAppetize do
+      githubStatusUpdate(
+        context: 'Appetize Android',
+        state: 'pending',
+        url: "https://appetize.io/dashboard",
+        description: 'Android build in progress'
+      )
+
+      apkUrl = getArtifactURL(
+        build_id: getBuildId()
+      )
+      
+      appUrl = callAppetizeAPI(
+        url: apkUrl,
+        platform: "android"
+      )
+      
+      p "Appetize app has been updated! check it out on #{appUrl}"
+
+      githubStatusUpdate(
+        context: 'Appetize Android',
+        state: 'success',
+        url: appUrl,
+        description: 'Android build succeed'
+      )
+    end
+
+    error do |lane, exception|
+      case lane
+        when /deployAppetize/
+          p "Error during deployAppetize"
+          githubStatusUpdate(
+            context: 'Appetize Android',
+            state: 'failure',
+            url: "https://appetize.io/dashboard",
+            description: 'Android build failed'
+          )
+      end
+    end
+end
