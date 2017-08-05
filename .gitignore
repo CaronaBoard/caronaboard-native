@@ -61,3 +61,5 @@ jsconfig.json
 coverage/
 .tmp/
 .env
+
+secrets/
