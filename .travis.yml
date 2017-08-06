@@ -17,14 +17,13 @@ install:
 - npm install
 - bundle install
 script:
-# - npm run lint-check #TODO: Make danger report lint failures
-# - npm run test-ci
+- npm run lint-check #TODO: Make danger report lint failures
+- npm run test-ci
 after_script:
-# - npm run update-coverage || true
-- npm run danger
+- npm run update-coverage || true
 after_success:
-# - bundle exec fastlane android deployAppetize
-# - npm run danger
+- bundle exec fastlane android deployAppetize
+- npm run danger
 env:
   global:
   - NODE_ENV=development
