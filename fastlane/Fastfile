@@ -23,7 +23,8 @@ private_lane :getBuildId do
   p "Buddybuild last commit build is #{commit_sha}"
 
   if commit_sha != ENV["GIT_COMMIT"] then
-    throw :invalid_commit, "INVALID COMMIT HASH EXPECTED #{ENV["GIT_COMMIT"]} got #{commit_sha} instead: #{json}"
+    p "INVALID COMMIT HASH EXPECTED #{ENV["GIT_COMMIT"]} got #{commit_sha} instead: #{json}"
+    throw :invalid_commit
   end
 
   p "Latest BuddyBuild Id # is #{json["_id"]}"
