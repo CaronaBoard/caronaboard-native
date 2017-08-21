@@ -113,13 +113,7 @@ ansi-styles@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-2.2.1.tgz#b432dd3358b634cf75e1e4664368240533c1ddbe"
 
-ansi-styles@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-3.0.0.tgz#5404e93a544c4fec7f048262977bebfe3155e0c1"
-  dependencies:
-    color-convert "^1.0.0"
-
-ansi-styles@^3.1.0:
+ansi-styles@^3.0.0, ansi-styles@^3.1.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-3.2.0.tgz#c159b8d5be0f9e5a6f346dab94f16ce022161b88"
   dependencies:
@@ -1305,7 +1299,7 @@ collections@^0.2.0:
   dependencies:
     weak-map "1.0.0"
 
-color-convert@^1.0.0, color-convert@^1.9.0:
+color-convert@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.0.tgz#1accf97dd739b983bf994d56fec8f95853641b7a"
   dependencies:
@@ -3289,6 +3283,7 @@ jade-legacy@^1.11.1:
     jstransformer "1.0.0"
     jstransformer-markdown "^1.1.1"
     mkdirp "~0.5.0"
+    uglify-js "^2.7.5"
     void-elements "~2.0.1"
     with "~5.1.1"
 
@@ -5094,6 +5089,10 @@ react-dom@^15.6.1:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
+react-native-config@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.5.0.tgz#109aaee511b81851b22e1fd3372d86c9d6c797d4"
+
 react-native-easy-toast@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/react-native-easy-toast/-/react-native-easy-toast-1.0.6.tgz#e9e2a0c865fcfdb407dbc2341bc3571a7f5da3b5"
@@ -6253,7 +6252,7 @@ uc.micro@^1.0.1, uc.micro@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/uc.micro/-/uc.micro-1.0.3.tgz#7ed50d5e0f9a9fb0a573379259f2a77458d50192"
 
-uglify-js@2.7.5, uglify-js@^2.6:
+uglify-js@2.7.5, uglify-js@^2.6, uglify-js@^2.7.5:
   version "2.7.5"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.7.5.tgz#4612c0c7baaee2ba7c487de4904ae122079f2ca8"
   dependencies:

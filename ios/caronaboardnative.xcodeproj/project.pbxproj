@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -56,6 +55,7 @@
 		E42E2F5DE3C443869AD55452 /* fontawesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B6A6F04E50B546CEAD9AE21F /* fontawesome.ttf */; };
 		E512F4C9ABF348DEA7915E08 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6438F7BA501744C1B4C4DAAA /* Zocial.ttf */; };
 		FB6DC5944F314AEABCF811DC /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 787FF46F60D746F4B9DD6621 /* Roboto-Light.ttf */; };
+		35960D0409C4423E81B08B0F /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6E8ED3CEC34F3E8DD94CEA /* libReactNativeConfig.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -318,6 +318,8 @@
 		D1B3E6A1BD5040F0912C944B /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		DC26BA90A12348CBB4F77861 /* Righteous-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Righteous-Regular.ttf"; path = "../src/assets/fonts/Righteous-Regular.ttf"; sourceTree = "<group>"; };
 		EB51EB3B575A4598A96A0415 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		85788F6938D341A98AA4CC69 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativeConfig.xcodeproj"; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		EE6E8ED3CEC34F3E8DD94CEA /* libReactNativeConfig.a */ = {isa = PBXFileReference; name = "libReactNativeConfig.a"; path = "libReactNativeConfig.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,8 +348,9 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				9EB8367A67244E1C8B417BCB /* libRNVectorIcons.a in Frameworks */,
-				A20EBD8BE2234C0CAA2C06B2 /* libBVLinearGradient.a in Frameworks */,
-			);
+        A20EBD8BE2234C0CAA2C06B2 /* libBVLinearGradient.a in Frameworks */,
+        35960D0409C4423E81B08B0F /* libReactNativeConfig.a in Frameworks */
+      );
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2D02E4781E0B4A5D006451C7 /* Frameworks */ = {
@@ -515,8 +518,9 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				EB51EB3B575A4598A96A0415 /* RNVectorIcons.xcodeproj */,
-				C07C315CFD54493C9E060536 /* BVLinearGradient.xcodeproj */,
-			);
+        C07C315CFD54493C9E060536 /* BVLinearGradient.xcodeproj */,
+        85788F6938D341A98AA4CC69 /* ReactNativeConfig.xcodeproj */
+      );
 			name = Libraries;
 			sourceTree = "<group>";
 		};
@@ -1134,7 +1138,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
-					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+          "$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+          "$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig"
 				);
 				INFOPLIST_FILE = caronaboardnativeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1161,7 +1166,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
-					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+          "$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+          "$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig"
 				);
 				INFOPLIST_FILE = caronaboardnativeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1190,7 +1196,8 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+          "$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+          "$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig"
 				);
 				INFOPLIST_FILE = caronaboardnative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1213,7 +1220,8 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+          "$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+          "$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig"
 				);
 				INFOPLIST_FILE = caronaboardnative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1242,7 +1250,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
-					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+          "$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+          "$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig"
 				);
 				INFOPLIST_FILE = "caronaboardnative-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1278,7 +1287,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
-					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+          "$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+          "$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig"
 				);
 				INFOPLIST_FILE = "caronaboardnative-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
