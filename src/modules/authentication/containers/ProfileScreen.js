@@ -2,7 +2,7 @@ import Styles from './styles/ProfileScreenStyles'
 import React, { Component } from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import { RkText, RkChoice, RkChoiceGroup } from 'react-native-ui-kitten'
-import { Button, TextInput } from '../../shared/components'
+import { TextInput, GradientButton } from '../../shared/components'
 import { saveProfileFirebase } from '../../../redux/actions'
 import { connect } from 'react-redux'
 
@@ -50,19 +50,27 @@ export class ProfileScreen extends Component {
           </RkText>
           <View style={Styles.inputTextsContainer}>
             <TextInput
-              label='Your name'
+              placeholder='Your name'
               onChangeText={(name) => { this.setState({name}) }} />
           </View>
-          <RkChoiceGroup radio rkType='clear'
+          <RkChoiceGroup
+            radio
+            rkType='clear'
             onChange={(index) => this.onContactOptionSelected(CONTACT_OPTIONS[index])}>
             {CONTACT_OPTIONS.map(renderOption)}
           </RkChoiceGroup>
           <View style={Styles.inputTextsContainer}>
             <TextInput
-              label='Number'
+              placeholder='Number'
               onChangeText={(number) => { this.setState({number}) }} />
           </View>
-          <Button text='SAVE' onPress={this.onButtonSubmit} />
+        </View>
+        <View style={Styles.centralized}>
+          <GradientButton
+            rkType='large'
+            text={'SAVE'}
+            onPress={this.onButtonSubmit}
+          />
         </View>
       </View>
     )

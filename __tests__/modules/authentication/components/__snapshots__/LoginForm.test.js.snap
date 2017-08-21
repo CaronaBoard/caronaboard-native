@@ -43,13 +43,14 @@ exports[`<LoginForm /> Should have a snapshot 1`] = `
       Awesome Slogan
     </RkText>
   </View>
-  <RkTextInput
+  <TextInput
     autoCapitalize="none"
     onChangeText={[Function]}
     placeholder="Username"
     rkType="rounded"
   />
-  <RkTextInput
+  <TextInput
+    autoCapitalize="none"
     onChangeText={[Function]}
     placeholder="Password"
     rkType="rounded"

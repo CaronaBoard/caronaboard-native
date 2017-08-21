@@ -2,18 +2,9 @@
 
 exports[`<TextInput /> Should have a snapshot 1`] = `
 <RkTextInput
-  containerStyle={
-    Object {
-      "borderBottomColor": "grey",
-    }
-  }
+  autoCapitalize="none"
   label="texto"
-  labelStyle={
-    Object {
-      "paddingBottom": 20,
-    }
-  }
   onChangeText={[Function]}
-  rkType="underline topLabel"
+  rkType="rounded"
 />
 `;

@@ -1,8 +1,8 @@
 import React from 'react'
 import { View, Image, Keyboard } from 'react-native'
 import Toast, { DURATION } from 'react-native-easy-toast'
-import { RkText, RkTextInput, RkAvoidKeyboard } from 'react-native-ui-kitten'
-import { GradientButton } from '../../shared/components/index'
+import { RkText, RkAvoidKeyboard } from 'react-native-ui-kitten'
+import { GradientButton, TextInput } from '../../shared/components'
 import { styles } from '../containers/styles/LoginScreenStyles'
 
 export class LoginForm extends React.Component {
@@ -46,14 +46,14 @@ export class LoginForm extends React.Component {
           <RkText rkType='light h1'>Awesome Slogan</RkText>
         </View>
 
-        <RkTextInput
+        <TextInput
           onChangeText={(email) => { this.setState({email}) }}
           key='email-input'
           rkType='rounded'
           placeholder='Username'
           autoCapitalize='none'
         />
-        <RkTextInput
+        <TextInput
           onChangeText={(password) => { this.setState({password}) }}
           key='password-input'
           rkType='rounded'

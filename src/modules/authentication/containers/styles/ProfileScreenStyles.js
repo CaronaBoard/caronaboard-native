@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Fonts, Metrics } from '../../../shared/themes/index'
+import { Fonts, Metrics } from '../../../shared/themes'
 
 export default StyleSheet.create({
   container: {
@@ -20,5 +20,10 @@ export default StyleSheet.create({
   contactOption: {
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  centralized: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
