@@ -8,7 +8,8 @@
 Prepare seu ambiente seguindo este [LINK](https://github.com/CaronaBoard/caronaboard-native/wiki/Environment-Setup)
 1. `yarn install`
 2. `yarn run ios` isso irá abrir o seu iOS simulator, caso queria rodar o android você precisa abrir o emulador android e rodar `yarn run android`
-3. Erros comuns e suas soluções serão documentadas [AQUI](https://github.com/CaronaBoard/caronaboard-native/wiki/Knowed-Issues)
+3. Você precisará preencher o arquivo [.env](https://github.com/CaronaBoard/caronaboard-native/blob/master/.env) com os valores para cada entrada. Você pode pedir os valores [AQUI](https://thoughtworks.slack.com/messages/C6NNRE97C)
+4. Erros comuns e suas soluções serão documentadas [AQUI](https://github.com/CaronaBoard/caronaboard-native/wiki/Knowed-Issues)
 
 Todos comandos `yarn` podem ser substituidos por `npm`
 
