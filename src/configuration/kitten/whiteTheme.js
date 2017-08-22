@@ -109,6 +109,7 @@ export const KittenTheme = {
     },
     border: {
       base: Colors.border,
+      solid: Colors.alterForeground,
       accent: Colors.accent,
       secondary: Colors.secondaryForeground
     },

@@ -2,21 +2,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { RkTextInput } from 'react-native-ui-kitten'
-import Styles from './styles/TextInputStyles'
 
 export const TextInput = (props) => {
   return (
     <RkTextInput
-      rkType='underline topLabel'
-      labelStyle={Styles.inputLabel}
-      containerStyle={Styles.inputContainer}
-      label={props.label}
-      onChangeText={props.onChangeText}
-    />
+      rkType='rounded'
+      autoCapitalize='none'
+      {...props} />
   )
 }
 
 TextInput.propTypes = {
-  label: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
   onChangeText: PropTypes.func.isRequired
+}
+
+TextInput.defaultProps = {
+  rkType: 'rounded',
+  autoCapitalize: 'none'
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { RideOfferScreen } from '../../../../src/modules/rideRequest/containers/RideRequestScreen'
-import { Button } from '../../../../src/modules/shared/components'
+import { RideRequestScreen } from '../../../../src/modules/rideRequest/containers/RideRequestScreen'
+import { GradientButton } from '../../../../src/modules/shared/components'
 
 import * as Firebase from '../../../../src/services/firebase'
 jest.mock('../../../../src/services/firebase')
@@ -23,8 +23,8 @@ const props = {
   }
 }
 
-describe.only('<RideOfferScreen />', () => {
-  const wrapper = shallow(<RideOfferScreen {...props} />)
+describe.only('<RideRequestScreen />', () => {
+  const wrapper = shallow(<RideRequestScreen {...props} />)
 
   it('Snapshot have a snapshot', () => {
     expect(wrapper).toMatchSnapshot()
@@ -33,7 +33,7 @@ describe.only('<RideOfferScreen />', () => {
   it('Should call firebase service to request a ride', () => {
     // TODO: I Think that' not a good idea calling services directly, we should use action
     Firebase.saveRideRequest = jest.fn()
-    wrapper.find(Button).simulate('press')
+    wrapper.find(GradientButton).simulate('press')
     expect(Firebase.saveRideRequest).toHaveBeenCalledWith(props.ride.rideId)
   })
 })

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<RideOfferScreen /> Snapshot have a snapshot 1`] = `
+exports[`<RideRequestScreen /> Snapshot have a snapshot 1`] = `
 <View
   style={
     Object {
@@ -45,9 +45,20 @@ exports[`<RideOfferScreen /> Snapshot have a snapshot 1`] = `
         }
       />
     </View>
-    <Button
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <GradientButton
       onPress={[Function]}
-      text="Ask for a Ride"
+      rkType="large"
+      text="SAVE"
     />
   </View>
 </View>

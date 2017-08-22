@@ -1,7 +1,4 @@
-import {
-  StatusBar,
-  StyleSheet
-} from 'react-native'
+import { StatusBar, StyleSheet } from 'react-native'
 import { RkTheme } from 'react-native-ui-kitten'
 import { KittenTheme } from './whiteTheme'
 import {SocialBarTypes, SwitchTypes, GradientButtonTypes, AvatarTypes} from './types'
@@ -15,9 +12,17 @@ export function bootstrap () {
   bootstrapRkModalImg()
   bootstrapRkTextInput()
   bootstrapRkCard()
+  bootstrapRkChoice()
 
   registerComponents()
   StatusBar.setBarStyle('dark-content', true)
+}
+
+function bootstrapRkChoice () {
+  RkTheme.setType('RkChoice', 'radio', {
+    borderColor: theme => theme.colors.border.solid,
+    borderWidth: 1
+  })
 }
 
 function bootsTrapRkText () {

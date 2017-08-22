@@ -35,20 +35,28 @@ exports[`<RideOfferScreen /> Snapshot have a snapshot 1`] = `
       }
     >
       <TextInput
+        autoCapitalize="none"
         label="ORIGIN"
         onChangeText={[Function]}
+        rkType="rounded"
       />
       <TextInput
+        autoCapitalize="none"
         label="DESTINATION"
         onChangeText={[Function]}
+        rkType="rounded"
       />
       <TextInput
+        autoCapitalize="none"
         label="DAYS"
         onChangeText={[Function]}
+        rkType="rounded"
       />
       <TextInput
+        autoCapitalize="none"
         label="HOUR"
         onChangeText={[Function]}
+        rkType="rounded"
       />
     </View>
     <Button
