@@ -14,10 +14,10 @@ install:
 - npm install
 - bundle install
 script:
-# - npm run test-ci
-# - npm run lint-check #TODO: Make danger report lint failures
+- npm run test-ci
+- npm run lint-check
 after_success:
-# - npm run update-coverage
+- npm run update-coverage
 - bundle exec fastlane android deployAppetize
 after_script:
 - bundle exec danger
