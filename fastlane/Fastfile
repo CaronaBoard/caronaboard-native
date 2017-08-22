@@ -3,9 +3,12 @@ fastlane_require 'httparty'
 fastlane_version '2.50.1'
 
 before_all do
-  ENV["GIT_COMMIT"] = last_git_commit[:commit_hash] unless ENV["GIT_COMMIT"]
-  ENV["GIT_BRANCH"] = git_branch unless ENV["GIT_BRANCH"]
+  ENV["GIT_COMMIT"] = last_git_commit[:commit_hash] unless ENV["TRAVIS_COMMIT"]
+  ENV["GIT_BRANCH"] = ENV["TRAVIS_BRANCH"]
   BUDDY_BUILD_HEADER = { 'Authorization' => "Bearer #{ENV["BUDDYBUILD_TOKEN"]}" }
+
+  p "Commit hash is #{ENV["GIT_COMMIT"]}"
+  p "Git branch is #{ENV["GIT_BRANCH"]}"
 end
 
 private_lane :getBuildId do
@@ -14,6 +17,8 @@ private_lane :getBuildId do
     "branch" => "#{ENV["GIT_BRANCH"]}",
     "limit" => 1
   }
+
+  p "Retrieving Buddybuild last build from branch: #{ENV["GIT_BRANCH"]} for appid: #{ENV["BUDDYBUILD_APP_ID"]}"
 
   response = HTTParty.get(url, :query => query, :headers => BUDDY_BUILD_HEADER)
   json = JSON.parse(response.body).first
@@ -37,6 +42,8 @@ private_lane :getArtifactURL do |options|
   jsonResponse = nil
   artifactUrl = nil
 
+  p "Trying to download APK for build ##{options[:build_id]}"
+
   loop do 
     responseBody = HTTParty.get(url, :headers => BUDDY_BUILD_HEADER).body
     jsonResponse = JSON.parse(responseBody) 
@@ -56,8 +63,10 @@ private_lane :getArtifactURL do |options|
   end
 
   throw :buddybuild_release_url, "Couldn't find realease URL: #{jsonResponse}" unless artifactUrl != nil
-  artifactUrl
+  
+  p "Succesfully get artifact url. #{artifactUrl}"
 
+  artifactUrl
 end
 
 private_lane :callAppetizeAPI do |options|
@@ -71,12 +80,14 @@ private_lane :callAppetizeAPI do |options|
     }.to_json,
     :headers => { 'Content-Type' => 'application/json' }
   )
-  
-  JSON.parse(response.body)["publicURL"]
+
+  appetizeURL = JSON.parse(response.body)["publicURL"]
+  p "Appetize URL: #{appetizeURL}"
+  appetizeURL
 end
 
 private_lane :githubStatusUpdate do |options|
-  url = "https://api.github.com/repos/caronaboard/caronaboard-native/statuses/#{ENV["GIT_COMMIT"]}"
+  url = "https://api.github.com/repos/eduardomoroni/trading-card-manager/statuses/#{ENV["GIT_COMMIT"]}"
   body = {
     "context" => options[:context],
     "state" => options[:state],
@@ -84,7 +95,7 @@ private_lane :githubStatusUpdate do |options|
     "target_url" => options[:url]
   }
 
-  p "Updating commit statuses"  
+  p "Updating commit status"  
   p body
 
   response = HTTParty.post(
