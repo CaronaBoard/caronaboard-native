@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<RideOfferScreen /> Snapshot have a snapshot 1`] = `
+exports[`<RideRequestScreen /> Snapshot have a snapshot 1`] = `
 <View
   style={
     Object {
@@ -45,20 +45,6 @@ exports[`<RideOfferScreen /> Snapshot have a snapshot 1`] = `
         }
       />
     </View>
-  </View>
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-        "justifyContent": "center",
-      }
-    }
-  >
-    <GradientButton
-      rkType="large"
-      text="SAVE"
-    />
   </View>
   <View
     style={

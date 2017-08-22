@@ -20,16 +20,9 @@ export class RideRequestScreen extends Component {
           <GradientButton
             rkType='large'
             text={'SAVE'}
-            onPress={this.onButtonSubmit}
-          />
-        </View>
-        {/* <View style={styles.centralized}> */}
-          <GradientButton
-            rkType='large'
-            text={'SAVE'}
             onPress={() => saveRideRequest(ride.rideId)}
           />
-        {/* </View> */}
+        </View>
       </View>
     )
   }
