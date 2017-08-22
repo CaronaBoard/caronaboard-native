@@ -23,7 +23,7 @@ const props = {
   }
 }
 
-describe.only('<RideOfferScreen />', () => {
+describe.only('<RideRequestScreen />', () => {
   const wrapper = shallow(<RideOfferScreen {...props} />)
 
   it('Snapshot have a snapshot', () => {

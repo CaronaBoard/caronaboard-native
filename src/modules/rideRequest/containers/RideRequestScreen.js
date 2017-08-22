@@ -6,7 +6,7 @@ import { Ride, ridePropTypes } from '../components/Ride'
 import { saveRideRequest } from '../../../services/firebase'
 import styles from './styles/RideRequestScreenStyles'
 
-export class RideOfferScreen extends Component {
+export class RideRequestScreen extends Component {
   render () {
     const { ride } = this.props
     return (
@@ -23,18 +23,18 @@ export class RideOfferScreen extends Component {
             onPress={this.onButtonSubmit}
           />
         </View>
-        <View style={styles.centralized}>
+        {/* <View style={styles.centralized}> */}
           <GradientButton
             rkType='large'
             text={'SAVE'}
             onPress={() => saveRideRequest(ride.rideId)}
           />
-        </View>
+        {/* </View> */}
       </View>
     )
   }
 }
 
-RideOfferScreen.propTypes = ridePropTypes
+RideRequestScreen.propTypes = ridePropTypes
 
-export default RideOfferScreen
+export default RideRequestScreen

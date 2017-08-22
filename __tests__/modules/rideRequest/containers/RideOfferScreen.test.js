@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { RideOfferScreen, INITIAL_STATE } from '../../../../src/modules/rideRequest/containers/RideOfferScreen'
-import { Button } from '../../../../src/modules/shared/components'
+import { GradientButton } from '../../../../src/modules/shared/components'
 
 import * as Firebase from '../../../../src/services/firebase'
 jest.mock('../../../../src/services/firebase')
@@ -16,7 +16,7 @@ describe('<RideOfferScreen />', () => {
   it('Should call firebase service for create a ride offer', () => {
     // TODO: I Think that' not a good idea calling services directly, we should use action
     Firebase.saveRideOffer = jest.fn()
-    wrapper.find(Button).simulate('press')
+    wrapper.find(GradientButton).simulate('press')
     expect(Firebase.saveRideOffer).toHaveBeenCalledWith(INITIAL_STATE)
   })
 })
