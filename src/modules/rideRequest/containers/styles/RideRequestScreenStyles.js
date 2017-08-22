@@ -12,5 +12,10 @@ export default StyleSheet.create({
   },
   inputTextsContainer: {
     minHeight: 185 * 2
+  },
+  centralized: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })

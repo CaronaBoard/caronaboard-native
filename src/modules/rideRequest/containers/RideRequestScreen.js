@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 
-import { Button } from '../../shared/components'
+import { GradientButton } from '../../shared/components'
 import { Ride, ridePropTypes } from '../components/Ride'
 import { saveRideRequest } from '../../../services/firebase'
 import styles from './styles/RideRequestScreenStyles'
@@ -15,7 +15,20 @@ export class RideOfferScreen extends Component {
           <View style={styles.inputTextsContainer}>
             <Ride ride={ride} />
           </View>
-          <Button text='Ask for a Ride' onPress={() => saveRideRequest(ride.rideId)} />
+        </View>
+        <View style={styles.centralized}>
+          <GradientButton
+            rkType='large'
+            text={'SAVE'}
+            onPress={this.onButtonSubmit}
+          />
+        </View>
+        <View style={styles.centralized}>
+          <GradientButton
+            rkType='large'
+            text={'SAVE'}
+            onPress={() => saveRideRequest(ride.rideId)}
+          />
         </View>
       </View>
     )
