@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
-export ENVFILE="${BUDDYBUILD_SECURE_FILES}/.env"
-echo "exported ENVFILE to ${ENVFILE}."
-echo "echoing files in ${BUDDYBUILD_SECURE_FILES}/"
+echo "Creating .env file"
+#TODO: This is just a POC, ideally we should get the whole file at once
+touch .env
+tee .env > /dev/null <<EOF
+API_KEY='$API_KEY'
+AUTH_DOMAIN='$AUTH_DOMAIN'
+DATABASE_URL='$DATABASE_URL'
+STORAGE_BUCKET='$STORAGE_BUCKET'
+MESSAGING_SENDER_ID='$MESSAGING_SENDER_ID'
+EOF
 
-for file in ${BUDDYBUILD_SECURE_FILES}/*; do
-  echo ${file##*/}
-done
+cat $ENVFILE
+pwd | ls -hal
