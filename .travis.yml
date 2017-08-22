@@ -23,7 +23,7 @@ after_success:
 - npm run update-coverage
 - bundle exec fastlane android deployAppetize
 after_script:
-- npm run danger
+- bundle exec danger
 env:
   global:
   - NODE_ENV=development
