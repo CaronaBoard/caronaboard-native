@@ -36,26 +36,26 @@ exports[`<RideOfferScreen /> Snapshot have a snapshot 1`] = `
     >
       <TextInput
         autoCapitalize="none"
-        label="ORIGIN"
         onChangeText={[Function]}
+        placeholder="ORIGIN"
         rkType="rounded"
       />
       <TextInput
         autoCapitalize="none"
-        label="DESTINATION"
         onChangeText={[Function]}
+        placeholder="DESTINATION"
         rkType="rounded"
       />
       <TextInput
         autoCapitalize="none"
-        label="DAYS"
         onChangeText={[Function]}
+        placeholder="DAYS"
         rkType="rounded"
       />
       <TextInput
         autoCapitalize="none"
-        label="HOUR"
         onChangeText={[Function]}
+        placeholder="HOUR"
         rkType="rounded"
       />
     </View>
