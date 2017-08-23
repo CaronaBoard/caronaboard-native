@@ -27,10 +27,10 @@ export class RideOfferScreen extends Component {
             Ride Offer
           </RkText>
           <View style={styles.inputTextsContainer}>
-            <TextInput label='ORIGIN' onChangeText={(origin) => this.setState({origin})} />
-            <TextInput label='DESTINATION' onChangeText={(destination) => this.setState({destination})} />
-            <TextInput label='DAYS' onChangeText={(days) => this.setState({days})} />
-            <TextInput label='HOUR' onChangeText={(hours) => this.setState({hours})} />
+            <TextInput placeholder='ORIGIN' onChangeText={(origin) => this.setState({origin})} />
+            <TextInput placeholder='DESTINATION' onChangeText={(destination) => this.setState({destination})} />
+            <TextInput placeholder='DAYS' onChangeText={(days) => this.setState({days})} />
+            <TextInput placeholder='HOUR' onChangeText={(hours) => this.setState({hours})} />
           </View>
           <Button text='Offer Ride' onPress={() => saveRideOffer(this.state)} />
         </View>
