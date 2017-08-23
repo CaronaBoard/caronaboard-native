@@ -1,12 +1,15 @@
-import { getAllRides, saveRideOffer, saveRideRequest } from '../../../src/services/firebase'
+import { getAllRides, saveRideOffer, saveRideRequest, updateRideOffer } from '../../../src/services/firebase'
 import RidesResponse from '../../__mocks__/Fixtures/FirebaseRidesResponse.json'
+import ProfileResponse from '../../__mocks__/Fixtures/FirebaseProfileResponse.json'
 
 const mockRef = {
   remove: jest.fn(() => Promise.resolve(true)),
+  update: jest.fn((ride) => Promise.resolve(ride)),
   push: jest.fn((ride) => Promise.resolve(ride)),
   child: () => ({
     once: () => Promise.resolve({ val: () => RidesResponse })
-  })
+  }),
+  once: () => Promise.resolve({ val: () => ProfileResponse })
 }
 
 const mockDatabase = {
@@ -15,7 +18,10 @@ const mockDatabase = {
 
 jest.mock('firebase', () => ({
   initializeApp: jest.fn(),
-  database: jest.fn(() => mockDatabase)
+  database: jest.fn(() => mockDatabase),
+  auth: () => ({
+    currentUser: { uid: 's29iF96rLqRIj1O9WZ2p2BjR59J3' }
+  })
 }))
 
 describe('Firebase database service', () => {
@@ -65,7 +71,24 @@ describe('Firebase database service', () => {
 
     await saveRideOffer(rideOffer)
     expect(mockDatabase.ref).toHaveBeenCalledWith(`rides/${rideGroup}/${userId}`)
-    expect(mockRef.push).toHaveBeenCalledWith({ rideOffer, profile: userProfile })
+    expect(mockRef.push).toHaveBeenCalledWith(Object.assign({profile: userProfile}, rideOffer))
+  })
+
+  it('Should update a ride', async () => {
+    const rideOffer = {
+      id: 12345,
+      origin: 'origin',
+      destination: 'destination',
+      days: 'days',
+      hour: 'hours'
+    }
+
+    const updatedRide = await updateRideOffer(rideOffer)
+    expect(mockDatabase.ref).toHaveBeenCalledWith(`profiles/${userId}`)
+    expect(updatedRide.origin).toBe('origin')
+    expect(updatedRide.destination).toBe('destination')
+    expect(updatedRide.days).toBe('days')
+    expect(updatedRide.hour).toBe('hours')
   })
 
   it('Should save a ride request', async () => {
