@@ -20,6 +20,16 @@ export const getAllRides = () => {
   })
 }
 
+export const getAllRideRequests = () => {
+  return new Promise(resolve => {
+    Firebase.database()
+      .ref(`ridesRequests/${rideGroup}`)
+      .child(rideGroup)
+      .once('value')
+      .then(snapshot => resolve(toArrayOfRides(snapshot.val())))
+  })
+}
+
 export const saveRideOffer = (rideOffer: rideOfferType) => {
   const userId = 's29iF96rLqRIj1O9WZ2p2BjR59J3' // firebase.auth().currentUser.uid
 
@@ -50,7 +60,7 @@ export const saveRideRequest = (rideId) => {
 
   return new Promise(resolve => {
     Firebase.database()
-      .ref(`rideRequests/${rideId}`)
+      .ref(`ridesRequests/${rideGroup}/${rideId}`)
       .push({profile})
       .then(resolve)
   })
