@@ -61,3 +61,10 @@ export const saveProfile = (profile) => {
       })
   })
 }
+
+export const forgotPassword = (email) => {
+  return Firebase.auth().sendPasswordResetEmail(email)
+          .then(() => {
+            console.log('Password reset email sent')
+          })
+}

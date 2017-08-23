@@ -4,29 +4,50 @@ exports[`<SignInScreen /> Should have a snapshot 1`] = `
 <LoginForm
   buttonText="SIGN IN"
   footer={
-    <View
-      style={
-        Object {
-          "flexDirection": "row",
-          "justifyContent": "center",
+    <View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "center",
+          }
         }
-      }
-    >
-      <RkText
-        rkType="primary3"
       >
-        Don’t have an account?
-      </RkText>
-      <RkButton
-        onPress={[Function]}
-        rkType="clear"
+        <RkButton
+          onPress={[Function]}
+          rkType="clear"
+        >
+          <RkText
+            rkType="header6"
+          >
+            Forgot your password?
+          </RkText>
+        </RkButton>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "center",
+          }
+        }
       >
         <RkText
-          rkType="header6"
+          rkType="primary3"
         >
-           Sign up now 
+          Don’t have an account?
         </RkText>
-      </RkButton>
+        <RkButton
+          onPress={[Function]}
+          rkType="clear"
+        >
+          <RkText
+            rkType="header6"
+          >
+             Sign up now
+          </RkText>
+        </RkButton>
+      </View>
     </View>
   }
   onButtonPress={[Function]}

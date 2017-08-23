@@ -1,5 +1,5 @@
-import { SIGN_IN_FIREBASE, SAVE_PROFILE_FIREBASE, SIGN_UP_SUCCESS, SIGN_UP_FAILED } from '../types'
-import { signIn, signUp, saveProfile } from '../../services/firebase'
+import { SIGN_IN_FIREBASE, SAVE_PROFILE_FIREBASE, SIGN_UP_SUCCESS, SIGN_UP_FAILED, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAILED } from '../types'
+import { signIn, signUp, saveProfile, forgotPassword } from '../../services/firebase'
 
 export function signInFirebase (email, password) {
   return async (dispatch) => {
@@ -41,5 +41,18 @@ export function saveProfileFirebase (profile) {
       .catch(err => {
         console.log('Error saving profile: ', err)
       })
+  }
+}
+
+export function forgotPasswordFirebase (email) {
+  return async (dispatch) => {
+    try {
+      await forgotPassword(email)
+      const successAction = { type: FORGOT_PASSWORD_SUCCESS }
+      dispatch(successAction)
+    } catch (error) {
+      const failureAction = { type: FORGOT_PASSWORD_FAILED, payload: error.message }
+      dispatch(failureAction)
+    }
   }
 }
