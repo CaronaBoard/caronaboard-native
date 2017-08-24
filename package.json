@@ -4,7 +4,7 @@
     "start-packager": "node node_modules/react-native/local-cli/cli.js start",
     "ios": "react-native run-ios",
     "android": "react-native run-android",
-    "log-ios": "react-native log-ios",
+    "log-ios": "react-native log-ios | grep -v nw_connection_get_connected_socket_block_invoke",
     "log-android": "react-native log-android",
     "test": "jest",
     "test-watch": "jest --watch",
