@@ -1,6 +1,6 @@
 import Firebase from 'firebase'
 import { toArrayOfRides } from './Conversion'
-
+import _ from 'lodash'
 const rideGroup = 'twpoa'
 
 type rideOfferType = {
@@ -31,22 +31,40 @@ export const getAllRideRequests = () => {
 }
 
 export const saveRideOffer = (rideOffer: rideOfferType) => {
-  const userId = 's29iF96rLqRIj1O9WZ2p2BjR59J3' // firebase.auth().currentUser.uid
+  const userId = Firebase.auth().currentUser.uid
 
-  const profile = {
-    name: 'TEST',
-    contact: {
-      kind: 'Whatsapp',
-      value: '5566778899'
-    }
-  } // firebase.database().ref(`profiles/${userId}`).once("value")
+  Firebase.database()
+    .ref(`profiles/${userId}`)
+    .once('value')
+    .then(snapshot => {
+      const profile = snapshot.val()
+      return new Promise(resolve => {
+        Firebase.database()
+          .ref(`rides/${rideGroup}/${userId}`)
+          .push(Object.assign({ profile: profile }, rideOffer))
+          .then(resolve)
+      })
+    })
+}
 
-  return new Promise(resolve =>
-    Firebase.database()
-      .ref(`rides/${rideGroup}/${userId}`)
-      .push({rideOffer, profile})
-      .then(resolve)
-  )
+export const updateRideOffer = (rideOffer: rideOfferType) => {
+  const userId = Firebase.auth().currentUser.uid
+
+  return Firebase.database()
+    .ref(`profiles/${userId}`)
+    .once('value')
+    .then(snapshot => {
+      const profile = snapshot.val()
+      return new Promise(resolve => {
+        let pathsToUpdate = {}
+        pathsToUpdate[`rides/${rideGroup}/${userId}/${rideOffer.id}`] = Object.assign({profile: profile}, _.omit(rideOffer, 'id'))
+
+        return Firebase.database()
+          .ref()
+          .update(pathsToUpdate)
+          .then(() => resolve(rideOffer))
+      })
+    })
 }
 
 export const saveRideRequest = (rideId) => {
