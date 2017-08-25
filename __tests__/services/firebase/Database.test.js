@@ -1,4 +1,10 @@
-import { getAllRides, saveRideOffer, saveRideRequest, updateRideOffer } from '../../../src/services/firebase'
+import { 
+  getAllRides, 
+  getAllRideRequests, 
+  saveRideOffer, 
+  saveRideRequest, 
+  updateRideOffer 
+} from '../../../src/services/firebase'
 import RidesResponse from '../../__mocks__/Fixtures/FirebaseRidesResponse.json'
 import ProfileResponse from '../../__mocks__/Fixtures/FirebaseProfileResponse.json'
 
@@ -61,6 +67,31 @@ describe('Firebase database service', () => {
     expect(rides[2].rideId).toBe('-Kne1QgaFLZf7Ai5HGWu')
   })
 
+  it('Should provide all ride requests as an array of rides', async () => {
+    const rides = await getAllRideRequests()
+
+    const expectedRide = {
+      driverId: 'AIYmwTmrdTfUuGeuoNF0SYgXJ1j1',
+      rideId: '-KndyvnnlSN05mJxL57Q',
+      origin: 'PUC',
+      destination: 'Bomfim',
+      days: 'Seg-Sex',
+      hours: '19h',
+      profile: {
+        name: 'Eduardo Moroni',
+        contact: {
+          kind: 'Whatsapp',
+          value: '+5559999999'
+        }
+      }
+    }
+
+    expect(rides).toHaveLength(3)
+    expect(rides[0]).toEqual(expectedRide)
+    expect(rides[1].rideId).toBe('-Kne1M8qIcxjCHDuqohc')
+    expect(rides[2].rideId).toBe('-Kne1QgaFLZf7Ai5HGWu')
+  })
+
   it('Should save a ride offer into firebase', async () => {
     const rideOffer = {
       origin: 'origin',
@@ -93,7 +124,7 @@ describe('Firebase database service', () => {
 
   it('Should save a ride request', async () => {
     await saveRideRequest(rideId)
-    expect(mockDatabase.ref).toHaveBeenCalledWith(`rideRequests/${rideId}`)
+    expect(mockDatabase.ref).toHaveBeenCalledWith(`ridesRequests/${rideGroup}/${rideId}`)
     expect(mockRef.push).toHaveBeenCalledWith({profile: userProfile})
   })
 })
