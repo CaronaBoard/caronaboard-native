@@ -10,6 +10,7 @@ import Toast, { DURATION } from 'react-native-easy-toast'
 
 export class ForgotPasswordScreen extends Component {
   static defaultProps = {
+    email: '',
     toast: {
       showAlert: false,
       message: ''
@@ -32,16 +33,18 @@ export class ForgotPasswordScreen extends Component {
     }
   }
 
+  constructor (props) {
+    super(props)
+    this.state = { ...this.state, email: props.email }
+  }
+
   componentWillReceiveProps (nextProps) {
     const { showAlert, message } = nextProps.alert
 
     if (showAlert) {
       this.refs.toast.show(message, DURATION.LENGTH_LONG)
       setTimeout(() => {
-        this.props.navigator.push({
-          screen: 'carona.signIn',
-          title: 'Sign In Screen'
-        })
+        this.props.navigator.pop()
       }, DURATION.LENGTH_LONG)
     }
   }
@@ -66,7 +69,8 @@ export class ForgotPasswordScreen extends Component {
           rkType='rounded'
           placeholder='Username'
           autoCapitalize='none'
-        />
+          value={this.state.email}
+          />
         <View style={styles.centralized}>
           <GradientButton
             rkType='large'

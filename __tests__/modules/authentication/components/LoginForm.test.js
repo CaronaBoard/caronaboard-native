@@ -10,7 +10,7 @@ const props = {
   },
   buttonText: 'buttonText',
   onButtonPress: jest.fn(),
-  footer: <View />
+  footer: () => {}
 }
 
 describe('<LoginForm />', () => {
