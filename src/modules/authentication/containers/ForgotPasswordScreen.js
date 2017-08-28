@@ -33,11 +33,16 @@ export class ForgotPasswordScreen extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log(nextProps.alert)
     const { showAlert, message } = nextProps.alert
 
     if (showAlert) {
       this.refs.toast.show(message, DURATION.LENGTH_LONG)
+      setTimeout(() => {
+        this.props.navigator.push({
+          screen: 'carona.signIn',
+          title: 'Sign In Screen'
+        })
+      }, DURATION.LENGTH_LONG)
     }
   }
 
