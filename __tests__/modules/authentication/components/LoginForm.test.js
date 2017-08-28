@@ -1,4 +1,3 @@
-import { View } from 'react-native'
 import React from 'react'
 import { shallow } from 'enzyme'
 import { LoginForm } from '../../../../src/modules/authentication/components/LoginForm'
