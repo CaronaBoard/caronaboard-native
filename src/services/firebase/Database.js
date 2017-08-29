@@ -8,12 +8,21 @@ type rideOfferType = {
   destination: string,
   days: string,
   hour: string
-}
 
 export const getAllRides = () => {
   return new Promise(resolve => {
     Firebase.database()
       .ref('rides')
+      .child(rideGroup)
+      .once('value')
+      .then(snapshot => resolve(toArrayOfRides(snapshot.val())))
+  })
+}
+
+export const getAllRideRequests = () => {
+  return new Promise(resolve => {
+    Firebase.database()
+      .ref(`ridesRequests/${rideGroup}`)
       .child(rideGroup)
       .once('value')
       .then(snapshot => resolve(toArrayOfRides(snapshot.val())))
@@ -83,7 +92,7 @@ export const saveRideRequest = (rideId) => {
 
   return new Promise(resolve => {
     Firebase.database()
-      .ref(`rideRequests/${rideId}`)
+      .ref(`ridesRequests/${rideGroup}/${rideId}`)
       .push({profile})
       .then(resolve)
   })

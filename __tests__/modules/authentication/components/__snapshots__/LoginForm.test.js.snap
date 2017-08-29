@@ -76,7 +76,6 @@ exports[`<LoginForm /> Should have a snapshot 1`] = `
       text="buttonText"
     />
   </View>
-  <View />
   <Toast
     fadeInDuration={500}
     fadeOutDuration={500}
