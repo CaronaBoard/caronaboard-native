@@ -1,4 +1,4 @@
-import { getAllRides, saveRideOffer, saveRideRequest, updateRideOffer, removeRideOffer } from '../../../src/services/firebase'
+import { getAllRides, getAllRideRequests, saveRideOffer, saveRideRequest, updateRideOffer, removeRideOffer } from '../../../src/services/firebase'
 import RidesResponse from '../../__mocks__/Fixtures/FirebaseRidesResponse.json'
 import ProfileResponse from '../../__mocks__/Fixtures/FirebaseProfileResponse.json'
 

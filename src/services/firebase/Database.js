@@ -8,6 +8,7 @@ type rideOfferType = {
   destination: string,
   days: string,
   hour: string
+}
 
 export const getAllRides = () => {
   return new Promise(resolve => {
