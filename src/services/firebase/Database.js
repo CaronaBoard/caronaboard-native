@@ -67,6 +67,21 @@ export const updateRideOffer = (rideOffer: rideOfferType) => {
     })
 }
 
+export const removeRideOffer = (rideId) => {
+  const userId = Firebase.auth().currentUser.uid
+  return Firebase.database()
+    .ref(`profiles/${userId}`)
+    .once('value')
+    .then(snapshot => {
+      return new Promise(resolve => {
+        return Firebase.database()
+          .ref(`rides/${rideGroup}/${userId}/${rideId}`)
+          .remove()
+          .then(() => resolve())
+      })
+    })
+}
+
 export const saveRideRequest = (rideId) => {
   const profile = {
     name: 'TEST',

@@ -1,17 +1,11 @@
-import {
-  getAllRides,
-  getAllRideRequests,
-  saveRideOffer,
-  saveRideRequest,
-  updateRideOffer
-} from '../../../src/services/firebase'
+import { getAllRides, getAllRideRequests, saveRideOffer, saveRideRequest, updateRideOffer, removeRideOffer } from '../../../src/services/firebase'
 import RidesResponse from '../../__mocks__/Fixtures/FirebaseRidesResponse.json'
 import ProfileResponse from '../../__mocks__/Fixtures/FirebaseProfileResponse.json'
 
 const mockRef = {
-  remove: jest.fn(() => Promise.resolve(true)),
-  update: jest.fn((ride) => Promise.resolve(ride)),
-  push: jest.fn((ride) => Promise.resolve(ride)),
+  remove: jest.fn(() => Promise.resolve()),
+  update: jest.fn(() => Promise.resolve()),
+  push: jest.fn(() => Promise.resolve()),
   child: () => ({
     once: () => Promise.resolve({ val: () => RidesResponse })
   }),
@@ -120,6 +114,11 @@ describe('Firebase database service', () => {
     expect(updatedRide.destination).toBe('destination')
     expect(updatedRide.days).toBe('days')
     expect(updatedRide.hour).toBe('hours')
+  })
+
+  it('Should remove a ride offer', async () => {
+    await removeRideOffer(rideId)
+    expect(mockDatabase.ref).toHaveBeenCalledWith(`rides/${rideGroup}/${userId}/${rideId}`)
   })
 
   it('Should save a ride request', async () => {
