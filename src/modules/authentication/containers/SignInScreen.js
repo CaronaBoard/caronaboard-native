@@ -16,13 +16,25 @@ export class SignInScreen extends Component {
     }).isRequired
   }
 
-  renderFooter = () => {
+  renderFooter = (email) => {
     return (
-      <View style={Styles.textRow}>
-        <RkText rkType='primary3'>Don’t have an account?</RkText>
-        <RkButton rkType='clear' onPress={() => this.props.navigator.push({screen: 'carona.signUp'})}>
-          <RkText rkType='header6'> Sign up now </RkText>
-        </RkButton>
+      <View>
+        <View style={Styles.textRow}>
+          <RkButton rkType='clear' onPress={() => this.props.navigator.push({
+            screen: 'carona.forgotPassword',
+            passProps: {
+              email: email
+            }
+          })}>
+            <RkText rkType='header6'>Forgot your password?</RkText>
+          </RkButton>
+        </View>
+        <View style={Styles.textRow}>
+          <RkText rkType='primary3'>Don’t have an account?</RkText>
+          <RkButton rkType='clear' onPress={() => this.props.navigator.push({screen: 'carona.signUp'})}>
+            <RkText rkType='header6'> Sign up now</RkText>
+          </RkButton>
+        </View>
       </View>
     )
   }
@@ -33,7 +45,7 @@ export class SignInScreen extends Component {
         buttonText='SIGN IN'
         onButtonPress={this.props.signIn}
         toast={this.props.alert}
-        footer={this.renderFooter()}
+        footer={this.renderFooter}
       />
     )
   }
