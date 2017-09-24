@@ -10,7 +10,7 @@ export class SignInFooter extends Component {
     navigator: PropTypes.object.isRequired
   }
 
-  navigateTo = (screen) => () => this.props.navigator.push({screen})
+  navigateTo = screen => () => this.props.navigator.push({screen})
 
   render () {
     return (

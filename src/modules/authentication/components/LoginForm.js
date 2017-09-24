@@ -7,11 +7,8 @@ import { styles } from '../containers/styles/LoginScreenStyles'
 
 export class LoginForm extends React.Component {
   static defaultProps = {
-    footer: () => {},
-    toast: {
-      showAlert: false,
-      message: ''
-    }
+    footer: () => null,
+    toast: { showAlert: false, message: '' }
   }
 
   state = {
@@ -70,7 +67,7 @@ export class LoginForm extends React.Component {
           />
         </View>
 
-        {this.props.footer(this.state.email)}
+        {this.props.footer()}
         <Toast position='top' ref='toast' />
       </RkAvoidKeyboard>
     )

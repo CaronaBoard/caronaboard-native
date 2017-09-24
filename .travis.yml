@@ -1,4 +1,7 @@
 language: javascript
+branches:
+  only:
+  - master
 os: osx
 osx_image: xcode8.3
 rvm: 2.2

@@ -15,7 +15,7 @@ const props = {
 describe('<LoginForm />', () => {
   const email = 'duduzinho@uol.com'
   const password = 'marotagem'
-  const INITIAL_STATE = LoginForm.state
+  const INITIAL_STATE = {}
   const wrapper = shallow(<LoginForm {...props} />)
 
   it('Should have a snapshot', () => {
