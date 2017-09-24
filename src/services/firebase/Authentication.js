@@ -1,18 +1,16 @@
 import Firebase from 'firebase'
 
 export const signIn = (email, password) => {
-  return new Promise((resolve, reject) => {
-    Firebase.auth().signInWithEmailAndPassword(email, password)
+  return Firebase.auth().signInWithEmailAndPassword(email, password)
       .then(user => {
         const { uid, emailVerified, email, phoneNumber } = user
         if (!emailVerified) {
           sendVerificationEmail(user)
-          reject(new Error('Email não verificado'))
+          throw (new Error('Email não verificado'))
         } else {
-          resolve({ uid, emailVerified, email, phoneNumber })
+          return { uid, emailVerified, email, phoneNumber }
         }
       })
-  })
 }
 
 export const signUp = (email, password) => {
@@ -41,11 +39,11 @@ export function sendVerificationEmail (user) {
 }
 
 export const saveProfile = (profile) => {
-  var currentUser = Firebase.auth().currentUser
-  var pathsToUpdate = {}
+  const currentUser = Firebase.auth().currentUser
+  let pathsToUpdate = {}
   pathsToUpdate[`profiles/${currentUser.uid}`] = profile
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     Firebase
       .database()
       .ref(`rides/${currentUser.uid}`)
