@@ -6,7 +6,7 @@ const props = {
   navigator: {
     push: jest.fn()
   },
-  signIn: jest.fn(),
+  signUp: jest.fn(),
   alert: {
     showAlert: false,
     message: ''

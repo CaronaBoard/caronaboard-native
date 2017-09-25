@@ -1,4 +1,4 @@
-import { SIGN_UP_SUCCESS, SIGN_UP_FAILED } from '../../../src/redux/types'
+import { SIGN_UP_SUCCESS, AUTH_FAILED } from '../../../src/redux/types'
 import { signUpFirebase } from '../../../src/redux/actions/AuthActions'
 
 import * as FirebaseService from '../../../src/services/firebase'
@@ -19,7 +19,7 @@ describe('AuthAction', () => {
       FirebaseService.signUp = jest.fn(() => Promise.reject(new Error(message)))
 
       const expectedAction = {
-        type: SIGN_UP_FAILED,
+        type: AUTH_FAILED,
         payload: message
       }
       const thunk = signUpFirebase(email, password)

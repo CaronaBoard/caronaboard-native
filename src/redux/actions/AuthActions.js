@@ -1,17 +1,19 @@
-import { SIGN_IN_FIREBASE, SAVE_PROFILE_FIREBASE, SIGN_UP_SUCCESS, SIGN_UP_FAILED, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAILED } from '../types'
 import { signIn, signUp, saveProfile, forgotPassword } from '../../services/firebase'
+import {
+  SIGN_IN_FIREBASE,
+  SAVE_PROFILE_FIREBASE,
+  SIGN_UP_SUCCESS,
+  AUTH_FAILED,
+  FORGOT_PASSWORD_SUCCESS
+} from '../types'
 
 export function signInFirebase (email, password) {
   return async (dispatch) => {
     try {
       const user = await signIn(email, password)
-      const action = {
-        type: SIGN_IN_FIREBASE,
-        payload: user
-      }
-      dispatch(action)
+      dispatch({ type: SIGN_IN_FIREBASE, payload: user })
     } catch (error) {
-      console.log('Error during signIn: ', error)
+      dispatch({ type: AUTH_FAILED, payload: error.message })
     }
   }
 }
@@ -23,8 +25,7 @@ export function signUpFirebase (email, password) {
       const successAction = { type: SIGN_UP_SUCCESS }
       dispatch(successAction)
     } catch (error) {
-      const failureAction = { type: SIGN_UP_FAILED, payload: error.message }
-      dispatch(failureAction)
+      dispatch({ type: AUTH_FAILED, payload: error.message })
     }
   }
 }
@@ -32,11 +33,7 @@ export function signUpFirebase (email, password) {
 export function saveProfileFirebase (profile) {
   return async (dispatch) => {
     await saveProfile(profile).then(userData => {
-      const action = {
-        type: SAVE_PROFILE_FIREBASE,
-        payload: userData
-      }
-      dispatch(action)
+      dispatch({ type: SAVE_PROFILE_FIREBASE, payload: userData })
     })
       .catch(err => {
         console.log('Error saving profile: ', err)
@@ -48,11 +45,9 @@ export function forgotPasswordFirebase (email) {
   return async (dispatch) => {
     try {
       await forgotPassword(email)
-      const successAction = { type: FORGOT_PASSWORD_SUCCESS }
-      dispatch(successAction)
+      dispatch({ type: FORGOT_PASSWORD_SUCCESS })
     } catch (error) {
-      const failureAction = { type: FORGOT_PASSWORD_FAILED, payload: error.message }
-      dispatch(failureAction)
+      dispatch({ type: AUTH_FAILED, payload: error.message })
     }
   }
 }

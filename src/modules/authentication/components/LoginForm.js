@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { View, Image, Keyboard } from 'react-native'
 import Toast, { DURATION } from 'react-native-easy-toast'
 import { RkText, RkAvoidKeyboard } from 'react-native-ui-kitten'
@@ -6,12 +7,18 @@ import { GradientButton, TextInput } from '../../shared/components'
 import { styles } from '../containers/styles/LoginScreenStyles'
 
 export class LoginForm extends React.Component {
+  static propTypes = {
+    footer: PropTypes.func,
+    buttonText: PropTypes.string.isRequired,
+    toast: PropTypes.shape({
+      showAlert: PropTypes.bool.isRequired,
+      message: PropTypes.string
+    })
+  }
+
   static defaultProps = {
-    footer: () => {},
-    toast: {
-      showAlert: false,
-      message: ''
-    }
+    footer: () => null,
+    toast: { showAlert: false, message: '' }
   }
 
   state = {
@@ -70,7 +77,7 @@ export class LoginForm extends React.Component {
           />
         </View>
 
-        {this.props.footer(this.state.email)}
+        {this.props.footer()}
         <Toast position='top' ref='toast' />
       </RkAvoidKeyboard>
     )

@@ -4,7 +4,7 @@ import { RkTextInput } from 'react-native-ui-kitten'
 import { TextInput } from '../../../../src/modules/shared/components'
 
 const props = {
-  label: 'texto',
+  placeholder: 'texto',
   onChangeText: jest.fn()
 }
 
