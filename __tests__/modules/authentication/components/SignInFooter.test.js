@@ -2,6 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { SignInFooter } from '../../../../src/modules/authentication/components/SignInFooter'
 import { RkButton } from 'react-native-ui-kitten'
+import { screens } from '../../../../src/configuration/Screens'
 
 const props = {
   email: 'email',
@@ -21,12 +22,12 @@ describe('<SignInFooter />', () => {
   it('should navigate to password recovery screen', () => {
     const forgotPasswordButton = wrapper.find(RkButton).findWhere(keyIsEqualTo('forgot-password-button'))
     forgotPasswordButton.simulate('press')
-    expect(props.navigator.push).toHaveBeenCalledWith({ screen: 'carona.forgotPassword' })
+    expect(props.navigator.push).toHaveBeenCalledWith({ screen: screens.forgotPassword.id })
   })
 
   it('should navigate to signup screen', () => {
     const forgotPasswordButton = wrapper.find(RkButton).findWhere(keyIsEqualTo('signup-button'))
     forgotPasswordButton.simulate('press')
-    expect(props.navigator.push).toHaveBeenCalledWith({ screen: 'carona.signUp' })
+    expect(props.navigator.push).toHaveBeenCalledWith({ screen: screens.forgotPassword.id })
   })
 })
