@@ -7,7 +7,6 @@ import { GradientButton, TextInput } from '../../shared/components'
 import { styles } from '../containers/styles/LoginScreenStyles'
 
 export class LoginForm extends React.Component {
-
   static propTypes = {
     footer: PropTypes.func,
     buttonText: PropTypes.string.isRequired,

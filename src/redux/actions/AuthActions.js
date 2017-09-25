@@ -3,9 +3,8 @@ import {
   SIGN_IN_FIREBASE,
   SAVE_PROFILE_FIREBASE,
   SIGN_UP_SUCCESS,
-  SIGN_UP_FAILED,
-  FORGOT_PASSWORD_SUCCESS,
-  FORGOT_PASSWORD_FAILED
+  AUTH_FAILED,
+  FORGOT_PASSWORD_SUCCESS
 } from '../types'
 
 export function signInFirebase (email, password) {
@@ -14,7 +13,7 @@ export function signInFirebase (email, password) {
       const user = await signIn(email, password)
       dispatch({ type: SIGN_IN_FIREBASE, payload: user })
     } catch (error) {
-      dispatch({ type: SIGN_UP_FAILED, payload: error.message })
+      dispatch({ type: AUTH_FAILED, payload: error.message })
     }
   }
 }
@@ -26,7 +25,7 @@ export function signUpFirebase (email, password) {
       const successAction = { type: SIGN_UP_SUCCESS }
       dispatch(successAction)
     } catch (error) {
-      dispatch({ type: SIGN_UP_FAILED, payload: error.message })
+      dispatch({ type: AUTH_FAILED, payload: error.message })
     }
   }
 }
@@ -48,7 +47,7 @@ export function forgotPasswordFirebase (email) {
       await forgotPassword(email)
       dispatch({ type: FORGOT_PASSWORD_SUCCESS })
     } catch (error) {
-      dispatch({ type: FORGOT_PASSWORD_FAILED, payload: error.message })
+      dispatch({ type: AUTH_FAILED, payload: error.message })
     }
   }
 }
