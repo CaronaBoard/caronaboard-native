@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import Styles from './styles/RideStyles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkCard } from 'react-native-ui-kitten'
+import { screens } from '../../../configuration/Screens'
 
 export class Ride extends Component {
   renderLine (subTitle, icon) {
@@ -17,7 +18,7 @@ export class Ride extends Component {
 
   pushTestScreen (ride) {
     this.props.navigator.push({
-      screen: 'carona.rideRequest',
+      screen: screens.rideRequest.id,
       title: 'Requesting a Ride',
       passProps: { ride }
     })

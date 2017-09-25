@@ -1,5 +1,6 @@
 import { Navigation } from 'react-native-navigation'
 import { Colors, Fonts } from '../modules/shared/themes'
+import { screens } from './Screens'
 
 const theme = {
   tabBarBackgroundColor: Colors.blue,
@@ -15,20 +16,30 @@ const theme = {
 
 const tabs = [
   {
-    label: 'SignIn',
-    screen: 'carona.signIn',
+    label: screens.signIn.label,
+    screen: screens.signIn.id,
     icon: require('../assets/images/swap.png'),
-    title: 'Sign In Screen'
+    navigatorStyle: {
+      navBarHidden: true,
+      tabBarHidden: true,
+      statusBarHidden: true,
+      statusBarHideWithNavBar: true
+    }
   }, {
-    label: 'Profile',
-    screen: 'carona.profile',
-    icon: require('../assets/images/swap.png'),
-    title: 'Profile'
+    label: screens.profile.label,
+    screen: screens.profile.id,
+    title: screens.profile.title,
+    icon: require('../assets/images/swap.png')
   }, {
-    label: 'RideList',
-    screen: 'carona.rideList',
-    icon: require('../assets/images/swap.png'),
-    title: 'Ride List'
+    label: screens.rideList.label,
+    screen: screens.rideList.id,
+    title: 'Ride List',
+    icon: require('../assets/images/swap.png')
+  }, {
+    label: screens.rideOffer.label,
+    screen: screens.rideOffer.id,
+    title: screens.profile.title,
+    icon: require('../assets/images/swap.png')
   }
 ]
 

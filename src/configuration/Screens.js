@@ -9,16 +9,49 @@ import RideList from '../modules/rideRequest/containers/RideList'
 import RideOffer from '../modules/rideRequest/containers/RideOfferScreen'
 import RideRequest from '../modules/rideRequest/containers/RideRequestScreen'
 
-const registerScreens = (store) => {
-  Navigation.registerComponent('carona.signIn', () => SignInScreen, store, Provider)
-  Navigation.registerComponent('carona.signUp', () => SignUpScreen, store, Provider)
-  Navigation.registerComponent('carona.forgotPassword', () => ForgotPasswordScreen, store, Provider)
-  Navigation.registerComponent('carona.profile', () => ProfileScreen, store, Provider)
-  Navigation.registerComponent('carona.rideList', () => RideList, store, Provider)
-  Navigation.registerComponent('carona.rideOffer', () => RideOffer, store, Provider)
-  Navigation.registerComponent('carona.rideRequest', () => RideRequest, store, Provider)
+export const screens = {
+  signIn: {
+    id: 'authentication.signIn',
+    component: SignInScreen
+  },
+  signUp: {
+    id: 'authentication.signUp',
+    component: SignUpScreen
+  },
+  forgotPassword: {
+    id: 'authentication.forgotPassword',
+    component: ForgotPasswordScreen
+  },
+  profile: {
+    id: 'user.profile',
+    component: ProfileScreen,
+    title: 'Profile'
+  },
+  rideList: {
+    id: 'ride.list',
+    component: RideList,
+    label: 'Ride List',
+    title: 'Ride List'
+  },
+  rideOffer: {
+    id: 'ride.offer',
+    component: RideOffer,
+    label: 'Ride Offer',
+    title: 'Ride Offer'
+  },
+  rideRequest: {
+    id: 'ride.request',
+    component: RideRequest,
+    label: 'Ride Request',
+    title: 'Ride Request'
+  }
 }
 
-export default {
-  registerScreens
+const registerScreens = (store) => {
+  for (const screen in screens) {
+    const { id, component } = screens[screen]
+    Navigation.registerComponent(id, () => component, store, Provider)
+  }
 }
+
+export default { registerScreens }
