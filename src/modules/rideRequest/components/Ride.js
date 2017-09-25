@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import Styles from './styles/RideStyles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkCard } from 'react-native-ui-kitten'
-import { screens } from '../../../configuration/Screens'
+import { screens } from '../../../configuration/navigation/Screens'
 
 export class Ride extends Component {
   renderLine (subTitle, icon) {

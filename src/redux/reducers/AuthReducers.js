@@ -8,7 +8,12 @@ import {
 } from '../types'
 
 export const INITIAL_STATE = {
-  userData: {},
+  userData: {
+    uid: '',
+    emailVerified: false,
+    email: '',
+    phoneNumber: null
+  },
   alert: {
     showAlert: false,
     message: ''

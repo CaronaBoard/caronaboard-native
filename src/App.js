@@ -1,10 +1,9 @@
 import Kitten from './configuration/kitten'
-import Screens from './configuration/Screens'
-import Navigation from './configuration/Navigation'
+import Navigation from './configuration/navigation'
 import Firebase from './configuration/Firebase'
 import Redux from './configuration/Redux'
 
 Kitten.setup()
 Firebase.initialize()
-Screens.registerScreens(Redux.createStore())
+Navigation.registerScreens(Redux.createStore())
 Navigation.startApp()

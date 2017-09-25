@@ -6,7 +6,6 @@ const initialState = {}
 
 export default {
   createStore: () => {
-    const store = create(rootReducer, initialState, applyMiddleware(thunk))
-    return store
+    return create(rootReducer, initialState, applyMiddleware(thunk))
   }
 }
