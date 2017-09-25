@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { SignInFooter } from '../../../../src/modules/authentication/components/SignInFooter'
 import { RkButton } from 'react-native-ui-kitten'
-import { screens } from '../../../../src/configuration/Screens'
+import { screens } from '../../../../src/configuration/navigation/Screens'
 
 const props = {
   email: 'email',

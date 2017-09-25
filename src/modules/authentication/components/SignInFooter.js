@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import PropTypes from 'prop-types'
 import { RkButton, RkText } from 'react-native-ui-kitten'
 import Styles from './styles/SignInFooterStyles'
-import { screens } from '../../../configuration/Screens'
+import { screens } from '../../../configuration/navigation/Screens'
 
 export class SignInFooter extends Component {
   static propTypes = {

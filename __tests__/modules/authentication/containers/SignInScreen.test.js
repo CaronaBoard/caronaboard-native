@@ -8,6 +8,7 @@ const props = {
     push: jest.fn()
   },
   signIn: jest.fn(),
+  user: {},
   alert: {
     showAlert: false,
     message: ''

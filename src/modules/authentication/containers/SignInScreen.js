@@ -5,10 +5,12 @@ import { connect } from 'react-redux'
 import { signInFirebase } from '../../../redux/actions'
 import { LoginForm } from '../components/LoginForm'
 import { SignInFooter } from '../components/SignInFooter'
+import Navigation from '../../../configuration/navigation'
 
 export class SignInScreen extends Component {
   static propTypes = {
     signIn: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
     alert: PropTypes.shape({
       showAlert: PropTypes.bool.isRequired,
       message: PropTypes.string
@@ -17,6 +19,12 @@ export class SignInScreen extends Component {
 
   renderFooter = () => {
     return <SignInFooter navigator={this.props.navigator} />
+  }
+
+  componentWillUpdate (nextProps) {
+    if (nextProps.user.uid !== '') {
+      Navigation.userLoggedIn()
+    }
   }
 
   render () {
@@ -33,7 +41,8 @@ export class SignInScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    alert: state.auth.alert
+    alert: state.auth.alert,
+    user: state.auth.userData
   }
 }
 
