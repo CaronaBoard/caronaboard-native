@@ -16,13 +16,21 @@ export class SignInFooter extends Component {
     return (
       <View>
         <View style={Styles.textRow}>
-          <RkButton rkType='clear' onPress={this.navigateTo('carona.forgotPassword')}>
+          <RkButton
+            key='forgot-password-button'
+            rkType='clear'
+            onPress={this.navigateTo('carona.forgotPassword')}
+          >
             <RkText rkType='header6'>Forgot your password?</RkText>
           </RkButton>
         </View>
         <View style={Styles.textRow}>
           <RkText rkType='primary3'>Don’t have an account?</RkText>
-          <RkButton rkType='clear' onPress={this.navigateTo('carona.signUp')}>
+          <RkButton
+            key='signup-button'
+            rkType='clear'
+            onPress={this.navigateTo('carona.signUp')}
+          >
             <RkText rkType='header6'> Sign up now</RkText>
           </RkButton>
         </View>

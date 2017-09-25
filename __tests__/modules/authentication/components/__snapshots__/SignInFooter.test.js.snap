@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignInFooter /> Should have a snapshot 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <RkButton
+      onPress={[Function]}
+      rkType="clear"
+    >
+      <RkText
+        rkType="header6"
+      >
+        Forgot your password?
+      </RkText>
+    </RkButton>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <RkText
+      rkType="primary3"
+    >
+      Don’t have an account?
+    </RkText>
+    <RkButton
+      onPress={[Function]}
+      rkType="clear"
+    >
+      <RkText
+        rkType="header6"
+      >
+         Sign up now
+      </RkText>
+    </RkButton>
+  </View>
+</View>
+`;
