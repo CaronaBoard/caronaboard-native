@@ -1,10 +1,10 @@
-import SignInScreen from '../../modules/authentication/containers/SignInScreen'
-import SignUpScreen from '../../modules/authentication/containers/SignUpScreen'
-import ForgotPasswordScreen from '../../modules/authentication/containers/ForgotPasswordScreen'
-import ProfileScreen from '../../modules/authentication/containers/ProfileScreen'
-import RideList from '../../modules/rideRequest/containers/RideList'
-import RideOffer from '../../modules/rideRequest/containers/RideOfferScreen'
-import RideRequest from '../../modules/rideRequest/containers/RideRequestScreen'
+import SignInScreen from '../modules/authentication/containers/SignInScreen'
+import SignUpScreen from '../modules/authentication/containers/SignUpScreen'
+import ForgotPasswordScreen from '../modules/authentication/containers/ForgotPasswordScreen'
+import ProfileScreen from '../modules/authentication/containers/ProfileScreen'
+import RideList from '../modules/rideRequest/containers/RideList'
+import RideOffer from '../modules/rideRequest/containers/RideOfferScreen'
+import RideRequest from '../modules/rideRequest/containers/RideRequestScreen'
 
 export const screens = {
   signIn: {
@@ -43,17 +43,3 @@ export const screens = {
     title: 'Ride Request'
   }
 }
-
-export const tabs = [
-  {
-    label: screens.rideList.label,
-    screen: screens.rideList.id,
-    title: screens.rideList.title,
-    icon: require('../../assets/images/swap.png')
-  }, {
-    label: screens.rideOffer.label,
-    screen: screens.rideOffer.id,
-    title: screens.profile.title,
-    icon: require('../../assets/images/swap.png')
-  }
-]

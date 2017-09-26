@@ -4,21 +4,11 @@ import PropTypes from 'prop-types'
 import { ListView } from 'react-native'
 import { fetchAllRides } from '../../../redux/actions'
 import { connect } from 'react-redux'
-import { screens } from '../../../navigation/Screens'
 import { Ride, ridePropTypes } from '../components/Ride'
+import { onNavigatorEvent } from '../../../navigation/NavBar'
 import styles from './styles/RideListStyles'
 
 export class RideList extends Component {
-  static navigatorButtons = {
-    rightButtons: [
-      {
-        icon: require('../../../assets/images/swap@1x.png'),
-        id: 'profile-button',
-        testID: 'profile-button'
-      }
-    ]
-  }
-
   static propTypes = {
     navigator: PropTypes.object.isRequired,
     rides: PropTypes.arrayOf(ridePropTypes)
@@ -27,15 +17,8 @@ export class RideList extends Component {
   constructor (props) {
     super(props)
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id})
-    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent)
+    this.props.navigator.setOnNavigatorEvent(onNavigatorEvent.bind(this))
     this.state = {dataSource: ds.cloneWithRows(this.props.rides)}
-  }
-
-  onNavigatorEvent = (event) => {
-    const { type, id } = event
-    if (type === 'NavBarButtonPress' && id === 'profile-button') {
-      this.props.navigator.push({screen: screens.profile.id})
-    }
   }
 
   componentWillReceiveProps (nextProps) {

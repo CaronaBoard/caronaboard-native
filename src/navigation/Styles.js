@@ -1,4 +1,4 @@
-import { Colors, Fonts } from '../../modules/shared/themes'
+import { Colors, Fonts } from '../modules/shared/themes'
 
 export const style = {
   tabBarBackgroundColor: Colors.blue,

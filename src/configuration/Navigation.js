@@ -1,8 +1,9 @@
 import { Navigation } from 'react-native-navigation'
 import { Provider } from 'react-redux'
 
-import { screens, tabs } from './Screens'
-import { style, barsHidden } from './Styles'
+import { screens } from '../navigation/Screens'
+import { tabs } from '../navigation/Tabs'
+import { style, barsHidden } from '../navigation/Styles'
 
 const { startTabBasedApp, startSingleScreenApp, registerComponent } = Navigation
 

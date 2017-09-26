@@ -1,5 +1,5 @@
 import Kitten from './configuration/kitten'
-import Navigation from './configuration/navigation'
+import Navigation from './configuration/Navigation'
 import Firebase from './configuration/Firebase'
 import Redux from './configuration/Redux'
 
