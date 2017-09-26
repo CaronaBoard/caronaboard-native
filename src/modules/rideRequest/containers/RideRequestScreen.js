@@ -2,11 +2,16 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 
 import { GradientButton } from '../../shared/components'
-import { Ride, ridePropTypes } from '../components/Ride'
+import { Ride } from '../components/Ride'
 import { saveRideRequest } from '../../../services/firebase'
+import { ridePropTypes } from '../types/index'
 import styles from './styles/RideRequestScreenStyles'
 
 export class RideRequestScreen extends Component {
+  static propTypes = {
+    ride: ridePropTypes
+  }
+
   render () {
     const { ride } = this.props
     return (
@@ -27,7 +32,5 @@ export class RideRequestScreen extends Component {
     )
   }
 }
-
-RideRequestScreen.propTypes = ridePropTypes
 
 export default RideRequestScreen

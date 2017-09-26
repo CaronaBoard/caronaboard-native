@@ -1,4 +1,6 @@
 import { Navigation } from 'react-native-navigation'
+import SignInScreen from '../modules/authentication/containers/SignInScreen'
+
 import { Provider } from 'react-redux'
 
 import { screens } from '../navigation/Screens'
@@ -6,6 +8,12 @@ import { tabs } from '../navigation/Tabs'
 import { style, barsHidden } from '../navigation/Styles'
 
 const { startTabBasedApp, startSingleScreenApp, registerComponent } = Navigation
+
+// TODO: Refactor this, this was causing cyclic dependency on screens.js
+const signInScreen = {
+  id: 'authentication.signIn',
+  component: SignInScreen
+}
 
 const tabAppParams = {
   tabs,
@@ -17,7 +25,7 @@ const tabAppParams = {
 const singleAppParams = () => {
   return {
     screen: {
-      screen: screens.signIn.id,
+      screen: signInScreen.id,
       navigatorStyle: barsHidden
     }
   }
@@ -32,6 +40,8 @@ const startApp = () => {
 }
 
 const registerScreens = (store) => {
+  registerComponent(signInScreen.id, () => signInScreen.component, store, Provider)
+
   for (const screen in screens) {
     const { id, component } = screens[screen]
     registerComponent(id, () => component, store, Provider)

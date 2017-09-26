@@ -1,4 +1,3 @@
-import SignInScreen from '../modules/authentication/containers/SignInScreen'
 import SignUpScreen from '../modules/authentication/containers/SignUpScreen'
 import ForgotPasswordScreen from '../modules/authentication/containers/ForgotPasswordScreen'
 import ProfileScreen from '../modules/authentication/containers/ProfileScreen'
@@ -7,10 +6,6 @@ import RideOffer from '../modules/rideRequest/containers/RideOfferScreen'
 import RideRequest from '../modules/rideRequest/containers/RideRequestScreen'
 
 export const screens = {
-  signIn: {
-    id: 'authentication.signIn',
-    component: SignInScreen
-  },
   signUp: {
     id: 'authentication.signUp',
     component: SignUpScreen

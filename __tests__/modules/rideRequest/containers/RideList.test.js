@@ -10,13 +10,18 @@ const props = {
     'destination': 'Rodoviaria',
     'hours': '19h',
     'origin': 'Tecnopuc',
+    'driverId': 'Some UID',
+    'rideId': 'Ride ID',
     'profile': {
       'contact': {
         'kind': 'Whatsapp', 'value': '5198269999'
       },
       'name': 'Eduardo' }
   }],
-  fetchRides: jest.fn()
+  fetchRides: jest.fn(),
+  navigator: {
+    setOnNavigatorEvent: jest.fn()
+  }
 }
 
 describe('<RideList />', () => {

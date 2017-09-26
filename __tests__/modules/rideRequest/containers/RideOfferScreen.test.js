@@ -6,8 +6,14 @@ import { Button } from '../../../../src/modules/shared/components'
 import * as Firebase from '../../../../src/services/firebase'
 jest.mock('../../../../src/services/firebase')
 
+const props = {
+  navigator: {
+    setOnNavigatorEvent: jest.fn()
+  }
+}
+
 describe('<RideOfferScreen />', () => {
-  const wrapper = shallow(<RideOfferScreen />)
+  const wrapper = shallow(<RideOfferScreen {...props} />)
 
   it('Snapshot have a snapshot', () => {
     expect(wrapper).toMatchSnapshot()
