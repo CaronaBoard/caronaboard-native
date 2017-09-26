@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { RkText } from 'react-native-ui-kitten'
 
+import { onNavigatorEvent } from '../../../navigation/NavBar'
 import { Button, TextInput } from '../../shared/components'
 import { saveRideOffer } from '../../../services/firebase'
 import styles from './styles/RideOfferScreenStyles'
@@ -17,6 +18,7 @@ export class RideOfferScreen extends Component {
   constructor (props) {
     super(props)
     this.state = INITIAL_STATE
+    this.props.navigator.setOnNavigatorEvent(onNavigatorEvent.bind(this))
   }
 
   render () {

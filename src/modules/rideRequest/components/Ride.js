@@ -1,29 +1,15 @@
 import React, { Component } from 'react'
-import { string, number, shape, oneOfType } from 'prop-types'
 import { View, Text, TouchableOpacity } from 'react-native'
 import Styles from './styles/RideStyles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkCard } from 'react-native-ui-kitten'
 import { screens } from '../../../navigation/Screens'
-
-export const ridePropTypes = shape({
-  days: string.isRequired,
-  destination: string.isRequired,
-  hours: string.isRequired,
-  origin: string.isRequired,
-  driverId: string.isRequired,
-  rideId: string.isRequired,
-  profile: shape({
-    name: string.isRequired,
-    contact: shape({
-      kind: string.isRequired,
-      value: oneOfType([string, number]).isRequired
-    })
-  })
-}).isRequired
+import { ridePropTypes } from '../types/index'
 
 export class Ride extends Component {
-  static propTypes = { ride: ridePropTypes }
+  static propTypes = {
+    ride: ridePropTypes
+  }
 
   renderLine (subTitle, icon) {
     return (

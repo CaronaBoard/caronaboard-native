@@ -5,16 +5,14 @@ import { connect } from 'react-redux'
 import { signInFirebase } from '../../../redux/actions'
 import { LoginForm } from '../components/LoginForm'
 import { SignInFooter } from '../components/SignInFooter'
+import { alertType } from '../types'
 import Navigation from '../../../configuration/Navigation'
 
 export class SignInScreen extends Component {
   static propTypes = {
     signIn: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
-    alert: PropTypes.shape({
-      showAlert: PropTypes.bool.isRequired,
-      message: PropTypes.string
-    }).isRequired
+    alert: alertType
   }
 
   renderFooter = () => {
