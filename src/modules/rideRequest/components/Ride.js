@@ -19,7 +19,6 @@ export class Ride extends Component {
   pushTestScreen (ride) {
     this.props.navigator.push({
       screen: screens.rideRequest.id,
-      title: 'Requesting a Ride',
       passProps: { ride }
     })
   }

@@ -3,15 +3,37 @@ import React, { Component } from 'react'
 import { ListView, StyleSheet } from 'react-native'
 import { fetchAllRides } from '../../../redux/actions'
 import { connect } from 'react-redux'
+import { screens } from '../../../configuration/navigation/Screens'
 
 import { Ride } from '../components/Ride'
 
+
+// TODO: REFACTOR
 export class RideList extends Component {
+
+  static navigatorButtons = {
+    rightButtons: [
+      {
+        icon: require('../../../assets/images/swap@1x.png'),
+        id: 'profile-button',
+        testID: 'profile-button'
+      }
+    ]
+  };
+
   constructor (props) {
     super(props)
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id})
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
     this.state = {
       dataSource: ds.cloneWithRows(this.props.rides)
+    }
+  }
+
+  onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
+    const { type, id } = event
+    if (type === 'NavBarButtonPress' && id === 'profile-button') {
+      this.props.navigator.push({ screen: screens.profile.id })
     }
   }
 
