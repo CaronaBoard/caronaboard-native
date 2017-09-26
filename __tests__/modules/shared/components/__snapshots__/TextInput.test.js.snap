@@ -3,8 +3,8 @@
 exports[`<TextInput /> Should have a snapshot 1`] = `
 <RkTextInput
   autoCapitalize="none"
-  label="texto"
   onChangeText={[Function]}
+  placeholder="texto"
   rkType="rounded"
 />
 `;
