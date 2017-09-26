@@ -1,12 +1,30 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import { string, number, shape, oneOfType } from 'prop-types'
 import { View, Text, TouchableOpacity } from 'react-native'
 import Styles from './styles/RideStyles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkCard } from 'react-native-ui-kitten'
-import { screens } from '../../../configuration/navigation/Screens'
+import { screens } from '../../../navigation/Screens'
+
+export const ridePropTypes = shape({
+  days: string.isRequired,
+  destination: string.isRequired,
+  hours: string.isRequired,
+  origin: string.isRequired,
+  driverId: string.isRequired,
+  rideId: string.isRequired,
+  profile: shape({
+    name: string.isRequired,
+    contact: shape({
+      kind: string.isRequired,
+      value: oneOfType([string, number]).isRequired
+    })
+  })
+}).isRequired
 
 export class Ride extends Component {
+  static propTypes = { ride: ridePropTypes }
+
   renderLine (subTitle, icon) {
     return (
       <View style={Styles.line} >
@@ -52,26 +70,3 @@ export class Ride extends Component {
     )
   }
 }
-
-export const ridePropTypes = {
-  ride: PropTypes.shape({
-    days: PropTypes.string.isRequired,
-    destination: PropTypes.string.isRequired,
-    hours: PropTypes.string.isRequired,
-    origin: PropTypes.string.isRequired,
-    driverId: PropTypes.string.isRequired,
-    rideId: PropTypes.string.isRequired,
-    profile: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      contact: PropTypes.shape({
-        kind: PropTypes.string.isRequired,
-        value: PropTypes.oneOfType([
-          PropTypes.string,
-          PropTypes.number
-        ]).isRequired
-      })
-    })
-  }).isRequired
-}
-
-Ride.propTypes = ridePropTypes

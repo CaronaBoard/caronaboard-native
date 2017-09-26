@@ -1,16 +1,14 @@
 
 import React, { Component } from 'react'
-import { ListView, StyleSheet } from 'react-native'
+import PropTypes from 'prop-types'
+import { ListView } from 'react-native'
 import { fetchAllRides } from '../../../redux/actions'
 import { connect } from 'react-redux'
-import { screens } from '../../../configuration/navigation/Screens'
+import { screens } from '../../../navigation/Screens'
+import { Ride, ridePropTypes } from '../components/Ride'
+import styles from './styles/RideListStyles'
 
-import { Ride } from '../components/Ride'
-
-
-// TODO: REFACTOR
 export class RideList extends Component {
-
   static navigatorButtons = {
     rightButtons: [
       {
@@ -19,30 +17,31 @@ export class RideList extends Component {
         testID: 'profile-button'
       }
     ]
-  };
+  }
+
+  static propTypes = {
+    navigator: PropTypes.object.isRequired,
+    rides: PropTypes.arrayOf(ridePropTypes)
+  }
 
   constructor (props) {
     super(props)
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id})
-    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
-    this.state = {
-      dataSource: ds.cloneWithRows(this.props.rides)
-    }
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent)
+    this.state = {dataSource: ds.cloneWithRows(this.props.rides)}
   }
 
-  onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
+  onNavigatorEvent = (event) => {
     const { type, id } = event
     if (type === 'NavBarButtonPress' && id === 'profile-button') {
-      this.props.navigator.push({ screen: screens.profile.id })
+      this.props.navigator.push({screen: screens.profile.id})
     }
   }
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.rides.length !== this.props.rides.length) {
       const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id})
-      this.setState({
-        dataSource: ds.cloneWithRows(nextProps.rides)
-      })
+      this.setState({dataSource: ds.cloneWithRows(nextProps.rides)})
     }
   }
 
@@ -61,13 +60,6 @@ export class RideList extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 20
-  }
-})
 
 const mapStateToProps = (state) => {
   return {
