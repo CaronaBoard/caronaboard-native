@@ -1,5 +1,5 @@
 import { screens } from './Screens'
-import {profileButton} from './NavBar'
+import { profileButton } from './NavBar'
 
 export const tabs = [
   {

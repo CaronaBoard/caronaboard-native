@@ -14,16 +14,18 @@ const tabAppParams = {
   appStyle: style
 }
 
-const singleAppParams = {
-  screen: {
-    screen: 'authentication.signIn',
-    navigatorStyle: barsHidden
+const singleAppParams = () => {
+  return {
+    screen: {
+      screen: screens.signIn.id,
+      navigatorStyle: barsHidden
+    }
   }
 }
 
 const isUserSignedIn = () => true
 const startCaronaBoard = () => startTabBasedApp(tabAppParams)
-const startAuthentication = () => startSingleScreenApp(singleAppParams)
+const startAuthentication = () => startSingleScreenApp(singleAppParams())
 
 const startApp = () => {
   isUserSignedIn() ? startCaronaBoard() : startAuthentication()

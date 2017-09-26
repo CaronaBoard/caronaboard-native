@@ -1,7 +1,7 @@
 import { screens } from './Screens'
 
 export const profileButton = {
-  icon: require('../assets/images/swap@1x.png'),
+  icon: require('../assets/images/gear-a.png'),
   id: 'profile-button',
   testID: 'profile-button'
 }
