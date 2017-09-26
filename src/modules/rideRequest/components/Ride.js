@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { View, Text, TouchableOpacity } from 'react-native'
 import Styles from './styles/RideStyles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkCard } from 'react-native-ui-kitten'
+import { screens } from '../../../navigation/Screens'
+import { ridePropTypes } from '../types/index'
 
 export class Ride extends Component {
+  static propTypes = {
+    ride: ridePropTypes
+  }
+
   renderLine (subTitle, icon) {
     return (
       <View style={Styles.line} >
@@ -17,8 +22,7 @@ export class Ride extends Component {
 
   pushTestScreen (ride) {
     this.props.navigator.push({
-      screen: 'carona.rideRequest',
-      title: 'Requesting a Ride',
+      screen: screens.rideRequest.id,
       passProps: { ride }
     })
   }
@@ -52,26 +56,3 @@ export class Ride extends Component {
     )
   }
 }
-
-export const ridePropTypes = {
-  ride: PropTypes.shape({
-    days: PropTypes.string.isRequired,
-    destination: PropTypes.string.isRequired,
-    hours: PropTypes.string.isRequired,
-    origin: PropTypes.string.isRequired,
-    driverId: PropTypes.string.isRequired,
-    rideId: PropTypes.string.isRequired,
-    profile: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      contact: PropTypes.shape({
-        kind: PropTypes.string.isRequired,
-        value: PropTypes.oneOfType([
-          PropTypes.string,
-          PropTypes.number
-        ]).isRequired
-      })
-    })
-  }).isRequired
-}
-
-Ride.propTypes = ridePropTypes

@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import PropTypes from 'prop-types'
 import { RkButton, RkText } from 'react-native-ui-kitten'
 import Styles from './styles/SignInFooterStyles'
+import { screens } from '../../../navigation/Screens'
 
 export class SignInFooter extends Component {
   static propTypes = {
@@ -19,7 +20,7 @@ export class SignInFooter extends Component {
           <RkButton
             key='forgot-password-button'
             rkType='clear'
-            onPress={this.navigateTo('carona.forgotPassword')}
+            onPress={this.navigateTo(screens.forgotPassword.id)}
           >
             <RkText rkType='header6'>Forgot your password?</RkText>
           </RkButton>
@@ -29,7 +30,7 @@ export class SignInFooter extends Component {
           <RkButton
             key='signup-button'
             rkType='clear'
-            onPress={this.navigateTo('carona.signUp')}
+            onPress={this.navigateTo(screens.signUp.id)}
           >
             <RkText rkType='header6'> Sign up now</RkText>
           </RkButton>

@@ -1,26 +1,31 @@
 
 import React, { Component } from 'react'
-import { ListView, StyleSheet } from 'react-native'
+import PropTypes from 'prop-types'
+import { ListView } from 'react-native'
 import { fetchAllRides } from '../../../redux/actions'
 import { connect } from 'react-redux'
-
 import { Ride } from '../components/Ride'
+import { ridePropTypes } from '../types/index'
+import { onNavigatorEvent } from '../../../navigation/NavBar'
+import styles from './styles/RideListStyles'
 
 export class RideList extends Component {
+  static propTypes = {
+    navigator: PropTypes.object.isRequired,
+    rides: PropTypes.arrayOf(ridePropTypes)
+  }
+
   constructor (props) {
     super(props)
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id})
-    this.state = {
-      dataSource: ds.cloneWithRows(this.props.rides)
-    }
+    this.props.navigator.setOnNavigatorEvent(onNavigatorEvent.bind(this))
+    this.state = {dataSource: ds.cloneWithRows(this.props.rides)}
   }
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.rides.length !== this.props.rides.length) {
       const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.id !== r2.id})
-      this.setState({
-        dataSource: ds.cloneWithRows(nextProps.rides)
-      })
+      this.setState({dataSource: ds.cloneWithRows(nextProps.rides)})
     }
   }
 
@@ -39,13 +44,6 @@ export class RideList extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 20
-  }
-})
 
 const mapStateToProps = (state) => {
   return {

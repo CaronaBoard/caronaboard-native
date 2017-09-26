@@ -3,14 +3,12 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { signUpFirebase } from '../../../redux/actions'
 import { LoginForm } from '../components/LoginForm'
+import { alertType } from '../types'
 
 export class SignUpScreen extends Component {
   static propTypes = {
     signUp: PropTypes.func.isRequired,
-    alert: PropTypes.shape({
-      showAlert: PropTypes.bool.isRequired,
-      message: PropTypes.string
-    }).isRequired
+    alert: alertType
   }
 
   render () {
