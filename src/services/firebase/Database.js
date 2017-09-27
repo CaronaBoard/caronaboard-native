@@ -10,91 +10,76 @@ type rideOfferType = {
   hour: string
 }
 
-export const getAllRides = () => {
-  return new Promise(resolve => {
-    Firebase.database()
-      .ref('rides')
-      .child(rideGroup)
-      .once('value')
-      .then(snapshot => resolve(toArrayOfRides(snapshot.val())))
-  })
+export const getAllRides = async () => {
+  const rides = await Firebase.database()
+    .ref('rides')
+    .child(rideGroup)
+    .once('value')
+
+  return toArrayOfRides(rides.val())
 }
 
-export const getAllRideRequests = () => {
-  return new Promise(resolve => {
-    Firebase.database()
-      .ref(`ridesRequests/${rideGroup}`)
-      .child(rideGroup)
-      .once('value')
-      .then(snapshot => resolve(toArrayOfRides(snapshot.val())))
-  })
+export const getAllRideRequests = async () => {
+  const rideRequests = await Firebase.database()
+    .ref(`ridesRequests/${rideGroup}`)
+    .child(rideGroup)
+    .once('value')
+
+  return toArrayOfRides(rideRequests.val())
 }
 
-export const saveRideOffer = (rideOffer: rideOfferType) => {
-  const userId = Firebase.auth().currentUser.uid
+export const getUserProfile = async (userId: string) => {
+  const profileSnapshot = await Firebase.database()
+    .ref(`profiles/${userId}`)
+    .once('value')
+
+  const profile = profileSnapshot.val()
+
+  if (!profile) {
+    throw (new Error('Usuário nāo preencheu o perfil'))
+  }
+
+  return profile
+}
+
+const getUserUid = async () => {
+  return Firebase.auth().currentUser.uid
+}
+
+export const saveRideOffer = async (rideOffer: rideOfferType) => {
+  const userId = await getUserUid()
+  const profile = await getUserProfile(userId)
 
   Firebase.database()
-    .ref(`profiles/${userId}`)
-    .once('value')
-    .then(snapshot => {
-      const profile = snapshot.val()
-      return new Promise(resolve => {
-        Firebase.database()
-          .ref(`rides/${rideGroup}/${userId}`)
-          .push(Object.assign({ profile: profile }, rideOffer))
-          .then(resolve)
-      })
-    })
+    .ref(`rides/${rideGroup}/${userId}`)
+    .push(Object.assign({ profile }, rideOffer))
 }
 
-export const updateRideOffer = (rideOffer: rideOfferType) => {
-  const userId = Firebase.auth().currentUser.uid
+export const updateRideOffer = async (rideOffer: rideOfferType) => {
+  const userId = await getUserUid()
+  const profile = await getUserProfile(userId)
+
+  let pathsToUpdate = {}
+  pathsToUpdate[`rides/${rideGroup}/${userId}/${rideOffer.id}`] = Object.assign({profile: profile}, _.omit(rideOffer, 'id'))
+
+  await Firebase.database().ref().update(pathsToUpdate)
+
+  return rideOffer
+}
+
+export const removeRideOffer = async (rideId) => {
+  const userId = await getUserUid()
 
   return Firebase.database()
-    .ref(`profiles/${userId}`)
-    .once('value')
-    .then(snapshot => {
-      const profile = snapshot.val()
-      return new Promise(resolve => {
-        let pathsToUpdate = {}
-        pathsToUpdate[`rides/${rideGroup}/${userId}/${rideOffer.id}`] = Object.assign({profile: profile}, _.omit(rideOffer, 'id'))
-
-        return Firebase.database()
-          .ref()
-          .update(pathsToUpdate)
-          .then(() => resolve(rideOffer))
-      })
-    })
+    .ref(`rides/${rideGroup}/${userId}/${rideId}`)
+    .remove()
 }
 
-export const removeRideOffer = (rideId) => {
-  const userId = Firebase.auth().currentUser.uid
+export const saveRideRequest = async (rideId) => {
+  const userId = await getUserUid()
+  const profile = await getUserProfile(userId)
+
   return Firebase.database()
-    .ref(`profiles/${userId}`)
-    .once('value')
-    .then(snapshot => {
-      return new Promise(resolve => {
-        return Firebase.database()
-          .ref(`rides/${rideGroup}/${userId}/${rideId}`)
-          .remove()
-          .then(() => resolve())
-      })
-    })
-}
-
-export const saveRideRequest = (rideId) => {
-  const profile = {
-    name: 'TEST',
-    contact: {
-      kind: 'Whatsapp',
-      value: '5566778899'
-    }
-  } // firebase.database().ref(`profiles/${userId}`).once("value")
-
-  return new Promise(resolve => {
-    Firebase.database()
-      .ref(`ridesRequests/${rideGroup}/${rideId}`)
-      .push({profile})
-      .then(resolve)
-  })
+    .ref(`ridesRequests/${rideGroup}/${rideId}`)
+    .push({profile})
 }
