@@ -50,7 +50,7 @@ export const saveRideOffer = async (rideOffer: rideOfferType) => {
   const userId = await getUserUid()
   const profile = await getUserProfile(userId)
 
-  Firebase.database()
+  return Firebase.database()
     .ref(`rides/${rideGroup}/${userId}`)
     .push(Object.assign({ profile }, rideOffer))
 }

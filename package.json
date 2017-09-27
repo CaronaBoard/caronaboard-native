@@ -67,6 +67,9 @@
     "ignore": [
       "Dangerfile.js"
     ],
+    "global": [
+      "alert"
+    ],
     "parser": "babel-eslint"
   },
   "rnpm": {
