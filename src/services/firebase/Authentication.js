@@ -49,7 +49,7 @@ export const saveProfile = (profile) => {
       .ref(`rides/${currentUser.uid}`)
       .once('value')
       .then(rides => {
-        Object.keys(rides.val() || {}).forEach(function (key) {
+        Object.keys(rides.val() || {}).forEach(key => {
           pathsToUpdate[`rides/${currentUser.uid}/${key}/profile`] = profile
         })
         return Firebase.database()

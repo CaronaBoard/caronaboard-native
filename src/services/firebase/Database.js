@@ -4,13 +4,14 @@ import _ from 'lodash'
 const rideGroup = 'twpoa'
 
 type rideOfferType = {
+  id: string,
   origin: string,
   destination: string,
   days: string,
   hour: string
 }
 
-export const getAllRides = async () => {
+export const getAllRideOffers = async () => {
   const rides = await Firebase.database()
     .ref('rides')
     .child(rideGroup)
@@ -28,6 +29,11 @@ export const getAllRideRequests = async () => {
   return toArrayOfRides(rideRequests.val())
 }
 
+export const getUserRideOffers = async (userId: string) => {
+  const rides = await getAllRideOffers()
+  return rides.filter(ride => ride.driverId === userId)
+}
+
 export const getUserProfile = async (userId: string) => {
   const profileSnapshot = await Firebase.database()
     .ref(`profiles/${userId}`)
@@ -42,12 +48,7 @@ export const getUserProfile = async (userId: string) => {
   return profile
 }
 
-const getUserUid = async () => {
-  return Firebase.auth().currentUser.uid
-}
-
-export const saveRideOffer = async (rideOffer: rideOfferType) => {
-  const userId = await getUserUid()
+export const saveRideOffer = async (rideOffer: rideOfferType, userId: string) => {
   const profile = await getUserProfile(userId)
 
   return Firebase.database()
@@ -55,8 +56,7 @@ export const saveRideOffer = async (rideOffer: rideOfferType) => {
     .push(Object.assign({ profile }, rideOffer))
 }
 
-export const updateRideOffer = async (rideOffer: rideOfferType) => {
-  const userId = await getUserUid()
+export const updateRideOffer = async (rideOffer: rideOfferType, userId: string) => {
   const profile = await getUserProfile(userId)
 
   let pathsToUpdate = {}
@@ -67,16 +67,13 @@ export const updateRideOffer = async (rideOffer: rideOfferType) => {
   return rideOffer
 }
 
-export const removeRideOffer = async (rideId) => {
-  const userId = await getUserUid()
-
+export const removeRideOffer = async (rideId: string, userId: string) => {
   return Firebase.database()
     .ref(`rides/${rideGroup}/${userId}/${rideId}`)
     .remove()
 }
 
-export const saveRideRequest = async (rideId) => {
-  const userId = await getUserUid()
+export const saveRideRequest = async (rideId: string, userId: string) => {
   const profile = await getUserProfile(userId)
 
   return Firebase.database()
