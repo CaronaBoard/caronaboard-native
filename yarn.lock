@@ -4946,6 +4946,12 @@ react-dom@^15.6.1:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
+react-native-action-button@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/react-native-action-button/-/react-native-action-button-2.8.0.tgz#8446388f722c1a95619f28ab33b91bf9488075e9"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-config@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.5.0.tgz#109aaee511b81851b22e1fd3372d86c9d6c797d4"

@@ -11,14 +11,6 @@ export const tabs = [
       rightButtons: [profileButton]
     }
   }, {
-    label: screens.rideOffer.label,
-    screen: screens.rideOffer.id,
-    title: screens.profile.title,
-    icon: require('../assets/images/swap.png'),
-    navigatorButtons: {
-      rightButtons: [profileButton]
-    }
-  }, {
     label: screens.rideOfferList.label,
     screen: screens.rideOfferList.id,
     title: screens.rideOfferList.title,

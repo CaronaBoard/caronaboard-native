@@ -1,20 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<YourRideOffersScreen /> Should have a snapshot 1`] = `
-<FlatList
-  data={Array []}
-  disableVirtualization={false}
-  horizontal={false}
-  initialNumToRender={10}
-  keyExtractor={[Function]}
-  maxToRenderPerBatch={10}
-  numColumns={1}
-  onEndReached={[Function]}
-  onEndReachedThreshold={2}
-  removeClippedSubviews={true}
-  renderItem={[Function]}
-  renderScrollComponent={[Function]}
-  updateCellsBatchingPeriod={50}
-  windowSize={21}
-/>
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <FlatList
+    data={Array []}
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReached={[Function]}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={true}
+    renderItem={[Function]}
+    renderScrollComponent={[Function]}
+    updateCellsBatchingPeriod={50}
+    windowSize={21}
+  />
+  <FloatingActionButton
+    onPress={[Function]}
+  />
+</View>
 `;

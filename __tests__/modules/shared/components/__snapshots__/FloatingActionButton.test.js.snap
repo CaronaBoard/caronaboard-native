@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FloatingActionButton /> Should have a snapshot 1`] = `
+<ActionButton
+  active={false}
+  activeOpacity={0.85}
+  autoInactive={true}
+  backdrop={false}
+  backgroundTappable={false}
+  bgColor="transparent"
+  bgOpacity={1}
+  buttonColor="rgba(231,76,60,1)"
+  buttonText="+"
+  buttonTextStyle={Object {}}
+  degrees={45}
+  fixNativeFeedbackRadius={false}
+  nativeFeedbackRippleColor="rgba(255,255,255,0.75)"
+  offsetX={30}
+  offsetY={30}
+  onPress={[Function]}
+  onPressIn={[Function]}
+  onPressOn={[Function]}
+  outRangeScale={1}
+  position="right"
+  resetToken={null}
+  size={56}
+  spacing={20}
+  useNativeFeedback={true}
+  verticalOrientation="up"
+/>
+`;
