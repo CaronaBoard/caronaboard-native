@@ -1,34 +1,25 @@
 // @flow
 
 import Firebase from 'firebase'
+import { getUserRideOffers, updateRideOffer } from './RideOffer'
+import { getUserRideRequests, updateRideRequest } from './RideRequest'
+import { toRideOffer } from '../Conversion'
+import type { profileFlowType } from '../types'
 
-type profileType = {
-  name: string,
-  contact: {
-    kind: string,
-    value: string
-  }
-}
-
-export const saveProfile = async (profile: profileType, userId: string) => {
-  let pathsToUpdate = {}
-  pathsToUpdate[`profiles/${userId}`] = profile
-
+export const saveProfile = async (profile: profileFlowType) => {
   try {
-    const updatedProfile = await Firebase.database()
-      .ref()
-      .update(pathsToUpdate)
+    await Firebase.database().ref(`profiles/${profile.uid}`).update(profile)
 
-    updateUserProfileOnRideOffers(updatedProfile)
-    updateUserProfileOnRideRequests(updatedProfile)
+    Promise.all([
+      updateUserProfileOnRideOffers(profile),
+      updateUserProfileOnRideRequests(profile)
+    ])
   } catch (error) {
     console.error(error)
   }
-
-  return profile
 }
 
-export const getUserProfile = async (userId: string): profileType => {
+export const getUserProfile = async (userId: string): profileFlowType => {
   const profileSnapshot = await Firebase.database()
     .ref(`profiles/${userId}`)
     .once('value')
@@ -42,10 +33,14 @@ export const getUserProfile = async (userId: string): profileType => {
   return profile
 }
 
-const updateUserProfileOnRideOffers = (profile: profileType) => {
-  console.log('===> profile is: ', profile)
+const updateUserProfileOnRideOffers = async (profile: profileFlowType) => {
+  const userRideOffers = await getUserRideOffers(profile.uid)
+  const ridesToUpdate = userRideOffers.map(ride => updateRideOffer(toRideOffer(ride), profile))
+  Promise.all(ridesToUpdate)
 }
 
-const updateUserProfileOnRideRequests = (profile: profileType) => {
-  console.log('===> profile is: ', profile)
+const updateUserProfileOnRideRequests = async (profile: profileFlowType) => {
+  const userRideOffers = await getUserRideRequests(profile.uid)
+  const ridesToUpdate = userRideOffers.map(ride => updateRideRequest(ride, profile))
+  Promise.all(ridesToUpdate)
 }

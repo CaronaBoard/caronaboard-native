@@ -4,39 +4,47 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { View, TouchableOpacity } from 'react-native'
 import { RkText, RkChoice, RkChoiceGroup } from 'react-native-ui-kitten'
+import type { profileFlowType } from '../../../services/firebase/database/Profile'
+import { profilePropType } from '../types'
 
 import { TextInput, GradientButton } from '../../shared/components'
 import { saveProfileFirebase } from '../../../redux/actions'
 
 export const CONTACT_OPTIONS = ['Whatsapp', 'Telegram']
+export const INITIAL_STATE: profileFlowType = {
+  name: '',
+  contact: {
+    kind: '',
+    value: ''
+  }
+}
 
 export class ProfileScreen extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
     userId: PropTypes.string.isRequired,
-    profile: PropTypes.string
+    profile: profilePropType
   }
 
-  onContactOptionSelected = (contactKind) => {
-    this.setState({contactKind})
+  state = INITIAL_STATE
+
+  onContactOptionSelected = kind => {
+    this.setState({contact: {...this.state.contact, kind}})
   }
 
   onButtonSubmit = async () => {
     this.setState({loading: true})
 
-    let profile = {
-      name: this.state.name,
-      contact: {
-        kind: this.state.contactKind,
-        value: this.state.number
-      }
-    }
+    const profile = {...this.state, uid: this.props.userId}
+    delete profile.loading
+
     try {
-      this.props.saveProfile(profile, this.props.userId)
+      this.props.saveProfile(profile)
     } catch (error) {
-      this.setState({loading: false})
       console.error(error)
     }
+
+    this.setState({loading: false})
   }
 
   render () {
@@ -60,18 +68,18 @@ export class ProfileScreen extends Component {
           <View style={Styles.inputTextsContainer}>
             <TextInput
               placeholder='Your name'
-              onChangeText={(name) => { this.setState({name}) }} />
+              onChangeText={name => { this.setState({name}) }} />
           </View>
           <RkChoiceGroup
             radio
             rkType='clear'
-            onChange={(index) => this.onContactOptionSelected(CONTACT_OPTIONS[index])}>
+            onChange={index => this.onContactOptionSelected(CONTACT_OPTIONS[index])}>
             {CONTACT_OPTIONS.map(renderOption)}
           </RkChoiceGroup>
           <View style={Styles.inputTextsContainer}>
             <TextInput
               placeholder='Number'
-              onChangeText={(number) => { this.setState({number}) }} />
+              onChangeText={value => { this.setState({contact: {...this.state.contact, value}}) }} />
           </View>
         </View>
         <View style={Styles.centralized}>

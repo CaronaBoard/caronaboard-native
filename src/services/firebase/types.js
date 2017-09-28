@@ -1,3 +1,12 @@
+export type profileFlowType = {
+  name: string,
+  uid: string,
+  contact: {
+    kind: string,
+    value: string
+  }
+}
+
 export type rideType = {
   days: string,
   destination: string,
@@ -10,6 +19,28 @@ export type rideType = {
     contact: {
       kind: string,
       value: string
+    }
+  }
+}
+
+export type rideOfferType = {
+  id: string,
+  origin: string,
+  destination: string,
+  days: string,
+  hour: string
+}
+
+export type rideRequestFlowType = {
+  requestId: string,
+  rideId: string,
+  profile: profileFlowType
+}
+
+export type firebaseRideRequests = {
+  [rideId: string]: {
+    [requestId: string]: {
+      profile: profileFlowType
     }
   }
 }

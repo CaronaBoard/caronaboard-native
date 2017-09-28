@@ -5,14 +5,14 @@ import { connect } from 'react-redux'
 import { signInFirebase } from '../../../redux/actions'
 import { LoginForm } from '../components/LoginForm'
 import { SignInFooter } from '../components/SignInFooter'
-import { alertType } from '../types'
+import { alertPropType } from '../types'
 import Navigation from '../../../configuration/Navigation'
 
 export class SignInScreen extends Component {
   static propTypes = {
     signIn: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
-    alert: alertType
+    alert: alertPropType
   }
 
   renderFooter = () => {

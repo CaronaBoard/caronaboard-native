@@ -24,7 +24,7 @@ jest.mock('firebase', () => ({
   })
 }))
 
-describe('Firebase database service', () => {
+xdescribe('Firebase database service', () => {
   const rideId = 'RIDE_ID'
   const rideGroup = 'twpoa'
   const userId = 's29iF96rLqRIj1O9WZ2p2BjR59J3'

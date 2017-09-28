@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { signUpFirebase } from '../../../redux/actions'
 import { LoginForm } from '../components/LoginForm'
-import { alertType } from '../types'
+import { alertPropType } from '../types'
 
 export class SignUpScreen extends Component {
   static propTypes = {
     signUp: PropTypes.func.isRequired,
-    alert: alertType
+    alert: alertPropType
   }
 
   render () {

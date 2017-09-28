@@ -7,12 +7,21 @@ import {
   FORGOT_PASSWORD_SUCCESS
 } from '../types'
 
-// TODO: DONT COMMIT THIS
+// TODO: REVERT THIS
 export const INITIAL_STATE = {
-  userData: { uid: 'r9okas9rioSvzy11AycFwue1L063',
+  userData: {
+    uid: 'r9okas9rioSvzy11AycFwue1L063',
     emailVerified: true,
     email: 'eduardomoroni@gmail.com',
-    phoneNumber: null },
+    phoneNumber: null
+  },
+  profile: {
+    name: '',
+    contact: {
+      kind: '',
+      value: ''
+    }
+  },
   alert: {
     showAlert: false,
     message: ''
@@ -23,12 +32,12 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SIGN_IN_FIREBASE:
       return { ...INITIAL_STATE, userData: action.payload }
+    case SAVE_PROFILE_FIREBASE:
+      return { ...state, profile: action.profile }
     case AUTH_FAILED:
       return { ...state, alert: {showAlert: true, message: action.payload} }
     case SIGN_UP_SUCCESS:
       return { ...state, alert: {showAlert: true, message: USER_SIGNED_UP} }
-    case SAVE_PROFILE_FIREBASE:
-      return { profile: action.payload }
     case FORGOT_PASSWORD_SUCCESS:
       return { ...state, alert: {showAlert: true, message: USER_RESET_PASSWORD} }
     default:
