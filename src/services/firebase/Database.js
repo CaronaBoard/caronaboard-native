@@ -80,3 +80,24 @@ export const saveRideRequest = async (rideId: string, userId: string) => {
     .ref(`ridesRequests/${rideGroup}/${rideId}`)
     .push({profile})
 }
+
+export const saveProfile = (profile: any, userId: string) => {
+  let pathsToUpdate = {}
+  pathsToUpdate[`profiles/${userId}`] = profile
+
+  return new Promise((resolve) => {
+    Firebase
+      .database()
+      .ref(`rides/${userId}`)
+      .once('value')
+      .then(rides => {
+        Object.keys(rides.val() || {}).forEach(key => {
+          pathsToUpdate[`rides/${userId}/${key}/profile`] = profile
+        })
+        return Firebase.database()
+          .ref()
+          .update(pathsToUpdate)
+          .then(() => resolve(profile))
+      })
+  })
+}
