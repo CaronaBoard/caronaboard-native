@@ -348,9 +348,9 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				9EB8367A67244E1C8B417BCB /* libRNVectorIcons.a in Frameworks */,
-        A20EBD8BE2234C0CAA2C06B2 /* libBVLinearGradient.a in Frameworks */,
-        35960D0409C4423E81B08B0F /* libReactNativeConfig.a in Frameworks */
-      );
+				A20EBD8BE2234C0CAA2C06B2 /* libBVLinearGradient.a in Frameworks */,
+				35960D0409C4423E81B08B0F /* libReactNativeConfig.a in Frameworks */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2D02E4781E0B4A5D006451C7 /* Frameworks */ = {
@@ -518,9 +518,9 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				EB51EB3B575A4598A96A0415 /* RNVectorIcons.xcodeproj */,
-        C07C315CFD54493C9E060536 /* BVLinearGradient.xcodeproj */,
-        85788F6938D341A98AA4CC69 /* ReactNativeConfig.xcodeproj */
-      );
+				C07C315CFD54493C9E060536 /* BVLinearGradient.xcodeproj */,
+				85788F6938D341A98AA4CC69 /* ReactNativeConfig.xcodeproj */,
+			);
 			name = Libraries;
 			sourceTree = "<group>";
 		};
@@ -1138,8 +1138,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
-          "$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
-          "$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig"
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 				);
 				INFOPLIST_FILE = caronaboardnativeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1166,8 +1166,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
-          "$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
-          "$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig"
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 				);
 				INFOPLIST_FILE = caronaboardnativeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1196,8 +1196,8 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
-          "$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
-          "$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig"
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 				);
 				INFOPLIST_FILE = caronaboardnative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1220,8 +1220,8 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
-          "$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
-          "$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig"
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 				);
 				INFOPLIST_FILE = caronaboardnative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1250,8 +1250,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
-          "$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
-          "$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig"
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 				);
 				INFOPLIST_FILE = "caronaboardnative-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1287,8 +1287,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
-          "$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
-          "$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig"
+					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
+					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
 				);
 				INFOPLIST_FILE = "caronaboardnative-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
