@@ -38,19 +38,18 @@ export function sendVerificationEmail (user) {
     .catch(() => console.error('Error ao enviar email de verificação'))
 }
 
-export const saveProfile = (profile) => {
-  const currentUser = Firebase.auth().currentUser
+export const saveProfile = (profile: any, userId: string) => {
   let pathsToUpdate = {}
-  pathsToUpdate[`profiles/${currentUser.uid}`] = profile
+  pathsToUpdate[`profiles/${userId}`] = profile
 
   return new Promise((resolve) => {
     Firebase
       .database()
-      .ref(`rides/${currentUser.uid}`)
+      .ref(`rides/${userId}`)
       .once('value')
       .then(rides => {
         Object.keys(rides.val() || {}).forEach(key => {
-          pathsToUpdate[`rides/${currentUser.uid}/${key}/profile`] = profile
+          pathsToUpdate[`rides/${userId}/${key}/profile`] = profile
         })
         return Firebase.database()
           .ref()
