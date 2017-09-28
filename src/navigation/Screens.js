@@ -4,6 +4,7 @@ import ProfileScreen from '../modules/authentication/containers/ProfileScreen'
 import RideList from '../modules/rideRequest/containers/RideList'
 import RideOffer from '../modules/rideRequest/containers/RideOfferScreen'
 import RideRequest from '../modules/rideRequest/containers/RideRequestScreen'
+import YourRideOfferList from '../modules/rideOffer/containers/YourRideOffersScreen'
 
 export const screens = {
   signUp: {
@@ -36,5 +37,11 @@ export const screens = {
     component: RideRequest,
     label: 'Ride Request',
     title: 'Ride Request'
+  },
+  rideOfferList: {
+    id: 'ride.offer.list',
+    component: YourRideOfferList,
+    label: 'Your Ride Offers',
+    title: 'Your Ride Offers'
   }
 }
