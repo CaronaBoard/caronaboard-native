@@ -2,7 +2,7 @@
 
 import Firebase from 'firebase'
 
-type profileType = {
+export type profileType = {
   name: string,
   contact: {
     kind: string,
@@ -11,21 +11,14 @@ type profileType = {
 }
 
 export const saveProfile = async (profile: profileType, userId: string) => {
-  let pathsToUpdate = {}
-  pathsToUpdate[`profiles/${userId}`] = profile
-
   try {
-    const updatedProfile = await Firebase.database()
-      .ref()
-      .update(pathsToUpdate)
+    await Firebase.database().ref(`profiles/${userId}`).update(profile)
 
-    updateUserProfileOnRideOffers(updatedProfile)
-    updateUserProfileOnRideRequests(updatedProfile)
+    updateUserProfileOnRideOffers(profile)
+    updateUserProfileOnRideRequests(profile)
   } catch (error) {
     console.error(error)
   }
-
-  return profile
 }
 
 export const getUserProfile = async (userId: string): profileType => {

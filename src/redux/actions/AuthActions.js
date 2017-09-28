@@ -1,5 +1,6 @@
 import { signIn, signUp, forgotPassword } from '../../services/firebase'
 import { saveProfile } from '../../services/firebase/database/index'
+import type { profileType } from '../../services/firebase/database/Profile'
 import {
   SIGN_IN_FIREBASE,
   SAVE_PROFILE_FIREBASE,
@@ -8,7 +9,7 @@ import {
   FORGOT_PASSWORD_SUCCESS
 } from '../types'
 
-export function signInFirebase (email, password) {
+export function signInFirebase (email: string, password: string) {
   return async (dispatch) => {
     try {
       const user = await signIn(email, password)
@@ -19,7 +20,7 @@ export function signInFirebase (email, password) {
   }
 }
 
-export function signUpFirebase (email, password) {
+export function signUpFirebase (email: string, password: string) {
   return async (dispatch) => {
     try {
       await signUp(email, password)
@@ -31,14 +32,14 @@ export function signUpFirebase (email, password) {
   }
 }
 
-export function saveProfileFirebase (profile: any, userId: string) {
+export function saveProfileFirebase (profile: profileType, userId: string) {
   return async (dispatch) => {
-    await saveProfile(profile, userId).then(userData => {
-      dispatch({ type: SAVE_PROFILE_FIREBASE, payload: userData })
-    })
-      .catch(err => {
-        console.log('Error saving profile: ', err)
-      })
+    try {
+      await saveProfile(profile, userId)
+      dispatch({ type: SAVE_PROFILE_FIREBASE, payload: profile })
+    } catch (err) {
+      console.log('Error saving profile: ', err)
+    }
   }
 }
 
