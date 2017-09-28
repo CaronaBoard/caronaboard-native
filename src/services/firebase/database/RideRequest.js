@@ -3,8 +3,7 @@
 import Firebase from 'firebase'
 import { toArrayOfRideRequests } from '../Conversion'
 import { getUserProfile } from './Profile'
-import type { rideRequestFlowType } from '../types'
-import type { profileFlowType } from './Profile'
+import type { rideRequestFlowType, profileFlowType } from '../types'
 import { rideGroup } from './'
 
 export const saveRideRequest = async (rideId: string, userId: string) => {
@@ -20,7 +19,7 @@ export const updateRideRequest = async (rideRequest: rideRequestFlowType, profil
   console.log(profile, 'is ===> profile')
   const { rideId, requestId } = rideRequest
   await Firebase.database()
-    .ref(`ridesRequests/${rideId}/${requestId}`)
+    .ref(`ridesRequests/${rideGroup}/${rideId}/${requestId}/profile`)
     .update(profile)
 }
 
@@ -35,5 +34,5 @@ export const getAllRideRequests = async (): Array<rideRequestFlowType> => {
 
 export const getUserRideRequests = async (userId: string): Array<rideRequestFlowType> => {
   const rides = await getAllRideRequests()
-  return rides.filter(ride => ride.driverId === userId)
+  return rides.filter(ride => ride.profile.uid === userId)
 }

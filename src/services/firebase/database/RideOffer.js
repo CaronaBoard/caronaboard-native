@@ -3,10 +3,9 @@
 import Firebase from 'firebase'
 import { toArrayOfRides } from '../Conversion'
 import _ from 'lodash'
-import type { rideType, rideOfferType } from '../types'
+import type { rideType, rideOfferType, profileFlowType } from '../types'
 import { rideGroup } from './'
 import { getUserProfile } from './Profile'
-import type { profileFlowType } from './Profile'
 
 export const saveRideOffer = async (rideOffer: rideOfferType, userId: string) => {
   const profile = await getUserProfile(userId)
@@ -39,5 +38,6 @@ export const getAllRideOffers = async (): Array<rideType> => {
 
 export const getUserRideOffers = async (userId: string) => {
   const rides = await getAllRideOffers()
+  console.log(rides, 'is ===> rides')
   return rides.filter(ride => ride.driverId === userId)
 }

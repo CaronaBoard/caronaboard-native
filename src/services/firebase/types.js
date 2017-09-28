@@ -1,4 +1,11 @@
-import type { profileFlowType } from './database/Profile'
+export type profileFlowType = {
+  name: string,
+  uid: string,
+  contact: {
+    kind: string,
+    value: string
+  }
+}
 
 export type rideType = {
   days: string,

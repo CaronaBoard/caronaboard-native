@@ -4,15 +4,7 @@ import Firebase from 'firebase'
 import { getUserRideOffers, updateRideOffer } from './RideOffer'
 import { getUserRideRequests, updateRideRequest } from './RideRequest'
 import { toRideOffer } from '../Conversion'
-
-export type profileFlowType = {
-  name: string,
-  uid: string,
-  contact: {
-    kind: string,
-    value: string
-  }
-}
+import type { profileFlowType } from '../types'
 
 export const saveProfile = async (profile: profileFlowType) => {
   try {
@@ -49,6 +41,6 @@ const updateUserProfileOnRideOffers = async (profile: profileFlowType) => {
 
 const updateUserProfileOnRideRequests = async (profile: profileFlowType) => {
   const userRideOffers = await getUserRideRequests(profile.uid)
-  const ridesToUpdate = userRideOffers.map(ride => updateRideRequest(toRideOffer(ride), profile))
+  const ridesToUpdate = userRideOffers.map(ride => updateRideRequest(ride, profile))
   Promise.all(ridesToUpdate)
 }
