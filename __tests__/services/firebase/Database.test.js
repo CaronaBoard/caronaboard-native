@@ -1,4 +1,4 @@
-import { getAllRides, getAllRideRequests, saveRideOffer, saveRideRequest, updateRideOffer, removeRideOffer } from '../../../src/services/firebase'
+import { getAllRideOffers, getAllRideRequests, saveRideOffer, saveRideRequest, updateRideOffer, removeRideOffer } from '../../../src/services/firebase'
 import RidesResponse from '../../__mocks__/Fixtures/FirebaseRidesResponse.json'
 import ProfileResponse from '../../__mocks__/Fixtures/FirebaseProfileResponse.json'
 
@@ -37,7 +37,7 @@ describe('Firebase database service', () => {
   }
 
   it('Should provide all rides as an array of rides', async () => {
-    const rides = await getAllRides()
+    const rides = await getAllRideOffers()
 
     const expectedRide = {
       driverId: 'AIYmwTmrdTfUuGeuoNF0SYgXJ1j1',
@@ -94,7 +94,7 @@ describe('Firebase database service', () => {
       hour: 'hours'
     }
 
-    await saveRideOffer(rideOffer)
+    await saveRideOffer(rideOffer, userId)
     expect(mockDatabase.ref).toHaveBeenCalledWith(`rides/${rideGroup}/${userId}`)
     expect(mockRef.push).toHaveBeenCalledWith(Object.assign({profile: userProfile}, rideOffer))
   })
@@ -117,12 +117,12 @@ describe('Firebase database service', () => {
   })
 
   it('Should remove a ride offer', async () => {
-    await removeRideOffer(rideId)
+    await removeRideOffer(rideId, userId)
     expect(mockDatabase.ref).toHaveBeenCalledWith(`rides/${rideGroup}/${userId}/${rideId}`)
   })
 
   it('Should save a ride request', async () => {
-    await saveRideRequest(rideId)
+    await saveRideRequest(rideId, userId)
     expect(mockDatabase.ref).toHaveBeenCalledWith(`ridesRequests/${rideGroup}/${rideId}`)
     expect(mockRef.push).toHaveBeenCalledWith({profile: userProfile})
   })

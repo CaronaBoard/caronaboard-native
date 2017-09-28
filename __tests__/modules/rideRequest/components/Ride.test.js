@@ -17,7 +17,8 @@ const props = {
         'kind': 'Whatsapp', 'value': '5198269999'
       },
       'name': 'Eduardo' }
-  }
+  },
+  userId: 'kakaroto'
 }
 
 describe('<Ride />', () => {

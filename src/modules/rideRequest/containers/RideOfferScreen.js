@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { View } from 'react-native'
 import { RkText } from 'react-native-ui-kitten'
@@ -17,13 +18,21 @@ export const INITIAL_STATE = {
 
 export class RideOfferScreen extends Component {
   static propTypes = {
-    navigator: PropTypes.object.isRequired
+    navigator: PropTypes.object.isRequired,
+    userId: PropTypes.string.isRequired
   }
 
   constructor (props) {
     super(props)
     this.state = INITIAL_STATE
     this.props.navigator.setOnNavigatorEvent(onNavigatorEvent.bind(this))
+  }
+
+  offerRide = async () => {
+    const rideOffer = await saveRideOffer(this.state, this.props.userId)
+    if (rideOffer) {
+      alert('Success')
+    }
   }
 
   render () {
@@ -39,11 +48,17 @@ export class RideOfferScreen extends Component {
             <TextInput placeholder='DAYS' onChangeText={(days) => this.setState({days})} />
             <TextInput placeholder='HOUR' onChangeText={(hours) => this.setState({hours})} />
           </View>
-          <Button text='Offer Ride' onPress={() => saveRideOffer(this.state)} />
+          <Button text='Offer Ride' onPress={this.offerRide} />
         </View>
       </View>
     )
   }
 }
 
-export default RideOfferScreen
+const mapStateToProps = (state) => {
+  return {
+    userId: state.auth.userData.uid
+  }
+}
+
+export default connect(mapStateToProps)(RideOfferScreen)

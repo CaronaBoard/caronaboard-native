@@ -7,13 +7,12 @@ import {
   FORGOT_PASSWORD_SUCCESS
 } from '../types'
 
+// TODO: DONT COMMIT THIS
 export const INITIAL_STATE = {
-  userData: {
-    uid: '',
-    emailVerified: false,
-    email: '',
-    phoneNumber: null
-  },
+  userData: { uid: 'r9okas9rioSvzy11AycFwue1L063',
+    emailVerified: true,
+    email: 'eduardomoroni@gmail.com',
+    phoneNumber: null },
   alert: {
     showAlert: false,
     message: ''

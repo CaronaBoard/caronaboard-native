@@ -23,7 +23,7 @@ const mockedRides = {
 
 describe('RideOfferReducers', () => {
   it('Should handle FETCH_ALL_RIDES action type', async () => {
-    FirebaseService.getAllRides = jest.fn(() => mockedRides)
+    FirebaseService.getAllRideOffers = jest.fn(() => mockedRides)
 
     const action = await extractActionFromThunk(fetchAllRides)
     const state = RideOfferReducers(INITIAL_STATE, action)

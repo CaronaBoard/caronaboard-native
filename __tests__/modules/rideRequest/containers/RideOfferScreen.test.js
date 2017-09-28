@@ -9,7 +9,8 @@ jest.mock('../../../../src/services/firebase')
 const props = {
   navigator: {
     setOnNavigatorEvent: jest.fn()
-  }
+  },
+  userId: 'someId'
 }
 
 describe('<RideOfferScreen />', () => {
@@ -23,6 +24,6 @@ describe('<RideOfferScreen />', () => {
     // TODO: I Think that' not a good idea calling services directly, we should use action
     Firebase.saveRideOffer = jest.fn()
     wrapper.find(Button).simulate('press')
-    expect(Firebase.saveRideOffer).toHaveBeenCalledWith(INITIAL_STATE)
+    expect(Firebase.saveRideOffer).toHaveBeenCalledWith(INITIAL_STATE, props.userId)
   })
 })

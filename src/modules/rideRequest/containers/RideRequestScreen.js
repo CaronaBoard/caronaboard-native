@@ -1,36 +1,35 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
-
-import { GradientButton } from '../../shared/components'
-import { Ride } from '../components/Ride'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { RideRequest } from '../components/RideRequest'
+import { ridePropTypes } from '../types'
 import { saveRideRequest } from '../../../services/firebase'
-import { ridePropTypes } from '../types/index'
-import styles from './styles/RideRequestScreenStyles'
 
+// TODO: Revisit, make sure that this should be a container ninstead of a component
 export class RideRequestScreen extends Component {
   static propTypes = {
-    ride: ridePropTypes
+    ride: ridePropTypes,
+    userId: PropTypes.string.isRequired
+  }
+
+  askForRide = (rideId: string) => async () => {
+    const ride = await saveRideRequest(rideId, this.props.userId)
+    if (ride) {
+      alert('Success')
+    }
   }
 
   render () {
-    const { ride } = this.props
     return (
-      <View style={styles.flexible}>
-        <View style={styles.container}>
-          <View style={styles.inputTextsContainer}>
-            <Ride ride={ride} />
-          </View>
-        </View>
-        <View style={styles.centralized}>
-          <GradientButton
-            rkType='large'
-            text={'SAVE'}
-            onPress={() => saveRideRequest(ride.rideId)}
-          />
-        </View>
-      </View>
+      <RideRequest ride={this.props.ride} saveRideRequest={this.askForRide} />
     )
   }
 }
 
-export default RideRequestScreen
+const mapStateToProps = (state) => {
+  return {
+    userId: state.auth.userData.uid
+  }
+}
+
+export default connect(mapStateToProps)(RideRequestScreen)

@@ -5,14 +5,15 @@ import { ListView } from 'react-native'
 import { fetchAllRides } from '../../../redux/actions'
 import { connect } from 'react-redux'
 import { Ride } from '../components/Ride'
-import { ridePropTypes } from '../types/index'
+import { ridePropTypes } from '../types'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
 import styles from './styles/RideListStyles'
 
 export class RideList extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
-    rides: PropTypes.arrayOf(ridePropTypes)
+    rides: PropTypes.arrayOf(ridePropTypes),
+    userId: PropTypes.string.isRequired
   }
 
   constructor (props) {
@@ -34,11 +35,12 @@ export class RideList extends Component {
   }
 
   render () {
+    const { userId, navigator } = this.props
     return (
       <ListView
         style={styles.container}
         dataSource={this.state.dataSource}
-        renderRow={(ride) => <Ride ride={ride} navigator={this.props.navigator} />}
+        renderRow={(ride) => <Ride ride={ride} navigator={navigator} userId={userId} />}
         enableEmptySections
       />
     )
@@ -47,7 +49,8 @@ export class RideList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    rides: state.rideOffer.rides
+    rides: state.rideOffer.rides,
+    userId: state.auth.userData.uid
   }
 }
 

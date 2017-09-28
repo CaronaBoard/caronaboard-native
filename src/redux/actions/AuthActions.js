@@ -30,9 +30,9 @@ export function signUpFirebase (email, password) {
   }
 }
 
-export function saveProfileFirebase (profile) {
+export function saveProfileFirebase (profile: any, userId: string) {
   return async (dispatch) => {
-    await saveProfile(profile).then(userData => {
+    await saveProfile(profile, userId).then(userData => {
       dispatch({ type: SAVE_PROFILE_FIREBASE, payload: userData })
     })
       .catch(err => {

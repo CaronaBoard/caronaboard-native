@@ -1,20 +1,29 @@
 import Styles from './styles/ProfileScreenStyles'
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { View, TouchableOpacity } from 'react-native'
 import { RkText, RkChoice, RkChoiceGroup } from 'react-native-ui-kitten'
+
 import { TextInput, GradientButton } from '../../shared/components'
 import { saveProfileFirebase } from '../../../redux/actions'
-import { connect } from 'react-redux'
 
 export const CONTACT_OPTIONS = ['Whatsapp', 'Telegram']
 
 export class ProfileScreen extends Component {
+  static propTypes = {
+    navigator: PropTypes.object.isRequired,
+    userId: PropTypes.string.isRequired,
+    profile: PropTypes.string
+  }
+
   onContactOptionSelected = (contactKind) => {
     this.setState({contactKind})
   }
 
   onButtonSubmit = async () => {
     this.setState({loading: true})
+
     let profile = {
       name: this.state.name,
       contact: {
@@ -23,7 +32,7 @@ export class ProfileScreen extends Component {
       }
     }
     try {
-      this.props.saveProfile(profile)
+      this.props.saveProfile(profile, this.props.userId)
     } catch (error) {
       this.setState({loading: false})
       console.error(error)
@@ -79,13 +88,14 @@ export class ProfileScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    profile: state.auth.profile
+    profile: state.auth.profile, // TODO: do we have profile saved into state?
+    userId: state.auth.userData.uid
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveProfile: (profile) => dispatch(saveProfileFirebase(profile))
+    saveProfile: (profile, userId) => dispatch(saveProfileFirebase(profile, userId))
   }
 }
 
