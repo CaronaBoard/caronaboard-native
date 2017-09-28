@@ -1,4 +1,5 @@
 // @flow
+
 import _ from 'lodash'
 import type { rideType } from './types'
 
