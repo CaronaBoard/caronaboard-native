@@ -2,7 +2,7 @@ import SignUpScreen from '../modules/authentication/containers/SignUpScreen'
 import ForgotPasswordScreen from '../modules/authentication/containers/ForgotPasswordScreen'
 import ProfileScreen from '../modules/authentication/containers/ProfileScreen'
 import RideList from '../modules/rideRequest/containers/RideList'
-import RideOffer from '../modules/rideRequest/containers/RideOfferScreen'
+import RideOffer from '../modules/rideOffer/containers/RideOfferScreen'
 import RideRequest from '../modules/rideRequest/containers/RideRequestScreen'
 import YourRideOfferList from '../modules/rideOffer/containers/YourRideOffersScreen'
 
