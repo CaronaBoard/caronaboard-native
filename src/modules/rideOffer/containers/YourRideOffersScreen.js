@@ -6,6 +6,7 @@ import { RideOffer } from '../components/RideOffer'
 import { getUserRideOffers, removeRideOffer } from '../../../services/firebase/database/RideOffer'
 import { FloatingActionButton } from '../../shared/components/FloatingActionButton'
 import { screens } from '../../../navigation/Screens'
+import { onNavigatorEvent } from '../../../navigation/NavBar'
 
 export const INITIAL_STATE = {
   rides: []
@@ -18,6 +19,11 @@ export class YourRideOffersScreen extends Component {
   }
 
   state = INITIAL_STATE
+
+  constructor (props) {
+    super(props)
+    this.props.navigator.setOnNavigatorEvent(onNavigatorEvent.bind(this))
+  }
 
   async componentDidMount () {
     const rides = await getUserRideOffers(this.props.profile.uid)
