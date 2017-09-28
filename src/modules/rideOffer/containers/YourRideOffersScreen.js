@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { FlatList, View, Alert } from 'react-native'
 import { RideOffer } from '../components/RideOffer'
-import { getUserRideOffers } from '../../../services/firebase/database/RideOffer'
+import { getUserRideOffers, removeRideOffer } from '../../../services/firebase/database/RideOffer'
 import { FloatingActionButton } from '../../shared/components/FloatingActionButton'
 import { screens } from '../../../navigation/Screens'
 
@@ -19,7 +19,7 @@ export class YourRideOffersScreen extends Component {
 
   state = INITIAL_STATE
 
-  componentDidMount = async () => {
+  async componentDidMount () {
     const rides = await getUserRideOffers(this.props.profile.uid)
     this.setState({rides})
   }
@@ -33,8 +33,15 @@ export class YourRideOffersScreen extends Component {
       'Delete Ride Offer',
       'Just a confirmation whether you wanna delete this ride or not.',
       [
-        {text: 'Sure thing, delete!', style: 'destructive', onPress: () => null},
-        {text: 'Not yet, Thanks', style: 'cancel'}
+        {
+          text: 'Sure thing, delete!',
+          style: 'destructive',
+          onPress: () => removeRideOffer(rideId, this.props.profile.uid)
+        },
+        {
+          text: 'Not yet, Thanks',
+          style: 'cancel'
+        }
       ],
       { cancelable: true }
     )
