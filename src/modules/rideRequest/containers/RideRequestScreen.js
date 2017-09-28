@@ -13,7 +13,6 @@ export class RideRequestScreen extends Component {
   }
 
   askForRide = (rideId: string) => async () => {
-    console.log('===> this.props.userId is asdasd: ', this.props.userId)
     const ride = await saveRideRequest(rideId, this.props.userId)
     if (ride) {
       alert('Success')

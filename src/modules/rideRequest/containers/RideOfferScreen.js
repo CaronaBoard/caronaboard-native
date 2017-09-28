@@ -28,8 +28,8 @@ export class RideOfferScreen extends Component {
     this.props.navigator.setOnNavigatorEvent(onNavigatorEvent.bind(this))
   }
 
-  offerRide = async (ride) => {
-    const rideOffer = await saveRideOffer(ride)
+  offerRide = async () => {
+    const rideOffer = await saveRideOffer(this.state, this.props.userId)
     if (rideOffer) {
       alert('Success')
     }
@@ -48,7 +48,7 @@ export class RideOfferScreen extends Component {
             <TextInput placeholder='DAYS' onChangeText={(days) => this.setState({days})} />
             <TextInput placeholder='HOUR' onChangeText={(hours) => this.setState({hours})} />
           </View>
-          <Button text='Offer Ride' onPress={() => this.offerRide(this.state)} />
+          <Button text='Offer Ride' onPress={this.offerRide} />
         </View>
       </View>
     )
