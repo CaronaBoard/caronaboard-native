@@ -3,17 +3,10 @@
 import Firebase from 'firebase'
 import { toArrayOfRides } from '../Conversion'
 import _ from 'lodash'
-import type { rideType } from '../types'
+import type { rideType, rideOfferType } from '../types'
 import { rideGroup } from './'
 import { getUserProfile } from './Profile'
-
-type rideOfferType = {
-  id: string,
-  origin: string,
-  destination: string,
-  days: string,
-  hour: string
-}
+import type { profileFlowType } from './Profile'
 
 export const saveRideOffer = async (rideOffer: rideOfferType, userId: string) => {
   const profile = await getUserProfile(userId)
@@ -23,8 +16,10 @@ export const saveRideOffer = async (rideOffer: rideOfferType, userId: string) =>
     .push(Object.assign({ profile }, rideOffer))
 }
 
-export const updateRideOffer = async (rideOffer: rideOfferType, userId: string) => {
-  const profile = await getUserProfile(userId)
+export const updateRideOffer = async (rideOffer: rideOfferType, userId: string, profile?: profileFlowType) => {
+  if (!profile) {
+    profile = await getUserProfile(userId)
+  }
 
   let pathsToUpdate = {}
   pathsToUpdate[`rides/${rideGroup}/${userId}/${rideOffer.id}`] = Object.assign({profile: profile}, _.omit(rideOffer, 'id'))

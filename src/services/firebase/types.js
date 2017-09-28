@@ -13,3 +13,11 @@ export type rideType = {
     }
   }
 }
+
+export type rideOfferType = {
+  id: string,
+  origin: string,
+  destination: string,
+  days: string,
+  hour: string
+}

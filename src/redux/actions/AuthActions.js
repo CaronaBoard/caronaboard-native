@@ -1,5 +1,5 @@
 import { signIn, signUp, forgotPassword, saveProfile } from '../../services/firebase'
-import type { profileType } from '../../services/firebase/database/Profile'
+import type { profileFlowType } from '../../services/firebase/database/Profile'
 import {
   SIGN_IN_FIREBASE,
   SAVE_PROFILE_FIREBASE,
@@ -31,7 +31,7 @@ export function signUpFirebase (email: string, password: string) {
   }
 }
 
-export function saveProfileFirebase (profile: profileType, userId: string) {
+export function saveProfileFirebase (profile: profileFlowType, userId: string) {
   return async (dispatch) => {
     try {
       await saveProfile(profile, userId)

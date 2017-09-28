@@ -1,8 +1,10 @@
 // @flow
 
 import Firebase from 'firebase'
+import { getUserRideOffers, updateRideOffer } from './RideOffer'
+import { toRideOffer } from '../Conversion'
 
-export type profileType = {
+export type profileFlowType = {
   name: string,
   contact: {
     kind: string,
@@ -10,18 +12,18 @@ export type profileType = {
   }
 }
 
-export const saveProfile = async (profile: profileType, userId: string) => {
+export const saveProfile = async (profile: profileFlowType, userId: string) => {
   try {
     await Firebase.database().ref(`profiles/${userId}`).update(profile)
 
-    updateUserProfileOnRideOffers(profile)
-    updateUserProfileOnRideRequests(profile)
+    updateUserProfileOnRideOffers(profile, userId)
+    updateUserProfileOnRideRequests(profile, userId)
   } catch (error) {
     console.error(error)
   }
 }
 
-export const getUserProfile = async (userId: string): profileType => {
+export const getUserProfile = async (userId: string): profileFlowType => {
   const profileSnapshot = await Firebase.database()
     .ref(`profiles/${userId}`)
     .once('value')
@@ -35,10 +37,13 @@ export const getUserProfile = async (userId: string): profileType => {
   return profile
 }
 
-const updateUserProfileOnRideOffers = (profile: profileType) => {
-  console.log('===> profile is: ', profile)
+const updateUserProfileOnRideOffers = async (profile: profileFlowType, userId: string) => {
+  const userRideOffers = await getUserRideOffers(userId)
+  userRideOffers.forEach(async ride => {
+    await updateRideOffer(toRideOffer(ride), userId, profile)
+  })
 }
 
-const updateUserProfileOnRideRequests = (profile: profileType) => {
+const updateUserProfileOnRideRequests = (profile: profileFlowType, userId: string) => {
   console.log('===> profile is: ', profile)
 }
