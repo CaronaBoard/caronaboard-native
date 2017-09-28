@@ -38,6 +38,5 @@ export const getAllRideOffers = async (): Array<rideType> => {
 
 export const getUserRideOffers = async (userId: string) => {
   const rides = await getAllRideOffers()
-  console.log(rides, 'is ===> rides')
   return rides.filter(ride => ride.driverId === userId)
 }

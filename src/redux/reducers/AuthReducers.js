@@ -16,10 +16,11 @@ export const INITIAL_STATE = {
     phoneNumber: null
   },
   profile: {
-    name: '',
+    name: 'Charles Xavies',
+    uid: 'r9okas9rioSvzy11AycFwue1L063',
     contact: {
-      kind: '',
-      value: ''
+      kind: 'Whatsapp',
+      value: '123123213'
     }
   },
   alert: {
