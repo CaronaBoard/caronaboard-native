@@ -94,7 +94,7 @@ describe('Firebase database service', () => {
       hour: 'hours'
     }
 
-    await saveRideOffer(rideOffer)
+    await saveRideOffer(rideOffer, userId)
     expect(mockDatabase.ref).toHaveBeenCalledWith(`rides/${rideGroup}/${userId}`)
     expect(mockRef.push).toHaveBeenCalledWith(Object.assign({profile: userProfile}, rideOffer))
   })
@@ -117,12 +117,12 @@ describe('Firebase database service', () => {
   })
 
   it('Should remove a ride offer', async () => {
-    await removeRideOffer(rideId)
+    await removeRideOffer(rideId, userId)
     expect(mockDatabase.ref).toHaveBeenCalledWith(`rides/${rideGroup}/${userId}/${rideId}`)
   })
 
   it('Should save a ride request', async () => {
-    await saveRideRequest(rideId)
+    await saveRideRequest(rideId, userId)
     expect(mockDatabase.ref).toHaveBeenCalledWith(`ridesRequests/${rideGroup}/${rideId}`)
     expect(mockRef.push).toHaveBeenCalledWith({profile: userProfile})
   })

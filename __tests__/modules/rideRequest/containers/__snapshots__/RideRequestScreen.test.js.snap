@@ -1,65 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RideRequestScreen /> Snapshot have a snapshot 1`] = `
-<View
-  style={
+<RideRequest
+  ride={
     Object {
-      "flex": 1,
+      "area": "Aeroporto",
+      "days": "Seg a Sex",
+      "destination": "Rodoviaria",
+      "driverId": "driverId",
+      "hours": "19h",
+      "origin": "Tecnopuc",
+      "profile": Object {
+        "contact": Object {
+          "kind": "Whatsapp",
+          "value": "5198269999",
+        },
+        "name": "Eduardo",
+      },
+      "rideId": "rideId",
     }
   }
->
-  <View
-    style={
-      Object {
-        "flex": 1,
-        "justifyContent": "space-around",
-        "paddingHorizontal": 50,
-      }
-    }
-  >
-    <View
-      style={
-        Object {
-          "minHeight": 370,
-        }
-      }
-    >
-      <Ride
-        ride={
-          Object {
-            "area": "Aeroporto",
-            "days": "Seg a Sex",
-            "destination": "Rodoviaria",
-            "driverId": "driverId",
-            "hours": "19h",
-            "origin": "Tecnopuc",
-            "profile": Object {
-              "contact": Object {
-                "kind": "Whatsapp",
-                "value": "5198269999",
-              },
-              "name": "Eduardo",
-            },
-            "rideId": "rideId",
-          }
-        }
-      />
-    </View>
-  </View>
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-        "justifyContent": "center",
-      }
-    }
-  >
-    <GradientButton
-      onPress={[Function]}
-      rkType="large"
-      text="SAVE"
-    />
-  </View>
-</View>
+  saveRideRequest={[Function]}
+/>
 `;

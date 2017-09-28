@@ -23,7 +23,6 @@ export class ProfileScreen extends Component {
 
   onButtonSubmit = async () => {
     this.setState({loading: true})
-    console.log('===> this.props.userId is: ', this.props.userId)
 
     let profile = {
       name: this.state.name,

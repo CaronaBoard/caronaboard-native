@@ -1,10 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { RideRequestScreen } from '../../../../src/modules/rideRequest/containers/RideRequestScreen'
-import { GradientButton } from '../../../../src/modules/shared/components'
-
-import * as Firebase from '../../../../src/services/firebase'
-jest.mock('../../../../src/services/firebase')
 
 const props = {
   ride: {
@@ -20,7 +16,8 @@ const props = {
         'kind': 'Whatsapp', 'value': '5198269999'
       },
       'name': 'Eduardo' }
-  }
+  },
+  userId: 'kakaroto'
 }
 
 describe('<RideRequestScreen />', () => {
@@ -28,12 +25,5 @@ describe('<RideRequestScreen />', () => {
 
   it('Snapshot have a snapshot', () => {
     expect(wrapper).toMatchSnapshot()
-  })
-
-  it('Should call firebase service to request a ride', () => {
-    // TODO: I Think that' not a good idea calling services directly, we should use action
-    Firebase.saveRideRequest = jest.fn()
-    wrapper.find(GradientButton).simulate('press')
-    expect(Firebase.saveRideRequest).toHaveBeenCalledWith(props.ride.rideId)
   })
 })

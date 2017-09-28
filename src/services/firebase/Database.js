@@ -35,7 +35,6 @@ export const getUserRideOffers = async (userId: string) => {
 }
 
 export const getUserProfile = async (userId: string) => {
-  console.log('===> userId is: ', userId)
   const profileSnapshot = await Firebase.database()
     .ref(`profiles/${userId}`)
     .once('value')
@@ -75,7 +74,6 @@ export const removeRideOffer = async (rideId: string, userId: string) => {
 }
 
 export const saveRideRequest = async (rideId: string, userId: string) => {
-  console.log('===> rideId,  userId is: ', rideId, userId)
   const profile = await getUserProfile(userId)
 
   return Firebase.database()

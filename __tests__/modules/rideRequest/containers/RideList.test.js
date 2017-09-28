@@ -21,7 +21,8 @@ const props = {
   fetchRides: jest.fn(),
   navigator: {
     setOnNavigatorEvent: jest.fn()
-  }
+  },
+  userId: 'kakaroto'
 }
 
 describe('<RideList />', () => {
