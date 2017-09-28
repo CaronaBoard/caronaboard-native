@@ -15,8 +15,6 @@ export const saveRideRequest = async (rideId: string, userId: string) => {
 }
 
 export const updateRideRequest = async (rideRequest: rideRequestFlowType, profile: profileFlowType) => {
-  console.log(rideRequest, 'is ===> rideRequest')
-  console.log(profile, 'is ===> profile')
   const { rideId, requestId } = rideRequest
   await Firebase.database()
     .ref(`ridesRequests/${rideGroup}/${rideId}/${requestId}/profile`)

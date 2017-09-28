@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { View, TouchableOpacity } from 'react-native'
 import { RkText, RkChoice, RkChoiceGroup } from 'react-native-ui-kitten'
-import type { profileFlowType } from '../../../services/firebase/database/Profile'
+import type { profileFlowType } from '../../../services/firebase/types'
 import { profilePropType } from '../types'
 
 import { TextInput, GradientButton } from '../../shared/components'
@@ -12,11 +12,15 @@ import { saveProfileFirebase } from '../../../redux/actions'
 
 export const CONTACT_OPTIONS = ['Whatsapp', 'Telegram']
 export const INITIAL_STATE: profileFlowType = {
-  name: '',
-  contact: {
-    kind: '',
-    value: ''
-  }
+  profile: {
+    name: '',
+    uid: '',
+    contact: {
+      kind: '',
+      value: ''
+    }
+  },
+  loading: false
 }
 
 export class ProfileScreen extends Component {
@@ -29,17 +33,17 @@ export class ProfileScreen extends Component {
   state = INITIAL_STATE
 
   onContactOptionSelected = kind => {
-    this.setState({contact: {...this.state.contact, kind}})
+    const { profile } = this.state
+    let { contact } = profile
+    contact.kind = kind
+    this.setState({profile: {...profile, contact}})
   }
 
   onButtonSubmit = async () => {
     this.setState({loading: true})
 
-    const profile = {...this.state, uid: this.props.userId}
-    delete profile.loading
-
     try {
-      this.props.saveProfile(profile)
+      this.props.saveProfile(this.state.profile)
     } catch (error) {
       console.error(error)
     }
@@ -47,17 +51,26 @@ export class ProfileScreen extends Component {
     this.setState({loading: false})
   }
 
+  renderOption = (option, i) => (
+    <View key={i}>
+      <TouchableOpacity choiceTrigger>
+        <View style={Styles.contactOption}>
+          <RkChoice rkType='radio' />
+          <RkText>{option}</RkText>
+        </View>
+      </TouchableOpacity>
+    </View>
+  )
+
+  componentDidMount () {
+    const { profile } = this.props
+    console.log(profile, 'is ===> profile')
+    this.setState({profile, loading: false})
+  }
+
   render () {
-    let renderOption = (option, i) => (
-      <View key={i}>
-        <TouchableOpacity choiceTrigger>
-          <View style={Styles.contactOption}>
-            <RkChoice rkType='radio' />
-            <RkText>{option}</RkText>
-          </View>
-        </TouchableOpacity>
-      </View>
-    )
+    const { profile } = this.state
+    const { contact, name } = profile
 
     return (
       <View style={Styles.flexible}>
@@ -68,18 +81,22 @@ export class ProfileScreen extends Component {
           <View style={Styles.inputTextsContainer}>
             <TextInput
               placeholder='Your name'
-              onChangeText={name => { this.setState({name}) }} />
+              value={name}
+              onChangeText={name => { this.setState({profile: {...profile, name}}) }}
+            />
           </View>
           <RkChoiceGroup
             radio
             rkType='clear'
             onChange={index => this.onContactOptionSelected(CONTACT_OPTIONS[index])}>
-            {CONTACT_OPTIONS.map(renderOption)}
+            {CONTACT_OPTIONS.map(this.renderOption)}
           </RkChoiceGroup>
           <View style={Styles.inputTextsContainer}>
             <TextInput
               placeholder='Number'
-              onChangeText={value => { this.setState({contact: {...this.state.contact, value}}) }} />
+              value={contact.value}
+              onChangeText={value => { this.setState({profile: {...profile, contact: {...contact, value}}}) }}
+            />
           </View>
         </View>
         <View style={Styles.centralized}>
