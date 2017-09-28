@@ -12,5 +12,4 @@ describe('<FloatingActionButton />', () => {
   it('Should have a snapshot', () => {
     expect(wrapper).toMatchSnapshot()
   })
-
 })
