@@ -1,5 +1,4 @@
-import { signIn, signUp, forgotPassword } from '../../services/firebase'
-import { saveProfile } from '../../services/firebase/database/index'
+import { signIn, signUp, forgotPassword, saveProfile } from '../../services/firebase'
 import type { profileType } from '../../services/firebase/database/Profile'
 import {
   SIGN_IN_FIREBASE,
@@ -36,7 +35,7 @@ export function saveProfileFirebase (profile: profileType, userId: string) {
   return async (dispatch) => {
     try {
       await saveProfile(profile, userId)
-      dispatch({ type: SAVE_PROFILE_FIREBASE, payload: profile })
+      dispatch({ type: SAVE_PROFILE_FIREBASE, profile })
     } catch (err) {
       console.log('Error saving profile: ', err)
     }
