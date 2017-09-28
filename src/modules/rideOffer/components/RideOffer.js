@@ -4,6 +4,7 @@ import Styles from './styles/RideOfferStyles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkCard } from 'react-native-ui-kitten'
 import { ridePropTypes } from '../../rideRequest/types'
+import PropTypes from 'prop-types'
 
 const renderLine = (text, icon) => {
   return (
@@ -12,10 +13,6 @@ const renderLine = (text, icon) => {
       <Text rkCardText>{text}</Text>
     </View>
   )
-}
-
-const onPress = (rideId: string) => {
-  alert(`Deseja deletar ${rideId}?. (NAO IMPLEMENTADO)`)
 }
 
 export const RideOffer = props => {
@@ -28,7 +25,7 @@ export const RideOffer = props => {
   } = props.ride
 
   return (
-    <TouchableOpacity onPress={() => onPress(rideId)}>
+    <TouchableOpacity onPress={() => props.onPress(rideId)}>
       <RkCard>
         <View rkCardContent>
           { renderLine(origin, 'radio-button-unchecked') }
@@ -38,11 +35,18 @@ export const RideOffer = props => {
           { renderLine(days, 'today') }
           { renderLine(hours, 'schedule') }
         </View>
+        <Icon
+          name='delete-forever'
+          size={30}
+          color='#900'
+          style={Styles.deleteIcon}
+        />
       </RkCard>
     </TouchableOpacity>
   )
 }
 
 RideOffer.propTypes = {
-  ride: ridePropTypes
+  ride: ridePropTypes,
+  onPress: PropTypes.func.isRequired
 }

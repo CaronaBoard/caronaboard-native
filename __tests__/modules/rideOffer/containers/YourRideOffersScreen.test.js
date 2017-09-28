@@ -3,7 +3,10 @@ import { shallow } from 'enzyme'
 import { YourRideOffersScreen } from '../../../../src/modules/rideOffer/containers/YourRideOffersScreen'
 
 const props = {
-  profile: {}
+  profile: {},
+  navigator: {
+    setOnNavigatorEvent: jest.fn()
+  }
 }
 
 describe('<YourRideOffersScreen />', () => {
