@@ -31,10 +31,10 @@ export function signUpFirebase (email: string, password: string) {
   }
 }
 
-export function saveProfileFirebase (profile: profileFlowType, userId: string) {
+export function saveProfileFirebase (profile: profileFlowType) {
   return async (dispatch) => {
     try {
-      await saveProfile(profile, userId)
+      await saveProfile(profile)
       dispatch({ type: SAVE_PROFILE_FIREBASE, profile })
     } catch (err) {
       console.log('Error saving profile: ', err)

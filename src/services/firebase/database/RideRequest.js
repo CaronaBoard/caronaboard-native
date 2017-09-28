@@ -1,9 +1,10 @@
 // @flow
 
 import Firebase from 'firebase'
-import { toArrayOfRides } from '../Conversion'
+import { toArrayOfRideRequests } from '../Conversion'
 import { getUserProfile } from './Profile'
-import type { rideType } from '../types'
+import type { rideType, rideRequestFlowType } from '../types'
+import type { profileFlowType } from './Profile'
 import { rideGroup } from './'
 
 export const saveRideRequest = async (rideId: string, userId: string) => {
@@ -14,11 +15,26 @@ export const saveRideRequest = async (rideId: string, userId: string) => {
     .push({profile})
 }
 
-export const getAllRideRequests = async (): Array<rideType> => {
+export const updateRideRequest = async (rideRequest: rideRequestFlowType, userId: string, profile: profileFlowType) => {
+  console.log(rideRequest, 'is ===> rideRequest')
+  console.log(userId, 'is ===> userId')
+  console.log(profile, 'is ===> profile')
+  const { rideId, requestId } = rideRequest
+  await Firebase.database()
+    .ref(`ridesRequests/${rideId}/${requestId}`)
+    .update(profile)
+}
+
+export const getAllRideRequests = async (): Array<rideRequestFlowType> => {
   const rideRequests = await Firebase.database()
-    .ref(`ridesRequests/${rideGroup}`)
+    .ref('ridesRequests')
     .child(rideGroup)
     .once('value')
+  
+  return toArrayOfRideRequests(rideRequests.val())
+}
 
-  return toArrayOfRides(rideRequests.val())
+export const getUserRideRequests = async (userId: string): Array<rideRequestFlowType> => {
+  const rides = await getAllRideRequests()
+  return rides.filter(ride => ride.driverId === userId)
 }

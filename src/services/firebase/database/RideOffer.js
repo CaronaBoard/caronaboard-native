@@ -16,17 +16,10 @@ export const saveRideOffer = async (rideOffer: rideOfferType, userId: string) =>
     .push(Object.assign({ profile }, rideOffer))
 }
 
-export const updateRideOffer = async (rideOffer: rideOfferType, userId: string, profile?: profileFlowType) => {
-  if (!profile) {
-    profile = await getUserProfile(userId)
-  }
-
-  let pathsToUpdate = {}
-  pathsToUpdate[`rides/${rideGroup}/${userId}/${rideOffer.id}`] = Object.assign({profile: profile}, _.omit(rideOffer, 'id'))
-
-  await Firebase.database().ref().update(pathsToUpdate)
-
-  return rideOffer
+export const updateRideOffer = async (rideOffer: rideOfferType, userId: string, profile: profileFlowType) => {
+  await Firebase.database()
+    .ref(`rides/${rideGroup}/${userId}/${rideOffer.id}`)
+    .update(Object.assign({profile: profile}, _.omit(rideOffer, 'id')))
 }
 
 export const removeRideOffer = async (rideId: string, userId: string) => {

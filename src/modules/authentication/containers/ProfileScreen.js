@@ -35,8 +35,11 @@ export class ProfileScreen extends Component {
   onButtonSubmit = async () => {
     this.setState({loading: true})
 
+    const profile = {...this.state, uid: this.props.userId}
+    delete profile.loading
+
     try {
-      this.props.saveProfile(this.state, this.props.userId)
+      this.props.saveProfile(profile)
     } catch (error) {
       console.error(error)
     }
