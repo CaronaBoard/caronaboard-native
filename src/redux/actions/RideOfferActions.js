@@ -1,9 +1,9 @@
 import { FETCH_ALL_RIDES } from '../types'
-import { getAllRides } from '../../services/firebase'
+import { getAllRideOffers } from '../../services/firebase'
 
 export function fetchAllRides () {
   return async (dispatch) => {
-    const rides = await getAllRides()
+    const rides = await getAllRideOffers()
     const action = {
       type: FETCH_ALL_RIDES,
       payload: rides

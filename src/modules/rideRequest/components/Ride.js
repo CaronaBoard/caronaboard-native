@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { View, Text, TouchableOpacity } from 'react-native'
 import Styles from './styles/RideStyles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -8,7 +9,8 @@ import { ridePropTypes } from '../types/index'
 
 export class Ride extends Component {
   static propTypes = {
-    ride: ridePropTypes
+    ride: ridePropTypes,
+    userId: PropTypes.string.isRequired
   }
 
   renderLine (subTitle, icon) {
@@ -20,10 +22,11 @@ export class Ride extends Component {
     )
   }
 
-  pushTestScreen (ride) {
+  pushRideRequestScreen () {
+    const { ride, userId } = this.props
     this.props.navigator.push({
       screen: screens.rideRequest.id,
-      passProps: { ride }
+      passProps: { ride, userId }
     })
   }
 
@@ -37,7 +40,7 @@ export class Ride extends Component {
      } = this.props.ride
 
     return (
-      <TouchableOpacity onPress={() => this.pushTestScreen(this.props.ride)}>
+      <TouchableOpacity onPress={() => this.pushRideRequestScreen()}>
         <View>
           <RkCard>
             <View rkCardContent>

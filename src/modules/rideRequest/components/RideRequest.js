@@ -1,23 +1,17 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { View, Text } from 'react-native'
 import Styles from './styles/RideStyles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkCard } from 'react-native-ui-kitten'
 import { ridePropTypes } from '../types'
 import { GradientButton } from '../../shared/components'
-import { saveRideRequest } from '../../../services/firebase'
 import styles from './styles/RideRequestStyles'
 
 export class RideRequest extends Component {
   static propTypes = {
-    ride: ridePropTypes
-  }
-
-  askForRide = async (rideId: string) => {
-    const ride = await saveRideRequest(rideId)
-    if (ride) {
-      alert('Success')
-    }
+    ride: ridePropTypes,
+    saveRideRequest: PropTypes.func.isRequired
   }
 
   renderLine (subTitle, icon) {
@@ -36,7 +30,8 @@ export class RideRequest extends Component {
         days,
         hours,
         profile,
-        rideId
+        rideId,
+        saveRideRequest
      } = this.props.ride
 
     return (
@@ -63,7 +58,7 @@ export class RideRequest extends Component {
           <GradientButton
             rkType='large'
             text={'Ask for a ride'}
-            onPress={() => this.askForRide(rideId)}
+            onPress={saveRideRequest(rideId)}
           />
         </View>
       </View>
