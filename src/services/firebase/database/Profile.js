@@ -14,13 +14,13 @@ export type profileFlowType = {
   }
 }
 
-export const saveProfile = async (profile: profileFlowType, userId: string) => {
+export const saveProfile = async (profile: profileFlowType) => {
   try {
-    await Firebase.database().ref(`profiles/${userId}`).update(profile)
+    await Firebase.database().ref(`profiles/${profile.uid}`).update(profile)
 
     Promise.all([
-      updateUserProfileOnRideOffers(profile, userId),
-      updateUserProfileOnRideRequests(profile, userId)
+      updateUserProfileOnRideOffers(profile),
+      updateUserProfileOnRideRequests(profile)
     ])
   } catch (error) {
     console.error(error)
@@ -41,14 +41,14 @@ export const getUserProfile = async (userId: string): profileFlowType => {
   return profile
 }
 
-const updateUserProfileOnRideOffers = async (profile: profileFlowType, userId: string) => {
-  const userRideOffers = await getUserRideOffers(userId)
-  const ridesToUpdate = userRideOffers.map(ride => updateRideOffer(toRideOffer(ride), userId, profile))
+const updateUserProfileOnRideOffers = async (profile: profileFlowType) => {
+  const userRideOffers = await getUserRideOffers(profile.uid)
+  const ridesToUpdate = userRideOffers.map(ride => updateRideOffer(toRideOffer(ride), profile))
   Promise.all(ridesToUpdate)
 }
 
-const updateUserProfileOnRideRequests = async (profile: profileFlowType, userId: string) => {
-  const userRideOffers = await getUserRideRequests(userId)
-  const ridesToUpdate = userRideOffers.map(ride => updateRideRequest(toRideOffer(ride), userId, profile))
+const updateUserProfileOnRideRequests = async (profile: profileFlowType) => {
+  const userRideOffers = await getUserRideRequests(profile.uid)
+  const ridesToUpdate = userRideOffers.map(ride => updateRideRequest(toRideOffer(ride), profile))
   Promise.all(ridesToUpdate)
 }
