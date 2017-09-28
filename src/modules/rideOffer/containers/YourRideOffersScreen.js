@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { FlatList } from 'react-native'
+import { FlatList, View } from 'react-native'
 import { RideOffer } from '../components/RideOffer'
 import { getUserRideOffers } from '../../../services/firebase/database/RideOffer'
+import { FloatingActionButton } from '../../shared/components/FloatingActionButton'
 
 export const INITIAL_STATE = {
   rides: []
@@ -25,11 +26,15 @@ export class YourRideOffersScreen extends Component {
 
   render () {
     return (
-      <FlatList
-        data={this.state.rides}
-        keyExtractor={item => item.rideId}
-        renderItem={({ item }) => (<RideOffer ride={item} />)}
-      />
+      <View style={{flex: 1}}>
+        <FlatList
+          data={this.state.rides}
+          keyExtractor={item => item.rideId}
+          renderItem={({ item }) => (<RideOffer ride={item} />)}
+        />
+        <FloatingActionButton onPress={() => alert('Clicado')} />
+      </View>
+
     )
   }
 }
