@@ -1,4 +1,4 @@
-import { getAllRides, getAllRideRequests, saveRideOffer, saveRideRequest, updateRideOffer, removeRideOffer } from '../../../src/services/firebase'
+import { getAllRideOffers, getAllRideRequests, saveRideOffer, saveRideRequest, updateRideOffer, removeRideOffer } from '../../../src/services/firebase'
 import RidesResponse from '../../__mocks__/Fixtures/FirebaseRidesResponse.json'
 import ProfileResponse from '../../__mocks__/Fixtures/FirebaseProfileResponse.json'
 
@@ -37,7 +37,7 @@ describe('Firebase database service', () => {
   }
 
   it('Should provide all rides as an array of rides', async () => {
-    const rides = await getAllRides()
+    const rides = await getAllRideOffers()
 
     const expectedRide = {
       driverId: 'AIYmwTmrdTfUuGeuoNF0SYgXJ1j1',

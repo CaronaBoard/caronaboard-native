@@ -24,7 +24,7 @@ describe('RideOffer actions', () => {
   const dispatchMock = jest.fn()
 
   it('Should create a thunk for fetching all rides', async () => {
-    FirebaseService.getAllRides = jest.fn(() => mockedRides)
+    FirebaseService.getAllRideOffers = jest.fn(() => mockedRides)
 
     const expectedAction = {
       type: FETCH_ALL_RIDES,
