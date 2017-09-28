@@ -14,16 +14,21 @@ const renderLine = (text, icon) => {
   )
 }
 
+const onPress = (rideId: string) => {
+  alert(`Deseja deletar ${rideId}?. (NAO IMPLEMENTADO)`)
+}
+
 export const RideOffer = props => {
   const {
     origin,
     destination,
     days,
-    hours
+    hours,
+    rideId
   } = props.ride
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => onPress(rideId)}>
       <RkCard>
         <View rkCardContent>
           { renderLine(origin, 'radio-button-unchecked') }
