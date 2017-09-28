@@ -1,4 +1,5 @@
-import { signIn, signUp, saveProfile, forgotPassword } from '../../services/firebase'
+import { signIn, signUp, forgotPassword } from '../../services/firebase'
+import { saveProfile } from '../../services/firebase/database/index'
 import {
   SIGN_IN_FIREBASE,
   SAVE_PROFILE_FIREBASE,

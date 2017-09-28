@@ -2,9 +2,9 @@ import {
   signUp,
   checkEmailRegistration,
   signIn,
-  sendVerificationEmail,
-  saveProfile
+  sendVerificationEmail
 } from '../../../src/services/firebase/Authentication'
+import { saveProfile } from '../../../src/services/firebase/database/index'
 import RidesResponse from '../../__mocks__/Fixtures/FirebaseRidesResponse.json'
 
 let mockFirebaseResponse = {
