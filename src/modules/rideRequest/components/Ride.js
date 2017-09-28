@@ -5,7 +5,7 @@ import Styles from './styles/RideStyles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkCard } from 'react-native-ui-kitten'
 import { screens } from '../../../navigation/Screens'
-import { ridePropTypes } from '../types/index'
+import { ridePropTypes } from '../types'
 
 export class Ride extends Component {
   static propTypes = {
