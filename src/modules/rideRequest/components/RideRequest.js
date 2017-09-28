@@ -30,8 +30,7 @@ export class RideRequest extends Component {
         days,
         hours,
         profile,
-        rideId,
-        saveRideRequest
+        rideId
      } = this.props.ride
 
     return (
@@ -58,7 +57,7 @@ export class RideRequest extends Component {
           <GradientButton
             rkType='large'
             text={'Ask for a ride'}
-            onPress={saveRideRequest(rideId)}
+            onPress={this.props.saveRideRequest(rideId)}
           />
         </View>
       </View>

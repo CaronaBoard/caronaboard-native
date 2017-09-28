@@ -75,6 +75,7 @@ export const removeRideOffer = async (rideId: string, userId: string) => {
 }
 
 export const saveRideRequest = async (rideId: string, userId: string) => {
+  console.log('===> rideId,  userId is: ', rideId, userId)
   const profile = await getUserProfile(userId)
 
   return Firebase.database()
