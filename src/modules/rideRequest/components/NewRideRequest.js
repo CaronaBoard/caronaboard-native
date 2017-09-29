@@ -10,7 +10,7 @@ import styles from './styles/RideRequestStyles'
 
 export class NewRideRequestScreen extends Component {
   static propTypes = {
-    ride: ridePropTypes,
+    ride: ridePropTypes.isRequired,
     saveRideRequest: PropTypes.func.isRequired
   }
 

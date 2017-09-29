@@ -14,4 +14,4 @@ export const ridePropTypes = shape({
       value: oneOfType([string, number]).isRequired
     })
   })
-}).isRequired
+})

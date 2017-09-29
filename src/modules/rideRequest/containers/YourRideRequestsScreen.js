@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { FlatList, View, Alert } from 'react-native'
 import { FloatingActionButton } from '../../shared/components/FloatingActionButton'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
-import { RideRequest } from '../components/RideRequest'
 import { getUserRideRequests, removeDuplicatedRequests } from '../../../services/firebase/database/RideRequest'
 import { findRideOfferById } from '../../../services/firebase/database/RideOffer'
+import { Ride } from '../components/Ride'
 
 export const INITIAL_STATE = {
   rides: []
@@ -33,7 +33,7 @@ export class YourRideOffersScreen extends Component {
     this.setState({rides})
   }
 
-  onPressRide = (rideId: string) => {
+  onPressRide = (props) => {
     Alert.alert(
       'Delete Ride Request',
       'Just a confirmation whether you wanna delete this ride or not.',
@@ -41,7 +41,7 @@ export class YourRideOffersScreen extends Component {
         {
           text: 'Sure thing, delete!',
           style: 'destructive',
-          onPress: () => null
+          onPress: () => console.log(props.ride.rideId, 'is ===> riderideId')
         },
         {
           text: 'Not yet, Thanks',
@@ -53,13 +53,12 @@ export class YourRideOffersScreen extends Component {
   }
 
   render () {
-    console.log(this.state, 'is ===> this.state')
     return (
       <View style={{flex: 1}}>
         <FlatList
           data={this.state.rides}
           keyExtractor={({rideId}) => rideId}
-          renderItem={({ item }) => (<RideRequest ride={item} />)}
+          renderItem={({ item }) => <Ride ride={item} onPress={this.onPressRide} />}
         />
         <FloatingActionButton
           icon='md-create'

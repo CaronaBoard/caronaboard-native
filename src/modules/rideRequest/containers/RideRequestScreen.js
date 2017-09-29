@@ -8,7 +8,7 @@ import { saveRideRequest } from '../../../services/firebase'
 // TODO: Revisit, make sure that this should be a container ninstead of a component
 export class RideRequestScreen extends Component {
   static propTypes = {
-    ride: ridePropTypes,
+    ride: ridePropTypes.isRequired,
     userId: PropTypes.string.isRequired
   }
 

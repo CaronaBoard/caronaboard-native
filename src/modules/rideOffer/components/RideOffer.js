@@ -47,6 +47,6 @@ export const RideOffer = props => {
 }
 
 RideOffer.propTypes = {
-  ride: ridePropTypes,
+  ride: ridePropTypes.isRequired,
   onPress: PropTypes.func.isRequired
 }

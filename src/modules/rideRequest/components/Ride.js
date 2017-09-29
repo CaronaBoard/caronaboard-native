@@ -4,13 +4,12 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import Styles from './styles/RideStyles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkCard } from 'react-native-ui-kitten'
-import { screens } from '../../../navigation/Screens'
 import { ridePropTypes } from '../types'
 
 export class Ride extends Component {
   static propTypes = {
-    ride: ridePropTypes,
-    userId: PropTypes.string.isRequired
+    ride: ridePropTypes.isRequired,
+    onPress: PropTypes.func.isRequired
   }
 
   renderLine (subTitle, icon) {
@@ -22,25 +21,18 @@ export class Ride extends Component {
     )
   }
 
-  pushRideRequestScreen () {
-    const { ride, userId } = this.props
-    this.props.navigator.push({
-      screen: screens.rideRequest.id,
-      passProps: { ride, userId }
-    })
-  }
-
   render () {
+    const { ride } = this.props
     const {
         origin,
         destination,
         days,
         hours,
         profile
-     } = this.props.ride
+     } = ride
 
     return (
-      <TouchableOpacity onPress={() => this.pushRideRequestScreen()}>
+      <TouchableOpacity onPress={() => this.props.onPress({ ride })}>
         <View>
           <RkCard>
             <View rkCardContent>

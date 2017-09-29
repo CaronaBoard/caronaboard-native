@@ -7,7 +7,7 @@ import { ridePropTypes } from '../types'
 
 export class RideRequest extends Component {
   static propTypes = {
-    ride: ridePropTypes
+    ride: ridePropTypes.isRequired
   }
 
   renderLine (subTitle, icon) {
