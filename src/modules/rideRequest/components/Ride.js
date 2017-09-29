@@ -9,7 +9,8 @@ import { ridePropTypes } from '../types'
 export class Ride extends Component {
   static propTypes = {
     ride: ridePropTypes.isRequired,
-    onPress: PropTypes.func.isRequired
+    onPress: PropTypes.func.isRequired,
+    icon: PropTypes.node
   }
 
   renderLine (subTitle, icon) {
@@ -19,6 +20,11 @@ export class Ride extends Component {
         <Text rkCardText>{subTitle}</Text>
       </View>
     )
+  }
+
+  renderIcon = () => {
+    const { icon } = this.props
+    return icon || <View />
   }
 
   render () {
@@ -33,20 +39,19 @@ export class Ride extends Component {
 
     return (
       <TouchableOpacity onPress={() => this.props.onPress({ ride })}>
-        <View>
-          <RkCard>
-            <View rkCardContent>
-              <Text rkCardTitle>{destination}</Text>
-              { this.renderLine(origin, 'radio-button-unchecked') }
-              { this.renderLine(destination, 'radio-button-unchecked') }
-            </View>
-            <View rkCardContent>
-              { this.renderLine(days, 'today') }
-              { this.renderLine(hours, 'schedule') }
-              { this.renderLine(profile.name, 'directions-car') }
-            </View>
-          </RkCard>
-        </View>
+        <RkCard>
+          <View rkCardContent>
+            <Text rkCardTitle>{destination}</Text>
+            { this.renderLine(origin, 'radio-button-unchecked') }
+            { this.renderLine(destination, 'radio-button-unchecked') }
+          </View>
+          <View rkCardContent>
+            { this.renderLine(days, 'today') }
+            { this.renderLine(hours, 'schedule') }
+            { this.renderLine(profile.name, 'directions-car') }
+          </View>
+          {this.renderIcon()}
+        </RkCard>
       </TouchableOpacity>
     )
   }

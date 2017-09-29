@@ -1,14 +1,18 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { FlatList, Alert } from 'react-native'
+import { FlatList } from 'react-native'
+import React, { Component } from 'react'
+import Icon from 'react-native-vector-icons/MaterialIcons'
+
+import { Ride } from '../components/Ride'
+import { alert } from '../../../navigation/Alert'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
+import { findRideOfferById } from '../../../services/firebase/database/RideOffer'
 import {
-  getUserRideRequests, removeDuplicatedRequests,
+  getUserRideRequests,
+  removeDuplicatedRequests,
   removeRideRequest
 } from '../../../services/firebase/database/RideRequest'
-import { findRideOfferById } from '../../../services/firebase/database/RideOffer'
-import { Ride } from '../components/Ride'
 
 export const INITIAL_STATE = {
   rides: [],
@@ -36,26 +40,26 @@ export class YourRideOffersScreen extends Component {
     this.setState({rides, rideRequestsMap})
   }
 
+  renderDeleteIcon = () => {
+    const style = {
+      alignSelf: 'flex-end'
+    }
+
+    return (
+      <Icon
+        name='delete-forever'
+        size={30}
+        color='#900'
+        style={style}
+      />
+    )
+  }
+
   onPressRide = (props) => {
     const { rideRequestsMap } = this.state
     const { rideId } = props.ride
     const rideRequest = rideRequestsMap[rideId]
-    Alert.alert(
-      'Delete Ride Request',
-      'Just a confirmation whether you wanna delete this ride or not.',
-      [
-        {
-          text: 'Sure thing, delete!',
-          style: 'destructive',
-          onPress: () => removeRideRequest(rideRequest)
-        },
-        {
-          text: 'Not yet, Thanks',
-          style: 'cancel'
-        }
-      ],
-      { cancelable: true }
-    )
+    alert('Delete Ride Request', () => removeRideRequest(rideRequest))
   }
 
   render () {
@@ -63,7 +67,7 @@ export class YourRideOffersScreen extends Component {
       <FlatList
         data={this.state.rides}
         keyExtractor={({rideId}) => rideId}
-        renderItem={({ item }) => <Ride ride={item} onPress={this.onPressRide} />}
+        renderItem={({ item }) => <Ride ride={item} onPress={this.onPressRide} icon={this.renderDeleteIcon()} />}
       />
     )
   }
