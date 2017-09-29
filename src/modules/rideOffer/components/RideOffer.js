@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import Styles from './styles/RideOfferStyles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkCard } from 'react-native-ui-kitten'
-import { ridePropTypes } from '../../rideRequest/types'
+import { RidePropType } from '../../rideRequest/types'
 import PropTypes from 'prop-types'
 
 const renderLine = (text, icon) => {
@@ -47,6 +47,6 @@ export const RideOffer = props => {
 }
 
 RideOffer.propTypes = {
-  ride: ridePropTypes.isRequired,
+  ride: RidePropType.isRequired,
   onPress: PropTypes.func.isRequired
 }

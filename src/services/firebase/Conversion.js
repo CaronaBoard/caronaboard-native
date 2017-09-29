@@ -1,9 +1,9 @@
 // @flow
 
 import _ from 'lodash'
-import type { rideType, rideOfferType, rideRequestFlowType, firebaseRideRequests } from './types'
+import type { RideType, RideOfferType, RideRequestFlowType, FirebaseRideRequests } from './types'
 
-export const toArrayOfRides = (firebaseResponse: any): rideType => {
+export const toArrayOfRides = (firebaseResponse: any): RideType => {
   return _.flatMap(firebaseResponse, (value, driverId) => {
     const ridesIds = Object.keys(value)
     const rides = Object.values(value)
@@ -17,7 +17,7 @@ export const toArrayOfRides = (firebaseResponse: any): rideType => {
   })
 }
 
-export const toArrayOfRideRequests = (firebaseResponse: firebaseRideRequests): rideRequestFlowType => {
+export const toArrayOfRideRequests = (firebaseResponse: FirebaseRideRequests): RideRequestFlowType => {
   return _.flatMap(firebaseResponse, (value, rideId) => {
     const requestIds = Object.keys(value)
     const rideRequests = Object.values(value)
@@ -31,7 +31,7 @@ export const toArrayOfRideRequests = (firebaseResponse: firebaseRideRequests): r
   })
 }
 
-export const toRideOffer = (ride: rideType): rideOfferType => {
+export const toRideOffer = (ride: RideType): RideOfferType => {
   const { days, destination, hours, origin, rideId } = ride
   return { days, destination, hours, origin, id: rideId }
 }

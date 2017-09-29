@@ -3,11 +3,11 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import Styles from './styles/RideStyles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkCard } from 'react-native-ui-kitten'
-import { ridePropTypes } from '../types'
+import { RidePropType } from '../types'
 
 export class RideRequest extends Component {
   static propTypes = {
-    ride: ridePropTypes.isRequired
+    ride: RidePropType.isRequired
   }
 
   renderLine (subTitle, icon) {
