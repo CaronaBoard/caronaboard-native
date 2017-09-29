@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { RideRequestScreen } from '../../../../src/modules/rideRequest/containers/RideRequestScreen'
+import { RideRequestScreen } from '../../../../src/modules/rideRequest/containers/NewRideRequestContainer'
 
 const props = {
   ride: {

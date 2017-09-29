@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import Styles from './styles/RideOfferStyles'
+import Styles from './styles/RideOffer.style'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkCard } from 'react-native-ui-kitten'
 import { RidePropType } from '../../rideRequest/types'

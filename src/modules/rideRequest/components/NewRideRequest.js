@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View, Text } from 'react-native'
-import Styles from './styles/RideStyles'
+import Styles from './styles/Ride.style'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkCard } from 'react-native-ui-kitten'
 import { RidePropType } from '../types'
 import { GradientButton } from '../../shared/components'
-import styles from './styles/RideRequestStyles'
+import styles from './styles/RideRequest.style'
 
-export class NewRideRequestScreen extends Component {
+export class NewRideRequest extends Component {
   static propTypes = {
     ride: RidePropType.isRequired,
     saveRideRequest: PropTypes.func.isRequired
