@@ -1,13 +1,10 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { View } from 'react-native'
 import { RkText } from 'react-native-ui-kitten'
 
-import { onNavigatorEvent } from '../../../navigation/NavBar'
+import styles from './styles/YourRideOfferStyles'
 import { Button, TextInput } from '../../shared/components/index'
-import { saveRideOffer } from '../../../services/firebase/index'
-import styles from '../../rideRequest/containers/styles/RideOfferScreenStyles'
 
 export const INITIAL_STATE = {
   origin: '',
@@ -16,23 +13,11 @@ export const INITIAL_STATE = {
   hours: ''
 }
 
-export class RideOfferScreen extends Component {
+export class NewRideOffer extends React.PureComponent {
+  state = INITIAL_STATE
+
   static propTypes = {
-    navigator: PropTypes.object.isRequired,
-    userId: PropTypes.string.isRequired
-  }
-
-  constructor (props) {
-    super(props)
-    this.state = INITIAL_STATE
-    this.props.navigator.setOnNavigatorEvent(onNavigatorEvent.bind(this))
-  }
-
-  offerRide = async () => {
-    const rideOffer = await saveRideOffer(this.state, this.props.userId)
-    if (rideOffer) {
-      alert('Success')
-    }
+    onPress: PropTypes.func.isRequired
   }
 
   render () {
@@ -48,17 +33,9 @@ export class RideOfferScreen extends Component {
             <TextInput placeholder='DAYS' onChangeText={(days) => this.setState({days})} />
             <TextInput placeholder='HOUR' onChangeText={(hours) => this.setState({hours})} />
           </View>
-          <Button text='Offer Ride' onPress={this.offerRide} />
+          <Button text='Offer Ride' onPress={() => this.props.onPress(this.state)} />
         </View>
       </View>
     )
   }
 }
-
-const mapStateToProps = (state) => {
-  return {
-    userId: state.auth.userData.uid
-  }
-}
-
-export default connect(mapStateToProps)(RideOfferScreen)

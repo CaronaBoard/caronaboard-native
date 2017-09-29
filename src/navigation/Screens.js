@@ -2,7 +2,7 @@ import SignUpScreen from '../modules/authentication/containers/SignUpScreen'
 import ForgotPasswordScreen from '../modules/authentication/containers/ForgotPasswordScreen'
 import ProfileScreen from '../modules/authentication/containers/ProfileScreen'
 import RideList from '../modules/rideRequest/containers/RideRequestsListContainer'
-import RideOffer from '../modules/rideOffer/containers/RideOfferScreen'
+import RideOffer from '../modules/rideOffer/containers/NewRideOfferContainer'
 import RideRequest from '../modules/rideRequest/containers/NewRideRequestContainer'
 import YourRideOfferList from '../modules/rideOffer/containers/YourRideOffersScreen'
 import YourRideRequestsScreen from '../modules/rideRequest/containers/YourRideRequestsScreen'
@@ -30,8 +30,8 @@ export const screens = {
   rideOffer: {
     id: 'ride.offer',
     component: RideOffer,
-    label: 'Ride Offer',
-    title: 'Ride Offer'
+    label: 'Ride Offers',
+    title: 'Ride Offers'
   },
   rideRequest: {
     id: 'ride.request',
