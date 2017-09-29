@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { View } from 'react-native'
 import { RkText } from 'react-native-ui-kitten'
 
-import styles from './styles/YourRideOfferStyles'
+import styles from './styles/YourRideOffer.style'
 import { Button, TextInput } from '../../shared/components/index'
 
 export const INITIAL_STATE = {

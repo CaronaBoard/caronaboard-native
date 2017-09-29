@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import { View, Text, TouchableOpacity } from 'react-native'
 
 import { RidePropType } from '../types'
-import Styles from './styles/RideStyles'
+import Styles from './styles/Ride.style'
 
 export class Ride extends Component {
   static propTypes = {

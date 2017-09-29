@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 
 import { RidePropType } from '../types'
 import { Ride } from '../components/Ride'
-import styles from './styles/RideListStyles'
+import styles from './styles/RideList.style'
 import { screens } from '../../../navigation/Screens'
 import { fetchAllRideOffers } from '../../../redux/actions'
 import { onNavigatorEvent } from '../../../navigation/NavBar'

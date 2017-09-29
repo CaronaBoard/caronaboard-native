@@ -13,6 +13,7 @@ import {
   removeRideOffer
 } from '../../../services/firebase/database/RideOffer'
 
+// TODO: This should've be on redux
 export const INITIAL_STATE = {
   rides: []
 }
