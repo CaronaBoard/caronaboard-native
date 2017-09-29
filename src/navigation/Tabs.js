@@ -3,6 +3,14 @@ import { profileButton } from './NavBar'
 
 export const tabs = [
   {
+    label: screens.yourRequestsList.label,
+    screen: screens.yourRequestsList.id,
+    title: screens.yourRequestsList.title,
+    icon: require('../assets/images/swap.png'),
+    navigatorButtons: {
+      rightButtons: [profileButton]
+    }
+  }, {
     label: screens.rideList.label,
     screen: screens.rideList.id,
     title: screens.rideList.title,

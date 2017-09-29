@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { FlatList, View, Alert } from 'react-native'
-import { RideOffer } from '../components/RideOffer'
-import { getUserRideOffers, removeRideOffer } from '../../../services/firebase/database/RideOffer'
 import { FloatingActionButton } from '../../shared/components/FloatingActionButton'
-import { screens } from '../../../navigation/Screens'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
+import { RideRequest } from '../components/RideRequest'
+import { getUserRideRequests, removeDuplicatedRequests } from '../../../services/firebase/database/RideRequest'
+import { findRideOfferById } from '../../../services/firebase/database/RideOffer'
 
 export const INITIAL_STATE = {
   rides: []
@@ -26,23 +26,22 @@ export class YourRideOffersScreen extends Component {
   }
 
   async componentDidMount () {
-    const rides = await getUserRideOffers(this.props.profile.uid)
+    const rideRequests = await getUserRideRequests(this.props.profile.uid)
+    await removeDuplicatedRequests(rideRequests)
+    const rideOffersPromises = rideRequests.map(({ rideId }) => findRideOfferById(rideId))
+    const rides = await Promise.all(rideOffersPromises)
     this.setState({rides})
-  }
-
-  pushRideRequestScreen () {
-    this.props.navigator.push({screen: screens.rideOffer.id})
   }
 
   onPressRide = (rideId: string) => {
     Alert.alert(
-      'Delete Ride Offer',
+      'Delete Ride Request',
       'Just a confirmation whether you wanna delete this ride or not.',
       [
         {
           text: 'Sure thing, delete!',
           style: 'destructive',
-          onPress: () => removeRideOffer(rideId, this.props.profile.uid)
+          onPress: () => null
         },
         {
           text: 'Not yet, Thanks',
@@ -54,19 +53,19 @@ export class YourRideOffersScreen extends Component {
   }
 
   render () {
+    console.log(this.state, 'is ===> this.state')
     return (
       <View style={{flex: 1}}>
         <FlatList
           data={this.state.rides}
-          keyExtractor={item => item.rideId}
-          renderItem={({ item }) => (<RideOffer ride={item} onPress={this.onPressRide} />)}
+          keyExtractor={({rideId}) => rideId}
+          renderItem={({ item }) => (<RideRequest ride={item} />)}
         />
         <FloatingActionButton
           icon='md-create'
           onPress={() => this.pushRideRequestScreen()}
         />
       </View>
-
     )
   }
 }
