@@ -8,7 +8,7 @@ import { RidePropType } from '../types'
 import { GradientButton } from '../../shared/components'
 import styles from './styles/RideRequestStyles'
 
-export class NewRideRequestScreen extends Component {
+export class NewRideRequest extends Component {
   static propTypes = {
     ride: RidePropType.isRequired,
     saveRideRequest: PropTypes.func.isRequired

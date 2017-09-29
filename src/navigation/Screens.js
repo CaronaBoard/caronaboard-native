@@ -3,7 +3,7 @@ import ForgotPasswordScreen from '../modules/authentication/containers/ForgotPas
 import ProfileScreen from '../modules/authentication/containers/ProfileScreen'
 import RideList from '../modules/rideRequest/containers/RideList'
 import RideOffer from '../modules/rideOffer/containers/RideOfferScreen'
-import RideRequest from '../modules/rideRequest/containers/RideRequestScreen'
+import RideRequest from '../modules/rideRequest/containers/NewRideRequestContainer'
 import YourRideOfferList from '../modules/rideOffer/containers/YourRideOffersScreen'
 import YourRideRequestsScreen from '../modules/rideRequest/containers/YourRideRequestsScreen'
 
