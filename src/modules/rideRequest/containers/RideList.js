@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { ListView } from 'react-native'
-import { fetchAllRides } from '../../../redux/actions'
+import { fetchAllRideOffers } from '../../../redux/actions'
 import { connect } from 'react-redux'
 import { Ride } from '../components/Ride'
 import { RidePropType } from '../types'
@@ -57,14 +57,14 @@ export class RideList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    rides: state.rideOffer.rides,
+    rides: state.ride.offers,
     userId: state.auth.userData.uid
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchRides: () => dispatch(fetchAllRides())
+    fetchRides: () => dispatch(fetchAllRideOffers())
   }
 }
 

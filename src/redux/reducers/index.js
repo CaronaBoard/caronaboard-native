@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
-import RideOfferReducers from './RideOfferReducers'
+import RideReducers from './RideReducers'
 import AuthReducers from './AuthReducers'
 
 const reducers = {
-  rideOffer: RideOfferReducers,
+  ride: RideReducers,
   auth: AuthReducers
 }
 

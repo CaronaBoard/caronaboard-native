@@ -1,5 +1,5 @@
 import { FETCH_ALL_RIDES } from '../../../src/redux/types'
-import { fetchAllRides } from '../../../src/redux/actions'
+import { fetchAllRideOffers } from '../../../src/redux/actions'
 
 import * as FirebaseService from '../../../src/services/firebase'
 jest.mock('../../../src/services/firebase')
@@ -31,7 +31,7 @@ describe('RideOffer actions', () => {
       payload: mockedRides
     }
 
-    const thunk = fetchAllRides()
+    const thunk = fetchAllRideOffers()
     await thunk(dispatchMock)
 
     expect(dispatchMock).toHaveBeenCalledWith(expectedAction)
