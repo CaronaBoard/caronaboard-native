@@ -1,6 +1,6 @@
 import AuthReducer, { INITIAL_STATE } from '../../../src/redux/reducers/AuthReducers'
 import { signUpFirebase, saveProfileFirebase } from '../../../src/redux/actions/AuthActions'
-import { USER_SIGNED_UP } from '../../../src/services/message'
+import { USER_SIGNED_UP } from '../../../src/constants/message'
 import { extractActionFromThunk } from '../../__mocks__/ReduxThunkMock'
 import * as FirebaseService from '../../../src/services/firebase'
 

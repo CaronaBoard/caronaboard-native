@@ -2,10 +2,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { ListView } from 'react-native'
-import { fetchAllRides } from '../../../redux/actions'
+import { fetchAllRideOffers } from '../../../redux/actions'
 import { connect } from 'react-redux'
 import { Ride } from '../components/Ride'
-import { ridePropTypes } from '../types'
+import { RidePropType } from '../types'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
 import styles from './styles/RideListStyles'
 import { screens } from '../../../navigation/Screens'
@@ -13,7 +13,7 @@ import { screens } from '../../../navigation/Screens'
 export class RideList extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
-    rides: PropTypes.arrayOf(ridePropTypes),
+    rides: PropTypes.arrayOf(RidePropType),
     userId: PropTypes.string.isRequired
   }
 
@@ -57,14 +57,14 @@ export class RideList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    rides: state.rideOffer.rides,
+    rides: state.ride.offers,
     userId: state.auth.userData.uid
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchRides: () => dispatch(fetchAllRides())
+    fetchRides: () => dispatch(fetchAllRideOffers())
   }
 }
 

@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import RideOfferReducers from './RideOfferReducers'
+import RideReducers from './RideReducers'
 import AuthReducers from './AuthReducers'
 
-export const rootReducer = combineReducers({
-  rideOffer: RideOfferReducers,
+const reducers = {
+  ride: RideReducers,
   auth: AuthReducers
-})
+}
+
+export const rootReducer = combineReducers(reducers)

@@ -1,6 +1,6 @@
 import { string, number, shape, oneOfType } from 'prop-types'
 
-export const ridePropTypes = shape({
+export const RidePropType = shape({
   days: string.isRequired,
   destination: string.isRequired,
   hours: string.isRequired,

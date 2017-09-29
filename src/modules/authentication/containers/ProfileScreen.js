@@ -4,14 +4,14 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { View, TouchableOpacity } from 'react-native'
 import { RkText, RkChoice, RkChoiceGroup } from 'react-native-ui-kitten'
-import type { profileFlowType } from '../../../services/firebase/types'
-import { profilePropType } from '../types'
+import type { ProfileType } from '../../../services/firebase/types'
+import { ProfilePropType } from '../types'
 
 import { TextInput, GradientButton } from '../../shared/components'
 import { saveProfileFirebase } from '../../../redux/actions'
 
 export const CONTACT_OPTIONS = ['Whatsapp', 'Telegram']
-export const INITIAL_STATE: profileFlowType = {
+export const INITIAL_STATE: ProfileType = {
   profile: {
     name: '',
     uid: '',
@@ -27,7 +27,7 @@ export class ProfileScreen extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
     userId: PropTypes.string.isRequired,
-    profile: profilePropType
+    profile: ProfilePropType
   }
 
   state = INITIAL_STATE
@@ -64,7 +64,6 @@ export class ProfileScreen extends Component {
 
   componentDidMount () {
     const { profile } = this.props
-    console.log(profile, 'is ===> profile')
     this.setState({profile, loading: false})
   }
 

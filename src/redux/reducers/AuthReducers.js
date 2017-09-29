@@ -1,4 +1,4 @@
-import { USER_SIGNED_UP, USER_RESET_PASSWORD } from '../../services/message'
+import { USER_SIGNED_UP, USER_RESET_PASSWORD } from '../../constants/message'
 import {
   SIGN_IN_FIREBASE,
   AUTH_FAILED,
@@ -7,20 +7,19 @@ import {
   FORGOT_PASSWORD_SUCCESS
 } from '../types'
 
-// TODO: REVERT THIS
 export const INITIAL_STATE = {
   userData: {
-    uid: 'r9okas9rioSvzy11AycFwue1L063',
+    uid: '',
     emailVerified: true,
-    email: 'eduardomoroni@gmail.com',
+    email: '',
     phoneNumber: null
   },
   profile: {
-    name: 'Charles Xavies',
-    uid: 'r9okas9rioSvzy11AycFwue1L063',
+    name: '',
+    uid: '',
     contact: {
-      kind: 'Whatsapp',
-      value: '123123213'
+      kind: '',
+      value: ''
     }
   },
   alert: {
@@ -32,7 +31,7 @@ export const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SIGN_IN_FIREBASE:
-      return { ...INITIAL_STATE, userData: action.payload }
+      return { ...state, userData: action.payload }
     case SAVE_PROFILE_FIREBASE:
       return { ...state, profile: action.profile }
     case AUTH_FAILED:
