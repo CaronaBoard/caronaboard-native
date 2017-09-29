@@ -4,8 +4,8 @@ import thunk from 'redux-thunk'
 
 const initialState = {}
 
-export default {
-  createStore: () => {
-    return create(rootReducer, initialState, applyMiddleware(thunk))
-  }
+const createStore = () => {
+  return create(rootReducer, initialState, applyMiddleware(thunk))
 }
+
+export default { createStore }

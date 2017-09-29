@@ -7,11 +7,14 @@ import {
   AUTH_FAILED,
   FORGOT_PASSWORD_SUCCESS
 } from '../types'
+import { getUserProfile } from '../../services/firebase/database/Profile'
 
 export function signInFirebase (email: string, password: string) {
   return async (dispatch) => {
     try {
       const user = await signIn(email, password)
+      const profile = await getUserProfile(user.uid)
+      dispatch({ type: SAVE_PROFILE_FIREBASE, profile })
       dispatch({ type: SIGN_IN_FIREBASE, payload: user })
     } catch (error) {
       dispatch({ type: AUTH_FAILED, payload: error.message })

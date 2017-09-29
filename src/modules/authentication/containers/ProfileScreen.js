@@ -64,7 +64,6 @@ export class ProfileScreen extends Component {
 
   componentDidMount () {
     const { profile } = this.props
-    console.log(profile, 'is ===> profile')
     this.setState({profile, loading: false})
   }
 
