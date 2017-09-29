@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { FlatList, View, Alert } from 'react-native'
-import { FloatingActionButton } from '../../shared/components/FloatingActionButton'
+import { FlatList, Alert } from 'react-native'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
-import { getUserRideRequests, removeDuplicatedRequests } from '../../../services/firebase/database/RideRequest'
+import {
+  getUserRideRequests, removeDuplicatedRequests,
+  removeRideRequest
+} from '../../../services/firebase/database/RideRequest'
 import { findRideOfferById } from '../../../services/firebase/database/RideOffer'
 import { Ride } from '../components/Ride'
 
 export const INITIAL_STATE = {
-  rides: []
+  rides: [],
+  rideRequestsMap: {}
 }
 
 export class YourRideOffersScreen extends Component {
@@ -27,13 +30,16 @@ export class YourRideOffersScreen extends Component {
 
   async componentDidMount () {
     const rideRequests = await getUserRideRequests(this.props.profile.uid)
-    await removeDuplicatedRequests(rideRequests)
+    const rideRequestsMap = await removeDuplicatedRequests(rideRequests)
     const rideOffersPromises = rideRequests.map(({ rideId }) => findRideOfferById(rideId))
     const rides = await Promise.all(rideOffersPromises)
-    this.setState({rides})
+    this.setState({rides, rideRequestsMap})
   }
 
   onPressRide = (props) => {
+    const { rideRequestsMap } = this.state
+    const { rideId } = props.ride
+    const rideRequest = rideRequestsMap[rideId]
     Alert.alert(
       'Delete Ride Request',
       'Just a confirmation whether you wanna delete this ride or not.',
@@ -41,7 +47,7 @@ export class YourRideOffersScreen extends Component {
         {
           text: 'Sure thing, delete!',
           style: 'destructive',
-          onPress: () => console.log(props.ride.rideId, 'is ===> riderideId')
+          onPress: () => removeRideRequest(rideRequest)
         },
         {
           text: 'Not yet, Thanks',
@@ -54,17 +60,11 @@ export class YourRideOffersScreen extends Component {
 
   render () {
     return (
-      <View style={{flex: 1}}>
-        <FlatList
-          data={this.state.rides}
-          keyExtractor={({rideId}) => rideId}
-          renderItem={({ item }) => <Ride ride={item} onPress={this.onPressRide} />}
-        />
-        <FloatingActionButton
-          icon='md-create'
-          onPress={() => this.pushRideRequestScreen()}
-        />
-      </View>
+      <FlatList
+        data={this.state.rides}
+        keyExtractor={({rideId}) => rideId}
+        renderItem={({ item }) => <Ride ride={item} onPress={this.onPressRide} />}
+      />
     )
   }
 }

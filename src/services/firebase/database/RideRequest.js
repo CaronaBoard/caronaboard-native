@@ -41,14 +41,17 @@ export const removeRideRequest = async (ride: rideRequestFlowType) => {
     .remove()
 }
 
-export const removeDuplicatedRequests = async (rides: Array<rideRequestFlowType>) => {
-  let map = {}
+export const removeDuplicatedRequests = async (rides: Array<rideRequestFlowType>)
+                                              : {[rideId: string]: rideRequestFlowType} => {
+  let rideRequestsMap = {}
   let promiseArray = []
 
   rides.forEach(ride => {
-    map[ride.rideId] ? promiseArray.push(removeRideRequest(ride))
-                     : map[ride.rideId] = ride
+    rideRequestsMap[ride.rideId] ? promiseArray.push(removeRideRequest(ride))
+                     : rideRequestsMap[ride.rideId] = ride
   })
 
-  return Promise.all(promiseArray)
+  await Promise.all(promiseArray)
+
+  return rideRequestsMap
 }
