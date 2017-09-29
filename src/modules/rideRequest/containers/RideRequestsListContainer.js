@@ -1,14 +1,14 @@
-
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { ListView } from 'react-native'
-import { fetchAllRideOffers } from '../../../redux/actions'
 import { connect } from 'react-redux'
-import { Ride } from '../components/Ride'
+import { ListView } from 'react-native'
+import React, { Component } from 'react'
+
 import { RidePropType } from '../types'
-import { onNavigatorEvent } from '../../../navigation/NavBar'
+import { Ride } from '../components/Ride'
 import styles from './styles/RideListStyles'
 import { screens } from '../../../navigation/Screens'
+import { fetchAllRideOffers } from '../../../redux/actions'
+import { onNavigatorEvent } from '../../../navigation/NavBar'
 
 export class RideList extends Component {
   static propTypes = {

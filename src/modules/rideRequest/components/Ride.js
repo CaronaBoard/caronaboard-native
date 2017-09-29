@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, TouchableOpacity } from 'react-native'
-import Styles from './styles/RideStyles'
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import React, { Component } from 'react'
 import { RkCard } from 'react-native-ui-kitten'
+import Icon from 'react-native-vector-icons/MaterialIcons'
+import { View, Text, TouchableOpacity } from 'react-native'
+
 import { RidePropType } from '../types'
+import Styles from './styles/RideStyles'
 
 export class Ride extends Component {
   static propTypes = {
