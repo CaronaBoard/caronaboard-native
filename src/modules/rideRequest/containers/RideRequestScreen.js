@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { RideRequest } from '../components/RideRequest'
+import { NewRideRequestScreen } from '../components/NewRideRequest'
 import { ridePropTypes } from '../types'
 import { saveRideRequest } from '../../../services/firebase'
 
 // TODO: Revisit, make sure that this should be a container ninstead of a component
 export class RideRequestScreen extends Component {
   static propTypes = {
-    ride: ridePropTypes,
+    ride: ridePropTypes.isRequired,
     userId: PropTypes.string.isRequired
   }
 
@@ -21,7 +21,7 @@ export class RideRequestScreen extends Component {
 
   render () {
     return (
-      <RideRequest ride={this.props.ride} saveRideRequest={this.askForRide} />
+      <NewRideRequestScreen ride={this.props.ride} saveRideRequest={this.askForRide} />
     )
   }
 }

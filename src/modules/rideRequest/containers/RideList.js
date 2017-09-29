@@ -8,6 +8,7 @@ import { Ride } from '../components/Ride'
 import { ridePropTypes } from '../types'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
 import styles from './styles/RideListStyles'
+import { screens } from '../../../navigation/Screens'
 
 export class RideList extends Component {
   static propTypes = {
@@ -34,13 +35,20 @@ export class RideList extends Component {
     this.props.fetchRides()
   }
 
-  render () {
+  onPress = (props) => {
     const { userId, navigator } = this.props
+    navigator.push({
+      screen: screens.rideRequest.id,
+      passProps: {...props, userId}
+    })
+  }
+
+  render () {
     return (
       <ListView
         style={styles.container}
         dataSource={this.state.dataSource}
-        renderRow={(ride) => <Ride ride={ride} navigator={navigator} userId={userId} />}
+        renderRow={(ride) => <Ride ride={ride} onPress={this.onPress} />}
         enableEmptySections
       />
     )

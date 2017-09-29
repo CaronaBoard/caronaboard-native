@@ -14,6 +14,19 @@ exports[`<FloatingActionButton /> Should have a snapshot 1`] = `
   buttonTextStyle={Object {}}
   degrees={45}
   fixNativeFeedbackRadius={false}
+  icon={
+    <Icon
+      allowFontScaling={false}
+      size={12}
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 20,
+          "height": 22,
+        }
+      }
+    />
+  }
   nativeFeedbackRippleColor="rgba(255,255,255,0.75)"
   offsetX={30}
   offsetY={30}

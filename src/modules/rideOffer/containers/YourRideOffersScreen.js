@@ -1,12 +1,17 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { FlatList, View, Alert } from 'react-native'
+import React, { Component } from 'react'
+import { FlatList, View } from 'react-native'
+
+import { alert } from '../../../navigation/Alert'
 import { RideOffer } from '../components/RideOffer'
-import { getUserRideOffers, removeRideOffer } from '../../../services/firebase/database/RideOffer'
-import { FloatingActionButton } from '../../shared/components/FloatingActionButton'
 import { screens } from '../../../navigation/Screens'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
+import { FloatingActionButton } from '../../shared/components/FloatingActionButton'
+import {
+  getUserRideOffers,
+  removeRideOffer
+} from '../../../services/firebase/database/RideOffer'
 
 export const INITIAL_STATE = {
   rides: []
@@ -35,22 +40,8 @@ export class YourRideOffersScreen extends Component {
   }
 
   onPressRide = (rideId: string) => {
-    Alert.alert(
-      'Delete Ride Offer',
-      'Just a confirmation whether you wanna delete this ride or not.',
-      [
-        {
-          text: 'Sure thing, delete!',
-          style: 'destructive',
-          onPress: () => removeRideOffer(rideId, this.props.profile.uid)
-        },
-        {
-          text: 'Not yet, Thanks',
-          style: 'cancel'
-        }
-      ],
-      { cancelable: true }
-    )
+    const { uid } = this.props.profile
+    alert('Delete Ride Offer', () => removeRideOffer(rideId, uid))
   }
 
   render () {
@@ -59,9 +50,12 @@ export class YourRideOffersScreen extends Component {
         <FlatList
           data={this.state.rides}
           keyExtractor={item => item.rideId}
-          renderItem={({ item }) => (<RideOffer ride={item} onPress={this.onPressRide} />)}
+          renderItem={({ item }) => <RideOffer ride={item} onPress={this.onPressRide} />}
         />
-        <FloatingActionButton onPress={() => this.pushRideRequestScreen()} />
+        <FloatingActionButton
+          icon='md-create'
+          onPress={() => this.pushRideRequestScreen()}
+        />
       </View>
 
     )

@@ -34,3 +34,24 @@ export const getUserRideRequests = async (userId: string): Array<rideRequestFlow
   const rides = await getAllRideRequests()
   return rides.filter(ride => ride.profile.uid === userId)
 }
+
+export const removeRideRequest = async (ride: rideRequestFlowType) => {
+  return Firebase.database()
+    .ref(`ridesRequests/${rideGroup}/${ride.rideId}/${ride.requestId}`)
+    .remove()
+}
+
+export const removeDuplicatedRequests = async (rides: Array<rideRequestFlowType>)
+                                              : {[rideId: string]: rideRequestFlowType} => {
+  let rideRequestsMap = {}
+  let promiseArray = []
+
+  rides.forEach(ride => {
+    rideRequestsMap[ride.rideId] ? promiseArray.push(removeRideRequest(ride))
+                     : rideRequestsMap[ride.rideId] = ride
+  })
+
+  await Promise.all(promiseArray)
+
+  return rideRequestsMap
+}

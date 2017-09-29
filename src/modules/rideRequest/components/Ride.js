@@ -4,13 +4,13 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import Styles from './styles/RideStyles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkCard } from 'react-native-ui-kitten'
-import { screens } from '../../../navigation/Screens'
 import { ridePropTypes } from '../types'
 
 export class Ride extends Component {
   static propTypes = {
-    ride: ridePropTypes,
-    userId: PropTypes.string.isRequired
+    ride: ridePropTypes.isRequired,
+    onPress: PropTypes.func.isRequired,
+    icon: PropTypes.node
   }
 
   renderLine (subTitle, icon) {
@@ -22,39 +22,36 @@ export class Ride extends Component {
     )
   }
 
-  pushRideRequestScreen () {
-    const { ride, userId } = this.props
-    this.props.navigator.push({
-      screen: screens.rideRequest.id,
-      passProps: { ride, userId }
-    })
+  renderIcon = () => {
+    const { icon } = this.props
+    return icon || <View />
   }
 
   render () {
+    const { ride } = this.props
     const {
         origin,
         destination,
         days,
         hours,
         profile
-     } = this.props.ride
+     } = ride
 
     return (
-      <TouchableOpacity onPress={() => this.pushRideRequestScreen()}>
-        <View>
-          <RkCard>
-            <View rkCardContent>
-              <Text rkCardTitle>{destination}</Text>
-              { this.renderLine(origin, 'radio-button-unchecked') }
-              { this.renderLine(destination, 'radio-button-unchecked') }
-            </View>
-            <View rkCardContent>
-              { this.renderLine(days, 'today') }
-              { this.renderLine(hours, 'schedule') }
-              { this.renderLine(profile.name, 'directions-car') }
-            </View>
-          </RkCard>
-        </View>
+      <TouchableOpacity onPress={() => this.props.onPress({ ride })}>
+        <RkCard>
+          <View rkCardContent>
+            <Text rkCardTitle>{destination}</Text>
+            { this.renderLine(origin, 'radio-button-unchecked') }
+            { this.renderLine(destination, 'radio-button-unchecked') }
+          </View>
+          <View rkCardContent>
+            { this.renderLine(days, 'today') }
+            { this.renderLine(hours, 'schedule') }
+            { this.renderLine(profile.name, 'directions-car') }
+          </View>
+          {this.renderIcon()}
+        </RkCard>
       </TouchableOpacity>
     )
   }

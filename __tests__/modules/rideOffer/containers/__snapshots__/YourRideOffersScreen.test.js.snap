@@ -25,6 +25,7 @@ exports[`<YourRideOffersScreen /> Should have a snapshot 1`] = `
     windowSize={21}
   />
   <FloatingActionButton
+    icon="md-create"
     onPress={[Function]}
   />
 </View>

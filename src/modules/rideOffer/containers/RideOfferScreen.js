@@ -5,9 +5,9 @@ import { View } from 'react-native'
 import { RkText } from 'react-native-ui-kitten'
 
 import { onNavigatorEvent } from '../../../navigation/NavBar'
-import { Button, TextInput } from '../../shared/components'
-import { saveRideOffer } from '../../../services/firebase'
-import styles from './styles/RideOfferScreenStyles'
+import { Button, TextInput } from '../../shared/components/index'
+import { saveRideOffer } from '../../../services/firebase/index'
+import styles from '../../rideRequest/containers/styles/RideOfferScreenStyles'
 
 export const INITIAL_STATE = {
   origin: '',

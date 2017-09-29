@@ -18,7 +18,8 @@ export type rideType = {
     name: string,
     contact: {
       kind: string,
-      value: string
+      value: string,
+      uid: string
     }
   }
 }

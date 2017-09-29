@@ -31,7 +31,7 @@ const singleAppParams = () => {
   }
 }
 
-const isUserSignedIn = () => true
+const isUserSignedIn = () => false
 const startCaronaBoard = () => startTabBasedApp(tabAppParams)
 const startAuthentication = () => startSingleScreenApp(singleAppParams())
 

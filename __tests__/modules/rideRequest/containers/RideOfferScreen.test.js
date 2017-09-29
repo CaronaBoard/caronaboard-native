@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { RideOfferScreen, INITIAL_STATE } from '../../../../src/modules/rideRequest/containers/RideOfferScreen'
+import { RideOfferScreen, INITIAL_STATE } from '../../../../src/modules/rideOffer/containers/RideOfferScreen'
 import { Button } from '../../../../src/modules/shared/components'
 
 import * as Firebase from '../../../../src/services/firebase'
