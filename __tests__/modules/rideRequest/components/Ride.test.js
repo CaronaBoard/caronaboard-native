@@ -18,7 +18,8 @@ const props = {
       },
       'name': 'Eduardo' }
   },
-  userId: 'kakaroto'
+  userId: 'kakaroto',
+  onPress: jest.fn()
 }
 
 describe('<Ride />', () => {

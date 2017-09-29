@@ -1,4 +1,4 @@
-import { FETCH_ALL_RIDES, FETCH_ALL_RIDES_REQUEST } from '../types'
+import { FETCH_ALL_RIDE_OFFERS, FETCH_ALL_RIDE_REQUESTS } from '../types'
 
 export const INITIAL_STATE = {
   offers: [],
@@ -7,10 +7,10 @@ export const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FETCH_ALL_RIDES:
-      return { offers: action.payload }
-    case FETCH_ALL_RIDES_REQUEST:
-      return { requests: action.payload }
+    case FETCH_ALL_RIDE_OFFERS:
+      return { ...state, offers: action.payload }
+    case FETCH_ALL_RIDE_REQUESTS:
+      return { ...state, requests: action.payload }
     default:
       return state
   }
