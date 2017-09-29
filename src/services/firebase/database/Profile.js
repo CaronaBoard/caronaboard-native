@@ -1,6 +1,6 @@
 // @flow
 
-import Firebase from 'firebase'
+import { ref } from './'
 import { getUserRideOffers, updateRideOffer } from './RideOffer'
 import { getUserRideRequests, updateRideRequest } from './RideRequest'
 import { toRideOffer } from '../Conversion'
@@ -8,9 +8,10 @@ import type { profileFlowType } from '../types'
 
 export const saveProfile = async (profile: profileFlowType) => {
   try {
-    await Firebase.database().ref(`profiles/${profile.uid}`).update(profile)
+    const path = `profiles/${profile.uid}`
+    await ref(path).update(profile)
 
-    Promise.all([
+    await Promise.all([
       updateUserProfileOnRideOffers(profile),
       updateUserProfileOnRideRequests(profile)
     ])
@@ -20,10 +21,8 @@ export const saveProfile = async (profile: profileFlowType) => {
 }
 
 export const getUserProfile = async (userId: string): profileFlowType => {
-  const profileSnapshot = await Firebase.database()
-    .ref(`profiles/${userId}`)
-    .once('value')
-
+  const path = `profiles/${userId}`
+  const profileSnapshot = await ref(path).once('value')
   const profile = profileSnapshot.val()
 
   if (!profile) {
@@ -36,11 +35,11 @@ export const getUserProfile = async (userId: string): profileFlowType => {
 const updateUserProfileOnRideOffers = async (profile: profileFlowType) => {
   const userRideOffers = await getUserRideOffers(profile.uid)
   const ridesToUpdate = userRideOffers.map(ride => updateRideOffer(toRideOffer(ride), profile))
-  Promise.all(ridesToUpdate)
+  await Promise.all(ridesToUpdate)
 }
 
 const updateUserProfileOnRideRequests = async (profile: profileFlowType) => {
   const userRideOffers = await getUserRideRequests(profile.uid)
   const ridesToUpdate = userRideOffers.map(ride => updateRideRequest(ride, profile))
-  Promise.all(ridesToUpdate)
+  await Promise.all(ridesToUpdate)
 }
