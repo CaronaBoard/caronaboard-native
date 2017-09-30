@@ -38,6 +38,13 @@ export type RideRequestFlowType = {
   profile: ProfileType
 }
 
+export type UserDataType = {
+  uid: string,
+  emailVerified: boolean,
+  email: string,
+  phoneNumber: ?string
+}
+
 export type FirebaseRideRequests = {
   [rideId: string]: {
     [requestId: string]: {

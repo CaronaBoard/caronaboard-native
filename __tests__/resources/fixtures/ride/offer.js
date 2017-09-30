@@ -1,4 +1,6 @@
-export const rideOffer = {
+import type { RideType } from '../../../../src/services/firebase/types'
+
+export const rideOfferFixture: RideType = {
   driverId: 'AIYmwTmrdTfUuGeuoNF0SYgXJ1j1',
   rideId: '-KndyvnnlSN05mJxL57Q',
   origin: 'PUC',

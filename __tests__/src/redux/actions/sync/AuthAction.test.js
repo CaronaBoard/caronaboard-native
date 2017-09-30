@@ -13,24 +13,23 @@ import {
   alertAction,
   updateProfile
 } from '../../../../../src/redux/actions/sync/AuthActions'
+import { profileFixture, userDataFixture } from '../../../../resources/fixtures/user'
 
 describe('Auth sync actions', () => {
   it('Should send a update user data action', async () => {
-    const userData = {}
-    const action = updateUserData(userData)
+    const action = updateUserData(userDataFixture)
     const expectedAction = {
       type: UPDATE_USER,
-      payload: userData
+      payload: userDataFixture
     }
     expect(action).toEqual(expectedAction)
   })
 
   it('Should send a update profile action', async () => {
-    const profile = {}
-    const action = updateProfile(profile)
+    const action = updateProfile(profileFixture)
     const expectedAction = {
       type: UPDATE_PROFILE,
-      profile
+      profile: profileFixture
     }
     expect(action).toEqual(expectedAction)
   })

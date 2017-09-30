@@ -1,9 +1,10 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { RideOffer } from '../../../../../src/modules/rideOffer/components/RideOffer'
+import { rideOfferFixture } from '../../../../resources/fixtures/ride/offer'
 
 const props = {
-  ride: {}
+  ride: rideOfferFixture
 }
 
 describe('<RideOffer />', () => {

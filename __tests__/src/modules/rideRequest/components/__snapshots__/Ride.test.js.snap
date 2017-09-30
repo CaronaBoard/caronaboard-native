@@ -16,7 +16,7 @@ exports[`<Ride /> Should have a snapshot 1`] = `
         ellipsizeMode="tail"
         rkCardTitle={true}
       >
-        Rodoviaria
+        Bomfim
       </Text>
       <View
         style={
@@ -43,7 +43,7 @@ exports[`<Ride /> Should have a snapshot 1`] = `
           ellipsizeMode="tail"
           rkCardText={true}
         >
-          Tecnopuc
+          PUC
         </Text>
       </View>
       <View
@@ -71,7 +71,7 @@ exports[`<Ride /> Should have a snapshot 1`] = `
           ellipsizeMode="tail"
           rkCardText={true}
         >
-          Rodoviaria
+          Bomfim
         </Text>
       </View>
     </View>
@@ -103,7 +103,7 @@ exports[`<Ride /> Should have a snapshot 1`] = `
           ellipsizeMode="tail"
           rkCardText={true}
         >
-          Seg a Sex
+          Seg-Sex
         </Text>
       </View>
       <View
@@ -159,7 +159,7 @@ exports[`<Ride /> Should have a snapshot 1`] = `
           ellipsizeMode="tail"
           rkCardText={true}
         >
-          Eduardo
+          Eduardo Moroni
         </Text>
       </View>
     </View>

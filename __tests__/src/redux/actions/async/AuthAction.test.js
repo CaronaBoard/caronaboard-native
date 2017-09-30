@@ -9,13 +9,13 @@ import {
 } from '../../../../../src/redux/actions/sync/AuthActions'
 
 import * as FirebaseService from '../../../../../src/services/firebase/index'
+import { profileFixture } from '../../../../resources/fixtures/user/index'
 jest.mock('../../../../../src/services/firebase')
 
 describe('Auth async actions', () => {
-  const userId = 'kakaroto'
+  const mockDispatch = jest.fn()
   const email = 'user@email.com'
   const password = '123456'
-  const mockDispatch = jest.fn()
 
   describe('SignUpFirebase thunk', () => {
     beforeEach(() => {
@@ -44,17 +44,10 @@ describe('Auth async actions', () => {
     })
 
     it('Should dispatch successfull profile save action', async () => {
-      const profile = {
-        name: 'duduzinho',
-        contact: {
-          kind: 'carta',
-          value: 'Rua dos bobos, Numero zero'
-        }
-      }
       FirebaseService.saveProfile = jest.fn(() => Promise.resolve())
 
-      const expectedAction = updateProfile(profile)
-      const thunk = saveProfileFirebase(profile, userId)
+      const expectedAction = updateProfile(profileFixture)
+      const thunk = saveProfileFirebase(profileFixture)
       await thunk(mockDispatch)
 
       expect(mockDispatch).toHaveBeenCalledWith(expectedAction)
