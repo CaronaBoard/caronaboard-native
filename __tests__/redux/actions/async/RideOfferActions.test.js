@@ -1,7 +1,6 @@
-import { UPDATE_RIDE_OFFERS } from '../../../../src/redux/types/index'
-import { fetchAllRideOffers } from '../../../../src/redux/actions/index'
-
-import * as FirebaseService from '../../../../src/services/firebase/index'
+import { fetchAllRideOffers } from '../../../../src/redux/actions'
+import * as FirebaseService from '../../../../src/services/firebase'
+import { updateRideOffers } from '../../../../src/redux/actions/sync/RideOfferActions'
 jest.mock('../../../../src/services/firebase')
 
 const mockedRides = {
@@ -26,11 +25,7 @@ describe('RideOffer async actions', () => {
   it('Should create a thunk for fetching all rides', async () => {
     FirebaseService.getAllRideOffers = jest.fn(() => mockedRides)
 
-    const expectedAction = {
-      type: UPDATE_RIDE_OFFERS,
-      payload: mockedRides
-    }
-
+    const expectedAction = updateRideOffers(mockedRides)
     const thunk = fetchAllRideOffers()
     await thunk(dispatchMock)
 

@@ -1,9 +1,6 @@
 import RideOfferReducers, { INITIAL_STATE } from '../../../src/redux/reducers/RideReducers'
-import { fetchAllRideOffers, fetchAllRideRequests } from '../../../src/redux/actions'
-import { extractActionFromThunk } from '../../__mocks__/ReduxThunkMock'
-
-import * as FirebaseService from '../../../src/services/firebase'
-jest.mock('../../../src/services/firebase')
+import { updateRideRequests } from '../../../src/redux/actions/sync/RideRequestActions'
+import { updateRideOffers } from '../../../src/redux/actions/sync/RideOfferActions'
 
 const mockedRides = {
   driverId: 'AIYmwTmrdTfUuGeuoNF0SYgXJ1j1',
@@ -24,9 +21,7 @@ const mockedRides = {
 
 describe('RideOfferReducers', () => {
   it('Should handle UPDATE_RIDE_OFFERS action type', async () => {
-    FirebaseService.getAllRideOffers = jest.fn(() => mockedRides)
-
-    const action = await extractActionFromThunk(fetchAllRideOffers)
+    const action = updateRideOffers(mockedRides)
     const state = RideOfferReducers(INITIAL_STATE, action)
     const expectedState = { offers: action.payload, requests: [] }
 
@@ -34,9 +29,7 @@ describe('RideOfferReducers', () => {
   })
 
   it('Should handle UPDATE_RIDE_REQUESTS action type', async () => {
-    FirebaseService.getUserRideRequests = jest.fn(() => mockedRides)
-
-    const action = await extractActionFromThunk(fetchAllRideRequests)
+    const action = updateRideRequests(mockedRides)
     const state = RideOfferReducers(INITIAL_STATE, action)
     const expectedState = { requests: action.payload, offers: [] }
 

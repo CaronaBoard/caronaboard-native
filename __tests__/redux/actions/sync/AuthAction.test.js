@@ -1,59 +1,60 @@
-import { SIGN_UP_SUCCESS, ALERT_AUTH_FAILED, UPDATE_PROFILE } from '../../../../src/redux/types/index'
-import { signUpFirebase, saveProfileFirebase } from '../../../../src/redux/actions/async/AuthActions'
 
-import * as FirebaseService from '../../../../src/services/firebase/index'
-jest.mock('../../../../src/services/firebase')
+import {
+  UPDATE_USER,
+  SIGN_UP_SUCCESS,
+  ALERT_AUTH_FAILED,
+  FORGOT_PASSWORD_SUCCESS,
+  UPDATE_PROFILE
+} from '../../../../src/redux/types/index'
+import {
+  updateUserData,
+  succesRetrievedPassword,
+  signUpSuccess,
+  alertAction,
+  updateProfile
+} from '../../../../src/redux/actions/sync/AuthActions'
 
-describe('AuthAction', () => {
-  const userId = 'kakaroto'
-  const email = 'user@email.com'
-  const password = '123456'
-  const mockDispatch = jest.fn()
+describe('Auth sync actions', () => {
+  it('Should send a update user data action', async () => {
+    const userData = {}
+    const action = updateUserData(userData)
+    const expectedAction = {
+      type: UPDATE_USER,
+      payload: userData
+    }
+    expect(action).toEqual(expectedAction)
+  })
 
-  describe('SignUpFirebase thunk', () => {
-    beforeEach(() => {
-      mockDispatch.mockClear()
-    })
+  it('Should send a update profile action', async () => {
+    const profile = {}
+    const action = updateProfile(profile)
+    const expectedAction = {
+      type: UPDATE_PROFILE,
+      profile
+    }
+    expect(action).toEqual(expectedAction)
+  })
 
-    it('Should handle any exception as a failure action', async () => {
-      const message = 'Error Message'
-      FirebaseService.signUp = jest.fn(() => Promise.reject(new Error(message)))
+  it('Should send a sucessfull forgot password action', async () => {
+    const expectedAction = {type: FORGOT_PASSWORD_SUCCESS}
+    const action = succesRetrievedPassword()
+    expect(action).toEqual(expectedAction)
+  })
 
-      const expectedAction = {
-        type: ALERT_AUTH_FAILED,
-        payload: message
-      }
-      const thunk = signUpFirebase(email, password)
-      await thunk(mockDispatch)
+  it('Should send a sucessfull signup action', async () => {
+    const expectedAction = {type: SIGN_UP_SUCCESS}
+    const action = signUpSuccess()
+    expect(action).toEqual(expectedAction)
+  })
 
-      expect(mockDispatch).toHaveBeenCalledWith(expectedAction)
-    })
+  it('Should send an alert message', async () => {
+    const error = {message: 'Error Message'}
+    const action = alertAction(error)
+    const expectedAction = {
+      type: ALERT_AUTH_FAILED,
+      payload: error.message
+    }
 
-    it('Should dispatch successfull signup action', async () => {
-      FirebaseService.signUp = jest.fn(() => Promise.resolve())
-
-      const expectedAction = { type: SIGN_UP_SUCCESS }
-      const thunk = signUpFirebase(email, password)
-      await thunk(mockDispatch)
-
-      expect(mockDispatch).toHaveBeenCalledWith(expectedAction)
-    })
-
-    it('Should dispatch successfull profile save action', async () => {
-      const profile = {
-        name: 'duduzinho',
-        contact: {
-          kind: 'carta',
-          value: 'Rua dos bobos, Numero zero'
-        }
-      }
-      FirebaseService.saveProfile = jest.fn(() => Promise.resolve())
-
-      const expectedAction = { type: UPDATE_PROFILE, profile }
-      const thunk = saveProfileFirebase(profile, userId)
-      await thunk(mockDispatch)
-
-      expect(mockDispatch).toHaveBeenCalledWith(expectedAction)
-    })
+    expect(action).toEqual(expectedAction)
   })
 })
