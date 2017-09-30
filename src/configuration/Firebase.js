@@ -1,12 +1,12 @@
 import Firebase from 'firebase'
-import Config from 'react-native-config'
 
+// TODO: REMOVE THIS AS SOON WE FIGURE OUT HOW TO INJECT SECRETS ON CI
 const firebaseConfig = {
-  apiKey: Config.API_KEY,
-  authDomain: Config.AUTH_DOMAIN,
-  databaseURL: Config.DATABASE_URL,
-  storageBucket: Config.STORAGE_BUCKET,
-  messagingSenderId: Config.MESSAGING_SENDER_ID
+  apiKey: 'AIzaSyBQnTKUKjQ0HkLUdHVs7a8_hFyCO-nbT-M',
+  authDomain: 'caronaboard-hack-night.firebaseapp.com',
+  databaseURL: 'https://caronaboard-hack-night.firebaseio.com',
+  storageBucket: 'caronaboard-hack-night.appspot.com',
+  messagingSenderId: '905421185910'
 }
 
 const initialize = () => {

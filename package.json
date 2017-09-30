@@ -16,7 +16,8 @@
     "lint-fix": "standard --fix --verbose | snazzy",
     "precommit": "npm run lint-check",
     "prepush": "jest --bail --forceExit --silent",
-    "danger": "danger"
+    "danger": "danger",
+    "generate-apk": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "firebase": "^4.1.3",
