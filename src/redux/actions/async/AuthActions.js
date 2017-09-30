@@ -1,23 +1,22 @@
 import { signIn, signUp, forgotPassword, saveProfile } from '../../../services/firebase/index'
-import type { ProfileType } from '../../../services/firebase/database/Profile'
-import {
-  SIGN_IN_FIREBASE,
-  SAVE_PROFILE_FIREBASE,
-  SIGN_UP_SUCCESS,
-  AUTH_FAILED,
-  FORGOT_PASSWORD_SUCCESS
-} from '../../types/index'
 import { getUserProfile } from '../../../services/firebase/database/Profile'
+import type { ProfileType } from '../../../services/firebase/database/Profile'
+import { updateProfile,
+  alertAction,
+  signUpSuccess,
+  succesRetrievedPassword,
+  updateUserData
+} from '../sync/AuthActions'
 
 export function signInFirebase (email: string, password: string) {
   return async (dispatch) => {
     try {
       const user = await signIn(email, password)
       const profile = await getUserProfile(user.uid)
-      dispatch({ type: SAVE_PROFILE_FIREBASE, profile })
-      dispatch({ type: SIGN_IN_FIREBASE, payload: user })
+      dispatch(updateProfile(profile))
+      dispatch(updateUserData(user))
     } catch (error) {
-      dispatch({ type: AUTH_FAILED, payload: error.message })
+      dispatch(alertAction(error))
     }
   }
 }
@@ -26,10 +25,10 @@ export function signUpFirebase (email: string, password: string) {
   return async (dispatch) => {
     try {
       await signUp(email, password)
-      const successAction = { type: SIGN_UP_SUCCESS }
+      const successAction = signUpSuccess()
       dispatch(successAction)
     } catch (error) {
-      dispatch({ type: AUTH_FAILED, payload: error.message })
+      dispatch(alertAction(error))
     }
   }
 }
@@ -38,7 +37,7 @@ export function saveProfileFirebase (profile: ProfileType) {
   return async (dispatch) => {
     try {
       await saveProfile(profile)
-      dispatch({ type: SAVE_PROFILE_FIREBASE, profile })
+      dispatch(updateProfile(profile))
     } catch (err) {
       console.log('Error saving profile: ', err)
     }
@@ -49,9 +48,9 @@ export function forgotPasswordFirebase (email) {
   return async (dispatch) => {
     try {
       await forgotPassword(email)
-      dispatch({ type: FORGOT_PASSWORD_SUCCESS })
+      dispatch(succesRetrievedPassword())
     } catch (error) {
-      dispatch({ type: AUTH_FAILED, payload: error.message })
+      dispatch(alertAction(error))
     }
   }
 }

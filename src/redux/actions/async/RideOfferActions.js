@@ -1,14 +1,10 @@
-import { FETCH_ALL_RIDE_OFFERS } from '../../types'
 import { getAllRideOffers } from '../../../services/firebase'
+import { updateRideOffers } from '../sync/RideOfferActions'
 
 export function fetchAllRideOffers () {
   return async (dispatch) => {
     const rides = await getAllRideOffers()
-    const action = {
-      type: FETCH_ALL_RIDE_OFFERS,
-      payload: rides
-    }
-
+    const action = updateRideOffers(rides)
     dispatch(action)
   }
 }

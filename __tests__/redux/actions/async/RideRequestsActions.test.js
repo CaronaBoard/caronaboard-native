@@ -20,7 +20,7 @@ const mockedRides = {
   }
 }
 
-describe('RideRequest actions', () => {
+describe('RideRequest async actions', () => {
   const dispatchMock = jest.fn()
 
   it('Should create a thunk for fetching all ride requests', async () => {
