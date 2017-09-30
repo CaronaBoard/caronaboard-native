@@ -5,7 +5,7 @@ import { RkButton } from 'react-native-ui-kitten'
 import { screens } from '../../../../../src/navigation/Screens'
 
 const props = {
-  email: 'email',
+  email: 'email@da.ana',
   navigator: {
     push: jest.fn()
   }

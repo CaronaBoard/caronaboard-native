@@ -1,22 +1,10 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { RideRequestScreen } from '../../../../../src/modules/rideRequest/containers/NewRideRequestContainer'
+import { rideOfferFixture } from '../../../../resources/fixtures/ride/offer'
 
 const props = {
-  ride: {
-    'driverId': 'driverId',
-    'rideId': 'rideId',
-    'area': 'Aeroporto',
-    'days': 'Seg a Sex',
-    'destination': 'Rodoviaria',
-    'hours': '19h',
-    'origin': 'Tecnopuc',
-    'profile': {
-      'contact': {
-        'kind': 'Whatsapp', 'value': '5198269999'
-      },
-      'name': 'Eduardo' }
-  },
+  ride: rideOfferFixture,
   userId: 'kakaroto'
 }
 

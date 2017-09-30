@@ -1,9 +1,10 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { YourRideOffersScreen } from '../../../../../src/modules/rideOffer/containers/YourRideOffersScreen'
+import { profileFixture } from '../../../../resources/fixtures/user/index'
 
 const props = {
-  profile: {},
+  profile: profileFixture,
   navigator: {
     setOnNavigatorEvent: jest.fn()
   }

@@ -4,20 +4,20 @@ exports[`<RideRequestScreen /> Snapshot have a snapshot 1`] = `
 <NewRideRequest
   ride={
     Object {
-      "area": "Aeroporto",
-      "days": "Seg a Sex",
-      "destination": "Rodoviaria",
-      "driverId": "driverId",
+      "days": "Seg-Sex",
+      "destination": "Bomfim",
+      "driverId": "AIYmwTmrdTfUuGeuoNF0SYgXJ1j1",
       "hours": "19h",
-      "origin": "Tecnopuc",
+      "origin": "PUC",
       "profile": Object {
         "contact": Object {
           "kind": "Whatsapp",
-          "value": "5198269999",
+          "uid": "User ID",
+          "value": "+5559999999",
         },
-        "name": "Eduardo",
+        "name": "Eduardo Moroni",
       },
-      "rideId": "rideId",
+      "rideId": "-KndyvnnlSN05mJxL57Q",
     }
   }
   saveRideRequest={[Function]}

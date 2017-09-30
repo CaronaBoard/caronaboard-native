@@ -2,22 +2,10 @@ import 'react-native'
 import React from 'react'
 import { shallow } from 'enzyme'
 import { RideList } from '../../../../../src/modules/rideRequest/containers/RideRequestsListContainer'
+import { rideOfferFixture } from '../../../../resources/fixtures/ride/offer'
 
 const props = {
-  rides: [{
-    'area': 'Aeroporto',
-    'days': 'Seg a Sex',
-    'destination': 'Rodoviaria',
-    'hours': '19h',
-    'origin': 'Tecnopuc',
-    'driverId': 'Some UID',
-    'rideId': 'Ride ID',
-    'profile': {
-      'contact': {
-        'kind': 'Whatsapp', 'value': '5198269999'
-      },
-      'name': 'Eduardo' }
-  }],
+  rides: [rideOfferFixture],
   fetchRides: jest.fn(),
   navigator: {
     setOnNavigatorEvent: jest.fn()

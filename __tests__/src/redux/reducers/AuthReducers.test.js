@@ -1,9 +1,10 @@
 import AuthReducer, { INITIAL_STATE } from '../../../../src/redux/reducers/AuthReducers'
 import { signUpFirebase } from '../../../../src/redux/actions/async/AuthActions'
 import { USER_SIGNED_UP } from '../../../../src/constants/message'
-import { extractActionFromThunk } from '../../../__mocks__/ReduxThunkMock'
+import { extractActionFromThunk } from '../../../resources/mocks/ReduxThunkMock'
 import { signUpSuccess, updateProfile } from '../../../../src/redux/actions/sync/AuthActions'
 import * as FirebaseService from '../../../../src/services/firebase'
+import { profileFixture } from '../../../resources/fixtures/user'
 jest.mock('../../../../src/services/firebase')
 
 describe('AuthReducer', () => {
@@ -33,15 +34,7 @@ describe('AuthReducer', () => {
   })
 
   it('Should update user profile', async () => {
-    const profile = {
-      name: 'duduzinho',
-      contact: {
-        kind: 'carta',
-        value: 'Rua dos bobos, Numero zero'
-      }
-    }
-
-    const action = updateProfile(profile)
+    const action = updateProfile(profileFixture)
     const state = AuthReducer(INITIAL_STATE, action)
     const expectedState = { ...state, profile: action.profile }
 
