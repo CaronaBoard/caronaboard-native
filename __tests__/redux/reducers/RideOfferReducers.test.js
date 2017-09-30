@@ -23,7 +23,7 @@ const mockedRides = {
 }
 
 describe('RideOfferReducers', () => {
-  it('Should handle FETCH_ALL_RIDE_OFFERS action type', async () => {
+  it('Should handle UPDATE_RIDE_OFFERS action type', async () => {
     FirebaseService.getAllRideOffers = jest.fn(() => mockedRides)
 
     const action = await extractActionFromThunk(fetchAllRideOffers)
@@ -33,7 +33,7 @@ describe('RideOfferReducers', () => {
     expect(state).toEqual(expectedState)
   })
 
-  it('Should handle FETCH_ALL_RIDE_REQUESTS action type', async () => {
+  it('Should handle UPDATE_RIDE_REQUESTS action type', async () => {
     FirebaseService.getUserRideRequests = jest.fn(() => mockedRides)
 
     const action = await extractActionFromThunk(fetchAllRideRequests)

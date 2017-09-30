@@ -1,4 +1,4 @@
-import { FETCH_ALL_RIDE_REQUESTS } from '../../../../src/redux/types/index'
+import { UPDATE_RIDE_REQUESTS } from '../../../../src/redux/types/index'
 import { fetchAllRideRequests } from '../../../../src/redux/actions/index'
 
 import * as FirebaseService from '../../../../src/services/firebase/index'
@@ -27,7 +27,7 @@ describe('RideRequest async actions', () => {
     FirebaseService.getAllRideRequests = jest.fn(() => mockedRides)
 
     const expectedAction = {
-      type: FETCH_ALL_RIDE_REQUESTS,
+      type: UPDATE_RIDE_REQUESTS,
       payload: mockedRides
     }
 

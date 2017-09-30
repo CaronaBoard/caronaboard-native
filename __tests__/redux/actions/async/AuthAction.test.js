@@ -1,9 +1,9 @@
 import {
-  SIGN_IN_FIREBASE,
+  UPDATE_USER,
   SIGN_UP_SUCCESS,
-  AUTH_FAILED,
+  ALERT_AUTH_FAILED,
   FORGOT_PASSWORD_SUCCESS,
-  SAVE_PROFILE_FIREBASE
+  UPDATE_PROFILE
 } from '../../../../src/redux/types/index'
 import {
   updateUserData,
@@ -18,7 +18,7 @@ describe('Auth sync actions', () => {
     const userData = {}
     const action = updateUserData(userData)
     const expectedAction = {
-      type: SIGN_IN_FIREBASE,
+      type: UPDATE_USER,
       payload: userData
     }
     expect(action).toEqual(expectedAction)
@@ -28,7 +28,7 @@ describe('Auth sync actions', () => {
     const profile = {}
     const action = updateProfile(profile)
     const expectedAction = {
-      type: SAVE_PROFILE_FIREBASE,
+      type: UPDATE_PROFILE,
       profile
     }
     expect(action).toEqual(expectedAction)
@@ -50,7 +50,7 @@ describe('Auth sync actions', () => {
     const error = {message: 'Error Message'}
     const action = alertAction(error)
     const expectedAction = {
-      type: AUTH_FAILED,
+      type: ALERT_AUTH_FAILED,
       payload: error.message
     }
 

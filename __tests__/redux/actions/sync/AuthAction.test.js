@@ -1,4 +1,4 @@
-import { SIGN_UP_SUCCESS, AUTH_FAILED, SAVE_PROFILE_FIREBASE } from '../../../../src/redux/types/index'
+import { SIGN_UP_SUCCESS, ALERT_AUTH_FAILED, UPDATE_PROFILE } from '../../../../src/redux/types/index'
 import { signUpFirebase, saveProfileFirebase } from '../../../../src/redux/actions/async/AuthActions'
 
 import * as FirebaseService from '../../../../src/services/firebase/index'
@@ -20,7 +20,7 @@ describe('AuthAction', () => {
       FirebaseService.signUp = jest.fn(() => Promise.reject(new Error(message)))
 
       const expectedAction = {
-        type: AUTH_FAILED,
+        type: ALERT_AUTH_FAILED,
         payload: message
       }
       const thunk = signUpFirebase(email, password)
@@ -49,7 +49,7 @@ describe('AuthAction', () => {
       }
       FirebaseService.saveProfile = jest.fn(() => Promise.resolve())
 
-      const expectedAction = { type: SAVE_PROFILE_FIREBASE, profile }
+      const expectedAction = { type: UPDATE_PROFILE, profile }
       const thunk = saveProfileFirebase(profile, userId)
       await thunk(mockDispatch)
 

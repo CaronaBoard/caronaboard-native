@@ -1,9 +1,9 @@
 import type { ProfileType } from '../../../services/firebase/database/Profile'
 import {
-  SIGN_IN_FIREBASE,
-  SAVE_PROFILE_FIREBASE,
+  UPDATE_USER,
+  UPDATE_PROFILE,
   SIGN_UP_SUCCESS,
-  AUTH_FAILED,
+  ALERT_AUTH_FAILED,
   FORGOT_PASSWORD_SUCCESS
 } from '../../types'
 
@@ -16,13 +16,13 @@ export const signUpSuccess = () => {
 }
 
 export const updateProfile = (profile: ProfileType) => {
-  return {type: SAVE_PROFILE_FIREBASE, profile}
+  return {type: UPDATE_PROFILE, profile}
 }
 
 export const updateUserData = (user) => {
-  return {type: SIGN_IN_FIREBASE, payload: user}
+  return {type: UPDATE_USER, payload: user}
 }
 
 export const alertAction = (error: {message: string}) => {
-  return {type: AUTH_FAILED, payload: error.message}
+  return {type: ALERT_AUTH_FAILED, payload: error.message}
 }

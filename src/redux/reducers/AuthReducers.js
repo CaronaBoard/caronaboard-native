@@ -1,9 +1,9 @@
 import { USER_SIGNED_UP, USER_RESET_PASSWORD } from '../../constants/message'
 import {
-  SIGN_IN_FIREBASE,
-  AUTH_FAILED,
+  UPDATE_USER,
+  ALERT_AUTH_FAILED,
   SIGN_UP_SUCCESS,
-  SAVE_PROFILE_FIREBASE,
+  UPDATE_PROFILE,
   FORGOT_PASSWORD_SUCCESS
 } from '../types'
 
@@ -30,11 +30,11 @@ export const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SIGN_IN_FIREBASE:
+    case UPDATE_USER:
       return { ...state, userData: action.payload }
-    case SAVE_PROFILE_FIREBASE:
+    case UPDATE_PROFILE:
       return { ...state, profile: action.profile }
-    case AUTH_FAILED:
+    case ALERT_AUTH_FAILED:
       return { ...state, alert: {showAlert: true, message: action.payload} }
     case SIGN_UP_SUCCESS:
       return { ...state, alert: {showAlert: true, message: USER_SIGNED_UP} }
