@@ -1,7 +1,7 @@
 import AuthReducer, { INITIAL_STATE } from '../../../../src/redux/reducers/AuthReducers'
 import { signUpFirebase } from '../../../../src/redux/actions/async/AuthActions'
 import { USER_SIGNED_UP } from '../../../../src/constants/message'
-import { extractActionFromThunk } from '../../../__mocks__/ReduxThunkMock'
+import { extractActionFromThunk } from '../../../resources/mocks/ReduxThunkMock'
 import { signUpSuccess, updateProfile } from '../../../../src/redux/actions/sync/AuthActions'
 import * as FirebaseService from '../../../../src/services/firebase'
 jest.mock('../../../../src/services/firebase')

@@ -4,15 +4,8 @@ import {
   signIn,
   sendVerificationEmail
 } from '../../../../src/services/firebase/Authentication'
-import RidesResponse from '../../../__mocks__/Fixtures/FirebaseRidesResponse.json'
-
-let mockFirebaseResponse = {
-  sendEmailVerification: jest.fn(() => Promise.resolve()),
-  uid: '-KndyvnnlSN05mJxL57Q',
-  emailVerified: true,
-  email: 'teste@email.io',
-  phoneNumber: '988887777'
-}
+import RidesResponse from '../../../resources/fixtures/firebase/FirebaseRidesResponse.json'
+import { signInWithEmailAndPasswordResponse } from '../../../resources/fixtures/firebase'
 
 let mockFetchProviders = jest.fn()
 
@@ -25,8 +18,8 @@ const mockDatabase = {
   ref: jest.fn(() => mockRef)
 }
 
-const mockCreateUser = jest.fn(() => Promise.resolve(mockFirebaseResponse))
-const mockSignInUser = jest.fn(() => Promise.resolve(mockFirebaseResponse))
+const mockCreateUser = jest.fn(() => Promise.resolve(signInWithEmailAndPasswordResponse))
+const mockSignInUser = jest.fn(() => Promise.resolve(signInWithEmailAndPasswordResponse))
 
 jest.mock('firebase', () => ({
   auth: () => ({
@@ -39,33 +32,32 @@ jest.mock('firebase', () => ({
 }))
 
 describe('Firebase authentication service', () => {
+  const email = 'new@user.com'
+  const password = 'pass123'
+
   it('Should register new user and send a verification mail', async () => {
-    const email = 'new@user.com'
-    const password = 'pass123'
     await signUp(email, password)
     expect(mockCreateUser).toHaveBeenCalledWith(email, password)
-    expect(mockFirebaseResponse.sendEmailVerification).toHaveBeenCalledWith()
+    expect(signInWithEmailAndPasswordResponse.sendEmailVerification).toHaveBeenCalledWith()
   })
 
   it('Should sign in user with a verified email', async () => {
-    mockFirebaseResponse.emailVerified = true
-    const email = 'verified@user.com'
-    const password = 'secret'
+    signInWithEmailAndPasswordResponse.emailVerified = true
     const user = await signIn(email, password)
     expect(mockSignInUser).toHaveBeenCalledWith(email, password)
-    expect(user.uid).toBe(mockFirebaseResponse.uid)
+    expect(user.uid).toBe(signInWithEmailAndPasswordResponse.uid)
   })
 
   it('Should send a verification email during sign in if user does not verified yet', async () => {
-    mockFirebaseResponse.emailVerified = false
+    signInWithEmailAndPasswordResponse.emailVerified = false
     await expect(signIn('email', 'pass')).rejects.toBeInstanceOf(Error)
-    expect(mockFirebaseResponse.sendEmailVerification).toHaveBeenCalledWith()
+    expect(signInWithEmailAndPasswordResponse.sendEmailVerification).toHaveBeenCalledWith()
   })
 
   it('Should send email verification for users', async () => {
-    mockFirebaseResponse.sendEmailVerification = jest.fn(() => Promise.resolve())
-    await sendVerificationEmail(mockFirebaseResponse)
-    expect(mockFirebaseResponse.sendEmailVerification).toHaveBeenCalled()
+    signInWithEmailAndPasswordResponse.sendEmailVerification = jest.fn(() => Promise.resolve())
+    await sendVerificationEmail(signInWithEmailAndPasswordResponse)
+    expect(signInWithEmailAndPasswordResponse.sendEmailVerification).toHaveBeenCalled()
   })
 
   it('Should check if an email is registered or not', async () => {

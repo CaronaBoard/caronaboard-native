@@ -8,7 +8,8 @@
       "profile": {
         "contact": {
           "kind": "Whatsapp",
-          "value": "+5559999999"
+          "value": "+5559999999",
+          "uid": "User ID"
         },
         "name": "Eduardo Moroni"
       }

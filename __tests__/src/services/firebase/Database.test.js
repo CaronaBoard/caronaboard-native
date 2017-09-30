@@ -6,8 +6,8 @@ import {
   updateRideOffer,
   removeRideOffer
 } from '../../../../src/services/firebase'
-import RidesResponse from '../../../__mocks__/Fixtures/FirebaseRidesResponse.json'
-import ProfileResponse from '../../../__mocks__/Fixtures/FirebaseProfileResponse.json'
+import RidesResponse from '../../../resources/fixtures/firebase/FirebaseRidesResponse.json'
+import ProfileResponse from '../../../resources/fixtures/firebase/FirebaseProfileResponse.json'
 
 const mockRef = {
   remove: jest.fn(() => Promise.resolve()),
