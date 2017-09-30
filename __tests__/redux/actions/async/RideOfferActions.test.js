@@ -1,8 +1,8 @@
-import { FETCH_ALL_RIDE_OFFERS } from '../../../src/redux/types'
-import { fetchAllRideOffers } from '../../../src/redux/actions'
+import { FETCH_ALL_RIDE_OFFERS } from '../../../../src/redux/types/index'
+import { fetchAllRideOffers } from '../../../../src/redux/actions/index'
 
-import * as FirebaseService from '../../../src/services/firebase'
-jest.mock('../../../src/services/firebase')
+import * as FirebaseService from '../../../../src/services/firebase/index'
+jest.mock('../../../../src/services/firebase')
 
 const mockedRides = {
   driverId: 'AIYmwTmrdTfUuGeuoNF0SYgXJ1j1',

@@ -1,5 +1,5 @@
-import { FETCH_ALL_RIDE_REQUESTS } from '../types'
-import { getAllRideRequests } from '../../services/firebase'
+import { FETCH_ALL_RIDE_REQUESTS } from '../../types/index'
+import { getAllRideRequests } from '../../../services/firebase/index'
 
 export function fetchAllRideRequests () {
   return async (dispatch) => {

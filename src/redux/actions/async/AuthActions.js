@@ -1,13 +1,13 @@
-import { signIn, signUp, forgotPassword, saveProfile } from '../../services/firebase'
-import type { ProfileType } from '../../services/firebase/database/Profile'
+import { signIn, signUp, forgotPassword, saveProfile } from '../../../services/firebase/index'
+import type { ProfileType } from '../../../services/firebase/database/Profile'
 import {
   SIGN_IN_FIREBASE,
   SAVE_PROFILE_FIREBASE,
   SIGN_UP_SUCCESS,
   AUTH_FAILED,
   FORGOT_PASSWORD_SUCCESS
-} from '../types'
-import { getUserProfile } from '../../services/firebase/database/Profile'
+} from '../../types/index'
+import { getUserProfile } from '../../../services/firebase/database/Profile'
 
 export function signInFirebase (email: string, password: string) {
   return async (dispatch) => {

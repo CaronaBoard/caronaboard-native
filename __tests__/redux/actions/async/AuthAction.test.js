@@ -1,8 +1,8 @@
-import { SIGN_UP_SUCCESS, AUTH_FAILED, SAVE_PROFILE_FIREBASE } from '../../../src/redux/types'
-import { signUpFirebase, saveProfileFirebase } from '../../../src/redux/actions/AuthActions'
+import { SIGN_UP_SUCCESS, AUTH_FAILED, SAVE_PROFILE_FIREBASE } from '../../../../src/redux/types/index'
+import { signUpFirebase, saveProfileFirebase } from '../../../../src/redux/actions/async/AuthActions'
 
-import * as FirebaseService from '../../../src/services/firebase'
-jest.mock('../../../src/services/firebase')
+import * as FirebaseService from '../../../../src/services/firebase/index'
+jest.mock('../../../../src/services/firebase')
 
 describe('AuthAction', () => {
   const userId = 'kakaroto'
