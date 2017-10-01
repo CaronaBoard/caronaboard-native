@@ -14,6 +14,16 @@ export class NewRideRequest extends Component {
     saveRideRequest: PropTypes.func.isRequired
   }
 
+  state = {
+    loading: false
+  }
+
+  onPress = async (rideId) => {
+    this.setState({loading: true})
+    await this.props.saveRideRequest(rideId)
+    this.setState({loading: false})
+  }
+
   renderLine (subTitle, icon) {
     return (
       <View style={Styles.line} >
@@ -57,7 +67,7 @@ export class NewRideRequest extends Component {
           <GradientButton
             rkType='large'
             text={'Ask for a ride'}
-            onPress={this.props.saveRideRequest(rideId)}
+            onPress={this.onPress(rideId)}
           />
         </View>
       </View>

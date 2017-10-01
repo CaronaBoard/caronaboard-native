@@ -20,7 +20,10 @@ export class RideRequestScreen extends Component {
 
   render () {
     return (
-      <NewRideRequest ride={this.props.ride} saveRideRequest={this.askForRide} />
+      <NewRideRequest
+        ride={this.props.ride}
+        saveRideRequest={this.askForRide}
+      />
     )
   }
 }

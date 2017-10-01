@@ -40,9 +40,9 @@ export class YourRideOffersScreen extends Component {
     this.setState({rides, rideRequestsMap})
   }
 
-  componentDidUpdate (prevProps) {
+  async componentDidUpdate (prevProps) {
     if (prevProps.uid !== this.props.uid) {
-      this.componentDidMount()
+      await this.componentDidMount()
     }
   }
 

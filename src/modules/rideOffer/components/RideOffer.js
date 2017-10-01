@@ -1,52 +1,65 @@
 import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
-import Styles from './styles/RideOffer.style'
+import PropTypes from 'prop-types'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import { View, Text, TouchableOpacity } from 'react-native'
+
+import Styles from './styles/RideOffer.style'
 import { RkCard } from 'react-native-ui-kitten'
 import { RidePropType } from '../../rideRequest/types'
-import PropTypes from 'prop-types'
 
-const renderLine = (text, icon) => {
-  return (
-    <View style={Styles.line} >
-      <Icon name={icon} style={Styles.icon} />
-      <Text rkCardText>{text}</Text>
-    </View>
-  )
-}
+export class RideOffer extends React.Component {
+  static propTypes = {
+    ride: RidePropType.isRequired,
+    onPress: PropTypes.func.isRequired
+  }
 
-export const RideOffer = props => {
-  const {
-    origin,
-    destination,
-    days,
-    hours,
-    rideId
-  } = props.ride
+  state = {
+    loading: false
+  }
 
-  return (
-    <TouchableOpacity onPress={() => props.onPress(rideId)}>
-      <RkCard>
-        <View rkCardContent>
-          { renderLine(origin, 'radio-button-unchecked') }
-          { renderLine(destination, 'radio-button-unchecked') }
-        </View>
-        <View rkCardContent>
-          { renderLine(days, 'today') }
-          { renderLine(hours, 'schedule') }
-        </View>
-        <Icon
-          name='delete-forever'
-          size={30}
-          color='#900'
-          style={Styles.deleteIcon}
-        />
-      </RkCard>
-    </TouchableOpacity>
-  )
-}
+  onPress = async (rideId) => {
+    this.setState({loading: true})
+    await this.props.onPress(rideId)
+    this.setState({loading: false})
+  }
 
-RideOffer.propTypes = {
-  ride: RidePropType.isRequired,
-  onPress: PropTypes.func.isRequired
+  renderLine = (text, icon) => {
+    return (
+      <View style={Styles.line} >
+        <Icon name={icon} style={Styles.icon} />
+        <Text rkCardText>{text}</Text>
+      </View>
+    )
+  }
+
+  render () {
+    const {
+      origin,
+      destination,
+      days,
+      hours,
+      rideId
+    } = this.props.ride
+
+    return (
+      <TouchableOpacity onPress={() => this.onPress(rideId)}>
+        <RkCard>
+          <View rkCardContent>
+            { this.renderLine(origin, 'radio-button-unchecked') }
+            { this.renderLine(destination, 'radio-button-unchecked') }
+          </View>
+          <View rkCardContent>
+            { this.renderLine(days, 'today') }
+            { this.renderLine(hours, 'schedule') }
+          </View>
+          <Icon
+            name='delete-forever'
+            size={30}
+            color='#900'
+            style={Styles.deleteIcon}
+          />
+        </RkCard>
+      </TouchableOpacity>
+    )
+  }
 }
