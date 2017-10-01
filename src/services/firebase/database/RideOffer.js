@@ -2,18 +2,18 @@
 
 import { toArrayOfRides } from '../Conversion'
 import _ from 'lodash'
-import type { RideType, RideOfferType, ProfileType } from '../types'
+import type { RideType, NewRideOfferType, ProfileType } from '../types'
 import { rideGroup, ref } from './'
 import { getUserProfile } from './Profile'
 
-export const saveRideOffer = async (rideOffer: RideOfferType, userId: string) => {
+export const saveRideOffer = async (rideOffer: NewRideOfferType, userId: string) => {
   const profile = await getUserProfile(userId)
   const path = `rides/${rideGroup}/${userId}`
   const ride = Object.assign({ profile }, rideOffer)
   return ref(path).push(ride)
 }
 
-export const updateRideOffer = async (rideOffer: RideOfferType, profile: ProfileType) => {
+export const updateRideOffer = async (rideOffer: NewRideOfferType, profile: ProfileType) => {
   const path = `rides/${rideGroup}/${profile.uid}/${rideOffer.id}`
   const newRide = Object.assign({profile: profile}, _.omit(rideOffer, 'id'))
   await ref(path).update(newRide)

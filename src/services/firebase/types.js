@@ -24,7 +24,7 @@ export type RideType = {
   }
 }
 
-export type RideOfferType = {
+export type NewRideOfferType = {
   id: string,
   origin: string,
   destination: string,
