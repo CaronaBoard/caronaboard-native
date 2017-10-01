@@ -10,12 +10,11 @@ export const initializeAuthModule = module => {
 export const signIn = (email, password) => {
   return auth.signInWithEmailAndPassword(email, password)
       .then(user => {
-        const { uid, emailVerified, email, phoneNumber } = user
-        if (!emailVerified) {
+        if (!user.emailVerified) {
           sendVerificationEmail(user)
           throw (new Error('Email não verificado'))
         } else {
-          return { uid, emailVerified, email, phoneNumber }
+          return user
         }
       })
 }

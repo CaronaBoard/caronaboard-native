@@ -12,16 +12,14 @@ const firebaseConfig = {
   messagingSenderId: '905421185910'
 }
 
-const initializeAuth = async (app) => {
+const initializeAuth = async (app, store) => {
   const auth = Firebase.auth(app)
-  initializeAuthModule(auth)
-  // TODO: This function cause severe side effect, figure out a better way to
-  // handle auth persistence
   auth.onAuthStateChanged(user => {
-    Navigation.startApp(user)
+    // TODO: This function cause severe side effect, figure out a better way to
+    // handle auth persistence
+    Navigation.startApp(user, store)
   })
-
-  auth.signOut()
+  initializeAuthModule(auth)
 }
 
 const initializeDatabase = (app) => {
@@ -29,15 +27,11 @@ const initializeDatabase = (app) => {
   initializeDatabaseModule(database)
 }
 
-const initialize = async () => {
+const initialize = async (store) => {
   try {
     const app = await Firebase.initializeApp(firebaseConfig)
-    const user = await initializeAuth(app)
+    await initializeAuth(app, store)
     initializeDatabase(app)
-
-    // dispatch(updateProfile(profile))
-    // dispatch(updateUserData(user))
-    console.log(user, 'is ===> user')
   } catch (error) {
     if (error.code === 'app/duplicate-app') {
       console.info('Hot reload tried to initiate firebase again. Ignoring duplicated initialization')

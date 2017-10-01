@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { screens } from '../navigation/Screens'
 import { tabs } from '../navigation/Tabs'
 import { style, barsHidden } from '../navigation/Styles'
+import { signInFirebase } from '../redux/actions/async/AuthActions'
 
 const { startTabBasedApp, startSingleScreenApp, registerComponent } = Navigation
 
@@ -30,11 +31,14 @@ const singleAppParams = {
 }
 
 const isUserSignedIn = (user) => !!user
-const startCaronaBoard = () => startTabBasedApp(tabAppParams)
 const startAuthentication = () => startSingleScreenApp(singleAppParams)
+const startCaronaBoard = (user, store) => {
+  store.dispatch(signInFirebase(user))
+  startTabBasedApp(tabAppParams)
+}
 
-const startApp = (user) => {
-  isUserSignedIn(user) ? startCaronaBoard() : startAuthentication()
+const startApp = (user, store) => {
+  isUserSignedIn(user) ? startCaronaBoard(user, store) : startAuthentication()
 }
 
 const registerScreens = (store) => {
@@ -46,4 +50,4 @@ const registerScreens = (store) => {
   }
 }
 
-export default { startApp, registerScreens, userLoggedIn: startCaronaBoard }
+export default { startApp, registerScreens }

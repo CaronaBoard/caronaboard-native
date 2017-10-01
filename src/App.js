@@ -5,10 +5,9 @@ import Redux from './configuration/Redux'
 
 async function main () {
   const store = Redux.createStore()
-  Firebase.initialize()
-  Kitten.setup()
   Navigation.registerScreens(store)
-  Navigation.startApp()
+  Kitten.setup()
+  await Firebase.initialize(store)
 }
 
 main().catch(error => {

@@ -11,9 +11,10 @@ import { updateProfile,
 export function signInFirebase (user) {
   return async (dispatch) => {
     try {
+      const { uid, emailVerified, email, phoneNumber } = user
       const profile = await getUserProfile(user.uid)
       dispatch(updateProfile(profile))
-      dispatch(updateUserData(user))
+      dispatch(updateUserData({ uid, emailVerified, email, phoneNumber }))
     } catch (error) {
       dispatch(alertAction(error))
     }
