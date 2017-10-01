@@ -11,41 +11,36 @@ export const onAuthStateChanged = callback => {
   auth.onAuthStateChanged(callback)
 }
 
-export const signIn = (email, password) => {
-  return auth.signInWithEmailAndPassword(email, password)
-      .then(user => {
-        if (!user.emailVerified) {
-          sendVerificationEmail(user)
-          throw (new Error('Email não verificado'))
-        } else {
-          return user
-        }
-      })
+export const signIn = async (email: string, password: string) => {
+  const user = await auth.signInWithEmailAndPassword(email, password)
+  if (!user.emailVerified) {
+    await sendVerificationEmail(user)
+    throw (new Error('Email não verificado'))
+  }
+  return user
 }
 
-export const signUp = (email, password) => {
-  return Firebase.auth()
-          .createUserWithEmailAndPassword(email, password)
-          .then(user => sendVerificationEmail(user))
+export const signUp = async (email: string, password: string) => {
+  try {
+    const user = await auth.createUserWithEmailAndPassword(email, password)
+    sendVerificationEmail(user)
+  } catch (error) {
+    console.error(error)
+  }
 }
 
-export const checkEmailRegistration = (email) => {
-  return new Promise(resolve => {
-    auth.fetchProvidersForEmail(email)
-      .then(providers => {
-        if (providers.length === 0) {
-          resolve(false)
-        } else {
-          resolve(true)
-        }
-      })
-  })
+export const checkEmailRegistration = async (email: string) => {
+  const providers = await auth.fetchProvidersForEmail(email)
+  return providers.length !== 0
 }
 
-export function sendVerificationEmail (user) {
-  user.sendEmailVerification()
-    .then(() => console.log('Email de verificação enviado'))
-    .catch(() => console.error('Error ao enviar email de verificação'))
+export const sendVerificationEmail = async (user) => {
+  try {
+    await user.sendEmailVerification()
+    console.log('Email de verificação enviado')
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 export const forgotPassword = (email) => {
