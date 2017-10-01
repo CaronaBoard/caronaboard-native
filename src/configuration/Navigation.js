@@ -29,12 +29,12 @@ const singleAppParams = {
   }
 }
 
-const isUserSignedIn = () => false
+const isUserSignedIn = (user) => !!user
 const startCaronaBoard = () => startTabBasedApp(tabAppParams)
 const startAuthentication = () => startSingleScreenApp(singleAppParams)
 
-const startApp = () => {
-  isUserSignedIn() ? startCaronaBoard() : startAuthentication()
+const startApp = (user) => {
+  isUserSignedIn(user) ? startCaronaBoard() : startAuthentication()
 }
 
 const registerScreens = (store) => {

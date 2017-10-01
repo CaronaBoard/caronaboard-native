@@ -1,7 +1,14 @@
 import Firebase from 'firebase'
 
+let auth
+
+export const initializeAuthModule = module => {
+  auth = module
+  auth.setPersistence(Firebase.auth.Auth.Persistence.LOCAL)
+}
+
 export const signIn = (email, password) => {
-  return Firebase.auth().signInWithEmailAndPassword(email, password)
+  return auth.signInWithEmailAndPassword(email, password)
       .then(user => {
         const { uid, emailVerified, email, phoneNumber } = user
         if (!emailVerified) {
@@ -21,7 +28,7 @@ export const signUp = (email, password) => {
 
 export const checkEmailRegistration = (email) => {
   return new Promise(resolve => {
-    Firebase.auth().fetchProvidersForEmail(email)
+    auth.fetchProvidersForEmail(email)
       .then(providers => {
         if (providers.length === 0) {
           resolve(false)
@@ -39,5 +46,5 @@ export function sendVerificationEmail (user) {
 }
 
 export const forgotPassword = (email) => {
-  return Firebase.auth().sendPasswordResetEmail(email)
+  return auth.sendPasswordResetEmail(email)
 }

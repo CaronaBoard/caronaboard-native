@@ -1,2 +1,2 @@
 export * from './Authentication'
-export * from './database/index'
+export * from './database'

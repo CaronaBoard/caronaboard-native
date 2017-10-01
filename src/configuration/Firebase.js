@@ -1,4 +1,7 @@
 import Firebase from 'firebase'
+import { initializeAuthModule } from '../services/firebase/Authentication'
+import { initializeDatabaseModule } from '../services/firebase/database/index'
+import Navigation from './Navigation'
 
 // TODO: REMOVE THIS AS SOON WE FIGURE OUT HOW TO INJECT SECRETS ON CI
 const firebaseConfig = {
@@ -9,9 +12,32 @@ const firebaseConfig = {
   messagingSenderId: '905421185910'
 }
 
-const initialize = () => {
+const initializeAuth = async (app) => {
+  const auth = Firebase.auth(app)
+  initializeAuthModule(auth)
+  // TODO: This function cause severe side effect, figure out a better way to
+  // handle auth persistence
+  auth.onAuthStateChanged(user => {
+    Navigation.startApp(user)
+  })
+
+  auth.signOut()
+}
+
+const initializeDatabase = (app) => {
+  const database = Firebase.database(app)
+  initializeDatabaseModule(database)
+}
+
+const initialize = async () => {
   try {
-    Firebase.initializeApp(firebaseConfig)
+    const app = await Firebase.initializeApp(firebaseConfig)
+    const user = await initializeAuth(app)
+    initializeDatabase(app)
+
+    // dispatch(updateProfile(profile))
+    // dispatch(updateUserData(user))
+    console.log(user, 'is ===> user')
   } catch (error) {
     if (error.code === 'app/duplicate-app') {
       console.info('Hot reload tried to initiate firebase again. Ignoring duplicated initialization')
