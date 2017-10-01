@@ -22,6 +22,7 @@
   "dependencies": {
     "firebase": "^4.4.0",
     "lodash": "^4.17.4",
+    "lottie-react-native": "2.2.7",
     "prop-types": "^15.5.10",
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.3",
