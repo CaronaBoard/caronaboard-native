@@ -1,13 +1,19 @@
 import Kitten from './configuration/kitten'
-import Navigation from './configuration/Navigation'
 import Firebase from './configuration/Firebase'
 import Redux from './configuration/Redux'
+import { onAuthStateChanged } from './services/firebase/Authentication'
+import { registerScreens, startAuthentication, startCaronaBoard } from './configuration/Navigation'
 
 async function main () {
   const store = Redux.createStore()
-  Navigation.registerScreens(store)
+  registerScreens(store)
   Kitten.setup()
-  await Firebase.initialize(store)
+  await Firebase.initialize()
+
+  onAuthStateChanged(user => {
+    user ? startCaronaBoard(user, store)
+         : startAuthentication()
+  })
 }
 
 main().catch(error => {

@@ -7,6 +7,10 @@ export const initializeAuthModule = module => {
   auth.setPersistence(Firebase.auth.Auth.Persistence.LOCAL)
 }
 
+export const onAuthStateChanged = callback => {
+  auth.onAuthStateChanged(callback)
+}
+
 export const signIn = (email, password) => {
   return auth.signInWithEmailAndPassword(email, password)
       .then(user => {

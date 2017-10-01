@@ -6,8 +6,13 @@ import RideOffer from '../modules/rideOffer/containers/NewRideOfferContainer'
 import RideRequest from '../modules/rideRequest/containers/NewRideRequestContainer'
 import YourRideOfferList from '../modules/rideOffer/containers/YourRideOffersScreen'
 import YourRideRequestsScreen from '../modules/rideRequest/containers/YourRideRequestsScreen'
+import SignInScreen from '../modules/authentication/containers/SignInScreen'
 
 export const screens = {
+  signIn: {
+    id: 'authentication.signIn',
+    component: SignInScreen
+  },
   signUp: {
     id: 'authentication.signUp',
     component: SignUpScreen

@@ -1,7 +1,6 @@
 import Firebase from 'firebase'
 import { initializeAuthModule } from '../services/firebase/Authentication'
 import { initializeDatabaseModule } from '../services/firebase/database/index'
-import Navigation from './Navigation'
 
 // TODO: REMOVE THIS AS SOON WE FIGURE OUT HOW TO INJECT SECRETS ON CI
 const firebaseConfig = {
@@ -12,13 +11,8 @@ const firebaseConfig = {
   messagingSenderId: '905421185910'
 }
 
-const initializeAuth = async (app, store) => {
+const initializeAuth = async (app) => {
   const auth = Firebase.auth(app)
-  auth.onAuthStateChanged(user => {
-    // TODO: This function cause severe side effect, figure out a better way to
-    // handle auth persistence
-    Navigation.startApp(user, store)
-  })
   initializeAuthModule(auth)
 }
 
@@ -27,10 +21,10 @@ const initializeDatabase = (app) => {
   initializeDatabaseModule(database)
 }
 
-const initialize = async (store) => {
+const initialize = async () => {
   try {
     const app = await Firebase.initializeApp(firebaseConfig)
-    await initializeAuth(app, store)
+    await initializeAuth(app)
     initializeDatabase(app)
   } catch (error) {
     if (error.code === 'app/duplicate-app') {
