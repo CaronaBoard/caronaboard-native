@@ -1,4 +1,4 @@
-export const signInWithEmailAndPasswordResponse = {
+export const firebaseUserFixture = {
   sendEmailVerification: jest.fn(() => Promise.resolve()),
   uid: '-KndyvnnlSN05mJxL57Q',
   emailVerified: true,

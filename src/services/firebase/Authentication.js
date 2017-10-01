@@ -23,7 +23,7 @@ export const signIn = async (email: string, password: string) => {
 export const signUp = async (email: string, password: string) => {
   try {
     const user = await auth.createUserWithEmailAndPassword(email, password)
-    sendVerificationEmail(user)
+    await sendVerificationEmail(user)
   } catch (error) {
     console.error(error)
   }
