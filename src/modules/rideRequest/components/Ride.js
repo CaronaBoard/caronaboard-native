@@ -14,6 +14,16 @@ export class Ride extends Component {
     icon: PropTypes.node
   }
 
+  state = {
+    loading: false
+  }
+
+  onPress = async (ride) => {
+    this.setState({loading: true})
+    await this.props.onPress(ride)
+    this.setState({loading: false})
+  }
+
   renderLine (subTitle, icon) {
     return (
       <View style={Styles.line} >
@@ -39,7 +49,7 @@ export class Ride extends Component {
      } = ride
 
     return (
-      <TouchableOpacity onPress={() => this.props.onPress({ ride })}>
+      <TouchableOpacity onPress={() => this.onPress({ ride })}>
         <RkCard>
           <View rkCardContent>
             <Text rkCardTitle>{destination}</Text>

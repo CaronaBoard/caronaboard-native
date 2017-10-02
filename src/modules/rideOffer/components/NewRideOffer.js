@@ -10,7 +10,8 @@ export const INITIAL_STATE = {
   origin: '',
   destination: '',
   days: '',
-  hours: ''
+  hours: '',
+  loading: false
 }
 
 export class NewRideOffer extends React.PureComponent {
@@ -18,6 +19,13 @@ export class NewRideOffer extends React.PureComponent {
 
   static propTypes = {
     onPress: PropTypes.func.isRequired
+  }
+
+  onPress = async () => {
+    this.setState({loading: true})
+    const { origin, destination, days, hours } = this.state
+    await this.props.onPress({ origin, destination, days, hours })
+    this.setState({loading: false})
   }
 
   render () {
@@ -33,7 +41,7 @@ export class NewRideOffer extends React.PureComponent {
             <TextInput placeholder='DAYS' onChangeText={(days) => this.setState({days})} />
             <TextInput placeholder='HOUR' onChangeText={(hours) => this.setState({hours})} />
           </View>
-          <Button text='Offer Ride' onPress={() => this.props.onPress(this.state)} />
+          <Button text='Offer Ride' onPress={this.onPress} />
         </View>
       </View>
     )
