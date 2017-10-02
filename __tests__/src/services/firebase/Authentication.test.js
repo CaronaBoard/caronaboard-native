@@ -2,70 +2,58 @@ import {
   signUp,
   checkEmailRegistration,
   signIn,
-  sendVerificationEmail
+  sendVerificationEmail, initializeAuthModule
 } from '../../../../src/services/firebase/Authentication'
-import RidesResponse from '../../../resources/fixtures/firebase/FirebaseRidesResponse.json'
-import { signInWithEmailAndPasswordResponse } from '../../../resources/fixtures/firebase'
-
-let mockFetchProviders = jest.fn()
-
-const mockRef = {
-  once: () => Promise.resolve({ val: () => RidesResponse }),
-  update: () => Promise.resolve({})
-}
-
-const mockDatabase = {
-  ref: jest.fn(() => mockRef)
-}
-
-const mockCreateUser = jest.fn(() => Promise.resolve(signInWithEmailAndPasswordResponse))
-const mockSignInUser = jest.fn(() => Promise.resolve(signInWithEmailAndPasswordResponse))
-
-jest.mock('firebase', () => ({
-  auth: () => ({
-    signInWithEmailAndPassword: mockSignInUser,
-    createUserWithEmailAndPassword: mockCreateUser,
-    fetchProvidersForEmail: mockFetchProviders,
-    currentUser: { uid: '12345' }
-  }),
-  database: jest.fn(() => mockDatabase)
-}))
+import { firebaseUserFixture } from '../../../resources/fixtures/firebase'
 
 describe('Firebase authentication service', () => {
   const email = 'new@user.com'
   const password = 'pass123'
+  const mockCreateUser = jest.fn(() => Promise.resolve(firebaseUserFixture))
+  const mockSignInUser = jest.fn(() => Promise.resolve(firebaseUserFixture))
+  const authMock = {
+    signInWithEmailAndPassword: mockSignInUser,
+    createUserWithEmailAndPassword: mockCreateUser,
+    fetchProvidersForEmail: jest.fn(),
+    currentUser: { uid: '12345' },
+    setPersistence: jest.fn()
+  }
+
+  beforeAll(() => {
+    initializeAuthModule(authMock)
+  })
 
   it('Should register new user and send a verification mail', async () => {
     await signUp(email, password)
     expect(mockCreateUser).toHaveBeenCalledWith(email, password)
-    expect(signInWithEmailAndPasswordResponse.sendEmailVerification).toHaveBeenCalledWith()
+    expect(firebaseUserFixture.sendEmailVerification).toHaveBeenCalledWith()
   })
 
   it('Should sign in user with a verified email', async () => {
-    signInWithEmailAndPasswordResponse.emailVerified = true
+    firebaseUserFixture.emailVerified = true
     const user = await signIn(email, password)
     expect(mockSignInUser).toHaveBeenCalledWith(email, password)
-    expect(user.uid).toBe(signInWithEmailAndPasswordResponse.uid)
+    expect(user.uid).toBe(firebaseUserFixture.uid)
   })
 
   it('Should send a verification email during sign in if user does not verified yet', async () => {
-    signInWithEmailAndPasswordResponse.emailVerified = false
+    firebaseUserFixture.emailVerified = false
     await expect(signIn('email', 'pass')).rejects.toBeInstanceOf(Error)
-    expect(signInWithEmailAndPasswordResponse.sendEmailVerification).toHaveBeenCalledWith()
+    expect(firebaseUserFixture.sendEmailVerification).toHaveBeenCalledWith()
   })
 
   it('Should send email verification for users', async () => {
-    signInWithEmailAndPasswordResponse.sendEmailVerification = jest.fn(() => Promise.resolve())
-    await sendVerificationEmail(signInWithEmailAndPasswordResponse)
-    expect(signInWithEmailAndPasswordResponse.sendEmailVerification).toHaveBeenCalled()
+    firebaseUserFixture.sendEmailVerification = jest.fn(() => Promise.resolve())
+    await sendVerificationEmail(firebaseUserFixture)
+    expect(firebaseUserFixture.sendEmailVerification).toHaveBeenCalled()
   })
 
   it('Should check if an email is registered or not', async () => {
-    mockFetchProviders = jest.fn(() => Promise.resolve(['providerOne', 'providerTwo']))
+    authMock.fetchProvidersForEmail = jest.fn(() => Promise.resolve(['providerOne', 'providerTwo']))
     const registeredUserResponse = await checkEmailRegistration('registered@email.com')
     expect(registeredUserResponse).toBe(true)
 
-    mockFetchProviders = jest.fn(() => Promise.resolve([]))
+    authMock.fetchProvidersForEmail = jest.fn(() => Promise.resolve([]))
     const notRegisteredUserResponse = await checkEmailRegistration('not_registered@email.com')
     expect(notRegisteredUserResponse).toBe(false)
   })

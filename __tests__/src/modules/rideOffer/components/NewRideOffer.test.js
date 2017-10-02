@@ -17,6 +17,7 @@ describe('<NewRideOffer />', () => {
   it('Should call firebase service for create a ride offer', () => {
     // TODO: I Think that' not a good idea calling services directly, we should use action
     wrapper.find(Button).simulate('press')
-    expect(props.onPress).toHaveBeenCalledWith(INITIAL_STATE)
+    const { origin, destination, days, hours } = INITIAL_STATE
+    expect(props.onPress).toHaveBeenCalledWith({ origin, destination, days, hours })
   })
 })
