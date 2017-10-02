@@ -16,11 +16,8 @@ export class LottieSpinner extends React.Component {
       <Animation
         loop
         ref={animation => { this.animation = animation }}
-        style={{
-          width: 200,
-          height: 200
-        }}
-        source={require('../../../assets/animations/loading_9.json')}
+        style={this.props.style}
+        source={require('../../../assets/animations/loading_1.json')}
       />
     )
   }
