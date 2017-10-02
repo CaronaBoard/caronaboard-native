@@ -1,4 +1,4 @@
-import { signIn, signUp, forgotPassword, saveProfile } from '../../../services/firebase/index'
+import { signUp, forgotPassword, saveProfile } from '../../../services/firebase/index'
 import { getUserProfile } from '../../../services/firebase/database/Profile'
 import type { ProfileType } from '../../../services/firebase/database/Profile'
 import { updateProfile,
@@ -8,13 +8,13 @@ import { updateProfile,
   updateUserData
 } from '../sync/AuthActions'
 
-export function signInFirebase (email: string, password: string) {
+export function signInFirebase (user) {
   return async (dispatch) => {
     try {
-      const user = await signIn(email, password)
+      const { uid, emailVerified, email, phoneNumber } = user
       const profile = await getUserProfile(user.uid)
       dispatch(updateProfile(profile))
-      dispatch(updateUserData(user))
+      dispatch(updateUserData({ uid, emailVerified, email, phoneNumber }))
     } catch (error) {
       dispatch(alertAction(error))
     }

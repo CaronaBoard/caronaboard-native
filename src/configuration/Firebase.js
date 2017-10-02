@@ -1,4 +1,6 @@
 import Firebase from 'firebase'
+import { initializeAuthModule } from '../services/firebase/Authentication'
+import { initializeDatabaseModule } from '../services/firebase/database/index'
 
 // TODO: REMOVE THIS AS SOON WE FIGURE OUT HOW TO INJECT SECRETS ON CI
 const firebaseConfig = {
@@ -9,9 +11,21 @@ const firebaseConfig = {
   messagingSenderId: '905421185910'
 }
 
-const initialize = () => {
+const initializeAuth = async (app) => {
+  const auth = Firebase.auth(app)
+  initializeAuthModule(auth)
+}
+
+const initializeDatabase = (app) => {
+  const database = Firebase.database(app)
+  initializeDatabaseModule(database)
+}
+
+const initialize = async () => {
   try {
-    Firebase.initializeApp(firebaseConfig)
+    const app = await Firebase.initializeApp(firebaseConfig)
+    await initializeAuth(app)
+    initializeDatabase(app)
   } catch (error) {
     if (error.code === 'app/duplicate-app') {
       console.info('Hot reload tried to initiate firebase again. Ignoring duplicated initialization')

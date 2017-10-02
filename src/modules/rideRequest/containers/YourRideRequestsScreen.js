@@ -22,7 +22,7 @@ export const INITIAL_STATE = {
 export class YourRideOffersScreen extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
-    profile: PropTypes.object.isRequired
+    uid: PropTypes.string.isRequired
   }
 
   state = INITIAL_STATE
@@ -33,11 +33,17 @@ export class YourRideOffersScreen extends Component {
   }
 
   async componentDidMount () {
-    const rideRequests = await getUserRideRequests(this.props.profile.uid)
+    const rideRequests = await getUserRideRequests(this.props.uid)
     const rideRequestsMap = await removeDuplicatedRequests(rideRequests)
     const rideOffersPromises = rideRequests.map(({ rideId }) => findRideOfferById(rideId))
     const rides = await Promise.all(rideOffersPromises)
     this.setState({rides, rideRequestsMap})
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.uid !== this.props.uid) {
+      this.componentDidMount()
+    }
   }
 
   renderDeleteIcon = () => {
@@ -75,7 +81,7 @@ export class YourRideOffersScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    profile: state.auth.profile
+    uid: state.auth.profile.uid
   }
 }
 

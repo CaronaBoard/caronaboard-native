@@ -20,7 +20,7 @@
     "generate-apk": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
-    "firebase": "^4.1.3",
+    "firebase": "^4.4.0",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react": "16.0.0-alpha.6",

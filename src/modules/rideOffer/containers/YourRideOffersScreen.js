@@ -21,7 +21,7 @@ export const INITIAL_STATE = {
 export class YourRideOffersScreen extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
-    profile: PropTypes.object.isRequired
+    uid: PropTypes.string.isRequired
   }
 
   state = INITIAL_STATE
@@ -32,8 +32,14 @@ export class YourRideOffersScreen extends Component {
   }
 
   async componentDidMount () {
-    const rides = await getUserRideOffers(this.props.profile.uid)
+    const rides = await getUserRideOffers(this.props.uid)
     this.setState({rides})
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.uid !== this.props.uid) {
+      this.componentDidMount()
+    }
   }
 
   pushRideRequestScreen () {
@@ -65,7 +71,7 @@ export class YourRideOffersScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    profile: state.auth.profile
+    uid: state.auth.profile.uid
   }
 }
 

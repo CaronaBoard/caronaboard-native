@@ -1,10 +1,10 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { YourRideOffersScreen } from '../../../../../src/modules/rideOffer/containers/YourRideOffersScreen'
-import { profileFixture } from '../../../../resources/fixtures/user/index'
+import { profileFixture } from '../../../../resources/fixtures/user'
 
 const props = {
-  profile: profileFixture,
+  uid: profileFixture.uid,
   navigator: {
     setOnNavigatorEvent: jest.fn()
   }

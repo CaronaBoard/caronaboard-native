@@ -8,7 +8,8 @@ const props = {
   navigator: {
     push: jest.fn()
   },
-  signIn: jest.fn(),
+  userSignedIn: jest.fn(),
+  onError: jest.fn(),
   user: userDataFixture,
   alert: {
     showAlert: false,

@@ -1,11 +1,15 @@
 // @flow
 
-import Firebase from 'firebase'
-
 export const rideGroup = 'twpoa'
 
 export * from './Profile'
 export * from './RideRequest'
 export * from './RideOffer'
 
-export const ref = (path: string) => Firebase.database().ref(path)
+let database
+
+export const initializeDatabaseModule = (module) => {
+  database = module
+}
+
+export const ref = (path: string) => database.ref(path)
