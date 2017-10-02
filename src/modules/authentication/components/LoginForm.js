@@ -29,8 +29,10 @@ export class LoginForm extends React.Component {
   }
 
   onButtonPress = () => {
+    this.setState({loading: true})
     const {email, password} = this.state
     this.props.onButtonPress(email, password)
+    this.setState({loading: false})
   }
 
   componentWillReceiveProps (nextProps) {
@@ -43,7 +45,7 @@ export class LoginForm extends React.Component {
 
   render () {
     return (
-      <LoadingSpinnerView isLoading>
+      <LoadingSpinnerView isLoading={this.state.loading}>
 
         <RkAvoidKeyboard
           style={styles.screen}

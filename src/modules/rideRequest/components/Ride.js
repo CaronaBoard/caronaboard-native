@@ -6,6 +6,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 
 import { RidePropType } from '../types'
 import Styles from './styles/Ride.style'
+import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 
 export class Ride extends Component {
   static propTypes = {
@@ -49,21 +50,23 @@ export class Ride extends Component {
      } = ride
 
     return (
-      <TouchableOpacity onPress={() => this.onPress({ ride })}>
-        <RkCard>
-          <View rkCardContent>
-            <Text rkCardTitle>{destination}</Text>
-            { this.renderLine(origin, 'radio-button-unchecked') }
-            { this.renderLine(destination, 'radio-button-unchecked') }
-          </View>
-          <View rkCardContent>
-            { this.renderLine(days, 'today') }
-            { this.renderLine(hours, 'schedule') }
-            { this.renderLine(profile.name, 'directions-car') }
-          </View>
-          {this.renderIcon()}
-        </RkCard>
-      </TouchableOpacity>
+      <LoadingSpinnerView isLoading={this.state.loading} >
+        <TouchableOpacity onPress={() => this.onPress({ ride })}>
+          <RkCard>
+            <View rkCardContent>
+              <Text rkCardTitle>{destination}</Text>
+              { this.renderLine(origin, 'radio-button-unchecked') }
+              { this.renderLine(destination, 'radio-button-unchecked') }
+            </View>
+            <View rkCardContent>
+              { this.renderLine(days, 'today') }
+              { this.renderLine(hours, 'schedule') }
+              { this.renderLine(profile.name, 'directions-car') }
+            </View>
+            {this.renderIcon()}
+          </RkCard>
+        </TouchableOpacity>
+      </LoadingSpinnerView>
     )
   }
 }
