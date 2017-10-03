@@ -22,12 +22,16 @@ describe('<SignInFooter />', () => {
   it('should navigate to password recovery screen', () => {
     const forgotPasswordButton = wrapper.find(RkButton).findWhere(keyIsEqualTo('forgot-password-button'))
     forgotPasswordButton.simulate('press')
-    expect(props.navigator.push).toHaveBeenCalledWith({ screen: screens.forgotPassword.id })
+    expect(props.navigator.push).toHaveBeenCalledWith({
+      screen: screens.forgotPassword.id, title: screens.forgotPassword.title
+    })
   })
 
   it('should navigate to signup screen', () => {
     const forgotPasswordButton = wrapper.find(RkButton).findWhere(keyIsEqualTo('signup-button'))
     forgotPasswordButton.simulate('press')
-    expect(props.navigator.push).toHaveBeenCalledWith({ screen: screens.forgotPassword.id })
+    expect(props.navigator.push).toHaveBeenCalledWith({
+      screen: screens.signUp.id, title: screens.signUp.title
+    })
   })
 })
