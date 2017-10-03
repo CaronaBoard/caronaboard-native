@@ -5,6 +5,7 @@ import { RkText } from 'react-native-ui-kitten'
 
 import styles from './styles/YourRideOffer.style'
 import { Button, TextInput } from '../../shared/components/index'
+import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 
 export const INITIAL_STATE = {
   origin: '',
@@ -30,7 +31,7 @@ export class NewRideOffer extends React.PureComponent {
 
   render () {
     return (
-      <View style={styles.flexible}>
+      <LoadingSpinnerView isLoading={this.state.loading} style={styles.flexible}>
         <View style={styles.container}>
           <RkText style={styles.title}>
             Ride Offer
@@ -43,7 +44,7 @@ export class NewRideOffer extends React.PureComponent {
           </View>
           <Button text='Offer Ride' onPress={this.onPress} />
         </View>
-      </View>
+      </LoadingSpinnerView>
     )
   }
 }

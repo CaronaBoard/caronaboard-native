@@ -1,92 +1,96 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LoginForm /> Should have a snapshot 1`] = `
-<RkAvoidKeyboard
-  onResponderRelease={[Function]}
-  onStartShouldSetResponder={[Function]}
-  style={
-    Object {
-      "backgroundColor": "#fff",
-      "flex": 1,
-      "justifyContent": "space-between",
-      "padding": 31.388235294117646,
-    }
-  }
+<LoadingSpinnerView
+  isLoading={false}
 >
-  <View
+  <RkAvoidKeyboard
+    onResponderRelease={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "alignItems": "center",
+        "backgroundColor": "#fff",
         "flex": 1,
-        "justifyContent": "center",
-        "paddingBottom": 19.61764705882353,
+        "justifyContent": "space-between",
+        "padding": 31.388235294117646,
       }
     }
   >
-    <Image
-      source={1}
+    <View
       style={
         Object {
-          "height": 151.05588235294118,
-          "resizeMode": "contain",
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+          "paddingBottom": 19.61764705882353,
+        }
+      }
+    >
+      <Image
+        source={1}
+        style={
+          Object {
+            "height": 151.05588235294118,
+            "resizeMode": "contain",
+          }
+        }
+      />
+      <RkText
+        rkType="logo h0"
+      >
+        Caronaboard
+      </RkText>
+      <RkText
+        rkType="light h1"
+      >
+        Awesome Slogan
+      </RkText>
+    </View>
+    <TextInput
+      autoCapitalize="none"
+      onChangeText={[Function]}
+      placeholder="Username"
+      rkType="rounded"
+    />
+    <TextInput
+      autoCapitalize="none"
+      onChangeText={[Function]}
+      placeholder="Password"
+      rkType="rounded"
+      secureTextEntry={true}
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <GradientButton
+        onPress={[Function]}
+        rkType="large"
+        style={
+          Object {
+            "marginVertical": 20,
+          }
+        }
+        text="buttonText"
+      />
+    </View>
+    <Toast
+      fadeInDuration={500}
+      fadeOutDuration={500}
+      opacity={1}
+      position="top"
+      positionValue={120}
+      textStyle={
+        Object {
+          "color": "white",
         }
       }
     />
-    <RkText
-      rkType="logo h0"
-    >
-      Caronaboard
-    </RkText>
-    <RkText
-      rkType="light h1"
-    >
-      Awesome Slogan
-    </RkText>
-  </View>
-  <TextInput
-    autoCapitalize="none"
-    onChangeText={[Function]}
-    placeholder="Username"
-    rkType="rounded"
-  />
-  <TextInput
-    autoCapitalize="none"
-    onChangeText={[Function]}
-    placeholder="Password"
-    rkType="rounded"
-    secureTextEntry={true}
-  />
-  <View
-    style={
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-        "justifyContent": "center",
-      }
-    }
-  >
-    <GradientButton
-      onPress={[Function]}
-      rkType="large"
-      style={
-        Object {
-          "marginVertical": 20,
-        }
-      }
-      text="buttonText"
-    />
-  </View>
-  <Toast
-    fadeInDuration={500}
-    fadeOutDuration={500}
-    opacity={1}
-    position="top"
-    positionValue={120}
-    textStyle={
-      Object {
-        "color": "white",
-      }
-    }
-  />
-</RkAvoidKeyboard>
+  </RkAvoidKeyboard>
+</LoadingSpinnerView>
 `;
