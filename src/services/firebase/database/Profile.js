@@ -7,6 +7,10 @@ import { toRideOffer } from '../Conversion'
 import type { ProfileType } from '../types'
 
 export const saveProfile = async (profile: ProfileType) => {
+  if (!profile.uid) {
+    throw (new Error('Usuário nāo contem uid no profile'))
+  }
+
   try {
     const path = `profiles/${profile.uid}`
     await ref(path).update(profile)

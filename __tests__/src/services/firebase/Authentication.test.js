@@ -22,7 +22,14 @@ describe('Firebase authentication service', () => {
     await signUp(email, password)
     expect(mockCreateUser).toHaveBeenCalledWith(email, password)
     expect(firebaseUserFixture.sendEmailVerification).toHaveBeenCalledWith()
-    expect(mockUpdate).toHaveBeenCalledWith({ name: email, uid: firebaseUserFixture.uid })
+    expect(mockUpdate).toHaveBeenCalledWith({
+      name: email,
+      uid: firebaseUserFixture.uid,
+      contact: {
+        kind: '',
+        value: ''
+      }
+    })
   })
 
   it('Should sign in user with a verified email', async () => {

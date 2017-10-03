@@ -23,7 +23,7 @@ export const signIn = async (email: string, password: string) => {
 
 export const signUp = async (email: string, password: string) => {
   const user = await auth.createUserWithEmailAndPassword(email, password)
-  await saveProfile({name: email, uid: user.uid})
+  await saveProfile({name: email, uid: user.uid, contact: {value: '', kind: ''}})
   await sendVerificationEmail(user)
   await signOut()
 }

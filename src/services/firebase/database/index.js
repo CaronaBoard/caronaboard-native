@@ -5,6 +5,7 @@ export const rideGroup = 'twpoa'
 export * from './Profile'
 export * from './RideRequest'
 export * from './RideOffer'
+export * from './Groups'
 
 let database
 

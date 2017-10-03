@@ -56,3 +56,13 @@ export type FirebaseRideRequests = {
 export type RideRequestIdMapFlowType = {
   [rideId: string]: RideRequestFlowType
 }
+
+export type GroupType = {
+  id: string,
+  name: string,
+  members: {
+    [userId: string]: {
+      admin: boolean
+    }
+  }
+}

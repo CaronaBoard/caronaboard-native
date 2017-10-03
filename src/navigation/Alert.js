@@ -19,6 +19,25 @@ export const alert = (title: string, confirmCallback: Function) => {
   )
 }
 
+export const confirmationAlert = (title: string, confirmCallback: Function) => {
+  Alert.alert(
+    title,
+    '',
+    [
+      {
+        text: 'Sim',
+        style: 'destructive',
+        onPress: confirmCallback
+      },
+      {
+        text: 'Agora nāo',
+        style: 'cancel'
+      }
+    ],
+    { cancelable: true }
+  )
+}
+
 export const destructiveAlert = (explanation: string, confirmCallback: Function) => {
   Alert.alert(
     'Esta operaçāo nāo tem volta',

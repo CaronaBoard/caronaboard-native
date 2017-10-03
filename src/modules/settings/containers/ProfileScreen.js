@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { View, TouchableOpacity } from 'react-native'
 import { RkText, RkChoice, RkChoiceGroup } from 'react-native-ui-kitten'
 import type { ProfileType } from '../../../services/firebase/types'
-import { ProfilePropType } from '../types'
+import { ProfilePropType } from '../../authentication/types'
 
 import { TextInput, GradientButton } from '../../shared/components'
 import { saveProfileFirebase } from '../../../redux/actions'
@@ -65,7 +65,13 @@ export class ProfileScreen extends Component {
   )
 
   componentDidMount () {
-    const { profile } = this.props
+    const { profile, userId } = this.props
+    if (userId && !profile.uid) {
+      profile.uid = userId
+    }
+    if (!profile.contact) {
+      profile.contact = {value: '', kind: ''}
+    }
     this.setState({profile, loading: false})
   }
 
@@ -116,14 +122,14 @@ export class ProfileScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    profile: state.auth.profile, // TODO: do we have profile saved into state?
+    profile: state.auth.profile,
     userId: state.auth.userData.uid
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveProfile: (profile, userId) => dispatch(saveProfileFirebase(profile, userId))
+    saveProfile: (profile, userId) => dispatch(saveProfileFirebase(profile))
   }
 }
 
