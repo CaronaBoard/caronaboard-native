@@ -4,6 +4,7 @@ import Styles from './styles/Ride.style'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkCard } from 'react-native-ui-kitten'
 import { RidePropType } from '../types'
+import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 
 export class RideRequest extends Component {
   static propTypes = {
@@ -27,30 +28,32 @@ export class RideRequest extends Component {
 
   render () {
     const {
-        origin,
-        destination,
-        days,
-        hours,
-        profile
-     } = this.props.ride
+      origin,
+      destination,
+      days,
+      hours,
+      profile
+    } = this.props.ride
 
     return (
-      <TouchableOpacity onPress={() => this.onPress()}>
-        <View>
-          <RkCard>
-            <View rkCardContent>
-              <Text rkCardTitle>{destination}</Text>
-              { this.renderLine(origin, 'radio-button-unchecked') }
-              { this.renderLine(destination, 'radio-button-unchecked') }
-            </View>
-            <View rkCardContent>
-              { this.renderLine(days, 'today') }
-              { this.renderLine(hours, 'schedule') }
-              { this.renderLine(profile.name, 'directions-car') }
-            </View>
-          </RkCard>
-        </View>
-      </TouchableOpacity>
+      <LoadingSpinnerView isLoading={this.state.loading}>
+        <TouchableOpacity onPress={() => this.onPress()}>
+          <View>
+            <RkCard>
+              <View rkCardContent>
+                <Text rkCardTitle>{destination}</Text>
+                { this.renderLine(origin, 'radio-button-unchecked') }
+                { this.renderLine(destination, 'radio-button-unchecked') }
+              </View>
+              <View rkCardContent>
+                { this.renderLine(days, 'today') }
+                { this.renderLine(hours, 'schedule') }
+                { this.renderLine(profile.name, 'directions-car') }
+              </View>
+            </RkCard>
+          </View>
+        </TouchableOpacity>
+      </LoadingSpinnerView>
     )
   }
 }
