@@ -7,6 +7,7 @@ import RideRequest from '../modules/rideRequest/containers/NewRideRequestContain
 import YourRideOfferList from '../modules/rideOffer/containers/YourRideOffersScreen'
 import YourRideRequestsScreen from '../modules/rideRequest/containers/YourRideRequestsScreen'
 import SignInScreen from '../modules/authentication/containers/SignInScreen'
+import Settings from '../modules/settings/containers/SettingsContainer'
 
 export const screens = {
   signIn: {
@@ -20,11 +21,6 @@ export const screens = {
   forgotPassword: {
     id: 'authentication.forgotPassword',
     component: ForgotPasswordScreen
-  },
-  profile: {
-    id: 'user.profile',
-    component: ProfileScreen,
-    title: 'Profile'
   },
   rideOfferList: {
     id: 'ride.list',
@@ -55,5 +51,15 @@ export const screens = {
     component: YourRideRequestsScreen,
     label: 'Your Ride Requests',
     title: 'Your Ride Requests'
+  },
+  settings: {
+    id: 'settings',
+    component: Settings,
+    title: 'Settings'
+  },
+  profile: {
+    id: 'settings.profile',
+    component: ProfileScreen,
+    title: 'Profile'
   }
 }
