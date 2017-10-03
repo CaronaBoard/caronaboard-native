@@ -2,6 +2,7 @@ package com.caronaboardnative;
 
 import android.app.Application;
 
+import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
@@ -22,7 +23,8 @@ public class MainApplication extends NavigationApplication {
     return Arrays.<ReactPackage>asList(
         new VectorIconsPackage(),
         new LinearGradientPackage(),
-        new ReactNativeConfigPackage()
+        new ReactNativeConfigPackage(),
+        new RNI18nPackage()
     );
   }
 
