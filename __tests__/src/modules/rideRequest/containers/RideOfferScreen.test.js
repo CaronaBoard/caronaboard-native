@@ -6,6 +6,7 @@ const props = {
   navigator: {
     setOnNavigatorEvent: jest.fn()
   },
+  updateYourOffers: jest.fn(),
   userId: 'someId'
 }
 

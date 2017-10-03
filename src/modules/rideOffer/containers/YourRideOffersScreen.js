@@ -8,12 +8,9 @@ import { RideOffer } from '../components/RideOffer'
 import { screens } from '../../../navigation/Screens'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
 import { FloatingActionButton } from '../../shared/components/FloatingActionButton'
-import {
-  getUserRideOffers,
-  removeRideOffer
-} from '../../../services/firebase/database/RideOffer'
-import { updateYourRideOffers } from '../../../redux/actions/sync/RideOfferActions'
+import { removeRideOffer } from '../../../services/firebase/database/RideOffer'
 import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
+import { fetchYourRideOffers } from '../../../redux/actions/async/RideOfferActions'
 
 export class YourRideOffersScreen extends Component {
   static propTypes = {
@@ -36,8 +33,7 @@ export class YourRideOffersScreen extends Component {
     const { uid, updateYourOffers } = this.props
     if (uid && prevProps.uid !== uid) {
       this.setState({loading: true})
-      const rides = await getUserRideOffers(uid)
-      updateYourOffers(rides)
+      updateYourOffers(uid)
       this.setState({loading: false})
     }
   }
@@ -77,7 +73,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateYourOffers: rides => dispatch(updateYourRideOffers(rides))
+    updateYourOffers: uid => dispatch(fetchYourRideOffers(uid))
   }
 }
 
