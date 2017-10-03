@@ -1,5 +1,5 @@
 import { screens } from './Screens'
-import { profileButton } from './NavBar'
+import { groupButton, profileButton } from './NavBar'
 
 export const tabs = [
   {
@@ -8,7 +8,7 @@ export const tabs = [
     title: screens.yourRequestsList.title,
     icon: require('../assets/images/swap.png'),
     navigatorButtons: {
-      rightButtons: [profileButton]
+      rightButtons: [groupButton, profileButton]
     }
   }, {
     label: screens.rideOfferList.label,
@@ -16,7 +16,7 @@ export const tabs = [
     title: screens.rideOfferList.title,
     icon: require('../assets/images/swap.png'),
     navigatorButtons: {
-      rightButtons: [profileButton]
+      rightButtons: [groupButton, profileButton]
     }
   }, {
     label: screens.yourRideOffersList.label,
@@ -24,7 +24,7 @@ export const tabs = [
     title: screens.yourRideOffersList.title,
     icon: require('../assets/images/swap.png'),
     navigatorButtons: {
-      rightButtons: [profileButton]
+      rightButtons: [groupButton, profileButton]
     }
   }
 ]
