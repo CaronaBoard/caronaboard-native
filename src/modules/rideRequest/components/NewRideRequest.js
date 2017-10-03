@@ -19,7 +19,6 @@ export class NewRideRequest extends Component {
   }
 
   onPress = async (rideId) => {
-    console.log(rideId, 'is ===> rideId')
     this.setState({loading: true})
     await this.props.saveRideRequest(rideId)
     this.setState({loading: false})

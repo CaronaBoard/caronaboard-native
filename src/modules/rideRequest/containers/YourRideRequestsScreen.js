@@ -34,7 +34,7 @@ export class YourRideRequestsScreen extends Component {
     const { uid } = this.props
     if (uid) {
       this.setState({loading: true})
-      await this.props.updateYourRequests()
+      await this.props.updateYourRequests(uid)
       this.setState({loading: false})
     }
   }
@@ -45,11 +45,15 @@ export class YourRideRequestsScreen extends Component {
     }
   }
 
-  onPressRide = (props) => {
+  onPressRide = async (props) => {
     const { rideRequestsMap } = this.props
     const { rideId } = props.ride
     const rideRequest = rideRequestsMap[rideId]
-    alert('Apagar pedido de carona?', () => removeRideRequest(rideRequest))
+    const callback = async () => {
+      await removeRideRequest(rideRequest)
+      await this.componentDidMount()
+    }
+    alert('Apagar pedido de carona?', () => callback())
   }
 
   render () {
