@@ -1,5 +1,5 @@
 import RideOfferReducers, { INITIAL_STATE } from '../../../../src/redux/reducers/RideReducers'
-import { updateRideRequests } from '../../../../src/redux/actions/sync/RideRequestActions'
+import { updateYourRideRequests } from '../../../../src/redux/actions/sync/RideRequestActions'
 import { updateRideOffers, updateYourRideOffers } from '../../../../src/redux/actions/sync/RideOfferActions'
 import { rideOfferFixture } from '../../../resources/fixtures/ride/offer'
 
@@ -21,7 +21,7 @@ describe('RideOfferReducers', () => {
   })
 
   it('Should handle UPDATE_RIDE_REQUESTS action type', async () => {
-    const action = updateRideRequests([rideOfferFixture])
+    const action = updateYourRideRequests([rideOfferFixture])
     const state = RideOfferReducers(INITIAL_STATE, action)
     const expectedState = { ...INITIAL_STATE, requests: action.requests }
 

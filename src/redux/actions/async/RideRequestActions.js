@@ -1,10 +1,10 @@
 import { getAllRideRequests } from '../../../services/firebase'
-import { updateRideRequests } from '../sync/RideRequestActions'
+import { updateYourRideRequests } from '../sync/RideRequestActions'
 
 export function fetchAllRideRequests () {
   return async (dispatch) => {
     const rides = await getAllRideRequests()
-    const action = updateRideRequests(rides)
+    const action = updateYourRideRequests(rides)
     dispatch(action)
   }
 }

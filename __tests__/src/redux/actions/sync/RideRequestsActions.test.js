@@ -1,5 +1,5 @@
 import { UPDATE_RIDE_REQUESTS } from '../../../../../src/redux/types/index'
-import { updateRideRequests } from '../../../../../src/redux/actions/sync/RideRequestActions'
+import { updateYourRideRequests } from '../../../../../src/redux/actions/sync/RideRequestActions'
 import { rideRequestFixture } from '../../../../resources/fixtures/ride/request'
 
 describe('RideRequest sync actions', () => {
@@ -9,7 +9,7 @@ describe('RideRequest sync actions', () => {
       type: UPDATE_RIDE_REQUESTS,
       requests: rides
     }
-    const action = updateRideRequests(rides)
+    const action = updateYourRideRequests(rides)
 
     expect(action).toEqual(expectedAction)
   })

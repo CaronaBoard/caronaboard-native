@@ -14,15 +14,17 @@ import {
   removeRideRequest
 } from '../../../services/firebase/database/RideRequest'
 import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
+import { updateYourRideRequests } from '../../../redux/actions/sync/RideRequestActions'
 
 export const INITIAL_STATE = {
-  rides: [],
   rideRequestsMap: {},
   loading: false
 }
 
-export class YourRideOffersScreen extends Component {
+export class YourRideRequestsScreen extends Component {
   static propTypes = {
+    updateYourRequests: PropTypes.func.isRequired,
+    yourRideRequests: PropTypes.array.isRequired,
     navigator: PropTypes.object.isRequired,
     uid: PropTypes.string.isRequired
   }
@@ -40,7 +42,8 @@ export class YourRideOffersScreen extends Component {
     const rideRequestsMap = await removeDuplicatedRequests(rideRequests)
     const rideOffersPromises = rideRequests.map(({ rideId }) => findRideOfferById(rideId))
     const rides = await Promise.all(rideOffersPromises)
-    this.setState({rides, rideRequestsMap})
+    this.setState({rideRequestsMap})
+    this.props.updateYourRequests(rides)
     this.setState({loading: false})
   }
 
@@ -76,7 +79,7 @@ export class YourRideOffersScreen extends Component {
     return (
       <LoadingSpinnerView isLoading={this.state.loading}>
         <FlatList
-          data={this.state.rides}
+          data={this.props.yourRideRequests}
           keyExtractor={({rideId}) => rideId}
           renderItem={({ item }) => <Ride ride={item} onPress={this.onPressRide} icon={this.renderDeleteIcon()} />}
         />
@@ -87,8 +90,15 @@ export class YourRideOffersScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    uid: state.auth.profile.uid
+    uid: state.auth.profile.uid,
+    yourRideRequests: state.ride.requests
   }
 }
 
-export default connect(mapStateToProps)(YourRideOffersScreen)
+const mapDispatchToProps = dispatch => {
+  return {
+    updateYourRequests: rides => dispatch(updateYourRideRequests(rides))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(YourRideRequestsScreen)
