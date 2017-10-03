@@ -31,14 +31,11 @@ export class YourRideOffersScreen extends Component {
     this.props.navigator.setOnNavigatorEvent(onNavigatorEvent.bind(this))
   }
 
-  async componentDidMount () {
-    const rides = await getUserRideOffers(this.props.uid)
-    this.setState({rides})
-  }
-
   async componentDidUpdate (prevProps) {
-    if (prevProps.uid !== this.props.uid) {
-      await this.componentDidMount()
+    const { uid } = this.props
+    if (uid && prevProps.uid !== uid) {
+      const rides = await getUserRideOffers(uid)
+      this.setState({rides})
     }
   }
 
