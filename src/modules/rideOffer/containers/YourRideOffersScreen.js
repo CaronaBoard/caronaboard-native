@@ -47,7 +47,7 @@ export class YourRideOffersScreen extends Component {
 
   onPressRide = (rideId: string) => {
     const {uid} = this.props.profile
-    alert('Delete Ride Offer', () => removeRideOffer(rideId, uid))
+    alert('Apagar oferta de carona?', () => removeRideOffer(rideId, uid))
   }
 
   render () {

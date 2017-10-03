@@ -16,7 +16,7 @@ export class SignUpScreen extends Component {
       <LoginForm
         onButtonPress={this.props.signUp}
         toast={this.props.alert}
-        buttonText='SIGN UP'
+        buttonText='CADASTRE-SE'
       />
     )
   }

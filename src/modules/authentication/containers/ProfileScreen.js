@@ -79,7 +79,7 @@ export class ProfileScreen extends Component {
           </RkText>
           <View style={Styles.inputTextsContainer}>
             <TextInput
-              placeholder='Your name'
+              placeholder='Seu nome'
               value={name}
               onChangeText={name => { this.setState({profile: {...profile, name}}) }}
             />
@@ -92,7 +92,7 @@ export class ProfileScreen extends Component {
           </RkChoiceGroup>
           <View style={Styles.inputTextsContainer}>
             <TextInput
-              placeholder='Number'
+              placeholder='Número'
               value={contact.value}
               onChangeText={value => { this.setState({profile: {...profile, contact: {...contact, value}}}) }}
             />

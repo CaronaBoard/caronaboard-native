@@ -55,21 +55,22 @@ export class LoginForm extends React.Component {
           <View style={styles.header}>
             <Image style={styles.image} source={require('../../../assets/images/caronaboard-logo-azul.png')} />
             <RkText rkType='logo h0'>Caronaboard</RkText>
-            <RkText rkType='light h1'>Awesome Slogan</RkText>
+            <RkText rkType='light h1'>Seu carro não precisa</RkText>
+            <RkText rkType='light h1'>levar apenas você</RkText>
           </View>
 
           <TextInput
             onChangeText={(email) => { this.setState({email}) }}
             key='email-input'
             rkType='rounded'
-            placeholder='Username'
+            placeholder='Email'
             autoCapitalize='none'
           />
           <TextInput
             onChangeText={(password) => { this.setState({password}) }}
             key='password-input'
             rkType='rounded'
-            placeholder='Password'
+            placeholder='Senha'
             secureTextEntry
           />
 

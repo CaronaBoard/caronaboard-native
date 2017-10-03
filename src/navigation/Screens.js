@@ -16,10 +16,12 @@ export const screens = {
   },
   signUp: {
     id: 'authentication.signUp',
+    title: 'Cadastrar nova conta',
     component: SignUpScreen
   },
   forgotPassword: {
     id: 'authentication.forgotPassword',
+    title: 'Esqueci minha senha',
     component: ForgotPasswordScreen
   },
   rideOfferList: {

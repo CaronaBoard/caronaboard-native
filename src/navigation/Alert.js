@@ -3,15 +3,15 @@ import { Alert } from 'react-native'
 export const alert = (title: string, confirmCallback: Function) => {
   Alert.alert(
     title,
-    'Just a confirmation whether you wanna delete this ride or not.',
+    'Só uma confirmaçāo se voce deseja apagar esta carona',
     [
       {
-        text: 'Sure thing, delete!',
+        text: 'Pode apagar!',
         style: 'destructive',
         onPress: confirmCallback
       },
       {
-        text: 'Not yet, Thanks',
+        text: 'Melhor nāo',
         style: 'cancel'
       }
     ],
@@ -21,16 +21,16 @@ export const alert = (title: string, confirmCallback: Function) => {
 
 export const destructiveAlert = (explanation: string, confirmCallback: Function) => {
   Alert.alert(
-    'This options has no turn back',
+    'Esta operaçāo nāo tem volta',
     explanation,
     [
       {
-        text: 'Sure thing, go ahead!',
+        text: 'Sim',
         style: 'destructive',
         onPress: confirmCallback
       },
       {
-        text: 'No, Thanks',
+        text: 'Nāo',
         style: 'cancel'
       }
     ],

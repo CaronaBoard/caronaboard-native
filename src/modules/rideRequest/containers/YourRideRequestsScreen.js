@@ -46,7 +46,7 @@ export class YourRideRequestsScreen extends Component {
     const { rideRequestsMap } = this.props
     const { rideId } = props.ride
     const rideRequest = rideRequestsMap[rideId]
-    alert('Delete Ride Request', () => removeRideRequest(rideRequest))
+    alert('Apagar pedido de carona?', () => removeRideRequest(rideRequest))
   }
 
   render () {
