@@ -7,6 +7,7 @@ import { RkCard } from 'react-native-ui-kitten'
 import { RidePropType } from '../types'
 import { GradientButton } from '../../shared/components'
 import styles from './styles/RideRequest.style'
+import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 
 export class NewRideRequest extends Component {
   static propTypes = {
@@ -44,7 +45,7 @@ export class NewRideRequest extends Component {
      } = this.props.ride
 
     return (
-      <View style={styles.flexible}>
+      <LoadingSpinnerView isLoading={this.state.loading} style={styles.flexible}>
         <View style={styles.container}>
           <View style={styles.inputTextsContainer}>
             <View>
@@ -70,7 +71,7 @@ export class NewRideRequest extends Component {
             onPress={this.onPress(rideId)}
           />
         </View>
-      </View>
+      </LoadingSpinnerView>
     )
   }
 }

@@ -1,11 +1,26 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+ext {
+    compileSdkVersion = 26
+    buildToolsVersion = '26.0.1'
+}
+
+subprojects { subproject ->
+    afterEvaluate{
+        if((subproject.plugins.hasPlugin('android') || subproject.plugins.hasPlugin('android-library'))) {
+            android {
+                compileSdkVersion rootProject.ext.compileSdkVersion
+                buildToolsVersion rootProject.ext.buildToolsVersion
+            }
+        }
+    }
+}
 
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.3.3'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -17,8 +32,20 @@ allprojects {
         mavenLocal()
         jcenter()
         maven {
+            url 'https://maven.google.com'
+            // Alternative URL is 'https://dl.google.com/dl/android/maven2/'
+        }
+        maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
         }
     }
+}
+
+task wrapper(type: Wrapper) {
+   gradleVersion = '3.3'
+}
+
+task clean(type: Delete) {
+  delete rootProject.buildDir
 }

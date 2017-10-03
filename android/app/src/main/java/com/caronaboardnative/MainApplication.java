@@ -7,6 +7,7 @@ import com.facebook.react.ReactPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.reactnativenavigation.NavigationApplication;
 import com.BV.LinearGradient.LinearGradientPackage;
+import com.airbnb.android.react.lottie.LottiePackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +23,8 @@ public class MainApplication extends NavigationApplication {
     return Arrays.<ReactPackage>asList(
         new VectorIconsPackage(),
         new LinearGradientPackage(),
-        new ReactNativeConfigPackage()
+        new ReactNativeConfigPackage(),
+        new LottiePackage()
     );
   }
 
