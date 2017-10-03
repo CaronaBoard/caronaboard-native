@@ -9,6 +9,7 @@ import YourRideRequestsScreen from '../modules/rideRequest/containers/YourRideRe
 import SignInScreen from '../modules/authentication/containers/SignInScreen'
 import Settings from '../modules/settings/containers/SettingsContainer'
 import { Feedback } from '../modules/settings/components/Feedback'
+import GroupsScreenContainer from '../modules/groups/containers/GroupsScreenContainer'
 
 export const screens = {
   signIn: {
@@ -69,5 +70,10 @@ export const screens = {
     id: 'settings.feeback',
     title: 'Feedback',
     component: Feedback
+  },
+  groups: {
+    id: 'groups',
+    title: 'Grupos de Carona',
+    component: GroupsScreenContainer
   }
 }

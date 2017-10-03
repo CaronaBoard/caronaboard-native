@@ -65,7 +65,13 @@ export class ProfileScreen extends Component {
   )
 
   componentDidMount () {
-    const { profile } = this.props
+    const { profile, userId } = this.props
+    if (userId && !profile.uid) {
+      profile.uid = userId
+    }
+    if (!profile.contact) {
+      profile.contact = {value: '', kind: ''}
+    }
     this.setState({profile, loading: false})
   }
 
@@ -115,15 +121,18 @@ export class ProfileScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log('Object state !!!')
+  console.log(JSON.stringify(state.auth))
+  console.log('--------------------')
   return {
-    profile: state.auth.profile, // TODO: do we have profile saved into state?
+    profile: state.auth.profile,
     userId: state.auth.userData.uid
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveProfile: (profile, userId) => dispatch(saveProfileFirebase(profile, userId))
+    saveProfile: (profile, userId) => dispatch(saveProfileFirebase(profile))
   }
 }
 

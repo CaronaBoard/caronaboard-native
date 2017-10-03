@@ -11,71 +11,47 @@ import { styles } from './styles/GroupsScreen.style'
 
 export class GroupsScreen extends React.Component {
   static propTypes = {
-    openProfile: PropTypes.func.isRequired,
-    resetPassword: PropTypes.func.isRequired,
-    logOut: PropTypes.func.isRequired,
-    eraseUserData: PropTypes.func.isRequired,
-    openFeedback: PropTypes.func.isRequired
+    uid: PropTypes.string.isRequired,
+    groups: PropTypes.array.isRequired,
+    joinGroup: PropTypes.func.isRequired
+  }
+
+  renderGroupList = (title, group, onPress = () => null) => {
+    return (
+      <View style={styles.section}>
+        <View style={[styles.row, styles.heading]}>
+          <RkText rkType='primary header6'>{title}</RkText>
+        </View>
+        {group.map(group => {
+          return (
+            <View style={styles.row} key={group.id}>
+              <TouchableOpacity
+                style={styles.rowButton}
+                onPress={() => onPress(group)}
+              >
+                <RkText rkType='header6'>{group.name}</RkText>
+              </TouchableOpacity>
+            </View>
+          )
+        })}
+      </View>
+    )
   }
 
   render () {
+    const {groups, uid, joinGroup} = this.props
+    const groupsYouBelong = []
+
+    groups.forEach(group => {
+      if (group.members.hasOwnProperty(uid)) {
+        groupsYouBelong.push(group)
+      }
+    })
+
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.section}>
-          <View style={[styles.row, styles.heading]}>
-            <RkText rkType='primary header6'>CONFIGURAÇŌES DE PERFIL</RkText>
-          </View>
-          <View style={styles.row}>
-            <TouchableOpacity
-              style={styles.rowButton}
-              onPress={() => this.props.openProfile()}
-            >
-              <RkText rkType='header6'>Editar perfil</RkText>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.row}>
-            <TouchableOpacity
-              style={styles.rowButton}
-              onPress={() => this.props.resetPassword()}
-            >
-              <RkText rkType='header6'>Trocar senha</RkText>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.section}>
-          <View style={[styles.row, styles.heading]}>
-            <RkText rkType='primary header6'>CONFIGURAÇŌES DE USUÁRIO</RkText>
-          </View>
-          <View style={styles.row}>
-            <TouchableOpacity
-              style={styles.rowButton}
-              onPress={() => this.props.eraseUserData()}
-            >
-              <RkText rkType='header6'>Apagar dados de usuário</RkText>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.row}>
-            <TouchableOpacity
-              style={styles.rowButton}
-              onPress={() => this.props.logOut()}
-            >
-              <RkText rkType='header6'>Deslogar</RkText>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.section}>
-          <View style={[styles.row, styles.heading]}>
-            <RkText rkType='primary header6'>Feedback</RkText>
-          </View>
-          <View style={styles.row}>
-            <TouchableOpacity
-              style={styles.rowButton}
-              onPress={() => this.props.openFeedback()}
-            >
-              <RkText rkType='header6'>Send us a feedback</RkText>
-            </TouchableOpacity>
-          </View>
-        </View>
+        {this.renderGroupList('GRUPOS QUE VOCE PERTENCE', groupsYouBelong)}
+        {this.renderGroupList('TODOS OS GRUPOS', groups, joinGroup)}
       </ScrollView>
     )
   }
