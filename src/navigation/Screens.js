@@ -25,41 +25,41 @@ export const screens = {
   rideOfferList: {
     id: 'ride.list',
     component: RideList,
-    label: 'Offer List',
-    title: 'Offer List'
+    label: 'Lista de Caronas',
+    title: 'Lista de Caronas'
   },
   rideOffer: {
     id: 'ride.offer',
     component: RideOffer,
-    label: 'Ride Offers',
-    title: 'Ride Offers'
+    label: 'Oferta de Carona',
+    title: 'Oferta de Carona'
   },
   rideRequest: {
     id: 'ride.request',
     component: RideRequest,
-    label: 'Ride Request',
-    title: 'Ride Request'
+    label: 'Pedido de Carona',
+    title: 'Pedido de Carona'
   },
   yourRideOffersList: {
     id: 'ride.offer.list',
     component: YourRideOfferList,
-    label: 'Your Ride Offers',
-    title: 'Your Ride Offers'
+    label: 'Suas Ofertas de Carona',
+    title: 'Suas Ofertas de Carona'
   },
   yourRequestsList: {
     id: 'ride.request.list',
     component: YourRideRequestsScreen,
-    label: 'Your Ride Requests',
-    title: 'Your Ride Requests'
+    label: 'Seus Pedidos de Carona',
+    title: 'Seus Pedidos de Carona'
   },
   settings: {
     id: 'settings',
     component: Settings,
-    title: 'Settings'
+    title: 'Configuraçōes'
   },
   profile: {
     id: 'settings.profile',
     component: ProfileScreen,
-    title: 'Profile'
+    title: 'Perfil'
   }
 }
