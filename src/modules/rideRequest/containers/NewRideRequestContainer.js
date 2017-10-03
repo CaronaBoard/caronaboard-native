@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { NewRideRequest } from '../components/NewRideRequest'
 import { RidePropType } from '../types'
 import { saveRideRequest } from '../../../services/firebase'
-import { fetchYourRideRequests } from '../../../redux/actions/async/RideRequestActions'
 
 export class RideRequestScreen extends Component {
   static propTypes = {
@@ -14,10 +13,9 @@ export class RideRequestScreen extends Component {
   }
 
   newRideRequest = async (rideId: string) => {
-    const { updateYourRequests, userId } = this.props
+    const { userId } = this.props
     try {
-      await saveRideRequest(rideId, this.props.userId)
-      await updateYourRequests(userId)
+      await saveRideRequest(rideId, userId)
       alert('Pedido de carona registrada com sucesso')
     } catch (error) {
       alert('Aconteceu um erro inesperado, poderia tentar novamente?')
@@ -40,10 +38,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    updateYourRequests: uid => dispatch(fetchYourRideRequests(uid))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(RideRequestScreen)
+export default connect(mapStateToProps)(RideRequestScreen)

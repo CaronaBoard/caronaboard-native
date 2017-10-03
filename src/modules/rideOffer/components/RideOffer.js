@@ -12,10 +12,6 @@ export class RideOffer extends React.Component {
     onPress: PropTypes.func.isRequired
   }
 
-  onPress = () => {
-    this.props.onPress(this.props.ride)
-  }
-
   render () {
     const {
       origin,
@@ -26,7 +22,7 @@ export class RideOffer extends React.Component {
     } = this.props.ride
 
     return (
-      <TouchableOpacity onPress={() => this.onPress()}>
+      <TouchableOpacity onPress={() => this.props.onPress(this.props.ride)}>
         <RkCard>
           <View rkCardContent>
             <View style={Styles.line} >
