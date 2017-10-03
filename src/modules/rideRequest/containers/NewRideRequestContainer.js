@@ -13,7 +13,7 @@ export class RideRequestScreen extends Component {
     userId: PropTypes.string.isRequired
   }
 
-  newRideRequest = (rideId: string) => async () => {
+  newRideRequest = async (rideId: string) => {
     const { updateYourRequests, userId } = this.props
     try {
       await saveRideRequest(rideId, this.props.userId)

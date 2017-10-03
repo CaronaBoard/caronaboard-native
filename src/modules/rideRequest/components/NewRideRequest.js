@@ -68,7 +68,7 @@ export class NewRideRequest extends Component {
           <GradientButton
             rkType='large'
             text={'Ask for a ride'}
-            onPress={this.onPress(rideId)}
+            onPress={() => this.onPress(rideId)}
           />
         </View>
       </LoadingSpinnerView>

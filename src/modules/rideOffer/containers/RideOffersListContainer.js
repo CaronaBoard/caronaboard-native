@@ -3,17 +3,17 @@ import { connect } from 'react-redux'
 import { ListView } from 'react-native'
 import React, { Component } from 'react'
 
-import { RidePropType } from '../../rideRequest/types/index'
-import { Ride } from '../../rideRequest/components/Ride'
+import { RideOffer } from '../components/RideOffer'
 import { screens } from '../../../navigation/Screens'
-import { fetchAllRideOffers } from '../../../redux/actions/index'
+import { RidePropType } from '../../rideRequest/types'
+import { fetchAllRideOffers } from '../../../redux/actions'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
 import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 
 export class RideList extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
-    rides: PropTypes.arrayOf(RidePropType),
+    rides: PropTypes.arrayOf(RidePropType).isRequired,
     userId: PropTypes.string.isRequired
   }
 
@@ -44,11 +44,12 @@ export class RideList extends Component {
     }
   }
 
-  onPress = (props) => {
-    const { userId, navigator } = this.props
+  onPress = (ride) => {
+    const { navigator } = this.props
     navigator.push({
       screen: screens.rideRequest.id,
-      passProps: {...props, userId}
+      title: screens.rideRequest.title,
+      passProps: {ride}
     })
   }
 
@@ -57,7 +58,7 @@ export class RideList extends Component {
       <LoadingSpinnerView isLoading={this.state.loading}>
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={(ride) => <Ride ride={ride} onPress={this.onPress} />}
+          renderRow={(ride) => <RideOffer ride={ride} onPress={this.onPress} />}
           enableEmptySections
         />
       </LoadingSpinnerView>

@@ -4,13 +4,13 @@ import React, { Component } from 'react'
 import { FlatList } from 'react-native'
 
 import { alert } from '../../../navigation/Alert'
-import { RideOffer } from '../components/RideOffer'
 import { screens } from '../../../navigation/Screens'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
 import { FloatingActionButton } from '../../shared/components/FloatingActionButton'
 import { removeRideOffer } from '../../../services/firebase/database/RideOffer'
 import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 import { fetchYourRideOffers } from '../../../redux/actions/async/RideOfferActions'
+import { YourRideOffer } from '../components/YourRideOffer'
 
 export class YourRideOffersScreen extends Component {
   static propTypes = {
@@ -33,7 +33,7 @@ export class YourRideOffersScreen extends Component {
     const { uid, updateYourOffers } = this.props
     if (uid && prevProps.uid !== uid) {
       this.setState({loading: true})
-      updateYourOffers(uid)
+      await updateYourOffers(uid)
       this.setState({loading: false})
     }
   }
@@ -53,7 +53,7 @@ export class YourRideOffersScreen extends Component {
         <FlatList
           data={this.props.yourOffers}
           keyExtractor={item => item.rideId}
-          renderItem={({ item }) => <RideOffer ride={item} onPress={this.onPressRide} />}
+          renderItem={({ item }) => <YourRideOffer ride={item} onPress={this.onPressRide} />}
         />
         <FloatingActionButton
           icon='md-create'
