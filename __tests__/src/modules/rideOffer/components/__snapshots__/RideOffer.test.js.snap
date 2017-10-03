@@ -1,144 +1,148 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RideOffer /> Should have a snapshot 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
-  focusedOpacity={0.7}
-  onPress={[Function]}
+<LoadingSpinnerView
+  isLoading={false}
 >
-  <RkCard>
-    <View
-      rkCardContent={true}
-    >
+  <TouchableOpacity
+    activeOpacity={0.2}
+    focusedOpacity={0.7}
+    onPress={[Function]}
+  >
+    <RkCard>
       <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-          }
-        }
+        rkCardContent={true}
       >
-        <Icon
-          allowFontScaling={false}
-          name="radio-button-unchecked"
-          size={12}
+        <View
           style={
             Object {
-              "fontSize": 15,
-              "marginRight": 5,
+              "alignItems": "center",
+              "flexDirection": "row",
             }
           }
-        />
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          rkCardText={true}
         >
-          PUC
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-          }
-        }
-      >
-        <Icon
-          allowFontScaling={false}
-          name="radio-button-unchecked"
-          size={12}
+          <Icon
+            allowFontScaling={false}
+            name="radio-button-unchecked"
+            size={12}
+            style={
+              Object {
+                "fontSize": 15,
+                "marginRight": 5,
+              }
+            }
+          />
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            rkCardText={true}
+          >
+            PUC
+          </Text>
+        </View>
+        <View
           style={
             Object {
-              "fontSize": 15,
-              "marginRight": 5,
+              "alignItems": "center",
+              "flexDirection": "row",
             }
           }
-        />
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          rkCardText={true}
         >
-          Bomfim
-        </Text>
-      </View>
-    </View>
-    <View
-      rkCardContent={true}
-    >
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-          }
-        }
-      >
-        <Icon
-          allowFontScaling={false}
-          name="today"
-          size={12}
-          style={
-            Object {
-              "fontSize": 15,
-              "marginRight": 5,
+          <Icon
+            allowFontScaling={false}
+            name="radio-button-unchecked"
+            size={12}
+            style={
+              Object {
+                "fontSize": 15,
+                "marginRight": 5,
+              }
             }
-          }
-        />
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          rkCardText={true}
-        >
-          Seg-Sex
-        </Text>
+          />
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            rkCardText={true}
+          >
+            Bomfim
+          </Text>
+        </View>
       </View>
       <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-          }
-        }
+        rkCardContent={true}
       >
-        <Icon
-          allowFontScaling={false}
-          name="schedule"
-          size={12}
+        <View
           style={
             Object {
-              "fontSize": 15,
-              "marginRight": 5,
+              "alignItems": "center",
+              "flexDirection": "row",
             }
           }
-        />
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          rkCardText={true}
         >
-          19h
-        </Text>
+          <Icon
+            allowFontScaling={false}
+            name="today"
+            size={12}
+            style={
+              Object {
+                "fontSize": 15,
+                "marginRight": 5,
+              }
+            }
+          />
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            rkCardText={true}
+          >
+            Seg-Sex
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Icon
+            allowFontScaling={false}
+            name="schedule"
+            size={12}
+            style={
+              Object {
+                "fontSize": 15,
+                "marginRight": 5,
+              }
+            }
+          />
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            rkCardText={true}
+          >
+            19h
+          </Text>
+        </View>
       </View>
-    </View>
-    <Icon
-      allowFontScaling={false}
-      color="#900"
-      name="delete-forever"
-      size={30}
-      style={
-        Object {
-          "alignSelf": "flex-end",
-          "margin": 10,
+      <Icon
+        allowFontScaling={false}
+        color="#900"
+        name="delete-forever"
+        size={30}
+        style={
+          Object {
+            "alignSelf": "flex-end",
+            "margin": 10,
+          }
         }
-      }
-    />
-  </RkCard>
-</TouchableOpacity>
+      />
+    </RkCard>
+  </TouchableOpacity>
+</LoadingSpinnerView>
 `;

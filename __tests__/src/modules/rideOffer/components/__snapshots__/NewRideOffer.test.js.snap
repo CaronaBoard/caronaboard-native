@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<NewRideOffer /> Should have a snapshot 1`] = `
-<View
+<LoadingSpinnerView
+  isLoading={false}
   style={
     Object {
       "flex": 1,
@@ -64,5 +65,5 @@ exports[`<NewRideOffer /> Should have a snapshot 1`] = `
       text="Offer Ride"
     />
   </View>
-</View>
+</LoadingSpinnerView>
 `;
