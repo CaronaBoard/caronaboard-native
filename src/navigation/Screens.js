@@ -8,6 +8,7 @@ import YourRideOfferList from '../modules/rideOffer/containers/YourRideOffersScr
 import YourRideRequestsScreen from '../modules/rideRequest/containers/YourRideRequestsScreen'
 import SignInScreen from '../modules/authentication/containers/SignInScreen'
 import Settings from '../modules/settings/containers/SettingsContainer'
+import { Feedback } from '../modules/settings/components/Feedback'
 
 export const screens = {
   signIn: {
@@ -63,5 +64,10 @@ export const screens = {
     id: 'settings.profile',
     component: ProfileScreen,
     title: 'Perfil'
+  },
+  feedback: {
+    id: 'settings.feeback',
+    title: 'Feedback',
+    component: Feedback
   }
 }

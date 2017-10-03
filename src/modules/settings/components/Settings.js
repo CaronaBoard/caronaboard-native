@@ -14,7 +14,8 @@ export class Settings extends React.Component {
     openProfile: PropTypes.func.isRequired,
     resetPassword: PropTypes.func.isRequired,
     logOut: PropTypes.func.isRequired,
-    eraseUserData: PropTypes.func.isRequired
+    eraseUserData: PropTypes.func.isRequired,
+    openFeedback: PropTypes.func.isRequired
   }
 
   render () {
@@ -59,6 +60,19 @@ export class Settings extends React.Component {
               onPress={() => this.props.logOut()}
             >
               <RkText rkType='header6'>Deslogar</RkText>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.section}>
+          <View style={[styles.row, styles.heading]}>
+            <RkText rkType='primary header6'>Feedback</RkText>
+          </View>
+          <View style={styles.row}>
+            <TouchableOpacity
+              style={styles.rowButton}
+              onPress={() => this.props.openFeedback()}
+            >
+              <RkText rkType='header6'>Send us a feedback</RkText>
             </TouchableOpacity>
           </View>
         </View>
