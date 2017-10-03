@@ -4,7 +4,8 @@ import { RideOffer } from '../../../../../src/modules/rideOffer/components/RideO
 import { rideOfferFixture } from '../../../../resources/fixtures/ride/offer'
 
 const props = {
-  ride: rideOfferFixture
+  ride: rideOfferFixture,
+  onPress: jest.fn()
 }
 
 describe('<RideOffer />', () => {

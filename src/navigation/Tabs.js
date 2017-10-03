@@ -11,17 +11,17 @@ export const tabs = [
       rightButtons: [profileButton]
     }
   }, {
-    label: screens.rideList.label,
-    screen: screens.rideList.id,
-    title: screens.rideList.title,
+    label: screens.rideOfferList.label,
+    screen: screens.rideOfferList.id,
+    title: screens.rideOfferList.title,
     icon: require('../assets/images/swap.png'),
     navigatorButtons: {
       rightButtons: [profileButton]
     }
   }, {
-    label: screens.rideOfferList.label,
-    screen: screens.rideOfferList.id,
-    title: screens.rideOfferList.title,
+    label: screens.yourRideOffersList.label,
+    screen: screens.yourRideOffersList.id,
+    title: screens.yourRideOffersList.title,
     icon: require('../assets/images/swap.png'),
     navigatorButtons: {
       rightButtons: [profileButton]

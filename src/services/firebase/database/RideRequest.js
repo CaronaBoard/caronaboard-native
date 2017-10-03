@@ -2,7 +2,7 @@
 
 import { toArrayOfRideRequests } from '../Conversion'
 import { getUserProfile } from './Profile'
-import type { RideRequestFlowType, ProfileType } from '../types'
+import type { RideRequestFlowType, ProfileType, RideRequestIdMapFlowType } from '../types'
 import { rideGroup, ref } from './'
 
 export const saveRideRequest = async (rideId: string, userId: string) => {
@@ -33,7 +33,7 @@ export const removeRideRequest = async (ride: RideRequestFlowType) => {
 }
 
 export const removeDuplicatedRequests = async (rides: Array<RideRequestFlowType>)
-                                              : {[rideId: string]: RideRequestFlowType} => {
+                                              : RideRequestIdMapFlowType => {
   let rideRequestsMap = {}
   let promiseArray = []
 

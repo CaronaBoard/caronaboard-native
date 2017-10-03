@@ -5,10 +5,12 @@ import PropTypes from 'prop-types'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
 import { saveRideOffer } from '../../../services/firebase'
 import { NewRideOffer } from '../components/NewRideOffer'
+import { fetchYourRideOffers } from '../../../redux/actions/async/RideOfferActions'
 
 export class NewRideOfferContainer extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
+    updateYourOffers: PropTypes.func.isRequired,
     userId: PropTypes.string.isRequired
   }
 
@@ -18,8 +20,14 @@ export class NewRideOfferContainer extends Component {
   }
 
   offerRide = async (rideOffer) => {
-    const saved = await saveRideOffer(rideOffer, this.props.userId)
-    if (saved) alert('Success')
+    const { updateYourOffers, userId } = this.props
+    try {
+      await saveRideOffer(rideOffer, this.props.userId)
+      await updateYourOffers(userId)
+      alert('Success')
+    } catch (error) {
+      alert('Error')
+    }
   }
 
   render () {
@@ -33,4 +41,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(NewRideOfferContainer)
+const mapDispatchToProps = dispatch => {
+  return {
+    updateYourOffers: uid => dispatch(fetchYourRideOffers(uid))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewRideOfferContainer)

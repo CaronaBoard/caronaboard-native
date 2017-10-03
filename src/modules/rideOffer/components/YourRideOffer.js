@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { View, Text, TouchableOpacity } from 'react-native'
 
-import Styles from './styles/RideOffer.style'
+import Styles from './styles/YourRideOffer.style'
 import { RkCard } from 'react-native-ui-kitten'
 import { RidePropType } from '../../rideRequest/types'
 
-export class RideOffer extends React.Component {
+export class YourRideOffer extends React.Component {
   static propTypes = {
     ride: RidePropType.isRequired,
     onPress: PropTypes.func.isRequired
@@ -45,6 +45,12 @@ export class RideOffer extends React.Component {
             { this.renderLine(days, 'today') }
             { this.renderLine(hours, 'schedule') }
           </View>
+          <Icon
+            name='delete-forever'
+            size={30}
+            color='#900'
+            style={Styles.deleteIcon}
+          />
         </RkCard>
       </TouchableOpacity>
     )

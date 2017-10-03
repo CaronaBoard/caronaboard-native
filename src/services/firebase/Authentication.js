@@ -1,4 +1,5 @@
 import Firebase from 'firebase'
+import { saveProfile } from './database/Profile'
 
 let auth
 
@@ -21,12 +22,14 @@ export const signIn = async (email: string, password: string) => {
 }
 
 export const signUp = async (email: string, password: string) => {
-  try {
-    const user = await auth.createUserWithEmailAndPassword(email, password)
-    await sendVerificationEmail(user)
-  } catch (error) {
-    console.error(error)
-  }
+  const user = await auth.createUserWithEmailAndPassword(email, password)
+  await saveProfile({name: email, uid: user.uid})
+  await sendVerificationEmail(user)
+  await signOut()
+}
+
+export const signOut = async () => {
+  return auth.signOut()
 }
 
 export const checkEmailRegistration = async (email: string) => {
@@ -35,14 +38,9 @@ export const checkEmailRegistration = async (email: string) => {
 }
 
 export const sendVerificationEmail = async (user) => {
-  try {
-    await user.sendEmailVerification()
-    console.log('Email de verificação enviado')
-  } catch (error) {
-    console.error(error)
-  }
+  return user.sendEmailVerification()
 }
 
-export const forgotPassword = (email) => {
+export const forgotPassword = async (email) => {
   return auth.sendPasswordResetEmail(email)
 }

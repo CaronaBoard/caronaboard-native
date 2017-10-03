@@ -6,15 +6,15 @@ import {
   updateRideOffer,
   removeRideOffer
 } from '../../../../src/services/firebase'
-import RidesResponse from '../../../resources/fixtures/firebase/FirebaseRidesResponse.json'
 import ProfileResponse from '../../../resources/fixtures/firebase/FirebaseProfileResponse.json'
 
+export const mockUpdate = jest.fn(() => Promise.resolve())
 const mockRef = {
   remove: jest.fn(() => Promise.resolve()),
-  update: jest.fn(() => Promise.resolve()),
   push: jest.fn(() => Promise.resolve()),
+  update: mockUpdate,
   child: () => ({
-    once: () => Promise.resolve({ val: () => RidesResponse })
+    once: () => Promise.resolve({ val: jest.fn() })
   }),
   once: () => Promise.resolve({ val: () => ProfileResponse })
 }

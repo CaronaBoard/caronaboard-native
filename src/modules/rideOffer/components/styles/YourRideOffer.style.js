@@ -7,6 +7,10 @@ export default StyleSheet.create({
     justifyContent: 'space-around',
     flex: 1
   },
+  deleteIcon: {
+    alignSelf: 'flex-end',
+    margin: Metrics.baseMargin
+  },
   title: {
     fontSize: Fonts.size.h1,
     textAlign: 'center'

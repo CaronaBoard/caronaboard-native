@@ -3,18 +3,22 @@ import { connect } from 'react-redux'
 import { ListView } from 'react-native'
 import React, { Component } from 'react'
 
-import { RidePropType } from '../types'
-import { Ride } from '../components/Ride'
-import styles from './styles/RideList.style'
+import { RideOffer } from '../components/RideOffer'
 import { screens } from '../../../navigation/Screens'
+import { RidePropType } from '../../rideRequest/types'
 import { fetchAllRideOffers } from '../../../redux/actions'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
+import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 
 export class RideList extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
-    rides: PropTypes.arrayOf(RidePropType),
+    rides: PropTypes.arrayOf(RidePropType).isRequired,
     userId: PropTypes.string.isRequired
+  }
+
+  state = {
+    loading: false
   }
 
   constructor (props) {
@@ -31,26 +35,33 @@ export class RideList extends Component {
     }
   }
 
-  componentDidMount () {
-    this.props.fetchRides()
+  async componentDidUpdate (prevProps) {
+    const { userId, fetchRides } = this.props
+    if (userId && prevProps.userId !== userId) {
+      this.setState({loading: true})
+      await fetchRides()
+      this.setState({loading: false})
+    }
   }
 
-  onPress = (props) => {
-    const { userId, navigator } = this.props
+  onPress = (ride) => {
+    const { navigator } = this.props
     navigator.push({
       screen: screens.rideRequest.id,
-      passProps: {...props, userId}
+      title: screens.rideRequest.title,
+      passProps: {ride}
     })
   }
 
   render () {
     return (
-      <ListView
-        style={styles.container}
-        dataSource={this.state.dataSource}
-        renderRow={(ride) => <Ride ride={ride} onPress={this.onPress} />}
-        enableEmptySections
-      />
+      <LoadingSpinnerView isLoading={this.state.loading}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(ride) => <RideOffer ride={ride} onPress={this.onPress} />}
+          enableEmptySections
+        />
+      </LoadingSpinnerView>
     )
   }
 }

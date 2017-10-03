@@ -4,7 +4,9 @@ import { YourRideOffersScreen } from '../../../../../src/modules/rideOffer/conta
 import { profileFixture } from '../../../../resources/fixtures/user'
 
 const props = {
-  uid: profileFixture.uid,
+  uid: profileFixture.contact.uid,
+  updateYourOffers: jest.fn(),
+  yourOffers: [],
   navigator: {
     setOnNavigatorEvent: jest.fn()
   }

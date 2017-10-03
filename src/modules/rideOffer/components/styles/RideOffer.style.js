@@ -7,10 +7,6 @@ export default StyleSheet.create({
     alignItems: 'flex-start',
     margin: Metrics.baseMargin
   },
-  deleteIcon: {
-    alignSelf: 'flex-end',
-    margin: Metrics.baseMargin
-  },
   title: {
     ...Fonts.style.h4
   },

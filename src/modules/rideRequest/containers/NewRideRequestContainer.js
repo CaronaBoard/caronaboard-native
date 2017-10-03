@@ -4,17 +4,23 @@ import { connect } from 'react-redux'
 import { NewRideRequest } from '../components/NewRideRequest'
 import { RidePropType } from '../types'
 import { saveRideRequest } from '../../../services/firebase'
+import { fetchYourRideRequests } from '../../../redux/actions/async/RideRequestActions'
 
 export class RideRequestScreen extends Component {
   static propTypes = {
     ride: RidePropType.isRequired,
+    updateYourRequests: PropTypes.func.isRequired,
     userId: PropTypes.string.isRequired
   }
 
-  askForRide = (rideId: string) => async () => {
-    const ride = await saveRideRequest(rideId, this.props.userId)
-    if (ride) {
+  newRideRequest = async (rideId: string) => {
+    const { updateYourRequests, userId } = this.props
+    try {
+      await saveRideRequest(rideId, this.props.userId)
+      await updateYourRequests(userId)
       alert('Success')
+    } catch (error) {
+      alert('Error')
     }
   }
 
@@ -22,7 +28,7 @@ export class RideRequestScreen extends Component {
     return (
       <NewRideRequest
         ride={this.props.ride}
-        saveRideRequest={this.askForRide}
+        saveRideRequest={this.newRideRequest}
       />
     )
   }
@@ -34,4 +40,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(RideRequestScreen)
+const mapDispatchToProps = dispatch => {
+  return {
+    updateYourRequests: uid => dispatch(fetchYourRideRequests(uid))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RideRequestScreen)
