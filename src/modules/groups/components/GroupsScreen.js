@@ -15,7 +15,7 @@ export class GroupsScreen extends React.Component {
     groups: PropTypes.array.isRequired,
     joinGroup: PropTypes.func.isRequired,
     changeGroup: PropTypes.func.isRequired,
-    activeGroup: PropTypes.string.isRequired
+    activeGroup: PropTypes.string
   }
 
   renderGroupList = (title, group, onPress = () => null) => {

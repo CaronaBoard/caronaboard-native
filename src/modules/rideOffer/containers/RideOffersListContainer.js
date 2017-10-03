@@ -16,7 +16,8 @@ export class RideList extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
     rides: PropTypes.arrayOf(RidePropType).isRequired,
-    userId: PropTypes.string.isRequired
+    userId: PropTypes.string.isRequired,
+    groupId: PropTypes.string
   }
 
   state = {
@@ -39,6 +40,7 @@ export class RideList extends Component {
 
   async componentDidMount () {
     const { userId, fetchRides } = this.props
+
     if (userId && getActiveGroup()) {
       this.setState({loading: true})
       await fetchRides()
@@ -47,8 +49,8 @@ export class RideList extends Component {
   }
 
   async componentDidUpdate (prevProps) {
-    const { userId } = this.props
-    if (userId && prevProps.userId !== userId) {
+    const { userId, groupId } = this.props
+    if (userId && (prevProps.userId !== userId) || (prevProps.groupId !== groupId)) {
       await this.componentDidMount()
     }
   }
@@ -80,7 +82,8 @@ export class RideList extends Component {
 const mapStateToProps = (state) => {
   return {
     rides: state.ride.offers,
-    userId: state.auth.userData.uid
+    userId: state.auth.userData.uid,
+    groupId: state.ride.group.id
   }
 }
 

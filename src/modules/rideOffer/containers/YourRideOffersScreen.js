@@ -19,7 +19,8 @@ export class YourRideOffersScreen extends Component {
     navigator: PropTypes.object.isRequired,
     uid: PropTypes.string.isRequired,
     updateYourOffers: PropTypes.func.isRequired,
-    yourOffers: PropTypes.array.isRequired
+    yourOffers: PropTypes.array.isRequired,
+    groupId: PropTypes.string
   }
 
   state = {
@@ -41,8 +42,9 @@ export class YourRideOffersScreen extends Component {
   }
 
   async componentDidUpdate (prevProps) {
-    const {uid} = this.props
-    if (uid && prevProps.uid !== uid) {
+    const { uid, groupId } = this.props
+
+    if (uid && (prevProps.uid !== uid) || (prevProps.groupId !== groupId)) {
       await this.componentDidMount()
     }
   }
@@ -88,7 +90,8 @@ export class YourRideOffersScreen extends Component {
 const mapStateToProps = state => {
   return {
     uid: state.auth.profile.uid,
-    yourOffers: state.ride.yourOffers
+    yourOffers: state.ride.yourOffers,
+    groupId: state.ride.group.id
   }
 }
 

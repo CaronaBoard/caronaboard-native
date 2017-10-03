@@ -5,7 +5,7 @@ import { View, Image, Keyboard } from 'react-native'
 import { styles } from './styles/WarningScreen.style'
 
 export const WarningScreen = props => {
-  const { uid, activeGroups } = props
+  const { uid, activeGroup } = props
   return (
     <View
       style={styles.screen}
@@ -15,7 +15,7 @@ export const WarningScreen = props => {
         <Image style={styles.image} source={require('../../../assets/images/caronaboard-logo-azul.png')} />
         <RkText rkType='logo h0'>Caronaboard</RkText>
         {!uid ? <RkText rkType='light h1'>Favor preencher o perfil</RkText> : null}
-        {!activeGroups ? <RkText rkType='light h1'>Favor Selecionar um grupo</RkText> : null}
+        {!activeGroup ? <RkText rkType='light h1'>Favor Selecionar um grupo</RkText> : null}
       </View>
     </View>
   )
@@ -23,5 +23,5 @@ export const WarningScreen = props => {
 
 WarningScreen.propTypes = {
   uid: PropTypes.string,
-  activeGroups: PropTypes.string
+  activeGroup: PropTypes.string
 }

@@ -22,7 +22,8 @@ export class YourRideRequestsScreen extends Component {
     yourRideRequests: PropTypes.array.isRequired,
     rideRequestsMap: PropTypes.object.isRequired,
     navigator: PropTypes.object.isRequired,
-    uid: PropTypes.string.isRequired
+    uid: PropTypes.string.isRequired,
+    groupId: PropTypes.string
   }
 
   state = INITIAL_STATE
@@ -42,7 +43,8 @@ export class YourRideRequestsScreen extends Component {
   }
 
   async componentDidUpdate (prevProps) {
-    if (prevProps.uid !== this.props.uid) {
+    const { uid, groupId } = this.props
+    if (prevProps.uid !== uid || prevProps.groupId !== groupId) {
       await this.componentDidMount()
     }
   }
@@ -77,7 +79,8 @@ const mapStateToProps = (state) => {
   return {
     uid: state.auth.profile.uid,
     yourRideRequests: state.ride.requests,
-    rideRequestsMap: state.ride.requestsIdMap
+    rideRequestsMap: state.ride.requestsIdMap,
+    groupId: state.ride.group.id
   }
 }
 
