@@ -20,6 +20,13 @@ class SettingsContainer extends Component {
     })
   }
 
+  pushFeedbackScreen = () => {
+    this.props.navigator.push({
+      screen: screens.feedback.id,
+      title: screens.feedback.title
+    })
+  }
+
   eraseUserData = () => {
     destructiveAlert(
       'If you confirm all your personal data will be erased from outr system,',
@@ -47,6 +54,7 @@ class SettingsContainer extends Component {
         eraseUserData={this.eraseUserData}
         logOut={this.logOutUser}
         resetPassword={this.resetPassword}
+        openFeedback={this.pushFeedbackScreen}
       />
     )
   }
