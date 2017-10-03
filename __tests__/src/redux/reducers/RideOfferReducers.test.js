@@ -23,7 +23,8 @@ describe('RideOfferReducers', () => {
   it('Should handle UPDATE_RIDE_REQUESTS action type', async () => {
     const action = updateYourRideRequests([rideOfferFixture])
     const state = RideOfferReducers(INITIAL_STATE, action)
-    const expectedState = { ...INITIAL_STATE, requests: action.requests }
+    const { requests, requestsIdMap } = action
+    const expectedState = { ...INITIAL_STATE, requests, requestsIdMap }
 
     expect(state).toEqual(expectedState)
   })

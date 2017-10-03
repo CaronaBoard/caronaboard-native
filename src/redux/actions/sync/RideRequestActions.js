@@ -1,9 +1,10 @@
 import { UPDATE_RIDE_REQUESTS } from '../../types/index'
-import type { RideRequestFlowType } from '../../../services/firebase/types'
+import type { RideRequestFlowType, RideRequestIdMapFlowType } from '../../../services/firebase/types'
 
-export const updateYourRideRequests = (rides: Array<RideRequestFlowType>) => {
+export const updateYourRideRequests = (rides: Array<RideRequestFlowType>, rideRequestsMap: RideRequestIdMapFlowType) => {
   return {
     type: UPDATE_RIDE_REQUESTS,
-    requests: rides
+    requests: rides,
+    requestsIdMap: rideRequestsMap
   }
 }

@@ -52,3 +52,7 @@ export type FirebaseRideRequests = {
     }
   }
 }
+
+export type RideRequestIdMapFlowType = {
+  [rideId: string]: RideRequestFlowType
+}

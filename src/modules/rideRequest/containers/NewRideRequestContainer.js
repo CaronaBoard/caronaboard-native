@@ -4,16 +4,20 @@ import { connect } from 'react-redux'
 import { NewRideRequest } from '../components/NewRideRequest'
 import { RidePropType } from '../types'
 import { saveRideRequest } from '../../../services/firebase'
+import { fetchYourRideRequests } from '../../../redux/actions/async/RideRequestActions'
 
 export class RideRequestScreen extends Component {
   static propTypes = {
     ride: RidePropType.isRequired,
+    updateYourRequests: PropTypes.func.isRequired,
     userId: PropTypes.string.isRequired
   }
 
   newRideRequest = (rideId: string) => async () => {
+    const { updateYourRequests, userId } = this.props
     try {
       await saveRideRequest(rideId, this.props.userId)
+      await updateYourRequests(userId)
       alert('Success')
     } catch (error) {
       alert('Error')
@@ -36,4 +40,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(RideRequestScreen)
+const mapDispatchToProps = dispatch => {
+  return {
+    updateYourRequests: uid => dispatch(fetchYourRideRequests(uid))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RideRequestScreen)

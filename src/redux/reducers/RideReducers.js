@@ -7,7 +7,8 @@ import {
 export const INITIAL_STATE = {
   offers: [],
   yourOffers: [],
-  requests: []
+  requests: [],
+  requestsIdMap: {}
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -17,7 +18,8 @@ export default (state = INITIAL_STATE, action) => {
     case UPDATE_YOUR_RIDE_OFFERS:
       return { ...state, yourOffers: action.yourOffers }
     case UPDATE_RIDE_REQUESTS:
-      return { ...state, requests: action.requests }
+      const { requests, requestsIdMap } = action
+      return { ...state, requests, requestsIdMap }
     default:
       return state
   }

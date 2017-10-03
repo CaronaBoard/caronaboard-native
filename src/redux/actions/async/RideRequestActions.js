@@ -1,10 +1,14 @@
-import { getAllRideRequests } from '../../../services/firebase'
 import { updateYourRideRequests } from '../sync/RideRequestActions'
+import { getUserRideRequests, removeDuplicatedRequests } from '../../../services/firebase/database/RideRequest'
+import { findRideOfferById } from '../../../services/firebase/database/RideOffer'
 
-export function fetchAllRideRequests () {
+export function fetchYourRideRequests (uid: string) {
   return async (dispatch) => {
-    const rides = await getAllRideRequests()
-    const action = updateYourRideRequests(rides)
+    const rideRequests = await getUserRideRequests(uid)
+    const rideRequestsMap = await removeDuplicatedRequests(rideRequests)
+    const rideOffersPromises = rideRequests.map(({ rideId }) => findRideOfferById(rideId))
+    const rides = await Promise.all(rideOffersPromises)
+    const action = updateYourRideRequests(rides, rideRequestsMap)
     dispatch(action)
   }
 }
