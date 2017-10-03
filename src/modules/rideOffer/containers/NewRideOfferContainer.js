@@ -18,8 +18,12 @@ export class NewRideOfferContainer extends Component {
   }
 
   offerRide = async (rideOffer) => {
-    const saved = await saveRideOffer(rideOffer, this.props.userId)
-    if (saved) alert('Success')
+    try {
+      await saveRideOffer(rideOffer, this.props.userId)
+      alert('Success')
+    } catch (error) {
+      alert('Error')
+    }
   }
 
   render () {

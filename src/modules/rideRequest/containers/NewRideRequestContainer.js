@@ -11,10 +11,12 @@ export class RideRequestScreen extends Component {
     userId: PropTypes.string.isRequired
   }
 
-  askForRide = (rideId: string) => async () => {
-    const ride = await saveRideRequest(rideId, this.props.userId)
-    if (ride) {
+  newRideRequest = (rideId: string) => async () => {
+    try {
+      await saveRideRequest(rideId, this.props.userId)
       alert('Success')
+    } catch (error) {
+      alert('Error')
     }
   }
 
@@ -22,7 +24,7 @@ export class RideRequestScreen extends Component {
     return (
       <NewRideRequest
         ride={this.props.ride}
-        saveRideRequest={this.askForRide}
+        saveRideRequest={this.newRideRequest}
       />
     )
   }
