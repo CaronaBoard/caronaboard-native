@@ -18,3 +18,22 @@ export const alert = (title: string, confirmCallback: Function) => {
     { cancelable: true }
   )
 }
+
+export const destructiveAlert = (explanation: string, confirmCallback: Function) => {
+  Alert.alert(
+    'This options has no turn back',
+    explanation,
+    [
+      {
+        text: 'Sure thing, go ahead!',
+        style: 'destructive',
+        onPress: confirmCallback
+      },
+      {
+        text: 'No, Thanks',
+        style: 'cancel'
+      }
+    ],
+    { cancelable: true }
+  )
+}
