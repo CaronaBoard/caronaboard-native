@@ -18,24 +18,13 @@ exports[`<RideOffer /> Should have a snapshot 1`] = `
           }
         }
       >
-        <Icon
-          allowFontScaling={false}
-          name="radio-button-unchecked"
-          size={12}
-          style={
-            Object {
-              "fontSize": 15,
-              "marginRight": 5,
-            }
-          }
-        />
         <Text
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
           rkCardText={true}
         >
-          PUC
+          Eduardo Moroni está oferecendo uma carona
         </Text>
       </View>
       <View
@@ -46,56 +35,13 @@ exports[`<RideOffer /> Should have a snapshot 1`] = `
           }
         }
       >
-        <Icon
-          allowFontScaling={false}
-          name="radio-button-unchecked"
-          size={12}
-          style={
-            Object {
-              "fontSize": 15,
-              "marginRight": 5,
-            }
-          }
-        />
         <Text
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
           rkCardText={true}
         >
-          Bomfim
-        </Text>
-      </View>
-    </View>
-    <View
-      rkCardContent={true}
-    >
-      <View
-        style={
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-          }
-        }
-      >
-        <Icon
-          allowFontScaling={false}
-          name="today"
-          size={12}
-          style={
-            Object {
-              "fontSize": 15,
-              "marginRight": 5,
-            }
-          }
-        />
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          rkCardText={true}
-        >
-          Seg-Sex
+          De: PUC
         </Text>
       </View>
       <View
@@ -106,24 +52,47 @@ exports[`<RideOffer /> Should have a snapshot 1`] = `
           }
         }
       >
-        <Icon
-          allowFontScaling={false}
-          name="schedule"
-          size={12}
-          style={
-            Object {
-              "fontSize": 15,
-              "marginRight": 5,
-            }
-          }
-        />
         <Text
           accessible={true}
           allowFontScaling={true}
           ellipsizeMode="tail"
           rkCardText={true}
         >
-          19h
+          Para: Bomfim
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          rkCardText={true}
+        >
+          Em: Seg-Sex
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          rkCardText={true}
+        >
+          As: 19h
         </Text>
       </View>
     </View>

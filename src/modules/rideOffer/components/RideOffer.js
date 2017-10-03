@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Icon from 'react-native-vector-icons/MaterialIcons'
 import { View, Text, TouchableOpacity } from 'react-native'
 
 import Styles from './styles/RideOffer.style'
@@ -17,33 +16,34 @@ export class RideOffer extends React.Component {
     this.props.onPress(this.props.ride)
   }
 
-  renderLine = (text, icon) => {
-    return (
-      <View style={Styles.line} >
-        <Icon name={icon} style={Styles.icon} />
-        <Text rkCardText>{text}</Text>
-      </View>
-    )
-  }
-
   render () {
     const {
       origin,
       destination,
       days,
-      hours
+      hours,
+      profile
     } = this.props.ride
 
     return (
       <TouchableOpacity onPress={() => this.onPress()}>
         <RkCard>
           <View rkCardContent>
-            { this.renderLine(origin, 'radio-button-unchecked') }
-            { this.renderLine(destination, 'radio-button-unchecked') }
-          </View>
-          <View rkCardContent>
-            { this.renderLine(days, 'today') }
-            { this.renderLine(hours, 'schedule') }
+            <View style={Styles.line} >
+              <Text rkCardText>{`${profile.name} está oferecendo uma carona`}</Text>
+            </View>
+            <View style={Styles.line} >
+              <Text rkCardText>{`De: ${origin}`}</Text>
+            </View>
+            <View style={Styles.line} >
+              <Text rkCardText>{`Para: ${destination}`}</Text>
+            </View>
+            <View style={Styles.line} >
+              <Text rkCardText>{`Em: ${days}`}</Text>
+            </View>
+            <View style={Styles.line} >
+              <Text rkCardText>{`As: ${hours}`}</Text>
+            </View>
           </View>
         </RkCard>
       </TouchableOpacity>
