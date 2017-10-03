@@ -4,6 +4,6 @@ import type { RideRequestFlowType } from '../../../services/firebase/types'
 export const updateRideRequests = (rides: Array<RideRequestFlowType>) => {
   return {
     type: UPDATE_RIDE_REQUESTS,
-    payload: rides
+    requests: rides
   }
 }

@@ -7,7 +7,7 @@ describe('RideRequest sync actions', () => {
     const rides = [rideRequestFixture]
     const expectedAction = {
       type: UPDATE_RIDE_REQUESTS,
-      payload: rides
+      requests: rides
     }
     const action = updateRideRequests(rides)
 
