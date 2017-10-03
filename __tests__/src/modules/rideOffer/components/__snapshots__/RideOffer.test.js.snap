@@ -127,18 +127,6 @@ exports[`<RideOffer /> Should have a snapshot 1`] = `
         </Text>
       </View>
     </View>
-    <Icon
-      allowFontScaling={false}
-      color="#900"
-      name="delete-forever"
-      size={30}
-      style={
-        Object {
-          "alignSelf": "flex-end",
-          "margin": 10,
-        }
-      }
-    />
   </RkCard>
 </TouchableOpacity>
 `;

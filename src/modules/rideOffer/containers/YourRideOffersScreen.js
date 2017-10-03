@@ -30,7 +30,7 @@ export class YourRideOffersScreen extends Component {
   }
 
   async componentDidUpdate (prevProps) {
-    const { uid, updateYourOffers } = this.props
+    const {uid, updateYourOffers} = this.props
     if (uid && prevProps.uid !== uid) {
       this.setState({loading: true})
       await updateYourOffers(uid)
@@ -39,11 +39,14 @@ export class YourRideOffersScreen extends Component {
   }
 
   pushRideRequestScreen () {
-    this.props.navigator.push({screen: screens.rideOffer.id})
+    this.props.navigator.push({
+      screen: screens.rideOffer.id,
+      title: screens.rideOffer.title
+    })
   }
 
   onPressRide = (rideId: string) => {
-    const { uid } = this.props.profile
+    const {uid} = this.props.profile
     alert('Delete Ride Offer', () => removeRideOffer(rideId, uid))
   }
 
@@ -53,7 +56,7 @@ export class YourRideOffersScreen extends Component {
         <FlatList
           data={this.props.yourOffers}
           keyExtractor={item => item.rideId}
-          renderItem={({ item }) => <YourRideOffer ride={item} onPress={this.onPressRide} />}
+          renderItem={({item}) => <YourRideOffer ride={item} onPress={this.onPressRide} />}
         />
         <FloatingActionButton
           icon='md-create'
