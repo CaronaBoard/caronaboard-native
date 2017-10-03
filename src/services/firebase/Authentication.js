@@ -37,6 +37,10 @@ export const checkEmailRegistration = async (email: string) => {
   return providers.length !== 0
 }
 
+export const deleteUser = async (user) => {
+  return user.delete()
+}
+
 export const sendVerificationEmail = async (user) => {
   return user.sendEmailVerification()
 }
@@ -47,4 +51,8 @@ export const forgotPassword = async (email) => {
 
 export const sendPasswordResetEmail = async (email: string) => {
   return auth.sendPasswordResetEmail(email)
+}
+
+export const getCurrentUser = () => {
+  return auth.currentUser
 }

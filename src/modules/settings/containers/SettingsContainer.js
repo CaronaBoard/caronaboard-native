@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { Settings } from '../components/Settings'
 import { screens } from '../../../navigation/Screens'
 import { sendPasswordResetEmail, signOut } from '../../../services/firebase/Authentication'
+import { destructiveAlert } from '../../../navigation/Alert'
 
 class SettingsContainer extends Component {
   static propTypes = {
@@ -20,7 +21,10 @@ class SettingsContainer extends Component {
   }
 
   eraseUserData = () => {
-
+    destructiveAlert(
+      'If you confirm all your personal data will be erased from outr system,',
+      () => alert('Feature not implemented :P')
+    )
   }
 
   logOutUser = () => {
@@ -54,9 +58,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SettingsContainer)
+export default connect(mapStateToProps)(SettingsContainer)
