@@ -19,7 +19,7 @@ export class YourRideOffer extends React.Component {
 
   renderLine = (text, icon) => {
     return (
-      <View style={Styles.line} >
+      <View style={Styles.line}>
         <Icon name={icon} style={Styles.icon} />
         <Text rkCardText>{text}</Text>
       </View>
@@ -38,12 +38,27 @@ export class YourRideOffer extends React.Component {
       <TouchableOpacity onPress={() => this.onPress()}>
         <RkCard>
           <View rkCardContent>
-            { this.renderLine(origin, 'radio-button-unchecked') }
-            { this.renderLine(destination, 'radio-button-unchecked') }
-          </View>
-          <View rkCardContent>
-            { this.renderLine(days, 'today') }
-            { this.renderLine(hours, 'schedule') }
+            <View style={Styles.line}>
+              <Text rkCardText>
+                {'Você está oferencendo carona'}
+              </Text>
+              <View style={Styles.line}>
+                <Text rkCardText>
+                  {`De: ${origin}`}
+                </Text>
+              </View>
+              <Text rkCardText>
+                {`Para: ${destination}`}
+              </Text>
+            </View>
+            <Text rkCardText>
+              {`Em: ${days}`}
+            </Text>
+            <View style={Styles.line}>
+              <Text rkCardText>
+                {`As: ${hours}`}
+              </Text>
+            </View>
           </View>
           <Icon
             name='delete-forever'

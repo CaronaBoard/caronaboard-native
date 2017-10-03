@@ -2,14 +2,13 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { FlatList } from 'react-native'
 import React, { Component } from 'react'
-import Icon from 'react-native-vector-icons/MaterialIcons'
 
-import { Ride } from '../components/Ride'
 import { alert } from '../../../navigation/Alert'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
 import { removeRideRequest } from '../../../services/firebase/database/RideRequest'
 import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 import { fetchYourRideRequests } from '../../../redux/actions/async/RideRequestActions'
+import { YourRideRequest } from '../components/YourRideRequest'
 
 export const INITIAL_STATE = {
   loading: false
@@ -43,21 +42,6 @@ export class YourRideRequestsScreen extends Component {
     }
   }
 
-  renderDeleteIcon = () => {
-    const style = {
-      alignSelf: 'flex-end'
-    }
-
-    return (
-      <Icon
-        name='delete-forever'
-        size={30}
-        color='#900'
-        style={style}
-      />
-    )
-  }
-
   onPressRide = (props) => {
     const { rideRequestsMap } = this.props
     const { rideId } = props.ride
@@ -71,7 +55,7 @@ export class YourRideRequestsScreen extends Component {
         <FlatList
           data={this.props.yourRideRequests}
           keyExtractor={({rideId}) => rideId}
-          renderItem={({ item }) => <Ride ride={item} onPress={this.onPressRide} icon={this.renderDeleteIcon()} />}
+          renderItem={({ item }) => <YourRideRequest ride={item} onPress={this.onPressRide} />}
         />
       </LoadingSpinnerView>
     )
