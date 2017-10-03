@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import Styles from './styles/Ride.style'
-import Icon from 'react-native-vector-icons/MaterialIcons'
 import { RkText } from 'react-native-ui-kitten'
 import { RidePropType } from '../types'
 import { GradientButton } from '../../shared/components'
@@ -23,15 +22,6 @@ export class NewRideRequest extends Component {
     this.setState({loading: true})
     await this.props.saveRideRequest(rideId)
     this.setState({loading: false})
-  }
-
-  renderLine (subTitle, icon) {
-    return (
-      <View style={Styles.line} >
-        <Icon name={icon} style={Styles.icon} />
-        <Text rkCardText>{subTitle}</Text>
-      </View>
-    )
   }
 
   render () {

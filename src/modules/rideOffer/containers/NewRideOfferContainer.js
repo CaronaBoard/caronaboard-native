@@ -24,9 +24,9 @@ export class NewRideOfferContainer extends Component {
     try {
       await saveRideOffer(rideOffer, this.props.userId)
       await updateYourOffers(userId)
-      alert('Success')
+      alert('Oferta de carona registrada com sucesso')
     } catch (error) {
-      alert('Error')
+      alert('Aconteceu um erro inesperado, poderia tentar novamente?')
     }
   }
 
