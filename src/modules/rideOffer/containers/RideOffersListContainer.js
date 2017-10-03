@@ -35,12 +35,19 @@ export class RideList extends Component {
     }
   }
 
-  async componentDidUpdate (prevProps) {
+  async componentDidMount () {
     const { userId, fetchRides } = this.props
-    if (userId && prevProps.userId !== userId) {
+    if (userId) {
       this.setState({loading: true})
       await fetchRides()
       this.setState({loading: false})
+    }
+  }
+
+  async componentDidUpdate (prevProps) {
+    const { userId } = this.props
+    if (userId && prevProps.userId !== userId) {
+      await this.componentDidMount()
     }
   }
 

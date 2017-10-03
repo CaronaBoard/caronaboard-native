@@ -31,9 +31,12 @@ export class YourRideRequestsScreen extends Component {
   }
 
   async componentDidMount () {
-    this.setState({loading: true})
-    await this.props.updateYourRequests(this.props.uid)
-    this.setState({loading: false})
+    const { uid } = this.props
+    if (uid) {
+      this.setState({loading: true})
+      await this.props.updateYourRequests()
+      this.setState({loading: false})
+    }
   }
 
   async componentDidUpdate (prevProps) {
