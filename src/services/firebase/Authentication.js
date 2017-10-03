@@ -44,3 +44,7 @@ export const sendVerificationEmail = async (user) => {
 export const forgotPassword = async (email) => {
   return auth.sendPasswordResetEmail(email)
 }
+
+export const sendPasswordResetEmail = async (email: string) => {
+  return auth.sendPasswordResetEmail(email)
+}
