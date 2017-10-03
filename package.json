@@ -28,6 +28,7 @@
     "react-native-action-button": "^2.8.0",
     "react-native-config": "^0.5.0",
     "react-native-easy-toast": "^1.0.6",
+    "react-native-i18n": "^2.0.6",
     "react-native-linear-gradient": "^2.1.0",
     "react-native-navigation": "^1.1.128",
     "react-native-ui-kitten": "^2.0.1",

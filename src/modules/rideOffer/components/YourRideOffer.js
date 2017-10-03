@@ -1,4 +1,5 @@
 import React from 'react'
+import i18n from 'react-native-i18n'
 import PropTypes from 'prop-types'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { View, Text, TouchableOpacity } from 'react-native'
@@ -17,15 +18,6 @@ export class YourRideOffer extends React.Component {
     this.props.onPress(this.props.ride)
   }
 
-  renderLine = (text, icon) => {
-    return (
-      <View style={Styles.line}>
-        <Icon name={icon} style={Styles.icon} />
-        <Text rkCardText>{text}</Text>
-      </View>
-    )
-  }
-
   render () {
     const {
       origin,
@@ -40,7 +32,7 @@ export class YourRideOffer extends React.Component {
           <View rkCardContent>
             <View style={Styles.line}>
               <Text rkCardText>
-                {'Você está oferencendo carona'}
+                {i18n.t('OFFERING_RIDE')}
               </Text>
               <View style={Styles.line}>
                 <Text rkCardText>
