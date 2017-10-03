@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
-import { FlatList, View } from 'react-native'
+import { FlatList } from 'react-native'
 
 import { alert } from '../../../navigation/Alert'
 import { RideOffer } from '../components/RideOffer'
@@ -13,6 +13,7 @@ import {
   removeRideOffer
 } from '../../../services/firebase/database/RideOffer'
 import { updateYourRideOffers } from '../../../redux/actions/sync/RideOfferActions'
+import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 
 export class YourRideOffersScreen extends Component {
   static propTypes = {
@@ -20,6 +21,10 @@ export class YourRideOffersScreen extends Component {
     uid: PropTypes.string.isRequired,
     updateYourOffers: PropTypes.func.isRequired,
     yourOffers: PropTypes.array.isRequired
+  }
+
+  state = {
+    loading: false
   }
 
   constructor (props) {
@@ -30,8 +35,10 @@ export class YourRideOffersScreen extends Component {
   async componentDidUpdate (prevProps) {
     const { uid, updateYourOffers } = this.props
     if (uid && prevProps.uid !== uid) {
+      this.setState({loading: true})
       const rides = await getUserRideOffers(uid)
       updateYourOffers(rides)
+      this.setState({loading: false})
     }
   }
 
@@ -46,7 +53,7 @@ export class YourRideOffersScreen extends Component {
 
   render () {
     return (
-      <View style={{flex: 1}}>
+      <LoadingSpinnerView isLoading={this.state.loading}>
         <FlatList
           data={this.props.yourOffers}
           keyExtractor={item => item.rideId}
@@ -56,8 +63,7 @@ export class YourRideOffersScreen extends Component {
           icon='md-create'
           onPress={() => this.pushRideRequestScreen()}
         />
-      </View>
-
+      </LoadingSpinnerView>
     )
   }
 }

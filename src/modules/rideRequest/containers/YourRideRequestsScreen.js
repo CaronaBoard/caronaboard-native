@@ -13,10 +13,12 @@ import {
   removeDuplicatedRequests,
   removeRideRequest
 } from '../../../services/firebase/database/RideRequest'
+import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 
 export const INITIAL_STATE = {
   rides: [],
-  rideRequestsMap: {}
+  rideRequestsMap: {},
+  loading: false
 }
 
 export class YourRideOffersScreen extends Component {
@@ -33,11 +35,13 @@ export class YourRideOffersScreen extends Component {
   }
 
   async componentDidMount () {
+    this.setState({loading: true})
     const rideRequests = await getUserRideRequests(this.props.uid)
     const rideRequestsMap = await removeDuplicatedRequests(rideRequests)
     const rideOffersPromises = rideRequests.map(({ rideId }) => findRideOfferById(rideId))
     const rides = await Promise.all(rideOffersPromises)
     this.setState({rides, rideRequestsMap})
+    this.setState({loading: false})
   }
 
   async componentDidUpdate (prevProps) {
@@ -70,11 +74,13 @@ export class YourRideOffersScreen extends Component {
 
   render () {
     return (
-      <FlatList
-        data={this.state.rides}
-        keyExtractor={({rideId}) => rideId}
-        renderItem={({ item }) => <Ride ride={item} onPress={this.onPressRide} icon={this.renderDeleteIcon()} />}
-      />
+      <LoadingSpinnerView isLoading={this.state.loading}>
+        <FlatList
+          data={this.state.rides}
+          keyExtractor={({rideId}) => rideId}
+          renderItem={({ item }) => <Ride ride={item} onPress={this.onPressRide} icon={this.renderDeleteIcon()} />}
+        />
+      </LoadingSpinnerView>
     )
   }
 }
