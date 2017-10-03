@@ -8,7 +8,7 @@ export * from './RideOffer'
 
 let database
 
-export const initializeDatabaseModule = (module) => {
+export const initializeDatabaseModule = module => {
   database = module
 }
 

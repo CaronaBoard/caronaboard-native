@@ -2,31 +2,27 @@ import {
   signUp,
   checkEmailRegistration,
   signIn,
-  sendVerificationEmail, initializeAuthModule
+  sendVerificationEmail,
+  initializeAuthModule
 } from '../../../../src/services/firebase/Authentication'
 import { firebaseUserFixture } from '../../../resources/fixtures/firebase'
+import { initializeDatabaseModule } from '../../../../src/services/firebase/database/index'
+import { authMock, databaseMock, mockCreateUser, mockSignInUser, mockUpdate } from '../../../resources/mocks/firebase'
 
 describe('Firebase authentication service', () => {
   const email = 'new@user.com'
   const password = 'pass123'
-  const mockCreateUser = jest.fn(() => Promise.resolve(firebaseUserFixture))
-  const mockSignInUser = jest.fn(() => Promise.resolve(firebaseUserFixture))
-  const authMock = {
-    signInWithEmailAndPassword: mockSignInUser,
-    createUserWithEmailAndPassword: mockCreateUser,
-    fetchProvidersForEmail: jest.fn(),
-    currentUser: { uid: '12345' },
-    setPersistence: jest.fn()
-  }
 
   beforeAll(() => {
     initializeAuthModule(authMock)
+    initializeDatabaseModule(databaseMock)
   })
 
   it('Should register new user and send a verification mail', async () => {
     await signUp(email, password)
     expect(mockCreateUser).toHaveBeenCalledWith(email, password)
     expect(firebaseUserFixture.sendEmailVerification).toHaveBeenCalledWith()
+    expect(mockUpdate).toHaveBeenCalledWith({ name: email, uid: firebaseUserFixture.uid })
   })
 
   it('Should sign in user with a verified email', async () => {
