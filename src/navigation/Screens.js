@@ -1,6 +1,6 @@
 import SignUpScreen from '../modules/authentication/containers/SignUpScreen'
 import ForgotPasswordScreen from '../modules/authentication/containers/ForgotPasswordScreen'
-import ProfileScreen from '../modules/authentication/containers/ProfileScreen'
+import ProfileScreen from '../modules/settings/containers/ProfileScreen'
 import RideList from '../modules/rideOffer/containers/RideOffersListContainer'
 import RideOffer from '../modules/rideOffer/containers/NewRideOfferContainer'
 import RideRequest from '../modules/rideRequest/containers/NewRideRequestContainer'

@@ -5,10 +5,10 @@ import { connect } from 'react-redux'
 import { View, TouchableOpacity } from 'react-native'
 import { RkText, RkChoice, RkChoiceGroup } from 'react-native-ui-kitten'
 import type { ProfileType } from '../../../services/firebase/types'
-import { ProfilePropType } from '../types'
+import { ProfilePropType } from '../../authentication/types/index'
 
-import { TextInput, GradientButton } from '../../shared/components'
-import { saveProfileFirebase } from '../../../redux/actions'
+import { TextInput, GradientButton } from '../../shared/components/index'
+import { saveProfileFirebase } from '../../../redux/actions/index'
 import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 
 export const CONTACT_OPTIONS = ['Whatsapp', 'Telegram']
