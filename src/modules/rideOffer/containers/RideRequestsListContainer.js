@@ -3,11 +3,10 @@ import { connect } from 'react-redux'
 import { ListView } from 'react-native'
 import React, { Component } from 'react'
 
-import { RidePropType } from '../types'
-import { Ride } from '../components/Ride'
-import styles from './styles/RideList.style'
+import { RidePropType } from '../../rideRequest/types/index'
+import { Ride } from '../../rideRequest/components/Ride'
 import { screens } from '../../../navigation/Screens'
-import { fetchAllRideOffers } from '../../../redux/actions'
+import { fetchAllRideOffers } from '../../../redux/actions/index'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
 
 export class RideList extends Component {
@@ -46,7 +45,6 @@ export class RideList extends Component {
   render () {
     return (
       <ListView
-        style={styles.container}
         dataSource={this.state.dataSource}
         renderRow={(ride) => <Ride ride={ride} onPress={this.onPress} />}
         enableEmptySections
