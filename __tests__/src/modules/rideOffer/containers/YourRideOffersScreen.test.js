@@ -5,6 +5,8 @@ import { profileFixture } from '../../../../resources/fixtures/user'
 
 const props = {
   uid: profileFixture.uid,
+  updateYourOffers: jest.fn(),
+  yourOffers: [],
   navigator: {
     setOnNavigatorEvent: jest.fn()
   }

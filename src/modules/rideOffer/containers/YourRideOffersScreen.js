@@ -12,19 +12,15 @@ import {
   getUserRideOffers,
   removeRideOffer
 } from '../../../services/firebase/database/RideOffer'
-
-// TODO: This should've be on redux
-export const INITIAL_STATE = {
-  rides: []
-}
+import { updateYourRideOffers } from '../../../redux/actions/sync/RideOfferActions'
 
 export class YourRideOffersScreen extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
-    uid: PropTypes.string.isRequired
+    uid: PropTypes.string.isRequired,
+    updateYourOffers: PropTypes.func.isRequired,
+    yourOffers: PropTypes.array.isRequired
   }
-
-  state = INITIAL_STATE
 
   constructor (props) {
     super(props)
@@ -32,10 +28,10 @@ export class YourRideOffersScreen extends Component {
   }
 
   async componentDidUpdate (prevProps) {
-    const { uid } = this.props
+    const { uid, updateYourOffers } = this.props
     if (uid && prevProps.uid !== uid) {
       const rides = await getUserRideOffers(uid)
-      this.setState({rides})
+      updateYourOffers(rides)
     }
   }
 
@@ -52,7 +48,7 @@ export class YourRideOffersScreen extends Component {
     return (
       <View style={{flex: 1}}>
         <FlatList
-          data={this.state.rides}
+          data={this.props.yourOffers}
           keyExtractor={item => item.rideId}
           renderItem={({ item }) => <RideOffer ride={item} onPress={this.onPressRide} />}
         />
@@ -66,10 +62,17 @@ export class YourRideOffersScreen extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    uid: state.auth.profile.uid
+    uid: state.auth.profile.uid,
+    yourOffers: state.ride.yourOffers
   }
 }
 
-export default connect(mapStateToProps)(YourRideOffersScreen)
+const mapDispatchToProps = dispatch => {
+  return {
+    updateYourOffers: rides => dispatch(updateYourRideOffers(rides))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(YourRideOffersScreen)
