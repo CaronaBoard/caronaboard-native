@@ -12,6 +12,7 @@ import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 import { fetchYourRideOffers } from '../../../redux/actions/async/RideOfferActions'
 import { YourRideOffer } from '../components/YourRideOffer'
 import ValidatedScreen from '../../shared/containers/ValidatedScreen'
+import { getActiveGroup } from '../../../services/firebase/database/Groups'
 
 export class YourRideOffersScreen extends Component {
   static propTypes = {
@@ -32,7 +33,7 @@ export class YourRideOffersScreen extends Component {
 
   async componentDidMount () {
     const {uid, updateYourOffers} = this.props
-    if (uid) {
+    if (uid && getActiveGroup()) {
       this.setState({loading: true})
       await updateYourOffers(uid)
       this.setState({loading: false})

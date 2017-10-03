@@ -10,6 +10,7 @@ import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 import { fetchYourRideRequests } from '../../../redux/actions/async/RideRequestActions'
 import { YourRideRequest } from '../components/YourRideRequest'
 import ValidatedScreen from '../../shared/containers/ValidatedScreen'
+import { getActiveGroup } from '../../../services/firebase/database/Groups'
 
 export const INITIAL_STATE = {
   loading: false
@@ -33,7 +34,7 @@ export class YourRideRequestsScreen extends Component {
 
   async componentDidMount () {
     const { uid } = this.props
-    if (uid) {
+    if (uid && getActiveGroup()) {
       this.setState({loading: true})
       await this.props.updateYourRequests(uid)
       this.setState({loading: false})

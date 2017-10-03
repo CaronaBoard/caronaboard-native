@@ -10,6 +10,7 @@ import { fetchAllRideOffers } from '../../../redux/actions'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
 import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 import ValidatedScreen from '../../shared/containers/ValidatedScreen'
+import { getActiveGroup } from '../../../services/firebase/database/Groups'
 
 export class RideList extends Component {
   static propTypes = {
@@ -38,7 +39,7 @@ export class RideList extends Component {
 
   async componentDidMount () {
     const { userId, fetchRides } = this.props
-    if (userId) {
+    if (userId && getActiveGroup()) {
       this.setState({loading: true})
       await fetchRides()
       this.setState({loading: false})
