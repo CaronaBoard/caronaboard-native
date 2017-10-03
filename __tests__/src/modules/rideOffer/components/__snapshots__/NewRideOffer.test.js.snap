@@ -38,32 +38,43 @@ exports[`<NewRideOffer /> Should have a snapshot 1`] = `
       <TextInput
         autoCapitalize="none"
         onChangeText={[Function]}
-        placeholder="ORIGIN"
+        placeholder="ORIGEM"
         rkType="rounded"
       />
       <TextInput
         autoCapitalize="none"
         onChangeText={[Function]}
-        placeholder="DESTINATION"
+        placeholder="DESTINO"
         rkType="rounded"
       />
       <TextInput
         autoCapitalize="none"
         onChangeText={[Function]}
-        placeholder="DAYS"
+        placeholder="DIAS"
         rkType="rounded"
       />
       <TextInput
         autoCapitalize="none"
         onChangeText={[Function]}
-        placeholder="HOUR"
+        placeholder="HORAS"
         rkType="rounded"
       />
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <GradientButton
+          onPress={[Function]}
+          rkType="large"
+          text="Oferecer carona"
+        />
+      </View>
     </View>
-    <Button
-      onPress={[Function]}
-      text="Offer Ride"
-    />
   </View>
 </LoadingSpinnerView>
 `;

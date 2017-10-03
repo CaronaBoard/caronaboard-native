@@ -33,7 +33,7 @@ export class SignInScreen extends Component {
   render () {
     return (
       <LoginForm
-        buttonText='SIGN IN'
+        buttonText='ENTRAR'
         onButtonPress={this.onPress}
         toast={this.props.alert}
         footer={this.renderFooter}

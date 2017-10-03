@@ -2,7 +2,7 @@
 
 exports[`<SignInScreen /> Should have a snapshot 1`] = `
 <LoginForm
-  buttonText="SIGN IN"
+  buttonText="ENTRAR"
   footer={[Function]}
   onButtonPress={[Function]}
   toast={

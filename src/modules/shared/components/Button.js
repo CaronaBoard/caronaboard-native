@@ -6,7 +6,9 @@ import Styles from './styles/Button.style'
 
 export const Button = (props) => {
   return (
-    <RkButton innerStyle={[Styles.buttonFontSize]}
+    <RkButton
+      innerStyle={[Styles.buttonFontSize]}
+      style={Styles.button}
       rkType='circle outline medium'
       onPress={props.onPress}>
       { props.text }

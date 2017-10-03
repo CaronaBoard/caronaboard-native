@@ -23,14 +23,14 @@ export class Settings extends React.Component {
       <ScrollView style={styles.container}>
         <View style={styles.section}>
           <View style={[styles.row, styles.heading]}>
-            <RkText rkType='primary header6'>PROFILE SETTINGS</RkText>
+            <RkText rkType='primary header6'>CONFIGURAÇŌES DE PERFIL</RkText>
           </View>
           <View style={styles.row}>
             <TouchableOpacity
               style={styles.rowButton}
               onPress={() => this.props.openProfile()}
             >
-              <RkText rkType='header6'>Edit Profile</RkText>
+              <RkText rkType='header6'>Editar perfil</RkText>
             </TouchableOpacity>
           </View>
           <View style={styles.row}>
@@ -38,20 +38,20 @@ export class Settings extends React.Component {
               style={styles.rowButton}
               onPress={() => this.props.resetPassword()}
             >
-              <RkText rkType='header6'>Reset Password</RkText>
+              <RkText rkType='header6'>Trocar senha</RkText>
             </TouchableOpacity>
           </View>
         </View>
         <View style={styles.section}>
           <View style={[styles.row, styles.heading]}>
-            <RkText rkType='primary header6'>USER SETTINGS</RkText>
+            <RkText rkType='primary header6'>CONFIGURAÇŌES DE USUÁRIO</RkText>
           </View>
           <View style={styles.row}>
             <TouchableOpacity
               style={styles.rowButton}
               onPress={() => this.props.eraseUserData()}
             >
-              <RkText rkType='header6'>Erase User Data</RkText>
+              <RkText rkType='header6'>Apagar dados de usuário</RkText>
             </TouchableOpacity>
           </View>
           <View style={styles.row}>
@@ -59,7 +59,7 @@ export class Settings extends React.Component {
               style={styles.rowButton}
               onPress={() => this.props.logOut()}
             >
-              <RkText rkType='header6'>Logout</RkText>
+              <RkText rkType='header6'>Deslogar</RkText>
             </TouchableOpacity>
           </View>
         </View>

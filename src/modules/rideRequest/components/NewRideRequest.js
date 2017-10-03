@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import Styles from './styles/Ride.style'
-import Icon from 'react-native-vector-icons/MaterialIcons'
-import { RkCard } from 'react-native-ui-kitten'
+import { RkText } from 'react-native-ui-kitten'
 import { RidePropType } from '../types'
 import { GradientButton } from '../../shared/components'
 import styles from './styles/RideRequest.style'
@@ -25,15 +24,6 @@ export class NewRideRequest extends Component {
     this.setState({loading: false})
   }
 
-  renderLine (subTitle, icon) {
-    return (
-      <View style={Styles.line} >
-        <Icon name={icon} style={Styles.icon} />
-        <Text rkCardText>{subTitle}</Text>
-      </View>
-    )
-  }
-
   render () {
     const {
       origin,
@@ -47,29 +37,32 @@ export class NewRideRequest extends Component {
     return (
       <LoadingSpinnerView isLoading={this.state.loading} style={styles.flexible}>
         <View style={styles.container}>
-          <View style={styles.inputTextsContainer}>
-            <View>
-              <RkCard>
-                <View rkCardContent>
-                  <Text rkCardTitle>{destination}</Text>
-                  { this.renderLine(origin, 'radio-button-unchecked') }
-                  { this.renderLine(destination, 'radio-button-unchecked') }
-                </View>
-                <View rkCardContent>
-                  { this.renderLine(days, 'today') }
-                  { this.renderLine(hours, 'schedule') }
-                  { this.renderLine(profile.name, 'directions-car') }
-                </View>
-              </RkCard>
+          <View>
+            <View rkCardContent>
+              <View style={Styles.line} >
+                <RkText rkType='header'>{`${profile.name} está oferecendo uma carona`}</RkText>
+              </View>
+              <View style={Styles.line} >
+                <RkText rkType='info'>{`De: ${origin}`}</RkText>
+              </View>
+              <View style={Styles.line} >
+                <RkText rkType='info'>{`Para: ${destination}`}</RkText>
+              </View>
+              <View style={Styles.line} >
+                <RkText rkType='info'>{`Em: ${days}`}</RkText>
+              </View>
+              <View style={Styles.line} >
+                <RkText rkType='info'>{`As: ${hours}`}</RkText>
+              </View>
             </View>
           </View>
-        </View>
-        <View style={styles.centralized}>
-          <GradientButton
-            rkType='large'
-            text={'Ask for a ride'}
-            onPress={() => this.onPress(rideId)}
-          />
+          <View style={styles.centralized}>
+            <GradientButton
+              rkType='large'
+              text={'Pedir Carona'}
+              onPress={() => this.onPress(rideId)}
+            />
+          </View>
         </View>
       </LoadingSpinnerView>
     )

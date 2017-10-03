@@ -11,7 +11,6 @@ export default StyleSheet.create({
     flex: 1
   },
   inputTextsContainer: {
-    minHeight: 185 * 2
   },
   centralized: {
     flexDirection: 'row',

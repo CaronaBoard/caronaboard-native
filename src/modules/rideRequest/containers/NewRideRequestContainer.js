@@ -18,9 +18,9 @@ export class RideRequestScreen extends Component {
     try {
       await saveRideRequest(rideId, this.props.userId)
       await updateYourRequests(userId)
-      alert('Success')
+      alert('Pedido de carona registrada com sucesso')
     } catch (error) {
-      alert('Error')
+      alert('Aconteceu um erro inesperado, poderia tentar novamente?')
     }
   }
 

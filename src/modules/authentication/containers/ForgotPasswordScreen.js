@@ -60,14 +60,13 @@ export class ForgotPasswordScreen extends Component {
         <View style={styles.header}>
           <Image style={styles.image} source={require('../../../assets/images/caronaboard-logo-azul.png')} />
           <RkText rkType='logo h0'>Caronaboard</RkText>
-          <RkText rkType='light h1'>Awesome Slogan</RkText>
         </View>
 
         <RkTextInput
           onChangeText={(email) => { this.setState({email}) }}
           key='email-input'
           rkType='rounded'
-          placeholder='Username'
+          placeholder='Email'
           autoCapitalize='none'
           value={this.state.email}
           />
@@ -75,7 +74,7 @@ export class ForgotPasswordScreen extends Component {
           <GradientButton
             rkType='large'
             style={styles.loginButton}
-            text='Send'
+            text='Redefinir senha'
             onPress={() => resetPassword(this.state.email)}
           />
         </View>

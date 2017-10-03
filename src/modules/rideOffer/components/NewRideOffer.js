@@ -4,8 +4,9 @@ import { View } from 'react-native'
 import { RkText } from 'react-native-ui-kitten'
 
 import styles from './styles/YourRideOffer.style'
-import { Button, TextInput } from '../../shared/components/index'
+import { TextInput } from '../../shared/components/index'
 import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
+import { GradientButton } from '../../shared/components/GradientButton'
 
 export const INITIAL_STATE = {
   origin: '',
@@ -37,12 +38,18 @@ export class NewRideOffer extends React.PureComponent {
             Ride Offer
           </RkText>
           <View style={styles.inputTextsContainer}>
-            <TextInput placeholder='ORIGIN' onChangeText={(origin) => this.setState({origin})} />
-            <TextInput placeholder='DESTINATION' onChangeText={(destination) => this.setState({destination})} />
-            <TextInput placeholder='DAYS' onChangeText={(days) => this.setState({days})} />
-            <TextInput placeholder='HOUR' onChangeText={(hours) => this.setState({hours})} />
+            <TextInput placeholder='ORIGEM' onChangeText={(origin) => this.setState({origin})} />
+            <TextInput placeholder='DESTINO' onChangeText={(destination) => this.setState({destination})} />
+            <TextInput placeholder='DIAS' onChangeText={(days) => this.setState({days})} />
+            <TextInput placeholder='HORAS' onChangeText={(hours) => this.setState({hours})} />
+            <View style={styles.centralized}>
+              <GradientButton
+                rkType='large'
+                text={'Oferecer carona'}
+                onPress={this.onPress}
+              />
+            </View>
           </View>
-          <Button text='Offer Ride' onPress={this.onPress} />
         </View>
       </LoadingSpinnerView>
     )

@@ -9,6 +9,7 @@ import { ProfilePropType } from '../types'
 
 import { TextInput, GradientButton } from '../../shared/components'
 import { saveProfileFirebase } from '../../../redux/actions'
+import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 
 export const CONTACT_OPTIONS = ['Whatsapp', 'Telegram']
 export const INITIAL_STATE: ProfileType = {
@@ -43,7 +44,8 @@ export class ProfileScreen extends Component {
     this.setState({loading: true})
 
     try {
-      this.props.saveProfile(this.state.profile)
+      await this.props.saveProfile(this.state.profile)
+      alert('Perfil Atualizado com sucesso!')
     } catch (error) {
       console.error(error)
     }
@@ -72,40 +74,42 @@ export class ProfileScreen extends Component {
     const { contact, name } = profile
 
     return (
-      <View style={Styles.flexible}>
-        <View style={Styles.container}>
-          <RkText style={Styles.title}>
-            PROFILE
-          </RkText>
-          <View style={Styles.inputTextsContainer}>
-            <TextInput
-              placeholder='Your name'
-              value={name}
-              onChangeText={name => { this.setState({profile: {...profile, name}}) }}
-            />
+      <LoadingSpinnerView isLoading={this.state.loading} style={Styles.flexible}>
+        <View style={Styles.flexible}>
+          <View style={Styles.container}>
+            <RkText style={Styles.title}>
+              PROFILE
+            </RkText>
+            <View style={Styles.inputTextsContainer}>
+              <TextInput
+                placeholder='Seu nome'
+                value={name}
+                onChangeText={name => { this.setState({profile: {...profile, name}}) }}
+              />
+            </View>
+            <RkChoiceGroup
+              radio
+              rkType='clear'
+              onChange={index => this.onContactOptionSelected(CONTACT_OPTIONS[index])}>
+              {CONTACT_OPTIONS.map(this.renderOption)}
+            </RkChoiceGroup>
+            <View style={Styles.inputTextsContainer}>
+              <TextInput
+                placeholder='Número'
+                value={contact.value}
+                onChangeText={value => { this.setState({profile: {...profile, contact: {...contact, value}}}) }}
+              />
+            </View>
           </View>
-          <RkChoiceGroup
-            radio
-            rkType='clear'
-            onChange={index => this.onContactOptionSelected(CONTACT_OPTIONS[index])}>
-            {CONTACT_OPTIONS.map(this.renderOption)}
-          </RkChoiceGroup>
-          <View style={Styles.inputTextsContainer}>
-            <TextInput
-              placeholder='Number'
-              value={contact.value}
-              onChangeText={value => { this.setState({profile: {...profile, contact: {...contact, value}}}) }}
+          <View style={Styles.centralized}>
+            <GradientButton
+              rkType='large'
+              text={'SAVE'}
+              onPress={this.onButtonSubmit}
             />
           </View>
         </View>
-        <View style={Styles.centralized}>
-          <GradientButton
-            rkType='large'
-            text={'SAVE'}
-            onPress={this.onButtonSubmit}
-          />
-        </View>
-      </View>
+      </LoadingSpinnerView>
     )
   }
 }

@@ -17,7 +17,7 @@ exports[`<SignInFooter /> Should have a snapshot 1`] = `
       <RkText
         rkType="header6"
       >
-        Forgot your password?
+        Esqueceu sua senha?
       </RkText>
     </RkButton>
   </View>
@@ -32,7 +32,7 @@ exports[`<SignInFooter /> Should have a snapshot 1`] = `
     <RkText
       rkType="primary3"
     >
-      Don’t have an account?
+      Ainda nāo tem conta?
     </RkText>
     <RkButton
       onPress={[Function]}
@@ -41,7 +41,7 @@ exports[`<SignInFooter /> Should have a snapshot 1`] = `
       <RkText
         rkType="header6"
       >
-         Sign up now
+         Cadastre-se
       </RkText>
     </RkButton>
   </View>

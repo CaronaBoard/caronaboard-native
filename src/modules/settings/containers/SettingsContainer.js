@@ -29,8 +29,9 @@ class SettingsContainer extends Component {
 
   eraseUserData = () => {
     destructiveAlert(
-      'If you confirm all your personal data will be erased from outr system,',
-      () => alert('Feature not implemented :P')
+      'Se voce confirmar, TODOS seus dados registrados' +
+      ' no carona board serāo PERMANENTEMENTE apagados',
+      () => alert('Ainda nāo implementamos isto. :P')
     )
   }
 
@@ -41,7 +42,7 @@ class SettingsContainer extends Component {
   resetPassword = async () => {
     try {
       await sendPasswordResetEmail(this.props.user.email)
-      alert('Check your email box, an email to redefine you password was sent')
+      alert('Verifique sua caixa de mensagem, voce receberá um email em instantes')
     } catch (error) {
       alert(error)
     }

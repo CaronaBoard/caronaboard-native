@@ -43,19 +43,24 @@ exports[`<LoginForm /> Should have a snapshot 1`] = `
       <RkText
         rkType="light h1"
       >
-        Awesome Slogan
+        Seu carro não precisa
+      </RkText>
+      <RkText
+        rkType="light h1"
+      >
+        levar apenas você
       </RkText>
     </View>
     <TextInput
       autoCapitalize="none"
       onChangeText={[Function]}
-      placeholder="Username"
+      placeholder="Email"
       rkType="rounded"
     />
     <TextInput
       autoCapitalize="none"
       onChangeText={[Function]}
-      placeholder="Password"
+      placeholder="Senha"
       rkType="rounded"
       secureTextEntry={true}
     />

@@ -11,6 +11,11 @@ exports[`<Button /> Should have a snapshot 1`] = `
   }
   onPress={[Function]}
   rkType="circle outline medium"
+  style={
+    Object {
+      "alignSelf": "center",
+    }
+  }
 >
   texto
 </RkButton>
