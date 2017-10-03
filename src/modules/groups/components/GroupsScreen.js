@@ -8,13 +8,14 @@ import {
 import PropTypes from 'prop-types'
 
 import { styles } from './styles/GroupsScreen.style'
-import { getActiveGroup } from '../../../services/firebase/database/Groups'
 
 export class GroupsScreen extends React.Component {
   static propTypes = {
     uid: PropTypes.string.isRequired,
     groups: PropTypes.array.isRequired,
-    joinGroup: PropTypes.func.isRequired
+    joinGroup: PropTypes.func.isRequired,
+    changeGroup: PropTypes.func.isRequired,
+    activeGroup: PropTypes.string.isRequired
   }
 
   renderGroupList = (title, group, onPress = () => null) => {
@@ -40,8 +41,7 @@ export class GroupsScreen extends React.Component {
   }
 
   render () {
-    const {groups, uid, joinGroup} = this.props
-    const activeGroup = getActiveGroup()
+    const {groups, uid, joinGroup, changeGroup, activeGroup} = this.props
     const groupsYouBelong = []
 
     groups.forEach(group => {
@@ -64,7 +64,7 @@ export class GroupsScreen extends React.Component {
             </View>
           </View>
         </View>
-        {this.renderGroupList('GRUPOS QUE VOCE PERTENCE', groupsYouBelong)}
+        {this.renderGroupList('GRUPOS QUE VOCE PERTENCE', groupsYouBelong, changeGroup)}
         {this.renderGroupList('TODOS OS GRUPOS', groups, joinGroup)}
       </ScrollView>
     )

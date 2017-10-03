@@ -14,8 +14,8 @@ export const WarningScreen = props => {
       <View style={styles.header}>
         <Image style={styles.image} source={require('../../../assets/images/caronaboard-logo-azul.png')} />
         <RkText rkType='logo h0'>Caronaboard</RkText>
-        <RkText rkType='light h1'>{uid && 'Favor preencher o perfil'}</RkText>
-        <RkText rkType='light h1'>{activeGroups && 'Favor Selecionar um grupo'}</RkText>
+        {!uid ? <RkText rkType='light h1'>Favor preencher o perfil</RkText> : null}
+        {!activeGroups ? <RkText rkType='light h1'>Favor Selecionar um grupo</RkText> : null}
       </View>
     </View>
   )
