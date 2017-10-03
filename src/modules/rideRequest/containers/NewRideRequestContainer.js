@@ -14,10 +14,10 @@ export class RideRequestScreen extends Component {
   }
 
   newRideRequest = async (rideId: string) => {
-    const { updateYourRequests, userId } = this.props
+    const { userId } = this.props
     try {
-      await saveRideRequest(rideId, this.props.userId)
-      await updateYourRequests(userId)
+      await saveRideRequest(rideId, userId)
+      await fetchYourRideRequests(userId)
       alert('Pedido de carona registrada com sucesso')
     } catch (error) {
       alert('Aconteceu um erro inesperado, poderia tentar novamente?')
@@ -39,7 +39,6 @@ const mapStateToProps = (state) => {
     userId: state.auth.userData.uid
   }
 }
-
 const mapDispatchToProps = dispatch => {
   return {
     updateYourRequests: uid => dispatch(fetchYourRideRequests(uid))

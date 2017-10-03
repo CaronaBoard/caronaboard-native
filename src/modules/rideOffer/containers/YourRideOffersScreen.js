@@ -29,12 +29,19 @@ export class YourRideOffersScreen extends Component {
     this.props.navigator.setOnNavigatorEvent(onNavigatorEvent.bind(this))
   }
 
-  async componentDidUpdate (prevProps) {
+  async componentDidMount () {
     const {uid, updateYourOffers} = this.props
-    if (uid && prevProps.uid !== uid) {
+    if (uid) {
       this.setState({loading: true})
       await updateYourOffers(uid)
       this.setState({loading: false})
+    }
+  }
+
+  async componentDidUpdate (prevProps) {
+    const {uid} = this.props
+    if (uid && prevProps.uid !== uid) {
+      await this.componentDidMount()
     }
   }
 
@@ -45,9 +52,16 @@ export class YourRideOffersScreen extends Component {
     })
   }
 
-  onPressRide = (rideId: string) => {
-    const {uid} = this.props.profile
-    alert('Apagar oferta de carona?', () => removeRideOffer(rideId, uid))
+  removeRideOfferCallback = async (rideId) => {
+    const { uid } = this.props
+    await removeRideOffer(rideId, uid)
+    await this.componentDidMount()
+  }
+
+  onPressRide = async (rideId: string) => {
+    alert('Apagar oferta de carona?',
+      () => this.removeRideOfferCallback(rideId)
+    )
   }
 
   render () {

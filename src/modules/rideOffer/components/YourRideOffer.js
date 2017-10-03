@@ -13,29 +13,17 @@ export class YourRideOffer extends React.Component {
     onPress: PropTypes.func.isRequired
   }
 
-  onPress = () => {
-    this.props.onPress(this.props.ride)
-  }
-
-  renderLine = (text, icon) => {
-    return (
-      <View style={Styles.line}>
-        <Icon name={icon} style={Styles.icon} />
-        <Text rkCardText>{text}</Text>
-      </View>
-    )
-  }
-
   render () {
     const {
       origin,
       destination,
       days,
-      hours
+      hours,
+      rideId
     } = this.props.ride
 
     return (
-      <TouchableOpacity onPress={() => this.onPress()}>
+      <TouchableOpacity onPress={() => this.props.onPress(rideId)}>
         <RkCard>
           <View rkCardContent>
             <View style={Styles.line}>
