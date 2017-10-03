@@ -9,6 +9,7 @@ import { RidePropType } from '../../rideRequest/types'
 import { fetchAllRideOffers } from '../../../redux/actions'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
 import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
+import ValidatedScreen from '../../shared/containers/ValidatedScreen'
 
 export class RideList extends Component {
   static propTypes = {
@@ -62,13 +63,15 @@ export class RideList extends Component {
 
   render () {
     return (
-      <LoadingSpinnerView isLoading={this.state.loading}>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={(ride) => <RideOffer ride={ride} onPress={this.onPress} />}
-          enableEmptySections
-        />
-      </LoadingSpinnerView>
+      <ValidatedScreen>
+        <LoadingSpinnerView isLoading={this.state.loading}>
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={(ride) => <RideOffer ride={ride} onPress={this.onPress} />}
+            enableEmptySections
+          />
+        </LoadingSpinnerView>
+      </ValidatedScreen>
     )
   }
 }

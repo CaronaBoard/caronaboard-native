@@ -11,6 +11,7 @@ import { removeRideOffer } from '../../../services/firebase/database/RideOffer'
 import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 import { fetchYourRideOffers } from '../../../redux/actions/async/RideOfferActions'
 import { YourRideOffer } from '../components/YourRideOffer'
+import ValidatedScreen from '../../shared/containers/ValidatedScreen'
 
 export class YourRideOffersScreen extends Component {
   static propTypes = {
@@ -66,17 +67,19 @@ export class YourRideOffersScreen extends Component {
 
   render () {
     return (
-      <LoadingSpinnerView isLoading={this.state.loading}>
-        <FlatList
-          data={this.props.yourOffers}
-          keyExtractor={item => item.rideId}
-          renderItem={({item}) => <YourRideOffer ride={item} onPress={this.onPressRide} />}
-        />
-        <FloatingActionButton
-          icon='md-create'
-          onPress={() => this.pushRideRequestScreen()}
-        />
-      </LoadingSpinnerView>
+      <ValidatedScreen>
+        <LoadingSpinnerView isLoading={this.state.loading}>
+          <FlatList
+            data={this.props.yourOffers}
+            keyExtractor={item => item.rideId}
+            renderItem={({item}) => <YourRideOffer ride={item} onPress={this.onPressRide} />}
+          />
+          <FloatingActionButton
+            icon='md-create'
+            onPress={() => this.pushRideRequestScreen()}
+          />
+        </LoadingSpinnerView>
+      </ValidatedScreen>
     )
   }
 }

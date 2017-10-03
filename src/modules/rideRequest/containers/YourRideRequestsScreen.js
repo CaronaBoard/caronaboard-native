@@ -9,6 +9,7 @@ import { removeRideRequest } from '../../../services/firebase/database/RideReque
 import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 import { fetchYourRideRequests } from '../../../redux/actions/async/RideRequestActions'
 import { YourRideRequest } from '../components/YourRideRequest'
+import ValidatedScreen from '../../shared/containers/ValidatedScreen'
 
 export const INITIAL_STATE = {
   loading: false
@@ -58,13 +59,15 @@ export class YourRideRequestsScreen extends Component {
 
   render () {
     return (
-      <LoadingSpinnerView isLoading={this.state.loading}>
-        <FlatList
-          data={this.props.yourRideRequests}
-          keyExtractor={({rideId}) => rideId}
-          renderItem={({ item }) => <YourRideRequest ride={item} onPress={this.onPressRide} />}
-        />
-      </LoadingSpinnerView>
+      <ValidatedScreen>
+        <LoadingSpinnerView isLoading={this.state.loading}>
+          <FlatList
+            data={this.props.yourRideRequests}
+            keyExtractor={({rideId}) => rideId}
+            renderItem={({ item }) => <YourRideRequest ride={item} onPress={this.onPressRide} />}
+          />
+        </LoadingSpinnerView>
+      </ValidatedScreen>
     )
   }
 }
