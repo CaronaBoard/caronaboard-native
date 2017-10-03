@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import { shallow } from 'enzyme'
-import { RideList } from '../../../../../src/modules/rideOffer/containers/RideRequestsListContainer'
+import { RideList } from '../../../../../src/modules/rideOffer/containers/RideOffersListContainer'
 import { rideOfferFixture } from '../../../../resources/fixtures/ride/offer'
 
 const props = {

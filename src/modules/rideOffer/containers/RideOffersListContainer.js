@@ -8,12 +8,17 @@ import { Ride } from '../../rideRequest/components/Ride'
 import { screens } from '../../../navigation/Screens'
 import { fetchAllRideOffers } from '../../../redux/actions/index'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
+import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 
 export class RideList extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
     rides: PropTypes.arrayOf(RidePropType),
     userId: PropTypes.string.isRequired
+  }
+
+  state = {
+    loading: false
   }
 
   constructor (props) {
@@ -30,8 +35,13 @@ export class RideList extends Component {
     }
   }
 
-  componentDidMount () {
-    this.props.fetchRides()
+  async componentDidUpdate (prevProps) {
+    const { userId, fetchRides } = this.props
+    if (userId && prevProps.userId !== userId) {
+      this.setState({loading: true})
+      await fetchRides()
+      this.setState({loading: false})
+    }
   }
 
   onPress = (props) => {
@@ -44,11 +54,13 @@ export class RideList extends Component {
 
   render () {
     return (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={(ride) => <Ride ride={ride} onPress={this.onPress} />}
-        enableEmptySections
-      />
+      <LoadingSpinnerView isLoading={this.state.loading}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(ride) => <Ride ride={ride} onPress={this.onPress} />}
+          enableEmptySections
+        />
+      </LoadingSpinnerView>
     )
   }
 }
