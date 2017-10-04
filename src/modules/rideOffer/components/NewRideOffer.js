@@ -35,7 +35,7 @@ export class NewRideOffer extends React.PureComponent {
       <LoadingSpinnerView isLoading={this.state.loading} style={styles.flexible}>
         <View style={styles.container}>
           <RkText style={styles.title}>
-            Ride Offer
+            Oferecer Carona
           </RkText>
           <View style={styles.inputTextsContainer}>
             <TextInput placeholder='ORIGEM' onChangeText={(origin) => this.setState({origin})} />

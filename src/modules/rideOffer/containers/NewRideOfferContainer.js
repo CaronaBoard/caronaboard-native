@@ -24,6 +24,10 @@ export class NewRideOfferContainer extends Component {
     try {
       await saveRideOffer(rideOffer, this.props.userId)
       await updateYourOffers(userId)
+      this.props.navigator.pop({
+        animated: true,
+        animationType: 'fade'
+      })
       alert('Oferta de carona registrada com sucesso')
     } catch (error) {
       alert('Aconteceu um erro inesperado, poderia tentar novamente?')
