@@ -24,7 +24,6 @@ export const fetchGroups = async (): Array<GroupType> => {
 }
 
 export const askToJoinGroup = async (group: GroupType, profile: ProfileType) => {
-  console.log(group, 'is ===> group')
   const path = `joinGroupRequests/${group.id}/${profile.uid}`
   await ref(path).update(profile)
 }

@@ -9,6 +9,7 @@ import PropTypes from 'prop-types'
 
 import { styles } from './styles/GroupsScreen.style'
 import { GroupPropType } from '../types'
+import { WarningScreen } from '../../shared/components/WarningScreen.style'
 
 export class GroupsScreen extends React.Component {
   static propTypes = {
@@ -71,6 +72,12 @@ export class GroupsScreen extends React.Component {
         groupsYouBelong.push(group)
       }
     })
+
+    if (!uid) {
+      return (
+        <WarningScreen activeGroup={'Must have profile first'} />
+      )
+    }
 
     return (
       <ScrollView style={styles.container}>
