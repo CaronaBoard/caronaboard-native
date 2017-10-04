@@ -1,10 +1,12 @@
 // @flow
 
+// TODO: Improve this implementation, in case of empty activeGroup application crashes
+
 import { ref } from './'
 import type { GroupType, ProfileType } from '../types'
 import { toGroupsArray } from '../Conversion'
 
-let activeGroup
+let activeGroup = 'twpoa'
 
 export const changeGroup = (groupId: string) => {
   activeGroup = groupId
