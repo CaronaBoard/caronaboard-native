@@ -44,7 +44,7 @@ export class YourRideOffersScreen extends Component {
   async componentDidUpdate (prevProps) {
     const { uid, groupId } = this.props
 
-    if (uid && (prevProps.uid !== uid) || (prevProps.groupId !== groupId)) {
+    if (prevProps.uid !== uid || prevProps.groupId !== groupId) {
       await this.componentDidMount()
     }
   }

@@ -50,7 +50,7 @@ export class RideList extends Component {
 
   async componentDidUpdate (prevProps) {
     const { userId, groupId } = this.props
-    if (userId && (prevProps.userId !== userId) || (prevProps.groupId !== groupId)) {
+    if (prevProps.userId !== userId || prevProps.groupId !== groupId) {
       await this.componentDidMount()
     }
   }
