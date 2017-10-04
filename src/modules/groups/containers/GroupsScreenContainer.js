@@ -47,7 +47,7 @@ class GroupsScreenContainer extends Component {
           uid={this.props.user.uid}
           joinGroup={this.joinGroup}
           changeGroup={this.selectGroup}
-          activeGroup={this.props.group.id}
+          activeGroup={this.props.group}
         />
       </LoadingSpinnerView>
     )
