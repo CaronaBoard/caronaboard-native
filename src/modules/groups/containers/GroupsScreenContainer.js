@@ -11,7 +11,6 @@ import { updateRideGroup } from '../../../redux/actions/sync/RideRequestActions'
 class GroupsScreenContainer extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
     profile: PropTypes.object.isRequired,
     group: PropTypes.object.isRequired,
     updateGroup: PropTypes.func.isRequired
@@ -44,7 +43,7 @@ class GroupsScreenContainer extends Component {
       <LoadingSpinnerView isLoading={this.state.loading}>
         <GroupsScreen
           groups={this.state.groups}
-          uid={this.props.user.uid}
+          uid={this.props.profile.uid}
           joinGroup={this.joinGroup}
           changeGroup={this.selectGroup}
           activeGroup={this.props.group}
@@ -56,7 +55,6 @@ class GroupsScreenContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.auth.userData,
     profile: state.auth.profile,
     group: state.ride.group
   }

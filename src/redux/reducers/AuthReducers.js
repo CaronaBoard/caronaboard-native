@@ -10,7 +10,7 @@ import {
 export const INITIAL_STATE = {
   userData: {
     uid: '',
-    emailVerified: true,
+    emailVerified: false,
     email: '',
     phoneNumber: null
   },

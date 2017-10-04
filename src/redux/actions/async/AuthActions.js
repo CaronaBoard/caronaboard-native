@@ -39,7 +39,7 @@ export function saveProfileFirebase (profile: ProfileType) {
       await saveProfile(profile)
       dispatch(updateProfile(profile))
     } catch (err) {
-      console.log('Error saving profile: ', err)
+      console.error('Error saving profile: ', err)
     }
   }
 }

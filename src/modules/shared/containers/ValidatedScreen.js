@@ -11,10 +11,10 @@ class ValidatedScreen extends Component {
   }
 
   render () {
-    const { uid, children, group } = this.props
+    const { uid, children, group, emailVerified } = this.props
 
     if (!uid || !group.id) {
-      return (<WarningScreen uid={uid} activeGroups={group} />)
+      return (<WarningScreen uid={uid} activeGroups={group} emailVerified={emailVerified} />)
     }
 
     return (
@@ -28,6 +28,7 @@ class ValidatedScreen extends Component {
 const mapStateToProps = (state) => {
   return {
     uid: state.auth.profile.uid,
+    emailVerified: state.auth.userData.emailVerified,
     group: state.ride.group
   }
 }

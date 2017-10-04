@@ -9,6 +9,13 @@ import PropTypes from 'prop-types'
 
 import { styles } from './styles/GroupsScreen.style'
 import { GroupPropType } from '../types'
+import { WarningScreen } from '../../shared/components/WarningScreen.style'
+
+const hardCodedGroup = {
+  'id': 'twpoa',
+  'members': {},
+  'name': 'ThoughtWorks POA'
+}
 
 export class GroupsScreen extends React.Component {
   static propTypes = {
@@ -64,13 +71,19 @@ export class GroupsScreen extends React.Component {
 
   render () {
     const {groups, uid, joinGroup, changeGroup, activeGroup} = this.props
-    const groupsYouBelong = []
+    const groupsYouBelong = [hardCodedGroup]
 
     groups.forEach(group => {
       if (group.members.hasOwnProperty(uid)) {
         groupsYouBelong.push(group)
       }
     })
+
+    if (!uid) {
+      return (
+        <WarningScreen activeGroup={'Must have profile first'} />
+      )
+    }
 
     return (
       <ScrollView style={styles.container}>

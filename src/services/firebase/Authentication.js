@@ -25,7 +25,6 @@ export const signUp = async (email: string, password: string) => {
   const user = await auth.createUserWithEmailAndPassword(email, password)
   await saveProfile({name: email, uid: user.uid, contact: {value: '', kind: ''}})
   await sendVerificationEmail(user)
-  await signOut()
 }
 
 export const signOut = async () => {
@@ -35,10 +34,6 @@ export const signOut = async () => {
 export const checkEmailRegistration = async (email: string) => {
   const providers = await auth.fetchProvidersForEmail(email)
   return providers.length !== 0
-}
-
-export const deleteUser = async (user) => {
-  return user.delete()
 }
 
 export const sendVerificationEmail = async (user) => {
@@ -51,8 +46,4 @@ export const forgotPassword = async (email) => {
 
 export const sendPasswordResetEmail = async (email: string) => {
   return auth.sendPasswordResetEmail(email)
-}
-
-export const getCurrentUser = () => {
-  return auth.currentUser
 }
