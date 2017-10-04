@@ -26,7 +26,7 @@ exports[`<NewRideOffer /> Should have a snapshot 1`] = `
         }
       }
     >
-      Ride Offer
+      Oferecer Carona
     </RkText>
     <View
       style={
