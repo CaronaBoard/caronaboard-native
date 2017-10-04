@@ -3,15 +3,18 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { GroupsScreen } from '../components/GroupsScreen'
-import { askToJoinGroup, fetchGroups } from '../../../services/firebase/database/Groups'
+import { askToJoinGroup, changeGroup, fetchGroups } from '../../../services/firebase/database/Groups'
 import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 import { confirmationAlert } from '../../../navigation/Alert'
+import { updateRideGroup } from '../../../redux/actions/sync/RideRequestActions'
 
 class GroupsScreenContainer extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
-    profile: PropTypes.object.isRequired
+    profile: PropTypes.object.isRequired,
+    group: PropTypes.object.isRequired,
+    updateGroup: PropTypes.func.isRequired
   }
 
   state = {
@@ -31,6 +34,11 @@ class GroupsScreenContainer extends Component {
     this.setState({...state, loading: false})
   }
 
+  selectGroup = async (group) => {
+    this.props.updateGroup(group)
+    changeGroup(group.id)
+  }
+
   render () {
     return (
       <LoadingSpinnerView isLoading={this.state.loading}>
@@ -38,6 +46,8 @@ class GroupsScreenContainer extends Component {
           groups={this.state.groups}
           uid={this.props.user.uid}
           joinGroup={this.joinGroup}
+          changeGroup={this.selectGroup}
+          activeGroup={this.props.group}
         />
       </LoadingSpinnerView>
     )
@@ -47,8 +57,15 @@ class GroupsScreenContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     user: state.auth.userData,
-    profile: state.auth.profile
+    profile: state.auth.profile,
+    group: state.ride.group
   }
 }
 
-export default connect(mapStateToProps)(GroupsScreenContainer)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateGroup: group => (dispatch(updateRideGroup(group)))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GroupsScreenContainer)

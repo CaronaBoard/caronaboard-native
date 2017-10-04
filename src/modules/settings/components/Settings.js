@@ -72,7 +72,7 @@ export class Settings extends React.Component {
               style={styles.rowButton}
               onPress={() => this.props.openFeedback()}
             >
-              <RkText rkType='header6'>Send us a feedback</RkText>
+              <RkText rkType='header6'>Envienos um feedback</RkText>
             </TouchableOpacity>
           </View>
         </View>

@@ -8,12 +8,36 @@ import {
 import PropTypes from 'prop-types'
 
 import { styles } from './styles/GroupsScreen.style'
+import { GroupPropType } from '../types'
 
 export class GroupsScreen extends React.Component {
   static propTypes = {
     uid: PropTypes.string.isRequired,
-    groups: PropTypes.array.isRequired,
-    joinGroup: PropTypes.func.isRequired
+    groups: PropTypes.arrayOf(GroupPropType).isRequired,
+    joinGroup: PropTypes.func.isRequired,
+    changeGroup: PropTypes.func.isRequired,
+    activeGroup: PropTypes.oneOfType([GroupPropType, {}])
+  }
+
+  renderActiveGroup = (title, activeGroup) => {
+    if (!activeGroup.name) {
+      return null
+    }
+
+    return (
+      <View style={styles.section}>
+        <View style={[styles.row, styles.heading]}>
+          <RkText rkType='primary header6'>{title}</RkText>
+        </View>
+        <View style={styles.row} >
+          <View
+            style={styles.rowButton}
+          >
+            <RkText rkType='header6'>{activeGroup.name}</RkText>
+          </View>
+        </View>
+      </View>
+    )
   }
 
   renderGroupList = (title, group, onPress = () => null) => {
@@ -39,7 +63,7 @@ export class GroupsScreen extends React.Component {
   }
 
   render () {
-    const {groups, uid, joinGroup} = this.props
+    const {groups, uid, joinGroup, changeGroup, activeGroup} = this.props
     const groupsYouBelong = []
 
     groups.forEach(group => {
@@ -50,7 +74,8 @@ export class GroupsScreen extends React.Component {
 
     return (
       <ScrollView style={styles.container}>
-        {this.renderGroupList('GRUPOS QUE VOCE PERTENCE', groupsYouBelong)}
+        {this.renderActiveGroup('GRUPO ATIVO', activeGroup)}
+        {this.renderGroupList('GRUPOS QUE VOCE PERTENCE', groupsYouBelong, changeGroup)}
         {this.renderGroupList('TODOS OS GRUPOS', groups, joinGroup)}
       </ScrollView>
     )

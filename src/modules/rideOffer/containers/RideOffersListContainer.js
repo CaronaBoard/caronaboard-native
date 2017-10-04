@@ -9,12 +9,15 @@ import { RidePropType } from '../../rideRequest/types'
 import { fetchAllRideOffers } from '../../../redux/actions'
 import { onNavigatorEvent } from '../../../navigation/NavBar'
 import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
+import ValidatedScreen from '../../shared/containers/ValidatedScreen'
+import { getActiveGroup } from '../../../services/firebase/database/Groups'
 
 export class RideList extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
     rides: PropTypes.arrayOf(RidePropType).isRequired,
-    userId: PropTypes.string.isRequired
+    userId: PropTypes.string.isRequired,
+    groupId: PropTypes.string
   }
 
   state = {
@@ -37,7 +40,8 @@ export class RideList extends Component {
 
   async componentDidMount () {
     const { userId, fetchRides } = this.props
-    if (userId) {
+
+    if (userId && getActiveGroup()) {
       this.setState({loading: true})
       await fetchRides()
       this.setState({loading: false})
@@ -45,8 +49,8 @@ export class RideList extends Component {
   }
 
   async componentDidUpdate (prevProps) {
-    const { userId } = this.props
-    if (userId && prevProps.userId !== userId) {
+    const { userId, groupId } = this.props
+    if (prevProps.userId !== userId || prevProps.groupId !== groupId) {
       await this.componentDidMount()
     }
   }
@@ -62,13 +66,15 @@ export class RideList extends Component {
 
   render () {
     return (
-      <LoadingSpinnerView isLoading={this.state.loading}>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={(ride) => <RideOffer ride={ride} onPress={this.onPress} />}
-          enableEmptySections
-        />
-      </LoadingSpinnerView>
+      <ValidatedScreen>
+        <LoadingSpinnerView isLoading={this.state.loading}>
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={(ride) => <RideOffer ride={ride} onPress={this.onPress} />}
+            enableEmptySections
+          />
+        </LoadingSpinnerView>
+      </ValidatedScreen>
     )
   }
 }
@@ -76,7 +82,8 @@ export class RideList extends Component {
 const mapStateToProps = (state) => {
   return {
     rides: state.ride.offers,
-    userId: state.auth.userData.uid
+    userId: state.auth.userData.uid,
+    groupId: state.ride.group.id
   }
 }
 

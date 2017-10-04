@@ -18,6 +18,10 @@ export class RideRequestScreen extends Component {
     try {
       await saveRideRequest(rideId, userId)
       await fetchYourRideRequests(userId)
+      this.props.navigator.pop({
+        animated: true,
+        animationType: 'fade'
+      })
       alert('Pedido de carona registrada com sucesso')
     } catch (error) {
       alert('Aconteceu um erro inesperado, poderia tentar novamente?')

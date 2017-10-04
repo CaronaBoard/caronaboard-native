@@ -11,13 +11,16 @@ import { removeRideOffer } from '../../../services/firebase/database/RideOffer'
 import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 import { fetchYourRideOffers } from '../../../redux/actions/async/RideOfferActions'
 import { YourRideOffer } from '../components/YourRideOffer'
+import ValidatedScreen from '../../shared/containers/ValidatedScreen'
+import { getActiveGroup } from '../../../services/firebase/database/Groups'
 
 export class YourRideOffersScreen extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
     uid: PropTypes.string.isRequired,
     updateYourOffers: PropTypes.func.isRequired,
-    yourOffers: PropTypes.array.isRequired
+    yourOffers: PropTypes.array.isRequired,
+    groupId: PropTypes.string
   }
 
   state = {
@@ -31,7 +34,7 @@ export class YourRideOffersScreen extends Component {
 
   async componentDidMount () {
     const {uid, updateYourOffers} = this.props
-    if (uid) {
+    if (uid && getActiveGroup()) {
       this.setState({loading: true})
       await updateYourOffers(uid)
       this.setState({loading: false})
@@ -39,8 +42,9 @@ export class YourRideOffersScreen extends Component {
   }
 
   async componentDidUpdate (prevProps) {
-    const {uid} = this.props
-    if (uid && prevProps.uid !== uid) {
+    const { uid, groupId } = this.props
+
+    if (prevProps.uid !== uid || prevProps.groupId !== groupId) {
       await this.componentDidMount()
     }
   }
@@ -66,17 +70,19 @@ export class YourRideOffersScreen extends Component {
 
   render () {
     return (
-      <LoadingSpinnerView isLoading={this.state.loading}>
-        <FlatList
-          data={this.props.yourOffers}
-          keyExtractor={item => item.rideId}
-          renderItem={({item}) => <YourRideOffer ride={item} onPress={this.onPressRide} />}
-        />
-        <FloatingActionButton
-          icon='md-create'
-          onPress={() => this.pushRideRequestScreen()}
-        />
-      </LoadingSpinnerView>
+      <ValidatedScreen>
+        <LoadingSpinnerView isLoading={this.state.loading}>
+          <FlatList
+            data={this.props.yourOffers}
+            keyExtractor={item => item.rideId}
+            renderItem={({item}) => <YourRideOffer ride={item} onPress={this.onPressRide} />}
+          />
+          <FloatingActionButton
+            icon='md-create'
+            onPress={() => this.pushRideRequestScreen()}
+          />
+        </LoadingSpinnerView>
+      </ValidatedScreen>
     )
   }
 }
@@ -84,7 +90,8 @@ export class YourRideOffersScreen extends Component {
 const mapStateToProps = state => {
   return {
     uid: state.auth.profile.uid,
-    yourOffers: state.ride.yourOffers
+    yourOffers: state.ride.yourOffers,
+    groupId: state.ride.group.id
   }
 }
 

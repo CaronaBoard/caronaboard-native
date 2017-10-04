@@ -4,6 +4,19 @@ import { ref } from './'
 import type { GroupType, ProfileType } from '../types'
 import { toGroupsArray } from '../Conversion'
 
+let activeGroup
+
+export const changeGroup = (groupId: string) => {
+  activeGroup = groupId
+}
+
+export const getActiveGroup = (): string => {
+  if (!activeGroup) {
+    return ''
+  }
+  return activeGroup
+}
+
 export const fetchGroups = async (): Array<GroupType> => {
   const path = 'groups'
   const groupSnapshot = await ref(path).once('value')

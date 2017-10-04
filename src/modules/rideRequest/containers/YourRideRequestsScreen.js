@@ -9,6 +9,8 @@ import { removeRideRequest } from '../../../services/firebase/database/RideReque
 import { LoadingSpinnerView } from '../../shared/components/LoadingSpinnerView'
 import { fetchYourRideRequests } from '../../../redux/actions/async/RideRequestActions'
 import { YourRideRequest } from '../components/YourRideRequest'
+import ValidatedScreen from '../../shared/containers/ValidatedScreen'
+import { getActiveGroup } from '../../../services/firebase/database/Groups'
 
 export const INITIAL_STATE = {
   loading: false
@@ -20,7 +22,8 @@ export class YourRideRequestsScreen extends Component {
     yourRideRequests: PropTypes.array.isRequired,
     rideRequestsMap: PropTypes.object.isRequired,
     navigator: PropTypes.object.isRequired,
-    uid: PropTypes.string.isRequired
+    uid: PropTypes.string.isRequired,
+    groupId: PropTypes.string
   }
 
   state = INITIAL_STATE
@@ -32,7 +35,7 @@ export class YourRideRequestsScreen extends Component {
 
   async componentDidMount () {
     const { uid } = this.props
-    if (uid) {
+    if (uid && getActiveGroup()) {
       this.setState({loading: true})
       await this.props.updateYourRequests(uid)
       this.setState({loading: false})
@@ -40,7 +43,8 @@ export class YourRideRequestsScreen extends Component {
   }
 
   async componentDidUpdate (prevProps) {
-    if (prevProps.uid !== this.props.uid) {
+    const { uid, groupId } = this.props
+    if (prevProps.uid !== uid || prevProps.groupId !== groupId) {
       await this.componentDidMount()
     }
   }
@@ -58,13 +62,15 @@ export class YourRideRequestsScreen extends Component {
 
   render () {
     return (
-      <LoadingSpinnerView isLoading={this.state.loading}>
-        <FlatList
-          data={this.props.yourRideRequests}
-          keyExtractor={({rideId}) => rideId}
-          renderItem={({ item }) => <YourRideRequest ride={item} onPress={this.onPressRide} />}
-        />
-      </LoadingSpinnerView>
+      <ValidatedScreen>
+        <LoadingSpinnerView isLoading={this.state.loading}>
+          <FlatList
+            data={this.props.yourRideRequests}
+            keyExtractor={({rideId}) => rideId}
+            renderItem={({ item }) => <YourRideRequest ride={item} onPress={this.onPressRide} />}
+          />
+        </LoadingSpinnerView>
+      </ValidatedScreen>
     )
   }
 }
@@ -73,7 +79,8 @@ const mapStateToProps = (state) => {
   return {
     uid: state.auth.profile.uid,
     yourRideRequests: state.ride.requests,
-    rideRequestsMap: state.ride.requestsIdMap
+    rideRequestsMap: state.ride.requestsIdMap,
+    groupId: state.ride.group.id
   }
 }
 
