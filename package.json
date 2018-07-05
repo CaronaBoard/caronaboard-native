@@ -17,14 +17,16 @@
     "precommit": "npm run lint-check",
     "prepush": "jest --bail --forceExit --silent",
     "danger": "danger",
-    "generate-apk": "cd android && ./gradlew assembleRelease"
+    "generate-apk": "cd android && ./gradlew assembleRelease",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "firebase": "^4.4.0",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react": "16.0.0-alpha.6",
-    "react-native": "0.44.3",
+    "react-native": "0.56.0",
     "react-native-action-button": "^2.8.0",
     "react-native-config": "^0.5.0",
     "react-native-easy-toast": "^1.0.6",
@@ -34,7 +36,8 @@
     "react-native-vector-icons": "^4.2.0",
     "react-redux": "^5.0.5",
     "redux": "^3.7.1",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "snyk": "^1.88.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
@@ -78,5 +81,6 @@
     "assets": [
       "./src/assets/fonts"
     ]
-  }
+  },
+  "snyk": true
 }
